@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "precommit": "lint-staged"
   },
-"lint-staged": {
+  "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --write",
       "eslint --fix"
