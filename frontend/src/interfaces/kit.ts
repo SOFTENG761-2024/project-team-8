@@ -1,17 +1,27 @@
 import Parse from 'parse';
 
-export interface Lesson {
+export interface Kit {
+    id: string;
     title: string;
-    overview: Parse.File;
-    printable: Parse.File;
-    content:Parse.File;
+    courses: Course[];
+
 }
 
- export interface Module {
+export interface Course {
+    id: string;
+    yearLevel: number;
+    description:string;
+    outcomes:string[];
+    modules: string[]; // references to those objects
+    assessments: Assessment[];
+}
+
+
+export interface Module {
     category: string;
-    name: string;
+    title: string;
     description: string;
-    lessons: Lesson[];
+    lessons: string[];
 }
 
 export interface Assessment {
@@ -20,9 +30,16 @@ export interface Assessment {
     printout: Parse.File[];
 }
 
-export interface Kit {
+export interface Lesson {
     id: string;
-    yearLevel: number;
-    modules: Module[];
-    assessments: Assessment[];
+    title: string;
+   content: Content[];
 }
+
+export interface Content{
+    text: string;
+    printout: Parse.File;
+}
+
+
+
