@@ -3,6 +3,7 @@ import DashboardPage from "./pages/Dashboard.page";
 import LoginPage from "./pages/Login.page";
 import RegisterPage from "./pages/Register.page";
 import CoursePage from "./pages/Course.page";
+import CreateLessonPage from "./pages/admin/CreateLesson.page";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,15 @@ const router = createBrowserRouter([
   {
     path: "/courses/:courseId",
     element: <CoursePage />,
+  },
+  {
+    path: "/admin",
+    children: [
+      {
+        path: "create-lesson",
+        element: <CreateLessonPage />,
+      },
+    ],
   },
 ]);
 
