@@ -97,8 +97,8 @@ export const theme = createTheme({
       h2: { fontSize: rem(30) },
       h3: { fontSize: rem(24) },
       h4: { fontSize: rem(20) },
-      h5: { fontSize: rem(20) }, // sub heading
-      h6: { fontSize: rem(20) }, // sub title
+      h5: { fontSize: rem(20), fontWeight: "300" }, // sub heading
+      h6: { fontSize: rem(20), fontWeight: "300" }, // sub title
     },
   },
 });
