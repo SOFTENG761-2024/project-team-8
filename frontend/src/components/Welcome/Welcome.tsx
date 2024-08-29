@@ -44,7 +44,7 @@ export function Welcome() {
       <Title size="h4" c="primary.4">
         Heading 4
       </Title>
-      <Title size="h5" c="neutral.5" tt={"uppercase"}>
+      <Title size="h5" c="neutral.5" tt={"uppercase"} lts="0.08em">
         SubHeading
       </Title>
       <Title size="h6" c="neutral.5">

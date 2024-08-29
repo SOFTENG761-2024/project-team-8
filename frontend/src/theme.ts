@@ -91,14 +91,14 @@ export const theme = createTheme({
   // Title component
   headings: {
     fontFamily: "DM Sans, Inter",
-    fontWeight: "600",
+    fontWeight: "700",
     sizes: {
       h1: { fontSize: rem(36) },
       h2: { fontSize: rem(30) },
       h3: { fontSize: rem(24) },
       h4: { fontSize: rem(20) },
-      h5: { fontSize: rem(20), fontWeight: "300" }, // sub heading
-      h6: { fontSize: rem(20), fontWeight: "300" }, // sub title
+      h5: { fontSize: rem(20), fontWeight: "400" }, // sub heading
+      h6: { fontSize: rem(20), fontWeight: "400" }, // sub title
     },
   },
 });
