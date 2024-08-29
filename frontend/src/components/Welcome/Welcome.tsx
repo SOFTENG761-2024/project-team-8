@@ -15,7 +15,7 @@ export function Welcome() {
           Mantine
         </Text>
       </Title>
-      <Text c="dimmed" ta="center" size="lg" maw={580} mx="auto" mt="xl">
+      <Text c="dimmed" ta="center" size="headingxl" maw={580} mx="auto" mt="xl">
         This starter Vite project includes a minimal setup, if you want to learn
         more on Mantine + Vite integration follow{" "}
         <Anchor href="https://mantine.dev/guides/vite/" size="lg">
