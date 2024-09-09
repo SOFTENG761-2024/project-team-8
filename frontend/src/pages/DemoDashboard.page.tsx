@@ -1,5 +1,5 @@
-import React from "react";
 import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
+import DummyCourseImage from "../assets/dummy_course.png";
 
 // Define the Course type and create some dummy data
 export interface Course {
@@ -19,7 +19,7 @@ const dummyCourses: Course[] = [
     course: "Dinosaur Steps",
     lessons: 17,
     status: "Completed",
-    image: "../../public/dummy_course.png",
+    image: DummyCourseImage,
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const dummyCourses: Course[] = [
     course: "Dinosaur Steps",
     lessons: 12,
     status: "In Progress",
-    image: "../../public/dummy_course.png",
+    image: DummyCourseImage,
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const dummyCourses: Course[] = [
     course: "Dinosaur Steps",
     lessons: 20,
     status: "Not Started",
-    image: "../../public/dummy_course.png",
+    image: DummyCourseImage,
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const dummyCourses: Course[] = [
     course: "Dinosaur Steps",
     lessons: 8,
     status: "Completed",
-    image: "../../public/dummy_course.png",
+    image: DummyCourseImage,
   },
   {
     id: 1,
@@ -51,7 +51,7 @@ const dummyCourses: Course[] = [
     course: "Dinosaur Steps",
     lessons: 17,
     status: "Completed",
-    image: "../../public/dummy_course.png",
+    image: DummyCourseImage,
   },
   {
     id: 2,
@@ -59,7 +59,7 @@ const dummyCourses: Course[] = [
     course: "Dinosaur Steps",
     lessons: 12,
     status: "In Progress",
-    image: "../../public/dummy_course.png",
+    image: DummyCourseImage,
   },
   {
     id: 3,
@@ -67,7 +67,7 @@ const dummyCourses: Course[] = [
     course: "Dinosaur Steps",
     lessons: 20,
     status: "Not Started",
-    image: "../../public/dummy_course.png",
+    image: DummyCourseImage,
   },
   {
     id: 4,
@@ -75,7 +75,7 @@ const dummyCourses: Course[] = [
     course: "Dinosaur Steps",
     lessons: 8,
     status: "Completed",
-    image: "../../public/dummy_course.png",
+    image: DummyCourseImage,
   },
 ];
 

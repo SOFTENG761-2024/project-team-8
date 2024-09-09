@@ -77,7 +77,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             </div>
 
             {/* View Button positioned at the bottom-right */}
-            <Button mt="md" variant="outline">
+            <Button mt="md" variant="fill" bg={"blue"}>
               <IconEye /> View
             </Button>
           </Flex>
