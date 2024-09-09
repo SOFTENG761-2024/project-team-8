@@ -8,7 +8,6 @@ function App() {
   return (
     <MantineProvider theme={theme}>
       <Router />
-      <UserLogin />
     </MantineProvider>
   );
 }
