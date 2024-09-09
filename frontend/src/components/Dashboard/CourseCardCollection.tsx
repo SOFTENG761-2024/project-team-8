@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pagination, Grid } from "@mantine/core"; // Import Grid and Pagination from Mantine
+import { Pagination, Grid, Flex } from "@mantine/core";
 import CourseCard from "./CourseCard";
 import { Course } from "../../pages/DemoDashboard.page";
 
@@ -35,14 +35,14 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
         ))}
       </Grid>
 
-      {/* Pagination component */}
-      <Pagination
-        page={activePage}
-        onChange={setPage}
-        total={Math.ceil(courses.length / coursesPerPage)}
-        position="center"
-        mt="lg"
-      />
+      {/* centering pagination using flex component */}
+      <Flex justify="center" mt="lg">
+        <Pagination
+          page={activePage}
+          onChange={setPage}
+          total={Math.ceil(courses.length / coursesPerPage)}
+        />
+      </Flex>
     </div>
   );
 };

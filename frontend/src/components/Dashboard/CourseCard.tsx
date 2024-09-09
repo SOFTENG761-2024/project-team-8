@@ -2,6 +2,8 @@ import React from "react";
 import { Card, Button, Text, Image, Grid, Flex } from "@mantine/core"; // Import necessary Mantine components
 import { useMediaQuery } from "@mantine/hooks"; // Import the useMediaQuery hook
 import { Course } from "../../pages/DemoDashboard.page";
+import { IconEye } from "@tabler/icons-react";
+import { IconAward } from "@tabler/icons-react";
 
 interface CourseCardProps {
   course: Course;
@@ -36,7 +38,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           >
             <div>
               <Text size="xl">{course.title}</Text>
-              <Text color="dark" size="md">
+              <Text c="dark" size="md">
                 {course.course}
               </Text>
               <Text size="sm">{course.lessons} Lessons</Text>
@@ -47,24 +49,36 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                 color={
                   course.status === "Completed" ? "seagreen" : "transparent"
                 }
+                m={2}
                 style={
                   course.status === "Completed"
                     ? {
                         backgroundColor: "aquamarine",
-                        display: "inline-block",
-                        padding: "6px",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        padding: "0.2rem 0.4rem",
                         borderRadius: "30px",
                       }
                     : { display: "inline" }
                 }
               >
-                {course.status === "Completed" ? course.status : "."}
+                {course.status === "Completed" ? (
+                  <span
+                    style={{ display: "inline-flex", alignItems: "center" }}
+                  >
+                    <IconAward style={{ marginRight: "4px" }} />{" "}
+                    {/* Adjust margin if needed */}
+                    {course.status}
+                  </span>
+                ) : (
+                  "."
+                )}
               </Text>
             </div>
 
             {/* View Button positioned at the bottom-right */}
             <Button mt="md" variant="outline">
-              View
+              <IconEye /> View
             </Button>
           </Flex>
         </Grid.Col>
