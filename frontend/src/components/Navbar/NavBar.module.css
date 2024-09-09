@@ -1,0 +1,51 @@
+.navbar {
+  width: rem(6vw);
+  height: rem(97vh);
+  margin-left: rem(1.5vh);
+  padding: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  border-radius: 1vmax;
+}
+
+.navbarMain {
+  flex: 1;
+}
+
+.link {
+  min-width: 4vw;
+  width: rem(55px);
+  max-width: 4.5vw;
+  min-height: 4vw;
+  height: rem(55px);
+  max-height: 4.5vw;
+  border-radius: 1vmax;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: light-dark(
+      rgba(50, 94, 118, 0.1),
+      rgba(194, 207, 214, 0.1)
+    );
+  }
+
+  &[data-active] {
+    & {
+      background-color: light-dark(
+        rgba(50, 94, 118, 0.25),
+        rgba(194, 207, 214, 0.25)
+      );
+    }
+  }
+
+  /* Disabled state */
+  &[data-disabled] {
+    opacity: 0.25;
+    background-color: transparent;
+  }
+}
