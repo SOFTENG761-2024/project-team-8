@@ -1,4 +1,4 @@
-import { FC, ReactElement, useState } from "react";
+import { FC, FormEvent, ReactElement, useState } from "react";
 import Parse from "../../../parseconfig.ts";
 import {
   Text,
@@ -13,39 +13,51 @@ import {
   Group,
   Checkbox,
 } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 export const UserLogin: FC = (): ReactElement => {
-  // State variables
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [currentUser, setCurrentUser] = useState<
     Parse.Object | null | undefined
   >(null);
+  const [usernameError, setUsernameError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const doUserLogIn = async function (): Promise<boolean> {
+  const navigate = useNavigate();
+
+  const doUserLogIn = async function (event: FormEvent): Promise<void> {
+    setIsLoading(true);
+    event.preventDefault();
     const usernameValue: string = username;
     const passwordValue: string = password;
     try {
+      // logIn will return the corresponding ParseUser object if it exists
       const loggedInUser: Parse.User = await Parse.User.logIn(
         usernameValue,
         passwordValue
       );
-      // logIn returns the corresponding ParseUser object
-      alert(
-        `Success! User ${loggedInUser.get("username")} has successfully signed in!`
-      );
-      // To verify that this is in fact the current user, `current` can be used
+      // We can verify that the logged in user is the current user
       const currentUser: Parse.User | undefined = Parse.User.current();
       console.log(loggedInUser === currentUser);
       // Clear input fields
       setUsername("");
       setPassword("");
-      // Update state variable holding current user
       getCurrentUser();
-      return true;
+      setIsLoading(false);
+      // Navigate to dashboard on successful login
+      navigate("/");
     } catch (error: Parse.Error) {
-      alert(`Error! ${error.message}`);
-      return false;
+      setIsLoading(false);
+      if (!error.message.includes("password")) {
+        setUsernameError(error.message);
+      } else if (!error.message.includes("username")) {
+        setPasswordError(error.message);
+      } else {
+        setUsernameError(" ");
+        setPasswordError("Invalid username or password, please try again.");
+      }
     }
   };
 
@@ -59,7 +71,11 @@ export const UserLogin: FC = (): ReactElement => {
     setCurrentUser(currentUser);
     return currentUser;
   };
-  console.log(currentUser);
+
+  // to use the unused variable
+  if (currentUser) {
+    console.log(currentUser);
+  }
 
   return (
     <Center bg="primary.3" h="100vh" w="100vw">
@@ -67,46 +83,58 @@ export const UserLogin: FC = (): ReactElement => {
         <Title ta="center" size="h1" c="primary.4">
           Login
         </Title>
-
-        <Container mt={25}>
-          <TextInput
-            label="Username"
-            placeholder="Your username"
-            variant="filled"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-          <PasswordInput
-            label="Password"
-            placeholder="Your password"
-            variant="filled"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            mt="md"
-          />
-          <Group justify="space-between" mt="lg">
-            <Checkbox c="neutral.4" label="Remember me" />
-            <Anchor
-              c="primary.5"
-              size="textSm"
-              component="a"
-              ml={5}
-              underline="always"
+        <form onSubmit={(event: FormEvent) => doUserLogIn(event)}>
+          <Container mt={25}>
+            <TextInput
+              label="Username"
+              placeholder="Your username"
+              variant="filled"
+              value={username}
+              error={usernameError}
+              onChange={(event) => {
+                setUsername(event.target.value);
+                setUsernameError("");
+                setPasswordError("");
+              }}
+            />
+            <PasswordInput
+              label="Password"
+              placeholder="Your password"
+              variant="filled"
+              value={password}
+              error={passwordError}
+              onChange={(event) => {
+                setPassword(event.target.value);
+                setUsernameError("");
+                setPasswordError("");
+              }}
+              mt="md"
+            />
+            <Group justify="space-between" mt="lg">
+              <Checkbox c="neutral.4" label="Remember me" />
+              <Anchor
+                c="primary.5"
+                size="textSm"
+                component="a"
+                ml={5}
+                underline="always"
+              >
+                Forgot password?
+              </Anchor>
+            </Group>
+          </Container>
+          <Center>
+            <Button
+              variant="filled"
+              px="100"
+              mt="xl"
+              loading={isLoading}
+              type="submit"
             >
-              Forgot password?
-            </Anchor>
-          </Group>
-        </Container>
-        <Center>
-          <Button
-            variant="filled"
-            px="100"
-            mt="xl"
-            onClick={() => doUserLogIn()}
-          >
-            Sign in
-          </Button>
-        </Center>
+              Sign in
+            </Button>
+          </Center>
+        </form>
         <Text c="neutral.4" size="textSm" ta="center" mt="xl">
           Don't have an account?
           <Anchor
