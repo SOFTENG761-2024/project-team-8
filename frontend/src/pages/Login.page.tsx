@@ -1,7 +1,12 @@
-import { UserLogin } from "../components/Authentication/UserLogin";
+import UserLogin from "../components/Authentication/UserLogin";
+import WelcomeContainer from "../components/WelcomeContainer";
 
 const LoginPage = () => {
-  return <UserLogin />;
+  return (
+    <WelcomeContainer title="Login">
+      <UserLogin />
+    </WelcomeContainer>
+  );
 };
 
 export default LoginPage;

@@ -1,13 +1,11 @@
-import { FC, FormEvent, ReactElement, useState } from "react";
+import { FC, FormEvent, useState } from "react";
 import Parse from "../../../parseconfig.ts";
 import {
   Text,
   Button,
   Center,
   Container,
-  Title,
   Anchor,
-  Paper,
   TextInput,
   PasswordInput,
   Group,
@@ -15,7 +13,7 @@ import {
 } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
-export const UserLogin: FC = (): ReactElement => {
+const UserLogin: FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [currentUser, setCurrentUser] = useState<
@@ -78,76 +76,73 @@ export const UserLogin: FC = (): ReactElement => {
   }
 
   return (
-    <Center bg="primary.3" h="100vh" w="100vw">
-      <Paper bg="neutral.0" shadow="lg" w="600" p={50} radius="md">
-        <Title ta="center" size="h1" c="primary.4">
-          Login
-        </Title>
-        <form onSubmit={(event: FormEvent) => doUserLogIn(event)}>
-          <Container mt={25}>
-            <TextInput
-              label="Username"
-              placeholder="Your username"
-              variant="filled"
-              value={username}
-              error={usernameError}
-              onChange={(event) => {
-                setUsername(event.target.value);
-                setUsernameError("");
-                setPasswordError("");
-              }}
-            />
-            <PasswordInput
-              label="Password"
-              placeholder="Your password"
-              variant="filled"
-              value={password}
-              error={passwordError}
-              onChange={(event) => {
-                setPassword(event.target.value);
-                setUsernameError("");
-                setPasswordError("");
-              }}
-              mt="md"
-            />
-            <Group justify="space-between" mt="lg">
-              <Checkbox c="neutral.4" label="Remember me" />
-              <Anchor
-                c="primary.5"
-                size="textSm"
-                component="a"
-                ml={5}
-                underline="always"
-              >
-                Forgot password?
-              </Anchor>
-            </Group>
-          </Container>
-          <Center>
-            <Button
-              variant="filled"
-              px="100"
-              mt="xl"
-              loading={isLoading}
-              type="submit"
+    <>
+      <form onSubmit={(event: FormEvent) => doUserLogIn(event)}>
+        <Container mt={25}>
+          <TextInput
+            label="Username"
+            placeholder="Your username"
+            variant="filled"
+            value={username}
+            error={usernameError}
+            onChange={(event) => {
+              setUsername(event.target.value);
+              setUsernameError("");
+              setPasswordError("");
+            }}
+          />
+          <PasswordInput
+            label="Password"
+            placeholder="Your password"
+            variant="filled"
+            value={password}
+            error={passwordError}
+            onChange={(event) => {
+              setPassword(event.target.value);
+              setUsernameError("");
+              setPasswordError("");
+            }}
+            mt="md"
+          />
+          <Group justify="space-between" mt="lg">
+            <Checkbox c="neutral.4" label="Remember me" />
+            <Anchor
+              c="primary.5"
+              size="textSm"
+              component="a"
+              ml={5}
+              underline="always"
             >
-              Sign in
-            </Button>
-          </Center>
-        </form>
-        <Text c="neutral.4" size="textSm" ta="center" mt="xl">
-          Don't have an account?
-          <Anchor
-            c="primary.5"
-            size="textSm"
-            component="a"
-            ml={5}
-            underline="always"
+              Forgot password?
+            </Anchor>
+          </Group>
+        </Container>
+        <Center>
+          <Button
+            variant="filled"
+            px="100"
+            mt="xl"
+            loading={isLoading}
+            type="submit"
           >
-            Sign up
-          </Anchor>
-        </Text>
-      </Paper>
-    </Center>
+            Sign in
+          </Button>
+        </Center>
+      </form>
+      <Text c="neutral.4" size="textSm" ta="center" mt="xl">
+        Don't have an account?
+        <Anchor
+          c="primary.5"
+          size="textSm"
+          component="a"
+          ml={5}
+          underline="always"
+        >
+          Sign up
+        </Anchor>
+      </Text>
+    </>
   );
 };
+
+export default UserLogin;
