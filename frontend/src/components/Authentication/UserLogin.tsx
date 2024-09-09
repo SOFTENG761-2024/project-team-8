@@ -14,66 +14,59 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const UserLogin: FC = () => {
-  const [username, setUsername] = useState<string>("");
+  const navigate = useNavigate();
+
+  const savedUsername = localStorage.getItem("savedUsername");
+  const [username, setUsername] = useState<string>(savedUsername || "");
+  const [rememberMe, setRememberMe] = useState<boolean>(!!savedUsername);
   const [password, setPassword] = useState<string>("");
-  const [currentUser, setCurrentUser] = useState<
-    Parse.Object | null | undefined
-  >(null);
   const [usernameError, setUsernameError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const navigate = useNavigate();
 
   const doUserLogIn = async function (event: FormEvent): Promise<void> {
     setIsLoading(true);
     event.preventDefault();
     const usernameValue: string = username;
     const passwordValue: string = password;
+
+    // store username if "remember me" is selected
+    if (rememberMe) {
+      localStorage.setItem("savedUsername", username);
+    } else {
+      localStorage.removeItem("savedUsername");
+    }
+
     try {
       // logIn will return the corresponding ParseUser object if it exists
       const loggedInUser: Parse.User = await Parse.User.logIn(
         usernameValue,
         passwordValue
       );
-      // We can verify that the logged in user is the current user
+      // logIn returns the corresponding ParseUser object
+      // To verify that this is in fact the current user, `current` can be used
       const currentUser: Parse.User | undefined = Parse.User.current();
       console.log(loggedInUser === currentUser);
-      // Clear input fields
+
       setUsername("");
       setPassword("");
-      getCurrentUser();
       setIsLoading(false);
+
       // Navigate to dashboard on successful login
       navigate("/");
-    } catch (error: Parse.Error) {
+    } catch {
       setIsLoading(false);
-      if (!error.message.includes("password")) {
-        setUsernameError(error.message);
-      } else if (!error.message.includes("username")) {
-        setPasswordError(error.message);
+
+      if (usernameValue.trim() === "") {
+        setUsernameError("Username is required.");
+      } else if (passwordValue.trim() === "") {
+        setPasswordError("Password is required.");
       } else {
         setUsernameError(" ");
         setPasswordError("Invalid username or password, please try again.");
       }
     }
   };
-
-  // Function that will return current user and also update current username
-  const getCurrentUser = async function (): Promise<
-    Parse.User | null | undefined
-  > {
-    const currentUser: Parse.User | null | undefined =
-      await Parse.User.current();
-    // Update state variable holding current user
-    setCurrentUser(currentUser);
-    return currentUser;
-  };
-
-  // to use the unused variable
-  if (currentUser) {
-    console.log(currentUser);
-  }
 
   return (
     <>
@@ -105,7 +98,12 @@ const UserLogin: FC = () => {
             mt="md"
           />
           <Group justify="space-between" mt="lg">
-            <Checkbox c="neutral.4" label="Remember me" />
+            <Checkbox
+              c="neutral.4"
+              label="Remember me"
+              checked={rememberMe}
+              onChange={(event) => setRememberMe(event.target.checked)}
+            />
             <Anchor
               c="primary.5"
               size="textSm"
