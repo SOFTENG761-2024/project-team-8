@@ -70,8 +70,8 @@ export const UserLogin: FC = (): ReactElement => {
 
         <Container mt={25}>
           <TextInput
-            label="Username (Email)"
-            placeholder="example@email.com"
+            label="Username"
+            placeholder="Your username"
             variant="filled"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
@@ -86,7 +86,13 @@ export const UserLogin: FC = (): ReactElement => {
           />
           <Group justify="space-between" mt="lg">
             <Checkbox c="neutral.4" label="Remember me" />
-            <Anchor c="primary.5" size="textSm" component="a" ml={5}>
+            <Anchor
+              c="primary.5"
+              size="textSm"
+              component="a"
+              ml={5}
+              underline="always"
+            >
               Forgot password?
             </Anchor>
           </Group>
@@ -103,7 +109,13 @@ export const UserLogin: FC = (): ReactElement => {
         </Center>
         <Text c="neutral.4" size="textSm" ta="center" mt="xl">
           Don't have an account?
-          <Anchor c="primary.5" size="textSm" component="a" ml={5}>
+          <Anchor
+            c="primary.5"
+            size="textSm"
+            component="a"
+            ml={5}
+            underline="always"
+          >
             Sign up
           </Anchor>
         </Text>
