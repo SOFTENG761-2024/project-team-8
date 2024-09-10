@@ -46,13 +46,13 @@ const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
     ]
     return (
         <Box>
-            <Group gap="xs">
+            <Group gap="xs" pl="md" pr="md">
                 <IconBooks size={24} color={theme.colors.primary[3]} />
                 <Text size="lg" fw={700} c="primary.5">Course Content</Text>
             </Group>
-            <Grid>
+            <Grid pl="md" pr="md" pt="xs">
                 {modules.map((module) => (
-                    <Grid.Col span={summaryExpanded ? 12 : 6} pl="md" pr="md" pt="md">
+                    <Grid.Col span={summaryExpanded ? 12 : 6}>
                         <ModuleAccordion module={module} />
                     </Grid.Col>
                 ))}

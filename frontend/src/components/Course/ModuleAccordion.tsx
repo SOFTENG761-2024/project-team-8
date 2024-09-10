@@ -15,7 +15,10 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
         <Accordion variant="separated" className={styles.accordionContainer}>
             <Accordion.Item key={module.title} value={module.title} className={styles.accordionItem}>
                 <Accordion.Control icon={<IconBook2 color={theme.colors.neutral[4]} />} c="neutral.5">
-                    <Text fw={700}>{module.title}</Text>
+                    <Group justify="space-between" pr="sm">
+                        <Text fw={700}>{module.title}</Text>
+                        <Text>{module.content.length} Lessons</Text>
+                    </Group>
                 </Accordion.Control>
                 <Accordion.Panel>
                     <Stack>
@@ -24,10 +27,9 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
                                 key={lesson}
                                 className={styles.lessonCard}
                                 p="1rem"
-                                bg="neutral.1"
                                 >
                                     <Group>
-                                        <IconFile color={theme.colors.neutral[4]} />
+                                        <IconFile />
                                         <Text c="neutral.5">{lesson}</Text>
                                     </Group>
                             </Box>

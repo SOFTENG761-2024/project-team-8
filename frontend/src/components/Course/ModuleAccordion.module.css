@@ -12,4 +12,20 @@
 .lessonCard {
     cursor: pointer;
     border-radius: 1rem;
+    background-color: var(--mantine-color-neutral-1);
+    &:hover {
+        background-color: var(--mantine-color-primary-1);
+    }
+}
+
+.lessonCard svg {
+    color: var(--mantine-color-neutral-4);
+}
+
+.lessonCard:hover p {
+    color: var(--mantine-color-primary-5) !important;
+}
+
+.lessonCard:hover svg {
+    color: var(--mantine-color-primary-5) !important;
 }
