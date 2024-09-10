@@ -4,35 +4,42 @@ import LoginPage from "./pages/Login.page";
 import RegisterPage from "./pages/Register.page";
 import CoursePage from "./pages/Course.page";
 import CreateLessonPage from "./pages/admin/CreateLesson.page";
+import BaseLayout from "./components/BaseLayout/BaseLayout";
 import DemoDashboardPage from "./pages/DemoDashboard.page";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DashboardPage />,
-  },
-  {
-    path: "/dashboard-test",
-    element: <DemoDashboardPage />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
-  },
-  {
-    path: "/courses/:courseId",
-    element: <CoursePage />,
-  },
-  {
-    path: "/admin",
+    element: <BaseLayout />,
     children: [
       {
-        path: "create-lesson",
-        element: <CreateLessonPage />,
+        index: true,
+        element: <DashboardPage />,
+      },
+      {
+        path: "/dashboard-test",
+        element: <DemoDashboardPage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
+      },
+      {
+        path: "courses/:courseId",
+        element: <CoursePage />,
+      },
+      {
+        path: "admin",
+        children: [
+          {
+            path: "create-lesson",
+            element: <CreateLessonPage />,
+          },
+        ],
       },
     ],
   },
