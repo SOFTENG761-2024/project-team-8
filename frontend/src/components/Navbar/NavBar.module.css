@@ -10,12 +10,34 @@
   left: 0;
   border-radius: 1vmax;
   background-color: var(--mantine-color-primary-5);
+  position: relative;
 }
 
 .navbarExpanded {
   width: rem(20vw);
   min-width: 200px;
-  max-width: 300px;
+  max-width: 250px;
+}
+
+.expandIcon {
+  position: absolute;
+  border-radius: 5rem;
+  height: rem(40px);
+  width: rem(40px);
+  background-color: var(--mantine-color-primary-5);
+  color: var(--mantine-color-neutral-1);
+  right: 10px;
+
+  &:hover {
+    color: var(--mantine-color-neutral-1);
+    background-color: var(--mantine-color-primary-4);
+  }
+
+  &[data-active] {
+    & {
+      color: var(--mantine-color-neutral-1);
+    }
+  }
 }
 
 .navbarMain {

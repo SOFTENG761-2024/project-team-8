@@ -1,6 +1,10 @@
 import { ActionIcon, rem, Stack, Tooltip, Text } from "@mantine/core";
 import classes from "./NavBar.module.css";
-import { IconHomeFilled } from "@tabler/icons-react";
+import {
+  IconChevronLeft,
+  IconChevronRight,
+  IconHomeFilled,
+} from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -41,6 +45,9 @@ const Navbar = () => {
 
   const [expanded, setExpanded] = useState<boolean>(true);
 
+  const toggleExpand = () => {
+    setExpanded(!expanded);
+  };
   const links = [{ icon: IconHomeFilled, label: "Dashboard", path: "/" }];
   const navbarItems = links.map((link) => (
     <NavbarLink
@@ -54,6 +61,9 @@ const Navbar = () => {
     <nav
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : ""}`}
     >
+      <ActionIcon className={classes.expandIcon} onClick={toggleExpand}>
+        {expanded ? <IconChevronLeft /> : <IconChevronRight />}
+      </ActionIcon>
       <Stack gap="2vh" className={classes.navbarMain}>
         {navbarItems}
       </Stack>
