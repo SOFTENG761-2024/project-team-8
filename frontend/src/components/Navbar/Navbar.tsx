@@ -23,10 +23,10 @@ function NavbarLink({
   onClick,
   expanded = true,
 }: NavbarLinkProps) {
-  const iconSize = rem("calc(1.5vw + 4px)");
+  const iconSize = rem("calc(4vw + 12px)");
 
   return (
-    <div className={classes.link}>
+    <div className={`${classes.link} ${expanded ? classes.linkExpanded : ""}`}>
       <ActionIcon
         onClick={onClick}
         variant="transparent"
@@ -35,7 +35,7 @@ function NavbarLink({
       >
         <Icon style={{ width: iconSize, height: iconSize }} stroke={3} />
       </ActionIcon>
-      {expanded && <Text>{label}</Text>}
+      {expanded && <Text style={{ marginLeft: "0.5rem" }}>{label}</Text>}
     </div>
   );
 }
@@ -61,6 +61,7 @@ const Navbar = () => {
     <nav
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : ""}`}
     >
+      <Text className={classes.menuHeading}>MENU</Text>
       <ActionIcon className={classes.expandIcon} onClick={toggleExpand}>
         {expanded ? <IconChevronLeft /> : <IconChevronRight />}
       </ActionIcon>
