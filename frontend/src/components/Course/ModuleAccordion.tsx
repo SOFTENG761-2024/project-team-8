@@ -1,5 +1,5 @@
 import { Accordion, Box, Group, Stack, Text, useMantineTheme } from "@mantine/core";
-import { IconBook2, IconCircleChevronDown, IconFile } from "@tabler/icons-react";
+import { IconBook2, IconSquareRoundedChevronDownFilled, IconFile } from "@tabler/icons-react";
 import styles from "./ModuleAccordion.module.css";
 
 interface ModuleAccordionProps {
@@ -12,7 +12,7 @@ interface ModuleAccordionProps {
 const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
     const theme = useMantineTheme();
     return (
-        <Accordion variant="separated" className={styles.accordionContainer} chevron={<IconCircleChevronDown stroke={2.5} color={theme.colors.neutral[5]} />} chevronSize={20}>
+        <Accordion variant="separated" className={styles.accordionContainer} chevron={<IconSquareRoundedChevronDownFilled stroke={2.5} color={theme.colors.neutral[5]} />} chevronSize={20}>
             <Accordion.Item key={module.title} value={module.title} className={styles.accordionItem}>
                 <Accordion.Control icon={<IconBook2 color={theme.colors.neutral[4]} />} c="neutral.5">
                     <Group justify="space-between" pr="sm">
