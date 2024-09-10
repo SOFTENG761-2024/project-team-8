@@ -1,8 +1,9 @@
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
 import { Router } from "./Router";
-import { theme } from "./theme";
 import FileUpload from "./upload-file.tsx";
+import { theme } from "./theme/theme";
+
 
 function App() {
   return (
