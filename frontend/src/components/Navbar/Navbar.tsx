@@ -1,9 +1,10 @@
-import { ActionIcon, rem, Stack, Tooltip, Text } from "@mantine/core";
+import { ActionIcon, rem, Stack, Tooltip, Text, Divider } from "@mantine/core";
 import classes from "./NavBar.module.css";
 import {
   IconChevronLeft,
   IconChevronRight,
   IconHomeFilled,
+  IconLogout,
 } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -67,6 +68,17 @@ const Navbar = () => {
       </ActionIcon>
       <Stack gap="2vh" className={classes.navbarMain}>
         {navbarItems}
+      </Stack>
+
+      <Stack gap="1vh" style={{ width: "100%" }}>
+        <Divider color="neutral.1" />
+        <NavbarLink
+          key={"Logout"}
+          onClick={() => console.log("TODO: logout functionality here")}
+          expanded={expanded}
+          icon={IconLogout}
+          label={"Logout"}
+        />
       </Stack>
     </nav>
   );

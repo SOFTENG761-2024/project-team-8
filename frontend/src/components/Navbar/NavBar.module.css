@@ -1,6 +1,5 @@
 .navbar {
   width: rem(75px);
-
   height: rem(97vh);
   margin-left: rem(1.5vh);
   padding: 2vh;
@@ -25,13 +24,13 @@
   border-radius: 5rem;
   height: rem(40px);
   width: rem(40px);
-  background-color: var(--mantine-color-primary-5);
+  background-color: var(--mantine-color-primary-4);
   color: var(--mantine-color-neutral-1);
-  right: 10px;
+  right: -20px;
 
   &:hover {
     color: var(--mantine-color-neutral-1);
-    background-color: var(--mantine-color-primary-4);
+    background-color: var(--mantine-color-primary-3);
   }
 
   &[data-active] {
