@@ -52,7 +52,7 @@ const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
             </Group>
             <Grid>
                 {modules.map((module) => (
-                    <Grid.Col span={summaryExpanded ? 12 : 6}>
+                    <Grid.Col span={summaryExpanded ? 12 : 6} pl="md" pr="md" pt="md">
                         <ModuleAccordion module={module} />
                     </Grid.Col>
                 ))}

@@ -1,0 +1,15 @@
+.accordionContainer {
+    border: 1px solid var(--mantine-color-neutral-2);
+    border-radius: 1rem;
+}
+
+.accordionItem {
+    background-color: transparent;
+    border: none;
+    border-radius: 1rem;
+}
+
+.lessonCard {
+    cursor: pointer;
+    border-radius: 1rem;
+}

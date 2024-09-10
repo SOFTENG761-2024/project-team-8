@@ -1,5 +1,6 @@
 import { Accordion, Box, Group, Stack, Text, useMantineTheme } from "@mantine/core";
 import { IconBook2, IconFile } from "@tabler/icons-react";
+import styles from "./ModuleAccordion.module.css";
 
 interface ModuleAccordionProps {
     module: {
@@ -11,8 +12,8 @@ interface ModuleAccordionProps {
 const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
     const theme = useMantineTheme();
     return (
-        <Accordion>
-            <Accordion.Item key={module.title} value={module.title}>
+        <Accordion variant="separated" className={styles.accordionContainer}>
+            <Accordion.Item key={module.title} value={module.title} className={styles.accordionItem}>
                 <Accordion.Control icon={<IconBook2 color={theme.colors.neutral[4]} />} c="neutral.5">
                     <Text fw={700}>{module.title}</Text>
                 </Accordion.Control>
@@ -21,10 +22,7 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
                         {module.content.map((lesson) => (
                             <Box
                                 key={lesson}
-                                style={{
-                                    cursor: "pointer",
-                                    borderRadius: "1rem",
-                                }}
+                                className={styles.lessonCard}
                                 p="1rem"
                                 bg="neutral.1"
                                 >
