@@ -9,6 +9,7 @@
   align-items: center;
   left: 0;
   border-radius: 1vmax;
+  background-color: var(--mantine-color-primary-5);
 }
 
 .navbarMain {
@@ -26,20 +27,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--mantine-color-neutral-1);
 
   &:hover {
-    background-color: light-dark(
-      rgba(50, 94, 118, 0.1),
-      rgba(194, 207, 214, 0.1)
-    );
+    background-color: var(--mantine-color-primary-3);
+    color: var(--mantine-color-neutral-1);
   }
 
   &[data-active] {
     & {
-      background-color: light-dark(
-        rgba(50, 94, 118, 0.25),
-        rgba(194, 207, 214, 0.25)
-      );
+      background-color: var(--mantine-color-primary-3);
+      color: var(--mantine-color-neutral-1);
     }
   }
 
