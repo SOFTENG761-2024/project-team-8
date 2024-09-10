@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Box, Title } from "@mantine/core";
-import CourseContent from "../components/CourseContent";
+import CourseContent from "../components/Course/CourseContent";
 
 const CoursePage = () => {
   const { courseId } = useParams();
