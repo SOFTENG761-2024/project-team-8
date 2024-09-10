@@ -1,5 +1,12 @@
+import UserLogin from "../components/Authentication/UserLogin";
+import WelcomeContainer from "../components/WelcomeContainer";
+
 const LoginPage = () => {
-  return <h1>Login Page</h1>;
+  return (
+    <WelcomeContainer title="Login">
+      <UserLogin />
+    </WelcomeContainer>
+  );
 };
 
 export default LoginPage;
