@@ -7,8 +7,8 @@ const CoursePage = () => {
 
   return (
     <Box>
-      <Title order={3} c="primary.6">Course Title</Title>
-      <CourseContent summaryExpanded={false} />
+      <Title order={3} c="primary.5">Course Title</Title>
+      <CourseContent />
     </Box>
   )
 };

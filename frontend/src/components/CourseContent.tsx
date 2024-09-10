@@ -1,10 +1,13 @@
-import { Accordion, Box, Grid, Group, Stack, Text } from "@mantine/core";
+import { Accordion, Box, Grid, Group, Stack, Text, useMantineTheme } from "@mantine/core";
+import { IconBooks, IconBook2, IconFile } from "@tabler/icons-react";
 
 interface CourseContentProps {
-    summaryExpanded: boolean;
+    summaryExpanded?: boolean;
 }
 
 const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
+    const theme = useMantineTheme();
+
     // Mock data
     const modules = [
         {
@@ -42,16 +45,18 @@ const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
     ]
     return (
         <Box>
-            <Group>
-                <Box>Icon</Box>
-                <Text size="lg" fw={700} c="primary.6">Course Content</Text>
+            <Group gap="xs">
+                <IconBooks size={24} color={theme.colors.primary[3]} />
+                <Text size="lg" fw={700} c="primary.5">Course Content</Text>
             </Group>
             <Grid>
                 {modules.map((module) => (
                     <Grid.Col span={summaryExpanded ? 12 : 6}>
                         <Accordion>
                             <Accordion.Item key={module.title} value={module.title}>
-                                <Accordion.Control icon={<Box>icon</Box>}>{module.title}</Accordion.Control>
+                                <Accordion.Control icon={<IconBook2 color={theme.colors.neutral[4]} />} c="neutral.5">
+                                    <Text fw={700}>{module.title}</Text>
+                                </Accordion.Control>
                                 <Accordion.Panel>
                                     <Stack>
                                         {module.content.map((lesson) => (
@@ -65,8 +70,8 @@ const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
                                                 bg="neutral.1"
                                                 >
                                                     <Group>
-                                                        <Box>Icon</Box>
-                                                        <Text>{lesson}</Text>
+                                                        <IconFile color={theme.colors.neutral[4]} />
+                                                        <Text c="neutral.5">{lesson}</Text>
                                                     </Group>
                                             </Box>
                                         ))}
