@@ -10,4 +10,5 @@
 
 label {
   color: var(--mantine-color-neutral-4);
+  margin-bottom: 0.4rem;
 }
