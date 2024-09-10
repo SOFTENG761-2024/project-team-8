@@ -5,7 +5,7 @@ import styles from "./ModuleAccordion.module.css";
 interface ModuleAccordionProps {
     module: {
         title: string;
-        content: string[];
+        lessons: string[];
     }
 }
 
@@ -17,12 +17,12 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
                 <Accordion.Control icon={<IconBook2 color={theme.colors.neutral[4]} />} c="neutral.5">
                     <Group justify="space-between" pr="sm">
                         <Text fw={700}>{module.title}</Text>
-                        <Text>{module.content.length} Lessons</Text>
+                        <Text>{module.lessons.length} Lessons</Text>
                     </Group>
                 </Accordion.Control>
                 <Accordion.Panel>
                     <Stack>
-                        {module.content.map((lesson) => (
+                        {module.lessons.map((lesson) => (
                             <Box
                                 key={lesson}
                                 className={styles.lessonCard}

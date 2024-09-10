@@ -1,49 +1,66 @@
 import { Box, Grid, Group, Text, useMantineTheme } from "@mantine/core";
 import { IconBooks } from "@tabler/icons-react";
 import ModuleAccordion from "./ModuleAccordion";
+import { useEffect, useState } from "react";
+import Parse from "../../../parseconfig";
 
 interface CourseContentProps {
+    courseId: string | undefined;
     summaryExpanded?: boolean;
 }
 
-const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
-    const theme = useMantineTheme();
+interface ModulesData {
+    title: string;
+    lessons: string[];
+} 
 
-    // Mock data
-    const modules = [
-        {
-            title: "Module 1",
-            content: [
-                "Lesson 1",
-                "Lesson 2",
-                "Lesson 3"
-            ]
-        },
-        {
-            title: "Module 2",
-            content: [
-                "Lesson 1",
-                "Lesson 2",
-                "Lesson 3"
-            ]
-        },
-        {
-            title: "Module 3",
-            content: [
-                "Lesson 1",
-                "Lesson 2"
-            ]
-        },
-        {
-            title: "Module 4",
-            content: [
-                "Lesson 1",
-                "Lesson 2",
-                "Lesson 3",
-                "Lesson 4"
-            ]
+const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
+    const theme = useMantineTheme();
+    const [modulesData, setModulesData] = useState<ModulesData[]>([]);
+
+    /**
+     * Fetches course data from the Parse server
+     */
+    const fetchCourseData = async () => {
+        const Course = Parse.Object.extend("course");
+        const query = new Parse.Query(Course);
+
+        try {
+            const course = await query.get(courseId);
+
+            const modules = [];
+
+            for (const module of course.get("modules")) {
+                const lessonTitles = [];
+
+                for (const lesson of module.lessons) {
+                    const Lesson = Parse.Object.extend("lesson");
+                    const lessonQuery = new Parse.Query(Lesson);
+
+                    try {
+                        const lessonData = await lessonQuery.get(lesson);
+                        lessonTitles.push(lessonData.get("title"));
+                    } catch (error) {
+                        console.error("Error fetching lesson: ", error);
+                    }
+                }
+
+                modules.push({
+                    title: module.title,
+                    lessons: lessonTitles
+                });
+            }
+
+            setModulesData(modules);
+        } catch (error) {
+            console.error("Error fetching course data: ", error);
         }
-    ]
+    }
+
+    useEffect(() => {
+        fetchCourseData();
+    }, []);
+
     return (
         <Box>
             <Group gap="xs" pl="md" pr="md">
@@ -51,8 +68,8 @@ const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
                 <Text size="lg" fw={700} c="primary.5">Course Content</Text>
             </Group>
             <Grid pl="md" pr="md" pt="xs">
-                {modules.map((module) => (
-                    <Grid.Col span={summaryExpanded ? 12 : 6}>
+                {modulesData.map((module) => (
+                    <Grid.Col key={module.title} span={summaryExpanded ? 12 : 6}>
                         <ModuleAccordion module={module} />
                     </Grid.Col>
                 ))}
