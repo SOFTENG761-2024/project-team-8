@@ -20,18 +20,18 @@ Through this project, we aim to:
 
 ## Running the project
 
-In order to run the project on your own machine, you must have access to the `.env` file for the frontend.
+In order to run the project on your own machine, you must have access to the `.env` file for the frontend. For developers, please contact Michelle (mlie788@aucklanduni.ac.nz) or any member from Team ATE for to request access to the `.env` file.
 
 To run the frontend please see the README [here](frontend/README.md).
 
 ## Technology Stack:
 
 **Frontend:**
-* React + Vite
-* Mantine
+* [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+* [Mantine](https://mantine.dev/)
 
 **Backend & Cloud Platform:**
-* Back4App
+* [Back4App](https://www.back4app.com/)
 
 ## More Information
 
