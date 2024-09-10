@@ -1,27 +1,61 @@
-import React from "react";
-import { Card, Button, Text, Image, Grid, Flex } from "@mantine/core"; // Import necessary Mantine components
-import { useMediaQuery } from "@mantine/hooks"; // Import the useMediaQuery hook
+import React, { useState } from "react";
+import { Card, Button, Text, Image, Grid, Flex } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/DemoDashboard.page";
-import { IconEye } from "@tabler/icons-react";
-import { IconAward } from "@tabler/icons-react";
+import { IconEye, IconAward } from "@tabler/icons-react";
 
 interface CourseCardProps {
   course: Course;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
-  const isSmallScreen = useMediaQuery("(max-width: 768px)"); // using hook to check if the screen is small
+  const isSmallScreen = useMediaQuery("(max-width: 768px)");
+  const [isHovered, setIsHovered] = useState(false);
+
+  // placeholder handling card click
+  const handleCardClick = () => {
+    // redirect to course page (CAN EXTRACT THIS TO PARENT COMPONENT!)
+    alert(`Clicked on course: ${course.title}`);
+    console.log(`Clicked on course: ${course.title}`);
+  };
 
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Grid>
-        {/* conditional image rendering (hide on small screens) */}
+    <Card
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      withBorder
+      style={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        cursor: "pointer",
+        position: "relative",
+        boxShadow: isHovered
+          ? "0 8px 24px rgba(0, 0, 0, 0.18)"
+          : "0 4px 12px rgba(0, 0, 0, 0.1)",
+        transition: "box-shadow 0.25s ease-in-out",
+      }}
+      onClick={handleCardClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Grid align="center" style={{ height: "100%" }}>
+        {/* Conditional image rendering (bigger size and centered) */}
         {!isSmallScreen && (
-          <Grid.Col span={3}>
+          <Grid.Col
+            span={3}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Image
               src={course.image}
               alt="Course Image"
-              height={150}
+              height={150} // Increased height for larger image
               width={150}
               radius="md"
               style={{ objectFit: "cover" }}
@@ -29,7 +63,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </Grid.Col>
         )}
 
-        {/* course details and viewbutton on the right side */}
+        {/* Course details */}
         <Grid.Col span={isSmallScreen ? 12 : 9}>
           <Flex
             direction="column"
@@ -43,46 +77,45 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
               </Text>
               <Text size="sm">{course.lessons} Lessons</Text>
 
-              {/* Status ONLY show if course is completed */}
-              <Text
-                size="xs"
-                color={
-                  course.status === "Completed" ? "seagreen" : "transparent"
-                }
-                m={2}
-                style={
-                  course.status === "Completed"
-                    ? {
-                        backgroundColor: "aquamarine",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        padding: "0.2rem 0.4rem",
-                        borderRadius: "30px",
-                      }
-                    : { display: "inline" }
-                }
-              >
-                {course.status === "Completed" ? (
-                  <span
-                    style={{ display: "inline-flex", alignItems: "center" }}
-                  >
-                    <IconAward style={{ marginRight: "4px" }} />{" "}
-                    {/* Adjust margin if needed */}
-                    {course.status}
-                  </span>
-                ) : (
-                  "."
-                )}
-              </Text>
+              {/* Status Badge (only for completed courses) */}
+              {course.status === "Completed" && !isSmallScreen && (
+                <Text
+                  size="xs"
+                  color="seagreen"
+                  mt={20}
+                  style={{
+                    backgroundColor: "aquamarine",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    padding: "0.2rem 0.6rem",
+                    borderRadius: "30px",
+                  }}
+                >
+                  <IconAward style={{ marginRight: "4px" }} />
+                  {course.status}
+                </Text>
+              )}
             </div>
-
-            {/* View Button positioned at the bottom-right */}
-            <Button mt="md" variant="fill" bg={"blue"}>
-              <IconEye /> View
-            </Button>
           </Flex>
         </Grid.Col>
       </Grid>
+
+      {/* View Button positioned at the bottom-right */}
+      <Button
+        variant="filled"
+        bg="blue"
+        style={{
+          position: "absolute",
+          bottom: "16px",
+          right: "16px",
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleCardClick();
+        }}
+      >
+        <IconEye style={{ marginRight: "8px" }} /> View
+      </Button>
     </Card>
   );
 };

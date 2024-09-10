@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pagination, Grid, Flex } from "@mantine/core";
+import { Pagination, Grid, Flex, Text } from "@mantine/core";
 import CourseCard from "./CourseCard";
 import { Course } from "../../pages/DemoDashboard.page";
 
@@ -10,38 +10,51 @@ interface CourseCardCollectionProps {
 const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
   courses,
 }) => {
-  // setting this as the active page
+  // Setting the active page for pagination
   const [activePage, setPage] = useState(1);
   const coursesPerPage = 4;
 
-  // calculating the index range for the current page
+  // Calculating the index range for the current page
   const startIndex = (activePage - 1) * coursesPerPage;
   const endIndex = startIndex + coursesPerPage;
 
-  // get the courses to display for the current page
+  // Get the courses to display for the current page
   const displayedCourses = courses.slice(startIndex, endIndex);
 
   return (
     <div>
-      <div>CourseCardCollection</div>
-      {/* display courses in grid */}
-      <Grid m={"xl"}>
-        {displayedCourses.map((course) => (
-          <Grid.Col span={6} key={course.id}>
-            {" "}
-            {/* Display 2 courses per row */}
-            <CourseCard course={course} />
-          </Grid.Col>
-        ))}
-      </Grid>
+      {/* Display a message when no courses are available */}
+      {courses.length === 0 ? (
+        <Flex justify="center" align="center" h="100px">
+          <Text size="xl">
+            Could not find the course you're looking for &#128546;
+          </Text>
+        </Flex>
+      ) : (
+        <>
+          {/* Display courses in grid */}
+          <Grid>
+            {displayedCourses.map((course) => (
+              <Grid.Col
+                span={6} // Adjust for 2 courses per row, adapt as needed
+                md={6} // Half-width on medium screens
+                key={course.id}
+              >
+                <CourseCard course={course} />
+              </Grid.Col>
+            ))}
+          </Grid>
 
-      {/* centering pagination using flex component */}
-      <Flex justify="center" mt="lg">
-        <Pagination
-          onChange={setPage}
-          total={Math.ceil(courses.length / coursesPerPage)}
-        />
-      </Flex>
+          {/* Center pagination using Flex component */}
+          <Flex justify="center" mt="lg">
+            <Pagination
+              onChange={setPage}
+              total={Math.ceil(courses.length / coursesPerPage)}
+              page={activePage} // Sync the active page
+            />
+          </Flex>
+        </>
+      )}
     </div>
   );
 };
