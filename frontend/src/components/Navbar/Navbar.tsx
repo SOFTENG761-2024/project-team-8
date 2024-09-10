@@ -1,4 +1,12 @@
-import { ActionIcon, rem, Stack, Tooltip, Text, Divider } from "@mantine/core";
+import {
+  ActionIcon,
+  rem,
+  Stack,
+  Tooltip,
+  Text,
+  Divider,
+  Transition,
+} from "@mantine/core";
 import classes from "./NavBar.module.css";
 import {
   IconChevronLeft,
@@ -36,7 +44,14 @@ function NavbarLink({
       >
         <Icon style={{ width: iconSize, height: iconSize }} stroke={3} />
       </ActionIcon>
-      {expanded && <Text style={{ marginLeft: "0.5rem" }}>{label}</Text>}
+
+      {expanded && (
+        <Text
+          className={`${classes.text} ${!expanded ? classes.textCollapsed : ""}`}
+        >
+          {label}
+        </Text>
+      )}
     </div>
   );
 }
@@ -60,11 +75,11 @@ const Navbar = () => {
   ));
   return (
     <nav
-      className={`${classes.navbar} ${expanded ? classes.navbarExpanded : ""}`}
+      className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}
     >
       <Text className={classes.menuHeading}>MENU</Text>
       <ActionIcon className={classes.expandIcon} onClick={toggleExpand}>
-        {expanded ? <IconChevronLeft /> : <IconChevronRight />}
+        <IconChevronRight />
       </ActionIcon>
       <Stack gap="2vh" className={classes.navbarMain}>
         {navbarItems}
