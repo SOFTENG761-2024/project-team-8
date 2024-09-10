@@ -1,0 +1,14 @@
+.input {
+  &[data-variant="filled"] {
+    background-color: var(--mantine-color-primary-0);
+    border-radius: 12px;
+    &:focus-within {
+      border-color: var(--mantine-color-primary-4);
+    }
+  }
+}
+
+label {
+  color: var(--mantine-color-neutral-4);
+  margin-bottom: 0.4rem;
+}
