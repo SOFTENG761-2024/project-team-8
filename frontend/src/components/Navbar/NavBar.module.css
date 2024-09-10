@@ -12,26 +12,45 @@
   background-color: var(--mantine-color-primary-5);
 }
 
-.navbarMain {
-  flex: 1;
+.navbarExpanded {
+  width: rem(20vw);
+  min-width: 200px;
+  max-width: 300px;
 }
 
-.link {
-  min-width: 4vw;
-  width: rem(55px);
-  max-width: 4.5vw;
-  min-height: 4vw;
-  height: rem(55px);
-  max-height: 4.5vw;
-  border-radius: 1vmax;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.navbarMain {
+  flex: 1;
+  width: 100%;
+}
+
+.linkIcon {
   color: var(--mantine-color-neutral-1);
 
   &:hover {
+    color: var(--mantine-color-neutral-1);
+  }
+
+  &[data-active] {
+    & {
+      color: var(--mantine-color-neutral-1);
+    }
+  }
+}
+
+.link {
+  width: 100%;
+  height: rem(55px);
+  border-radius: 1vmax;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--mantine-color-neutral-1);
+  padding: 0.5rem;
+  &:hover {
     background-color: var(--mantine-color-primary-3);
     color: var(--mantine-color-neutral-1);
+    cursor: pointer;
   }
 
   &[data-active] {
