@@ -120,7 +120,7 @@ const DemoDashboardPage = () => {
 
   return (
     <div style={{ width: "100%", height: "100vh" }}>
-      <Stack spacing="md" h="auto" align="stretch">
+      <Stack h="auto" align="stretch">
         <Grid pb={10}>
           <Grid.Col span={8}>
             <Input

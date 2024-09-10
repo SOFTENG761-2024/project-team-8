@@ -36,8 +36,7 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
           <Grid>
             {displayedCourses.map((course) => (
               <Grid.Col
-                span={6} // Adjust for 2 courses per row, adapt as needed
-                md={6} // Half-width on medium screens
+                span={6} // this makes two rows
                 key={course.id}
               >
                 <CourseCard course={course} />
@@ -45,12 +44,13 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
             ))}
           </Grid>
 
-          {/* Center pagination using Flex component */}
+          {/* Centering pagination using Flex component */}
           <Flex justify="center" mt="lg">
             <Pagination
               onChange={setPage}
               total={Math.ceil(courses.length / coursesPerPage)}
-              page={activePage} // Sync the active page
+              value={activePage}
+              gap={20}
             />
           </Flex>
         </>

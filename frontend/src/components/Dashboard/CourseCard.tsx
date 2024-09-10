@@ -55,7 +55,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             <Image
               src={course.image}
               alt="Course Image"
-              height={150} // Increased height for larger image
+              height={150}
               width={150}
               radius="md"
               style={{ objectFit: "cover" }}
