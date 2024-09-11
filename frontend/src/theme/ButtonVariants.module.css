@@ -1,0 +1,12 @@
+.root {
+  &[data-variant="filled"] {
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 12px;
+
+    transition: background-color 0.1s ease-in;
+    &:hover {
+      background-color: var(--mantine-color-primary-4);
+    }
+  }
+}

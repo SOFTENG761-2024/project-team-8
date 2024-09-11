@@ -1,6 +1,13 @@
-import { createTheme, rem, Title } from "@mantine/core";
+import { Button, createTheme, Input, rem } from "@mantine/core";
+import inputVariantStyles from "./InputVariants.module.css";
+import buttonVariantStyles from "./ButtonVariants.module.css";
 
 export const theme = createTheme({
+  // adding and/or overriding variants of commonly used components
+  components: {
+    Input: Input.extend({ classNames: inputVariantStyles }),
+    Button: Button.extend({ classNames: buttonVariantStyles }),
+  },
   // color theme
   colors: {
     primary: [
