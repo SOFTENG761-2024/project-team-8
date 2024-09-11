@@ -1,9 +1,10 @@
 .layoutWrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
   align-items: center;
+  background-color: #F9FCFF;
 }
 
 .mainContentWrapper {
@@ -13,6 +14,23 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+.headerContentWrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 190px;
+  padding: 50px 50px 0 50px;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;            /* Vertically center the items (optional) */
+  flex-grow: 1; 
+  background-color: blueviolet;
 }
 
 .mainContent {
@@ -32,6 +50,13 @@
   width: 100vw;
   height: 100vh;
   z-index: 1;
+}
+
+.logoImage {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  height: 100%;           
 }
 
 .alert {
