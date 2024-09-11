@@ -1,4 +1,4 @@
-import { Box, Grid, Group, Text, useMantineTheme } from "@mantine/core";
+import { Box, Grid, Group, Loader, Text, useMantineTheme } from "@mantine/core";
 import { IconBooks } from "@tabler/icons-react";
 import ModuleAccordion from "./ModuleAccordion";
 import { useEffect, useState } from "react";
@@ -17,6 +17,7 @@ interface ModulesData {
 const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
     const theme = useMantineTheme();
     const [modulesData, setModulesData] = useState<ModulesData[]>([]);
+    const [loading, setLoading] = useState(true);
 
     /**
      * Fetches course data from the Parse server
@@ -52,6 +53,7 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
             }
 
             setModulesData(modules);
+            setLoading(false);
         } catch (error) {
             console.error("Error fetching course data: ", error);
         }
@@ -68,6 +70,14 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
                 <Text size="lg" fw={700} c="primary.5">Course Content</Text>
             </Group>
             <Grid pl="md" pr="md" pt="xs">
+                {loading && (
+                    <Loader
+                        pt="1rem"
+                        m="0 auto"
+                        size={40}
+                        color={theme.colors.primary[4]}
+                        />
+                )}
                 {modulesData.map((module) => (
                     <Grid.Col key={module.title} span={summaryExpanded ? 12 : 6}>
                         <ModuleAccordion module={module} />
