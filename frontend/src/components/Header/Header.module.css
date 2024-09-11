@@ -1,0 +1,43 @@
+.headerWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px;  
+  width: 100%;
+  height: 100%;
+  border-bottom: 2px solid var(--mantine-color-neutral-2);
+}
+
+.detailsWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+  width: auto;
+}
+
+.nameWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.largeBoldText {
+  font-size: 30px;      
+  font-weight: bold;    
+  color: var(--mantine-color-primary-4);      
+}
+
+.boldText {
+  font-size: 18px;     
+  font-weight: bold;    
+  color: var(--mantine-color-primary-4);      
+}
+
+.text {
+  font-size: 18px;      
+  font-weight: normal;    
+  color: var(--mantine-color-primary-4);   
+}

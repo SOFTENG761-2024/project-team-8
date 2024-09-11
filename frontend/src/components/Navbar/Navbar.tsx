@@ -1,15 +1,6 @@
-import {
-  ActionIcon,
-  rem,
-  Stack,
-  Tooltip,
-  Text,
-  Divider,
-  Transition,
-} from "@mantine/core";
+import { ActionIcon, rem, Stack, Text, Divider } from "@mantine/core";
 import classes from "./NavBar.module.css";
 import {
-  IconChevronLeft,
   IconChevronRight,
   IconHomeFilled,
   IconLogout,
