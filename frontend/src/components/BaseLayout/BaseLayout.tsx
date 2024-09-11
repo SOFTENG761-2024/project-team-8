@@ -10,7 +10,7 @@ const BaseLayout = () => {
     <Container fluid className={classes.layoutWrapper}>
       <div className={classes.headerContentWrapper}>
         <div className={classes.logoImage}>
-          <img src={logo} alt="Centered" style={{ maxWidth: '100%', height: '100%' }} />
+          <img src={logo} alt="logo" className={classes.logo} />
         </div>
         <div className={classes.headerContent}>
           <Header />

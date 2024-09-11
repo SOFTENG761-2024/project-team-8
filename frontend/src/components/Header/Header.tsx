@@ -7,7 +7,7 @@ import explorer from '../../assets/explorer.png';
 
 const Header = () => {
   return (
-    <Container className={classes.headerWrapper}>
+    <Container fluid className={classes.headerWrapper}>
       <div className={classes.detailsWrapper}>
       <img src={explorer} alt="Centered" style={{ maxWidth: '70px' }} />
       <text className={classes.largeBoldText}>[Page Description]</text>
