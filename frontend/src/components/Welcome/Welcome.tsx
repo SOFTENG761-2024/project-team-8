@@ -1,5 +1,6 @@
 import { Title, Text, Anchor } from "@mantine/core";
 import classes from "./Welcome.module.css";
+import CreateLessonModal from "../CreateLessonModal/CreateLessonModal";
 
 export function Welcome() {
   return (
@@ -50,6 +51,7 @@ export function Welcome() {
       <Title size="h6" c="neutral.5">
         Sub Title
       </Title>
+      <CreateLessonModal />
     </>
   );
 }
