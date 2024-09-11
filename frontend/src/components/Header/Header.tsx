@@ -3,8 +3,10 @@ import classes from "./Header.module.css";
 import { IconUserFilled } from "@tabler/icons-react";
 import explorer from "../../assets/explorer.png";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
+  const location = useLocation();
   const [page, setPage] = useState("");
   useEffect(() => {
     determinePage();
@@ -16,11 +18,8 @@ const Header = () => {
       setPage("Dashboard");
     } else if (path === "/dashboard-test") {
       setPage("Demo Dashboard");
-    } else if (path.startsWith("/courses/")) {
-      // Use startsWith for dynamic segments
-      setPage("Course");
-      // } else if (path === "/admin/create-lesson") {
-      //   setPage("Create Lesson");
+    } else if (path.includes("courses")) {
+      setPage("Course Details");
     } else {
       setPage("");
     }
