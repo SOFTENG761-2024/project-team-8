@@ -6,10 +6,10 @@ const CoursePage = () => {
   const { courseId } = useParams();
 
   return (
-    <Box p="2rem">
+    <Box h="100%" w="100%">
       <Title order={3} c="primary.5">Course Title <Text inherit span c="primary.3">- Dinosaur Steps</Text></Title>
       <Group justify="space-between">
-        <Box w="40%">
+        <Box>
           <Text>Placeholder for Course Summary</Text>
         </Box>
         <CourseContent courseId={courseId} summaryExpanded />

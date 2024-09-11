@@ -62,7 +62,7 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
     }, []);
 
     return (
-        <Box w="40%">
+        <Box w="50%">
             <Group gap="xs" pl="md" pr="md">
                 <IconBooks size={24} color={theme.colors.primary[3]} />
                 <Text size="lg" fw={700} c="primary.5">Course Content</Text>
