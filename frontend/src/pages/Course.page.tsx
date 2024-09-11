@@ -8,7 +8,7 @@ const CoursePage = () => {
   return (
     <Box h="100%" w="100%">
       <Title order={3} c="primary.5">Course Title <Text inherit span c="primary.3">- Dinosaur Steps</Text></Title>
-      <Group justify="space-between">
+      <Group justify="space-between" align="top" h="100%">
         <Box>
           <Text>Placeholder for Course Summary</Text>
         </Box>
