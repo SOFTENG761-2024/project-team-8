@@ -26,7 +26,7 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
   const theme = useMantineTheme();
   const [modulesData, setModulesData] = useState<ModulesData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string[] | null>(null);
 
   /**
    * Fetches course data from the Parse server
@@ -50,8 +50,9 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
           try {
             const lessonData = await lessonQuery.get(lesson);
             lessonTitles.push(lessonData.get("title"));
-          } catch (error) {
-            setError("Error fetching lesson data: " + error);
+          } catch (error: any) {
+            const errorData = ["Error fetching lesson data", error.message];
+            setError(errorData);
             setTimeout(() => setError(null), 3000);
             setLoading(false);
           }
@@ -65,8 +66,9 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
 
       setModulesData(modules);
       setLoading(false);
-    } catch (error) {
-      setError("Error fetching course data: " + error);
+    } catch (error: any) {
+      const errorData = ["Error fetching course data", error.message];
+      setError(errorData);
       setTimeout(() => setError(null), 3000);
       setLoading(false);
     }
@@ -100,8 +102,8 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
         ))}
       </Grid>
       {error && (
-        <Alert variant="light" color="red" title="Error">
-          {error}
+        <Alert variant="light" color="red" title={error[0]}>
+          {error[1]}
         </Alert>
       )}
     </Box>
