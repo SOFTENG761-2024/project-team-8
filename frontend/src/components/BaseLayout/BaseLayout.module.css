@@ -1,9 +1,11 @@
 .layoutWrapper {
   display: flex;
-  flex-direction: row;
-  height: 100vh;
+  flex-direction: column;
+  min-height: 100vh;
   width: 100vw;
   align-items: center;
+
+  background-color: var(--mantine-color-neutral-0);
 }
 
 .mainContentWrapper {
@@ -15,13 +17,50 @@
   overflow: hidden;
 }
 
+.headerContentWrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 190px;
+  padding: 20px;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+}
+
 .mainContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 84%;
+  height: auto;
   width: 93%;
+}
+
+.horizontalWrapper {
+  display: flex;
+  padding-top: 20px;
+  padding-bottom: 60px;
+  flex-direction: row;
+  width: 100%;
+  min-height: fit-content;
+  height: auto;
+}
+
+.footerWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 190px;
+  bottom: 0;
+  background-color: var(
+    --mantine-color-neutral-2
+  ); /*Stand in colour for visualization of position*/
 }
 
 .overlay {
@@ -34,6 +73,13 @@
   z-index: 1;
 }
 
+.logoImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .alert {
   z-index: 2;
   color: light-dark(var(--mantine-color-grey-8), var(--mantine-color-white));
@@ -42,4 +88,12 @@
 .countDown {
   color: light-dark(var(--mantine-color-grey-8), var(--mantine-color-white));
   font-size: 2rem;
+}
+
+.logo {
+  max-width: 100%;
+  height: 100%;
+  top: 20px;
+  left: 20px;
+  object-fit: cover;
 }
