@@ -4,6 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import Header from "../Header/Header";
 import { Container } from "@mantine/core";
 import logo from "../../assets/logo.png";
+import Footer from "../Footer/Footer";
 
 const BaseLayout = () => {
   return (
@@ -24,7 +25,9 @@ const BaseLayout = () => {
           </div>
         </main>
       </div>
-      <div className={classes.footerWrapper}></div>
+      <div className={classes.footerWrapper}>
+        <Footer />
+      </div>
     </Container>
   );
 };
