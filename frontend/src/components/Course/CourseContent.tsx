@@ -17,7 +17,7 @@ interface ModulesData {
 const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
     const theme = useMantineTheme();
     const [modulesData, setModulesData] = useState<ModulesData[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<boolean>(true);
 
     /**
      * Fetches course data from the Parse server
@@ -67,7 +67,7 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
         <Box w="50%">
             <Group gap="xs" pl="md" pr="md">
                 <IconBooks size={24} color={theme.colors.primary[3]} />
-                <Text size="lg" fw={700} c="primary.5">Course Content</Text>
+                <Text size="textLg" fw={700} c="primary.5">Course Content</Text>
             </Group>
             <Grid pl="md" pr="md" pt="xs">
                 {loading && (
