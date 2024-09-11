@@ -4,7 +4,7 @@
   min-height: 100vh;
   width: 100vw;
   align-items: center;
-  
+
   background-color: var(--mantine-color-neutral-0);
 }
 
@@ -22,14 +22,14 @@
   flex-direction: row;
   width: 100%;
   height: 190px;
-  padding: 60px 40px 0 40px;
+  padding: 20px;
 }
 
 .headerContent {
   display: flex;
   flex-direction: row;
-  align-items: center;            
-  flex-grow: 1; 
+  align-items: center;
+  flex-grow: 1;
 }
 
 .mainContent {
@@ -44,9 +44,10 @@
 .horizontalWrapper {
   display: flex;
   padding-top: 20px;
+  padding-bottom: 60px;
   flex-direction: row;
   width: 100%;
-  min-height: 800px;
+  min-height: fit-content;
   height: auto;
 }
 
@@ -57,7 +58,9 @@
   width: 100vw;
   height: 190px;
   bottom: 0;
-  background-color: var(--mantine-color-neutral-2); /*Stand in colour for visualization of position*/
+  background-color: var(
+    --mantine-color-neutral-2
+  ); /*Stand in colour for visualization of position*/
 }
 
 .overlay {
@@ -72,9 +75,9 @@
 
 .logoImage {
   display: flex;
-  justify-content: center; 
-  align-items: center;     
-  height: 100%;         
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .alert {
@@ -89,8 +92,8 @@
 
 .logo {
   max-width: 100%;
-  height: 100%;    
-  top: 20px;           
-  left: 20px;      
+  height: 100%;
+  top: 20px;
+  left: 20px;
   object-fit: cover;
 }

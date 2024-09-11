@@ -3,7 +3,7 @@ import classes from "./BaseLayout.module.css";
 import Navbar from "../Navbar/Navbar";
 import Header from "../Header/Header";
 import { Container } from "@mantine/core";
-import logo from '../../assets/logo.png';
+import logo from "../../assets/logo.png";
 
 const BaseLayout = () => {
   return (
@@ -24,12 +24,8 @@ const BaseLayout = () => {
           </div>
         </main>
       </div>
-      <div className={classes.footerWrapper}>
-
-      </div>
-
+      <div className={classes.footerWrapper}></div>
     </Container>
-    
   );
 };
 
