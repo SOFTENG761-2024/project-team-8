@@ -100,12 +100,12 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
             <ModuleAccordion module={module} />
           </Grid.Col>
         ))}
+        {error && (
+          <Alert variant="light" color="red" title={error[0]} mt="1rem" w="100%">
+            {error[1]}
+          </Alert>
+        )}
       </Grid>
-      {error && (
-        <Alert variant="light" color="red" title={error[0]}>
-          {error[1]}
-        </Alert>
-      )}
     </Box>
   );
 };
