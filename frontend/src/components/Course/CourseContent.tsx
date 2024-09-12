@@ -7,7 +7,7 @@ import {
   Text,
   useMantineTheme,
 } from "@mantine/core";
-import { IconBooks } from "@tabler/icons-react";
+import { IconBooks, IconExclamationCircle } from "@tabler/icons-react";
 import ModuleAccordion from "./ModuleAccordion";
 import { useEffect, useState } from "react";
 import Parse from "../../../parseconfig";
@@ -26,7 +26,7 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
   const theme = useMantineTheme();
   const [modulesData, setModulesData] = useState<ModulesData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   /**
    * Fetches course data from the Parse server
@@ -50,26 +50,25 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
           try {
             const lessonData = await lessonQuery.get(lesson);
             lessonTitles.push(lessonData.get("title"));
-          } catch (error: any) {
-            const errorData = ["Error fetching lesson data", error.message];
-            setError(errorData);
-            setTimeout(() => setError(null), 3000);
+          } catch {
+            setError("There was a problem loading the course data, please try again.");
             setLoading(false);
           }
         }
-
+        
         modules.push({
           title: module.title,
           lessons: lessonTitles,
         });
       }
 
-      setModulesData(modules);
+      if (error !== null) {
+        setModulesData(modules);
+      }
+      
       setLoading(false);
-    } catch (error: any) {
-      const errorData = ["Error fetching course data", error.message];
-      setError(errorData);
-      setTimeout(() => setError(null), 3000);
+    } catch {
+      setError("There was a problem loading the course data, please try again.");
       setLoading(false);
     }
   };
@@ -101,8 +100,8 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
           </Grid.Col>
         ))}
         {error && (
-          <Alert variant="light" color="red" title={error[0]} mt="1rem" w="100%">
-            {error[1]}
+          <Alert variant="light" color="red" title="Something went wrong" mt="1rem" w="100%" icon={<IconExclamationCircle />}>
+            {error}
           </Alert>
         )}
       </Grid>
