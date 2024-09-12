@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-../database-scipts/node_modules
+../database-scripts/node_modules
 
 node_modules
 dist
