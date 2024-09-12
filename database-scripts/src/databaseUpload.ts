@@ -216,6 +216,70 @@ async function uploadDinoLoops() {
     }
 }
 
+async function uploadDinoCommands() {
+    /* Upload lessons */
+    const lessons = [
+        {
+            title: "DinoLoops - Lesson 1",
+            handoutPath: path.join(__dirname, "../assets/dinoCommands/Demonstration Copy - Dinosaur Commands Module - Lesson 01 - Teaching Slides.pdf"),
+            worksheetPath: path.join(__dirname, "../assets/dinoCommands/Demonstration Copy - Lesson 01 - Dinosaur Commands Module - Student handouts.pdf")
+        },
+        {
+            title: "DinoLoops - Lesson 2",
+            handoutPath: path.join(__dirname, "../assets/dinoCommands/Demonstration Copy - Dinosaur Commands Module - Lesson 02 - Teaching Slides.pdf"),
+            worksheetPath: path.join(__dirname, "../assets/dinoCommands/Demonstration Copy - Lesson 02 - Dinosaur Commands Module - Student handouts.pdf")
+        },
+        {
+            title: "DinoLoops - Lesson 3",
+            handoutPath: path.join(__dirname, "../assets/dinoCommands/Demonstration Copy -  Dinosaur Commands Module - Lesson 03 - Teaching Slides.pdf"),
+            worksheetPath: path.join(__dirname, "../assets/dinoCommands/Demonstration copy - Lesson 03 - Dinosaur Commands Module - Student handouts.pdf")
+        }
+    ];
+
+    const savedLessons = await Promise.all(lessons.map(lesson =>
+        createLesson(lesson.title, lesson.handoutPath, lesson.worksheetPath)
+    ));
+
+    /* Upload module */
+    const module: Module[] = [{
+        category: "Computational Thinking",
+        title: "Module 1",
+        lessons: savedLessons.map(lesson => lesson.id),
+        description: 'This module dives into computational thinking, algorithms and debugging.'
+    }];
+
+    /* Upload assessment */
+    const assessmentPath = path.join(__dirname, "../assets/dinoCommands/Demonstration Copy - Dinosaur Commands formative assessment.pdf");
+    const dinoStepsAssessment = await uploadFile(assessmentPath);
+
+    const assessment: Assessment = {
+        category: "Computer Science",
+        title: "DinoCommands Assessment",
+        printout: [dinoStepsAssessment]
+    };
+
+    /* Create course */
+    const newCourse = new Parse.Object("course");
+    newCourse.set("yearLevel", 4 as any);
+    newCourse.set("description", "To create content in programming, students need to develop a good understanding of computational thinking (CT). In this module, students will develop skills and knowledge to support their understanding of CT through a gamified approach using unplugged and digital activities." as any);
+    newCourse.set("outcomes", ["A", "B"] as any);
+    newCourse.set("modules", module as any);
+    newCourse.set("assessments", [assessment] as any);
+    const savedCourse = await newCourse.save();
+
+    /* Create kit */
+    const newKit = new Parse.Object("kits");
+    newKit.set("title", "Dinosaur Commands" as any);
+    newKit.set('courses', [savedCourse.id] as any);
+
+    try {
+        const result = await newKit.save();
+        console.log('Kit object created with objectId:', result.id);
+    } catch (error) {
+        console.error('Error while creating Kit object:', error);
+    }
+}
 
 uploadDinoSteps()
 uploadDinoLoops()
+uploadDinoCommands()
