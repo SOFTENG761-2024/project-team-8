@@ -8,6 +8,10 @@ import {
   Title,
   Text,
   Flex,
+  TextInput,
+  Textarea,
+  MultiSelect,
+  rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
@@ -17,8 +21,21 @@ const CreateLessonModal = () => {
   const [active, setActive] = useState(1);
   return (
     <>
-      <Modal opened={opened} onClose={close} size="100%" h="100%">
-        <Flex>
+      <Modal
+        opened={opened}
+        onClose={close}
+        size="100%"
+        // maw="50rem"
+        // h="100%"
+        // mih="30em"
+        styles={{
+          content: { height: "90vh" },
+          header: { height: "10%" },
+          body: { height: "85%" },
+        }}
+        centered
+      >
+        <Flex h="100%">
           <Stack h="100%" align="stretch" justify="flex-start" gap="md" w="30%">
             <Title size="h1" c="primary.4">
               Create a new lesson
@@ -37,15 +54,9 @@ const CreateLessonModal = () => {
               <Stepper.Step label="Step 3" description="Add lesson content" />
             </Stepper>
           </Stack>
-          <Group w="70%" align="stretch" justify="flex-start" gap="md">
+          <Group w="70%" justify="flex-start" gap="md">
             <Divider orientation="vertical" mx="lg" />
-            <Stack
-              h="100%"
-              w="80%"
-              align="stretch"
-              justify="flex-start"
-              gap="md"
-            >
+            <Stack h="100%" w="80%" justify="flex-start">
               {active === 0 && (
                 <>
                   <Group w="100%">
@@ -55,7 +66,45 @@ const CreateLessonModal = () => {
                   </Group>
 
                   <Divider />
-                  <Text>Page 1</Text>
+
+                  <TextInput
+                    label={
+                      <Title
+                        size="h5"
+                        c="neutral.5"
+                        tt={"uppercase"}
+                        lts="0.08em"
+                      >
+                        lesson name
+                      </Title>
+                    }
+                    placeholder="Insert name of this lesson here..."
+                    variant="filled"
+                  />
+                  <Textarea
+                    label={
+                      <Title
+                        size="h5"
+                        c="neutral.5"
+                        tt={"uppercase"}
+                        lts="0.08em"
+                      >
+                        lesson overview
+                      </Title>
+                    }
+                  />
+                  <MultiSelect
+                    label={
+                      <Title
+                        size="h5"
+                        c="neutral.5"
+                        tt={"uppercase"}
+                        lts="0.08em"
+                      >
+                        select course for this lesson
+                      </Title>
+                    }
+                  />
                 </>
               )}
               {active === 1 && (
