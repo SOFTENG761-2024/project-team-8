@@ -1,14 +1,30 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import DashboardPage from "./pages/Dashboard.page";
-import LoginPage from "./pages/Login.page";
 import RegisterPage from "./pages/Register.page";
 import CoursePage from "./pages/Course.page";
 import CreateLessonPage from "./pages/admin/CreateLesson.page";
 import BaseLayout from "./components/BaseLayout/BaseLayout";
+import LoginPage from "./pages/Login.page";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Navigate to="login" replace />,
+  },
+  {
+    path: "login",
+    element: <LoginPage />,
+  },
+  {
+    path: "register",
+    element: <RegisterPage />,
+  },
+  {
+    path: "user",
     element: <BaseLayout />,
     children: [
       {
@@ -16,25 +32,18 @@ const router = createBrowserRouter([
         element: <DashboardPage />,
       },
       {
-        path: "login",
-        element: <LoginPage />,
-      },
-      {
-        path: "register",
-        element: <RegisterPage />,
-      },
-      {
         path: "courses/:courseId",
         element: <CoursePage />,
       },
+    ],
+  },
+  {
+    path: "admin",
+    element: <BaseLayout />,
+    children: [
       {
-        path: "admin",
-        children: [
-          {
-            path: "create-lesson",
-            element: <CreateLessonPage />,
-          },
-        ],
+        path: "create-lesson",
+        element: <CreateLessonPage />,
       },
     ],
   },
