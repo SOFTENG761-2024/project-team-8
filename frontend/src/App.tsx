@@ -4,6 +4,7 @@ import {Router} from "./Router";
 import {theme} from "./theme/theme";
 
 
+
 function App() {
     return (
         <MantineProvider theme={theme}>
