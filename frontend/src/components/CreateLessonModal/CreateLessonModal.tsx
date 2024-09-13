@@ -10,12 +10,13 @@ import {
   Flex,
   TextInput,
   Textarea,
-  MultiSelect,
-  rem,
   Select,
+  rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
+import classes from "./CreateLessonModal.module.css";
+import { IconCheck, IconCircleCheck } from "@tabler/icons-react";
 
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -47,13 +48,20 @@ const CreateLessonModal = () => {
               onStepClick={setActive}
               orientation="vertical"
               size="xl"
+              iconSize={rem(60)}
+              classNames={{
+                root: classes.steps,
+                steps: classes.steps,
+                step: classes.step,
+                stepIcon: classes.stepIcon,
+                verticalSeparator: classes.stepSeperator,
+                stepCompletedIcon: classes.stepCompletedIcon,
+                stepBody: classes.stepBody,
+              }}
             >
-              <Stepper.Step label="Step 1" description="Add lesson details" />
-              <Stepper.Step
-                label="Step 2"
-                description="Add or upload resources"
-              />
-              <Stepper.Step label="Step 3" description="Add lesson content" />
+              <Stepper.Step label="Add lesson details" />
+              <Stepper.Step label="Add or upload resources" />
+              <Stepper.Step label="Add lesson content" />
             </Stepper>
           </Stack>
           <Group w="70%" justify="flex-start" gap="md">
@@ -110,6 +118,7 @@ const CreateLessonModal = () => {
                     }
                     data={courses}
                     variant="filled"
+                    maw="30rem"
                   />
                 </>
               )}
