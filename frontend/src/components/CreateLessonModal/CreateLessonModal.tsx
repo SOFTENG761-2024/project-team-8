@@ -14,9 +14,8 @@ import {
   rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { act, useState } from "react";
+import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
-import { IconCheck, IconCircleCheck } from "@tabler/icons-react";
 
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -33,9 +32,6 @@ const CreateLessonModal = () => {
         opened={opened}
         onClose={close}
         size="100%"
-        // maw="50rem"
-        // h="100%"
-        // mih="30em"
         styles={{
           content: { height: "90vh" },
           header: { height: "10%" },
@@ -73,6 +69,7 @@ const CreateLessonModal = () => {
             <Divider orientation="vertical" mx="lg" />
             <Stack h="100%" w="80%">
               <Stack h="100%" w="100%">
+                {/* step 1 */}
                 {active === 0 && (
                   <>
                     <Group w="100%">
@@ -128,6 +125,7 @@ const CreateLessonModal = () => {
                     />
                   </>
                 )}
+                {/* step 2 (TODO) */}
                 {active === 1 && (
                   <>
                     <Group>
@@ -136,6 +134,7 @@ const CreateLessonModal = () => {
                     </Group>
                   </>
                 )}
+                {/* step 3 (TODO) */}
                 {active === 2 && (
                   <>
                     <Group>
@@ -145,6 +144,7 @@ const CreateLessonModal = () => {
                   </>
                 )}
               </Stack>
+              {/* navigation buttons */}
               <Group className={classes.buttonGroup}>
                 <Button
                   variant="filled"
@@ -166,6 +166,7 @@ const CreateLessonModal = () => {
           </Group>
         </Flex>
       </Modal>
+      {/* modal trigger (TODO as not sure how it looks yet) */}
       <Button onClick={open}>Open create lesson modal</Button>
     </>
   );
