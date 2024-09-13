@@ -38,3 +38,13 @@
   margin-top: 0.7rem;
   color: var(--mantine-color-primary-4);
 }
+
+.buttonGroup {
+  width: 100%;
+  justify-self: flex-end;
+  justify-content: space-between;
+}
+
+.button {
+  width: 8rem;
+}
