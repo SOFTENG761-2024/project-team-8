@@ -51,24 +51,28 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
             const lessonData = await lessonQuery.get(lesson);
             lessonTitles.push(lessonData.get("title"));
           } catch {
-            setError("There was a problem loading the course data, please try again.");
+            setError(
+              "There was a problem loading the course data, please try again."
+            );
             setLoading(false);
           }
         }
-        
+
         modules.push({
           title: module.title,
           lessons: lessonTitles,
         });
       }
 
-      if (error !== null) {
+      if (error === null) {
         setModulesData(modules);
       }
-      
+
       setLoading(false);
     } catch {
-      setError("There was a problem loading the course data, please try again.");
+      setError(
+        "There was a problem loading the course data, please try again."
+      );
       setLoading(false);
     }
   };
@@ -100,7 +104,14 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
           </Grid.Col>
         ))}
         {error && (
-          <Alert variant="light" color="red" title="Something went wrong" mt="1rem" w="100%" icon={<IconExclamationCircle />}>
+          <Alert
+            variant="light"
+            color="red"
+            title="Something went wrong"
+            mt="1rem"
+            w="100%"
+            icon={<IconExclamationCircle />}
+          >
             {error}
           </Alert>
         )}
