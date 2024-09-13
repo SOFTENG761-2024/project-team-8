@@ -31,15 +31,15 @@ const CreateLessonModal = () => {
       <Modal
         opened={opened}
         onClose={close}
-        size="100%"
+        size="90%"
         styles={{
-          content: { height: "90vh" },
+          content: { height: "90vh", maxWidth: "1200px" },
           header: { height: "10%" },
-          body: { height: "85%" },
+          body: { height: "85%", padding: "1rem 4rem" },
         }}
         centered
       >
-        <Flex h="100%">
+        <Flex h="100%" gap="xl">
           <Stack h="100%" align="stretch" justify="flex-start" gap="md" w="30%">
             <Title size="h1" c="primary.4">
               Create a new lesson
@@ -67,8 +67,8 @@ const CreateLessonModal = () => {
           </Stack>
           <Group w="70%" justify="flex-start" gap="md">
             <Divider orientation="vertical" mx="lg" />
-            <Stack h="100%" w="80%">
-              <Stack h="100%" w="100%" gap="1.5em">
+            <Stack h="100%" w="85%">
+              <Stack h="100%" w="100%" gap="xl">
                 {/* step 1 */}
                 {active === 0 && (
                   <>
