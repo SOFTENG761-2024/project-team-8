@@ -19,7 +19,7 @@ import classes from "./CreateLessonModal.module.css";
 
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const courses = ["Course 1", "Course 2"]; // TODO: render with fetched data
 
   const nextStep = () =>
@@ -54,15 +54,31 @@ const CreateLessonModal = () => {
                 root: classes.steps,
                 steps: classes.steps,
                 step: classes.step,
-                stepIcon: classes.stepIcon,
                 verticalSeparator: classes.stepSeperator,
                 stepCompletedIcon: classes.stepCompletedIcon,
                 stepBody: classes.stepBody,
               }}
             >
-              <Stepper.Step label="Add lesson details" />
-              <Stepper.Step label="Add or upload resources" />
-              <Stepper.Step label="Add lesson content" />
+              <Stepper.Step
+                label="Add lesson details"
+                classNames={{
+                  stepIcon: classes.stepActiveIcon,
+                }}
+              />
+              <Stepper.Step
+                label="Add or upload resources"
+                classNames={{
+                  stepIcon:
+                    active < 1 ? classes.stepIcon : classes.stepActiveIcon,
+                }}
+              />
+              <Stepper.Step
+                label="Add lesson content"
+                classNames={{
+                  stepIcon:
+                    active < 2 ? classes.stepIcon : classes.stepActiveIcon,
+                }}
+              />
             </Stepper>
           </Stack>
           <Group w="70%" justify="flex-start" gap="md">

@@ -7,6 +7,12 @@
 }
 
 .stepIcon {
+  background-color: var(--mantine-color-neutral-3);
+  color: white;
+  border-width: 0px;
+}
+
+.stepActiveIcon {
   background-color: var(--mantine-color-primary-4);
   color: white;
   border-width: 0px;
@@ -17,6 +23,7 @@
   border-radius: 10rem;
   padding: 0.7rem;
 }
+
 .step {
   height: 100%;
   display: flex;
