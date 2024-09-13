@@ -1,32 +1,127 @@
-import {FC} from "react";
+import { FC, ReactNode } from "react";
 import classes from "./CourseSummary.module.css";
-import testImage from "../../assets/organic-crops-test.png"
+import testImage from "../../assets/organic-crops-test.png";
 import {
+  IconAwardFilled,
+  IconBulbFilled,
+  IconFileDescription,
+  IconInfoSquareFilled,
   IconStarFilled,
-  IconAwardFilled
+  IconUserFilled,
 } from "@tabler/icons-react";
-import {Text} from "@mantine/core";
+import { Accordion, Image, List, Text } from "@mantine/core";
 
-interface CourseSummaryProps {
-
-}
+interface CourseSummaryProps {}
 
 export const CourseSummary: FC<CourseSummaryProps> = () => {
   return (
     <div className={classes.courseSummary}>
-      <img className={classes.courseImage} src={testImage}/>
+      <Image h={300} src={testImage} radius="10px" />
       <div className={classes.courseHighlights}>
         <div className={classes.item}>
-          <IconStarFilled/>
-          <Text>Easy</Text>
+          <IconStarFilled />
+          <Text size="textSm">Beginner</Text>
         </div>
         <div className={classes.item}>
-          <IconAwardFilled/>
-          <Text>Certificate of Completion</Text>
+          <IconAwardFilled />
+          <Text size="textSm">Certificate of Completion</Text>
         </div>
       </div>
-
+      <SummaryAccordion topics={summaryTopicsTest} />
     </div>
-  )
+  );
+};
 
+const summaryTopicsTest = [
+  {
+    value: "About Course",
+    icon: <IconInfoSquareFilled />,
+    information:
+      "On this page you will find teaching and learning ideas and activities in the context of farming and agriculture. Continue to teach digital technologies with the kit (use the ideas from the PCL computational thinking page) and/or explore further ideas for integrating curriculum subjects.\n" +
+      "\n" +
+      "These activity ideas build on the suggestions from the Dinosaur Steps Farm Teaching resources.\n" +
+      "\n" +
+      "Many activities link to a range of subjects, including computer science. The icons denote links to computational concepts and ideas:",
+    informationList: [
+      "Use the ByteEd app to explore the theme",
+      "Decomposition",
+      "Algorithmic Thinking",
+      "Logical Thinking",
+      "Pattern Recognition",
+      "Abstraction",
+      "Debugging",
+    ],
+  },
+  {
+    value: "Learning Outcomes",
+    icon: <IconBulbFilled />,
+    informationList: [
+      "Crops and Plant Products",
+      "The different use cases of crops",
+      "Biofuel produciton and uses",
+      "Bees and Bee keeping",
+      "Agriculture Technologies",
+      "Animals in Agriculture",
+      "Decomposition",
+      "Algorithmic Thinking",
+      "Logical Thinking",
+      "Pattern recognition",
+      "Abstraction",
+      "Debugging",
+    ],
+  },
+  {
+    value: "Materials Include",
+    icon: <IconFileDescription />,
+    informationList: [
+      "A full comprehensive guide for teachers",
+      "Print-outs and activities",
+      "Posters",
+      "Cut-out resources",
+    ],
+  },
+  {
+    value: "Audience",
+    icon: <IconUserFilled />,
+    information: "Teachers or Tutors",
+  },
+];
+
+interface SummaryTopic {
+  value: string;
+  icon: ReactNode;
+  information?: string;
+  informationList?: string[];
 }
+
+interface SummaryAccordionProps {
+  topics: SummaryTopic[];
+}
+
+const SummaryAccordion = ({ topics }: SummaryAccordionProps) => {
+  const summaryItems = topics.map((topic) => (
+    <Accordion.Item
+      key={topic.value}
+      value={topic.value}
+      className={classes.item}
+    >
+      <Accordion.Control icon={topic.icon} c="neutral.5">
+        {topic.value}
+      </Accordion.Control>
+      <Accordion.Panel c="neutral.5">
+        {topic.information}
+        {topic.informationList && (
+          <List>
+            {topic.informationList.map((listItem) => (
+              <List.Item>{listItem}</List.Item>
+            ))}
+          </List>
+        )}
+      </Accordion.Panel>
+    </Accordion.Item>
+  ));
+
+  return (
+    <Accordion className={classes.accordionRoot}>{summaryItems}</Accordion>
+  );
+};

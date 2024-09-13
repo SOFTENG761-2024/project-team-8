@@ -1,13 +1,12 @@
 .courseSummary {
-  width: 476px;
-  height: 838px;
+  width: 430px;
   background-color: white;
   border: 1px solid var(--mantine-color-neutral-2);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 10px 40px;
+  padding: 10px 10px 20px;
   gap: 30px;
 
 }
@@ -36,8 +35,14 @@
   align-items: center;
   padding: 10px 15px;
   gap: 10px;
-  color: var(--mantine-color-secondary-5);
+  color: var(--mantine-color-secondary-6);
 }
 
+.accordionRoot {
+  width: 100%;
+  border-top: 1px solid var(--mantine-color-neutral-2);
+}
 
-
+.accordionRoot .item {
+  border-bottom: 1px solid var(--mantine-color-neutral-2);
+}
