@@ -68,7 +68,7 @@ const CreateLessonModal = () => {
           <Group w="70%" justify="flex-start" gap="md">
             <Divider orientation="vertical" mx="lg" />
             <Stack h="100%" w="80%">
-              <Stack h="100%" w="100%">
+              <Stack h="100%" w="100%" gap="1.5em">
                 {/* step 1 */}
                 {active === 0 && (
                   <>
@@ -107,6 +107,9 @@ const CreateLessonModal = () => {
                       }
                       variant="filled"
                       placeholder="Insert overview of lesson content here..."
+                      autosize
+                      minRows={4}
+                      maxRows={6}
                     />
                     <Select
                       label={
