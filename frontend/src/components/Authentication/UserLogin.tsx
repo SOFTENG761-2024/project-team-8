@@ -53,7 +53,7 @@ const UserLogin: FC = () => {
       setIsLoading(false);
 
       // Navigate to dashboard on successful login
-      navigate("/");
+      navigate("/user");
     } catch {
       setIsLoading(false);
 

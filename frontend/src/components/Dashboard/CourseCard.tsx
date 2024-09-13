@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button, Text, Image, Grid, Flex } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import { Course } from "../../pages/DemoDashboard.page";
+import { Course } from "../../pages/Dashboard.page";
 import { IconEye, IconAward } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
 
   return (
     <Link
-      to={`/courses/${course.id}`}
+      to={`/user/courses/${course.id}`}
       style={{ textDecoration: "none" }}
       // state={{ course }} // if we want to pass the course data to the next page
     >
