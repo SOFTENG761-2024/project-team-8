@@ -1,3 +1,20 @@
+.courseSummaryContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px
+}
+
+.courseSummaryWrapper {
+  transition: width 0.5s ease;
+  overflow: clip;
+  width: 430px;
+}
+
+.collapsed {
+  width: 0;
+}
+
 .courseSummary {
   width: 430px;
   background-color: white;
@@ -8,12 +25,22 @@
   align-items: center;
   padding: 10px 10px 20px;
   gap: 30px;
-
 }
 
-.courseImage {
-  border-radius: 10px;
-  width: 100%;
+.collapseButton {
+  width: 30px;
+  height: 100px;
+  border-radius: 25px;
+  transition: 0.5s ease;
+}
+
+.collapseButtonExpanded {
+  width: 60px;
+  height: 100%;
+}
+
+.collapseButton .icon {
+  color: var(--mantine-color-secondary-0)
 }
 
 .courseHighlights {

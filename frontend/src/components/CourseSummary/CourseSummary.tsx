@@ -1,33 +1,73 @@
-import { FC, ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import classes from "./CourseSummary.module.css";
 import testImage from "../../assets/organic-crops-test.png";
 import {
   IconAwardFilled,
   IconBulbFilled,
+  IconChevronLeft,
+  IconChevronRight,
   IconFileDescription,
   IconInfoSquareFilled,
   IconStarFilled,
   IconUserFilled,
 } from "@tabler/icons-react";
-import { Accordion, Image, List, Text } from "@mantine/core";
+import { Accordion, ActionIcon, Image, List, Text } from "@mantine/core";
 
-interface CourseSummaryProps {}
+export const CourseSummary = () => {
+  const [expanded, setExpanded] = useState(true);
 
-export const CourseSummary: FC<CourseSummaryProps> = () => {
+  const toggleCourseSummary = () => {
+    setExpanded(!expanded);
+  };
+
   return (
-    <div className={classes.courseSummary}>
-      <Image h={300} src={testImage} radius="10px" />
-      <div className={classes.courseHighlights}>
-        <div className={classes.item}>
-          <IconStarFilled />
-          <Text size="textSm">Beginner</Text>
-        </div>
-        <div className={classes.item}>
-          <IconAwardFilled />
-          <Text size="textSm">Certificate of Completion</Text>
-        </div>
+    <div className={classes.courseSummaryContainer}>
+      <CourseSummaryBase isExpanded={expanded} />
+      <ActionIcon
+        variant="filled"
+        color="secondary.6"
+        className={`${classes.collapseButton} ${expanded ? "" : classes.collapseButtonExpanded}`}
+        onClick={toggleCourseSummary}
+      >
+        {expanded ? (
+          <IconChevronLeft className={classes.icon} stroke={3} />
+        ) : (
+          <IconChevronRight className={classes.icon} stroke={3} />
+        )}
+      </ActionIcon>
+    </div>
+  );
+};
+
+interface CourseSummaryBaseProps {
+  isExpanded: boolean;
+}
+
+const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
+  return (
+    <div
+      className={`${classes.courseSummaryWrapper} ${isExpanded ? "" : classes.collapsed}`}
+    >
+      <div className={classes.courseSummary}>
+        <Image h={300} src={testImage} radius="10px" />
+        <CourseAttributes />
+        <SummaryAccordion topics={summaryTopicsTest} />
       </div>
-      <SummaryAccordion topics={summaryTopicsTest} />
+    </div>
+  );
+};
+
+const CourseAttributes = () => {
+  return (
+    <div className={classes.courseHighlights}>
+      <div className={classes.item}>
+        <IconStarFilled />
+        <Text size="textSm">Beginner</Text>
+      </div>
+      <div className={classes.item}>
+        <IconAwardFilled />
+        <Text size="textSm">Certificate of Completion</Text>
+      </div>
     </div>
   );
 };
