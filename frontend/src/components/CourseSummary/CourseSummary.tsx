@@ -51,7 +51,7 @@ const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
       <div className={classes.courseSummary}>
         <Image h={300} src={testImage} radius="10px" />
         <CourseAttributes />
-        <SummaryAccordion topics={summaryTopicsTest} />
+        <SummaryAccordion topics={summaryTopicsTest} isExpanded={isExpanded} />
       </div>
     </div>
   );
@@ -136,9 +136,12 @@ interface SummaryTopic {
 
 interface SummaryAccordionProps {
   topics: SummaryTopic[];
+  isExpanded: boolean;
 }
 
-const SummaryAccordion = ({ topics }: SummaryAccordionProps) => {
+const SummaryAccordion = ({ topics, isExpanded }: SummaryAccordionProps) => {
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+
   const summaryItems = topics.map((topic) => (
     <Accordion.Item
       key={topic.value}
@@ -162,6 +165,12 @@ const SummaryAccordion = ({ topics }: SummaryAccordionProps) => {
   ));
 
   return (
-    <Accordion className={classes.accordionRoot}>{summaryItems}</Accordion>
+    <Accordion
+      className={classes.accordionRoot}
+      value={!isExpanded ? "" : expandedItem}
+      onChange={setExpandedItem}
+    >
+      {summaryItems}
+    </Accordion>
   );
 };
