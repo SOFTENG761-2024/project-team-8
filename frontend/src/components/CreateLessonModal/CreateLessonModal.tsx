@@ -12,6 +12,7 @@ import {
   Textarea,
   MultiSelect,
   rem,
+  Select,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
@@ -19,6 +20,7 @@ import { useState } from "react";
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [active, setActive] = useState(1);
+  const courses = ["Course 1", "Course 2"]; // TODO: render with fetched data
   return (
     <>
       <Modal
@@ -92,8 +94,10 @@ const CreateLessonModal = () => {
                         lesson overview
                       </Title>
                     }
+                    variant="filled"
+                    placeholder="Insert overview of lesson content here..."
                   />
-                  <MultiSelect
+                  <Select
                     label={
                       <Title
                         size="h5"
@@ -104,6 +108,8 @@ const CreateLessonModal = () => {
                         select course for this lesson
                       </Title>
                     }
+                    data={courses}
+                    variant="filled"
                   />
                 </>
               )}
