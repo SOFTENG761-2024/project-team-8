@@ -14,13 +14,12 @@ const Header = () => {
 
   const determinePage = () => {
     const path = location.pathname;
-    if (path === "/") {
+    if (path.includes("dashboard")) {
       setPage("Dashboard");
-    } else if (path === "/dashboard-test") {
-      setPage("Demo Dashboard");
     } else if (path.includes("courses")) {
       setPage("Course Details");
     } else {
+      // CAN ADD MORE!
       setPage("");
     }
   };
