@@ -55,7 +55,7 @@ const Navbar = () => {
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
-  const links = [{ icon: IconHomeFilled, label: "Dashboard", path: "/" }];
+  const links = [{ icon: IconHomeFilled, label: "Dashboard", path: "/user" }];
   const navbarItems = links.map((link) => (
     <NavbarLink
       key={link.label}
@@ -80,7 +80,7 @@ const Navbar = () => {
         <Divider color="neutral.1" />
         <NavbarLink
           key={"Logout"}
-          onClick={() => console.log("TODO: logout functionality here")}
+          onClick={() => navigate("/login")}
           expanded={expanded}
           icon={IconLogout}
           label={"Logout"}
