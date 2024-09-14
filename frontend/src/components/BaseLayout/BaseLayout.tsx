@@ -2,12 +2,12 @@ import { Outlet } from "react-router-dom";
 import classes from "./BaseLayout.module.css";
 import Navbar from "../Navbar/Navbar";
 import Header from "../Header/Header";
-import { Container } from "@mantine/core";
+import { Box } from "@mantine/core";
 import logo from '../../assets/logo.png';
 
 const BaseLayout = () => {
   return (
-    <Container fluid className={classes.layoutWrapper}>
+    <Box className={classes.layoutWrapper}>
       <div className={classes.headerContentWrapper}>
         <div className={classes.logoImage}>
           <img src={logo} alt="logo" className={classes.logo} />
@@ -25,11 +25,8 @@ const BaseLayout = () => {
         </main>
       </div>
       <div className={classes.footerWrapper}>
-
       </div>
-
-    </Container>
-    
+    </Box>
   );
 };
 
