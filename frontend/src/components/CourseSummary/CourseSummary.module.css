@@ -45,7 +45,7 @@
 }
 
 .courseHighlights {
-  background: #BEF5F5;
+  background: var(--mantine-color-secondary-2);
   border-radius: 10px;
   width: 100%;
   display: flex;

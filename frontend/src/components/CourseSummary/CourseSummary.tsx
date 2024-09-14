@@ -156,7 +156,7 @@ const SummaryAccordion = ({ topics, isExpanded }: SummaryAccordionProps) => {
         {topic.informationList && (
           <List>
             {topic.informationList.map((listItem) => (
-              <List.Item>{listItem}</List.Item>
+              <List.Item key={listItem}>{listItem}</List.Item>
             ))}
           </List>
         )}
