@@ -23,21 +23,3 @@
   flex-direction: column;
   gap: 0.5rem;
 }
-
-.largeBoldText {
-  font-size: 30px;      
-  font-weight: bold;    
-  color: var(--mantine-color-primary-4);      
-}
-
-.boldText {
-  font-size: 18px;     
-  font-weight: bold;    
-  color: var(--mantine-color-primary-4);      
-}
-
-.text {
-  font-size: 18px;      
-  font-weight: normal;    
-  color: var(--mantine-color-primary-4);   
-}

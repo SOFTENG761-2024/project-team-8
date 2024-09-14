@@ -4,23 +4,24 @@ import {
   IconUserFilled
 } from "@tabler/icons-react";
 import explorer from '../../assets/explorer.png';
+import { Text } from '@mantine/core';
 
 const Header = () => {
   return (
     <Container fluid className={classes.headerWrapper}>
       <div className={classes.detailsWrapper}>
       <img src={explorer} alt="Centered" style={{ maxWidth: '4rem' }} />
-      <text className={classes.largeBoldText}>[Page Description]</text>
+      <Text fw={700} size="2.1rem" c="primary.4">[Page Description]</Text>
       </div>
       <div className={classes.detailsWrapper}>
         <IconUserFilled size={50}/>
         <div className={classes.nameWrapper}>
-          <text className={classes.text}>
+          <Text size="1.125rem" c="primary.4">
             Hello,
-          </text>
-          <text className={classes.boldText}>
+          </Text>
+          <Text fw={700} size="1.125rem" c="primary.4">
             Username
-          </text>
+          </Text>
         </div>
       </div>
     </Container>
