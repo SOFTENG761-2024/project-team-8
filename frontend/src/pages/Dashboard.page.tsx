@@ -2,7 +2,7 @@ import { Welcome } from "../components/Welcome/Welcome";
 import { ColorSchemeToggle } from "../components/ColorSchemeToggle/ColorSchemeToggle";
 import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
 import DummyCourseImage from "../assets/dummy_course.png";
-import { Input, Select, Grid, Stack } from "@mantine/core";
+import { Input, Select, Grid, Stack, Box } from "@mantine/core";
 import { useState, useEffect } from "react";
 
 // defininng the Course type and create some dummy data
@@ -121,7 +121,7 @@ const DashboardPage = () => {
   }, [courses, searchQuery, filter]);
 
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <Box w={"100%"} h={"100%"}>
       {/* <Welcome />
       <ColorSchemeToggle /> */}
       <Stack h="auto" align="stretch">
@@ -129,7 +129,7 @@ const DashboardPage = () => {
           <Grid.Col span={8}>
             <Input
               size="md"
-              placeholder="Search for my course"
+              placeholder="Search for course..."
               onChange={(e) => setSearchQuery(e.currentTarget.value)}
             />
           </Grid.Col>
@@ -150,11 +150,11 @@ const DashboardPage = () => {
             />
           </Grid.Col>
         </Grid>
-        <div className="course-card-collection-wrapper">
+        <Box className="course-card-collection-wrapper">
           <CourseCardCollection courses={filteredCourses} />
-        </div>
+        </Box>
       </Stack>
-    </div>
+    </Box>
   );
 };
 

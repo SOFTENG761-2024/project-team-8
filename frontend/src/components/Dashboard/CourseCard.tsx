@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button, Text, Image, Grid, Flex } from "@mantine/core";
+import { Card, Button, Text, Image, Grid, Flex, Box } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/Dashboard.page";
 import { IconEye, IconAward } from "@tabler/icons-react";
@@ -67,7 +67,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
               justify="space-between"
               style={{ height: "100%" }}
             >
-              <div>
+              <Box>
                 <Text size="xl">{course.title}</Text>
                 <Text c="dark" size="md">
                   {course.course}
@@ -91,16 +91,16 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                     {course.status}
                   </Text>
                 )}
-              </div>
+              </Box>
             </Flex>
           </Grid.Col>
         </Grid>
         {/* View Button positioned at the bottom-right */}
         <Button
           variant="filled"
-          bg="blue"
+          bg="var(--mantine-color-primary-5)"
           style={{
-            position: "absolute",
+            position: !isSmallScreen ? "absolute" : "static",
             bottom: "16px",
             right: "16px",
           }}

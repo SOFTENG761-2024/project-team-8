@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pagination, Grid, Flex, Text } from "@mantine/core";
+import { Pagination, Grid, Flex, Text, Box } from "@mantine/core";
 import CourseCard from "./CourseCard";
 import { Course } from "../../pages/Dashboard.page";
 
@@ -22,7 +22,7 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
   const displayedCourses = courses.slice(startIndex, endIndex);
 
   return (
-    <div>
+    <Box>
       {/* Display a message when no courses are available */}
       {courses.length === 0 ? (
         <Flex justify="center" align="center" h="100px">
@@ -55,7 +55,7 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
           </Flex>
         </>
       )}
-    </div>
+    </Box>
   );
 };
 
