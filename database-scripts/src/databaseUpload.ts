@@ -220,17 +220,17 @@ async function uploadDinoCommands() {
     /* Upload lessons */
     const lessons = [
         {
-            title: "DinoLoops - Lesson 1",
+            title: "DinoCommands - Lesson 1",
             handoutPath: path.join(__dirname, "../assets/dinoCommands/Demonstration Copy - Dinosaur Commands Module - Lesson 01 - Teaching Slides.pdf"),
             worksheetPath: path.join(__dirname, "../assets/dinoCommands/Demonstration Copy - Lesson 01 - Dinosaur Commands Module - Student handouts.pdf")
         },
         {
-            title: "DinoLoops - Lesson 2",
+            title: "DinoCommands - Lesson 2",
             handoutPath: path.join(__dirname, "../assets/dinoCommands/Demonstration Copy - Dinosaur Commands Module - Lesson 02 - Teaching Slides.pdf"),
             worksheetPath: path.join(__dirname, "../assets/dinoCommands/Demonstration Copy - Lesson 02 - Dinosaur Commands Module - Student handouts.pdf")
         },
         {
-            title: "DinoLoops - Lesson 3",
+            title: "DinoCommands - Lesson 3",
             handoutPath: path.join(__dirname, "../assets/dinoCommands/Demonstration Copy -  Dinosaur Commands Module - Lesson 03 - Teaching Slides.pdf"),
             worksheetPath: path.join(__dirname, "../assets/dinoCommands/Demonstration copy - Lesson 03 - Dinosaur Commands Module - Student handouts.pdf")
         }
