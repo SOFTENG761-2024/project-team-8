@@ -16,11 +16,27 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
+import { useForm } from "@mantine/form";
 
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [active, setActive] = useState(0);
   const courses = ["Course 1", "Course 2"]; // TODO: render with fetched data
+
+  const form = useForm({
+    mode: "uncontrolled",
+    initialValues: {
+      lessonName: "",
+      lessonOverview: "",
+      course: "",
+    },
+  });
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    console.log("TODO: on submit logic", form.getValues());
+
+    e.preventDefault();
+  };
 
   const nextStep = () =>
     setActive((current) => (current < 3 ? current + 1 : current));
@@ -84,103 +100,118 @@ const CreateLessonModal = () => {
           <Group w="70%" justify="flex-start" gap="md">
             <Divider orientation="vertical" mx="lg" />
             <Stack h="100%" w="85%">
-              <Stack h="100%" w="100%" gap="xl">
-                {/* step 1 */}
-                {active === 0 && (
-                  <>
-                    <Group w="100%">
-                      <Title size="h2" c="primary.4" w="100%">
-                        Lesson details
-                      </Title>
-                    </Group>
+              <form onSubmit={handleSubmit}>
+                <Stack h="100%" w="100%" gap="xl">
+                  {/* step 1 */}
+                  {active === 0 && (
+                    <>
+                      <Group w="100%">
+                        <Title size="h2" c="primary.4" w="100%">
+                          Lesson details
+                        </Title>
+                      </Group>
 
-                    <Divider />
+                      <Divider />
 
-                    <TextInput
-                      label={
-                        <Title
-                          size="h5"
-                          c="neutral.5"
-                          tt={"uppercase"}
-                          lts="0.08em"
-                        >
-                          lesson name
-                        </Title>
-                      }
-                      placeholder="Insert name of this lesson here..."
+                      <TextInput
+                        label={
+                          <Title
+                            size="h5"
+                            c="neutral.5"
+                            tt={"uppercase"}
+                            lts="0.08em"
+                          >
+                            lesson name
+                          </Title>
+                        }
+                        placeholder="Insert name of this lesson here..."
+                        variant="filled"
+                        {...form.getInputProps("lessonName")}
+                      />
+                      <Textarea
+                        label={
+                          <Title
+                            size="h5"
+                            c="neutral.5"
+                            tt={"uppercase"}
+                            lts="0.08em"
+                          >
+                            lesson overview
+                          </Title>
+                        }
+                        variant="filled"
+                        placeholder="Insert overview of lesson content here..."
+                        {...form.getInputProps("lessonOverview")}
+                        autosize
+                        minRows={4}
+                        maxRows={6}
+                      />
+                      <Select
+                        label={
+                          <Title
+                            size="h5"
+                            c="neutral.5"
+                            tt={"uppercase"}
+                            lts="0.08em"
+                          >
+                            select course for this lesson
+                          </Title>
+                        }
+                        data={courses}
+                        variant="filled"
+                        maw="30rem"
+                        {...form.getInputProps("course")}
+                      />
+                    </>
+                  )}
+                  {/* step 2 (TODO) */}
+                  {active === 1 && (
+                    <>
+                      <Group>
+                        <Divider orientation="vertical" mx="lg" />
+                        <Text>Page 2</Text>
+                      </Group>
+                    </>
+                  )}
+                  {/* step 3 (TODO) */}
+                  {active === 2 && (
+                    <>
+                      <Group>
+                        <Divider orientation="vertical" mx="lg" />
+                        <Text>Page 3</Text>
+                      </Group>
+                    </>
+                  )}
+                </Stack>
+                {/* navigation buttons */}
+                <Group className={classes.buttonGroup}>
+                  <Button
+                    variant="filled"
+                    onClick={prevStep}
+                    disabled={active === 0}
+                    className={classes.button}
+                  >
+                    BACK
+                  </Button>
+                  {active < 2 ? (
+                    <Button
                       variant="filled"
-                    />
-                    <Textarea
-                      label={
-                        <Title
-                          size="h5"
-                          c="neutral.5"
-                          tt={"uppercase"}
-                          lts="0.08em"
-                        >
-                          lesson overview
-                        </Title>
-                      }
+                      onClick={nextStep}
+                      className={classes.button}
+                    >
+                      NEXT
+                    </Button>
+                  ) : (
+                    <Button
                       variant="filled"
-                      placeholder="Insert overview of lesson content here..."
-                      autosize
-                      minRows={4}
-                      maxRows={6}
-                    />
-                    <Select
-                      label={
-                        <Title
-                          size="h5"
-                          c="neutral.5"
-                          tt={"uppercase"}
-                          lts="0.08em"
-                        >
-                          select course for this lesson
-                        </Title>
-                      }
-                      data={courses}
-                      variant="filled"
-                      maw="30rem"
-                    />
-                  </>
-                )}
-                {/* step 2 (TODO) */}
-                {active === 1 && (
-                  <>
-                    <Group>
-                      <Divider orientation="vertical" mx="lg" />
-                      <Text>Page 2</Text>
-                    </Group>
-                  </>
-                )}
-                {/* step 3 (TODO) */}
-                {active === 2 && (
-                  <>
-                    <Group>
-                      <Divider orientation="vertical" mx="lg" />
-                      <Text>Page 3</Text>
-                    </Group>
-                  </>
-                )}
-              </Stack>
-              {/* navigation buttons */}
-              <Group className={classes.buttonGroup}>
-                <Button
-                  variant="filled"
-                  onClick={prevStep}
-                  disabled={active === 0}
-                  className={classes.button}
-                >
-                  BACK
-                </Button>
-                <Button
-                  variant="filled"
-                  onClick={nextStep}
-                  className={classes.button}
-                >
-                  {active === 2 ? "DONE" : "NEXT"}
-                </Button>
-              </Group>
+                      type="submit"
+                      className={classes.button}
+                    >
+                      DONE
+                    </Button>
+                  )}
+                </Group>
+              </form>
             </Stack>
           </Group>
         </Flex>
