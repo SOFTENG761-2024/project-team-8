@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <Container fluid className={classes.headerWrapper}>
       <div className={classes.detailsWrapper}>
-      <img src={explorer} alt="Centered" style={{ maxWidth: '70px' }} />
+      <img src={explorer} alt="Centered" style={{ maxWidth: '4rem' }} />
       <text className={classes.largeBoldText}>[Page Description]</text>
       </div>
       <div className={classes.detailsWrapper}>
