@@ -105,8 +105,12 @@ const CreateLessonModal = () => {
           </Stack>
           <Group w="70%" justify="flex-start" gap="md">
             <Divider orientation="vertical" mx="lg" />
-            <Stack h="100%" w="85%">
-              <form onSubmit={handleSubmit}>
+
+            <form
+              onSubmit={handleSubmit}
+              style={{ height: "100%", width: "85%" }}
+            >
+              <Stack h="100%" w="100%">
                 <Stack h="100%" w="100%" gap="xl">
                   {/* step 1 */}
                   {active === 0 && (
@@ -192,8 +196,8 @@ const CreateLessonModal = () => {
                     </Button>
                   )}
                 </Group>
-              </form>
-            </Stack>
+              </Stack>
+            </form>
           </Group>
         </Flex>
       </Modal>
