@@ -18,6 +18,12 @@ import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
 
+const FormLabel = ({ text }) => (
+  <Title size="h5" c="neutral.5" tt={"uppercase"} lts="0.08em">
+    {text}
+  </Title>
+);
+
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [active, setActive] = useState(0);
@@ -114,31 +120,13 @@ const CreateLessonModal = () => {
                       <Divider />
 
                       <TextInput
-                        label={
-                          <Title
-                            size="h5"
-                            c="neutral.5"
-                            tt={"uppercase"}
-                            lts="0.08em"
-                          >
-                            lesson name
-                          </Title>
-                        }
+                        label={<FormLabel text="Lesson Name" />}
                         placeholder="Insert name of this lesson here..."
                         variant="filled"
                         {...form.getInputProps("lessonName")}
                       />
                       <Textarea
-                        label={
-                          <Title
-                            size="h5"
-                            c="neutral.5"
-                            tt={"uppercase"}
-                            lts="0.08em"
-                          >
-                            lesson overview
-                          </Title>
-                        }
+                        label={<FormLabel text="Lesson Overview" />}
                         variant="filled"
                         placeholder="Insert overview of lesson content here..."
                         {...form.getInputProps("lessonOverview")}
@@ -148,14 +136,7 @@ const CreateLessonModal = () => {
                       />
                       <Select
                         label={
-                          <Title
-                            size="h5"
-                            c="neutral.5"
-                            tt={"uppercase"}
-                            lts="0.08em"
-                          >
-                            select course for this lesson
-                          </Title>
+                          <FormLabel text="select course for this lesson" />
                         }
                         data={courses}
                         variant="filled"
