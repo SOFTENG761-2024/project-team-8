@@ -2,7 +2,7 @@ import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
 import DummyCourseImage from "../assets/dummy_course.png";
 import { Input, Select, Grid, Stack, Box } from "@mantine/core";
 import { useState, useEffect } from "react";
-import { IconFilter } from '@tabler/icons-react';
+import { IconFilter, IconSearch } from '@tabler/icons-react';
 
 // defininng the Course type and create some dummy data
 export interface Course {
@@ -128,6 +128,7 @@ const DashboardPage = () => {
               size="md"
               variant="filled"
               placeholder="Search for course..."
+              rightSection={<IconSearch />}
               onChange={(e) => setSearchQuery(e.currentTarget.value)}
             />
           </Grid.Col>
