@@ -9,4 +9,7 @@
       background-color: var(--mantine-color-primary-4);
     }
   }
+  &:disabled {
+    pointer-events: none;
+  }
 }

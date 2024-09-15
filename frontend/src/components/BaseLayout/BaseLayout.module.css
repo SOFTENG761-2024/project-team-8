@@ -1,11 +1,15 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 .layoutWrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   align-items: center;
-
-  background-color: var(--mantine-color-neutral-0);
 }
 
 .mainContentWrapper {
@@ -21,8 +25,8 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 190px;
-  padding: 20px;
+  height: 12rem;
+  padding: 1rem;
 }
 
 .headerContent {
@@ -43,20 +47,22 @@
 
 .horizontalWrapper {
   display: flex;
-  padding-top: 20px;
-  padding-bottom: 60px;
+  padding-top: 5rem;
   flex-direction: row;
   width: 100%;
-  min-height: fit-content;
+  /* min-height: 50rem; */
   height: auto;
+  padding: 1rem;
+  flex: 1;
 }
 
 .footerWrapper {
   position: relative;
   display: flex;
   flex-direction: row;
-  width: 100vw;
+  width: 100%;
   height: fit-content;
+  margin-top: 1rem;
   bottom: 0;
   background-color: var(
     --mantine-color-neutral-2
@@ -68,7 +74,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   z-index: 1;
 }
@@ -93,7 +99,7 @@
 .logo {
   max-width: 100%;
   height: 100%;
-  top: 20px;
-  left: 20px;
+  top: 1.25rem;
+  left: 1.25rem;
   object-fit: cover;
 }

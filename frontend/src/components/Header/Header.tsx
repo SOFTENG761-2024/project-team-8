@@ -1,4 +1,4 @@
-import { Container } from "@mantine/core";
+import { Container, Text } from "@mantine/core";
 import classes from "./Header.module.css";
 import { IconUserFilled } from "@tabler/icons-react";
 import explorer from "../../assets/explorer.png";
@@ -27,14 +27,20 @@ const Header = () => {
   return (
     <Container fluid className={classes.headerWrapper}>
       <div className={classes.detailsWrapper}>
-        <img src={explorer} alt="Centered" style={{ maxWidth: "70px" }} />
-        <text className={classes.largeBoldText}>{page}</text>
+        <img src={explorer} alt="Centered" style={{ maxWidth: "4rem" }} />
+        <Text fw={700} size="2.1rem" c="primary.4">
+          {page}
+        </Text>
       </div>
       <div className={classes.detailsWrapper}>
         <IconUserFilled size={50} />
         <div className={classes.nameWrapper}>
-          <text className={classes.text}>Hello,</text>
-          <text className={classes.boldText}>Username</text>
+          <Text size="1.125rem" c="primary.4">
+            Hello,
+          </Text>
+          <Text fw={700} size="1.125rem" c="primary.4">
+            Username
+          </Text>
         </div>
       </div>
     </Container>
