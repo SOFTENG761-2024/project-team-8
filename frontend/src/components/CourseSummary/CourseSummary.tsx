@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import classes from "./CourseSummary.module.css";
 import testImage from "../../assets/organic-crops-test.png";
 import {
@@ -13,23 +13,29 @@ import {
 } from "@tabler/icons-react";
 import { Accordion, ActionIcon, Image, List, Text } from "@mantine/core";
 
-export const CourseSummary = () => {
-  const [expanded, setExpanded] = useState(true);
+interface CourseSummaryProps {
+  summaryExpanded: boolean;
+  setSummaryExpanded: Dispatch<SetStateAction<boolean>>;
+}
 
+export const CourseSummary = ({
+  summaryExpanded,
+  setSummaryExpanded,
+}: CourseSummaryProps) => {
   const toggleCourseSummary = () => {
-    setExpanded(!expanded);
+    setSummaryExpanded(!summaryExpanded);
   };
 
   return (
     <div className={classes.courseSummaryContainer}>
-      <CourseSummaryBase isExpanded={expanded} />
+      <CourseSummaryBase isExpanded={summaryExpanded} />
       <ActionIcon
         variant="filled"
         color="secondary.6"
-        className={`${classes.collapseButton} ${expanded ? "" : classes.collapseButtonExpanded}`}
+        className={`${classes.collapseButton} ${summaryExpanded ? "" : classes.collapseButtonExpanded}`}
         onClick={toggleCourseSummary}
       >
-        {expanded ? (
+        {summaryExpanded ? (
           <IconChevronLeft className={classes.icon} stroke={3} />
         ) : (
           <IconChevronRight className={classes.icon} stroke={3} />

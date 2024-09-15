@@ -14,7 +14,7 @@ import Parse from "../../../parseconfig";
 
 interface CourseContentProps {
   courseId: string | undefined;
-  summaryExpanded?: boolean;
+  summaryExpanded: boolean;
 }
 
 interface ModulesData {
