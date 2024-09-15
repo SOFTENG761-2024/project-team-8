@@ -1,6 +1,7 @@
 .navbar {
   width: 75px;
-  height: 50vh;
+  min-height: 62vh;
+  height: auto;
   margin-left: 1.5vh;
   padding: 2vh;
   display: flex;
