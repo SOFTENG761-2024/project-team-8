@@ -1,5 +1,4 @@
 import Parse from "parse";
-import { ReactNode } from "react";
 
 export interface Kit {
   id: string;
@@ -38,11 +37,4 @@ export interface Lesson {
 export interface Content {
   text: string;
   printout: Parse.File;
-}
-
-export interface CourseSummaryTopic {
-  value: string;
-  icon: ReactNode;
-  information?: string;
-  informationList?: string[]; //  for bullet points
 }

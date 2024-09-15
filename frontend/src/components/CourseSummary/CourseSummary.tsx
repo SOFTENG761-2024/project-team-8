@@ -12,7 +12,7 @@ import {
   IconUserFilled,
 } from "@tabler/icons-react";
 import { Accordion, ActionIcon, Image, List, Text } from "@mantine/core";
-import { CourseSummaryTopic } from "../../interfaces/kit.ts";
+import { CourseSummaryTopic } from "../../interfaces/componentInterfaces.ts";
 
 interface CourseSummaryProps {
   summaryExpanded: boolean;
