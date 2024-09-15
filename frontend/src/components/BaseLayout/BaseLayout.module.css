@@ -18,7 +18,7 @@ body {
   justify-content: center;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .headerContentWrapper {
@@ -64,9 +64,8 @@ body {
   height: fit-content;
   margin-top: 1rem;
   bottom: 0;
-  background-color: var(
-    --mantine-color-neutral-2
-  ); /*Stand in colour for visualization of position*/
+  background-color: var(--mantine-color-neutral-2);
+  /*Stand in colour for visualization of position*/
 }
 
 .overlay {
