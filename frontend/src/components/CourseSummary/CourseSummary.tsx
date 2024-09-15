@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import classes from "./CourseSummary.module.css";
 import testImage from "../../assets/organic-crops-test.png";
 import {
@@ -12,6 +12,7 @@ import {
   IconUserFilled,
 } from "@tabler/icons-react";
 import { Accordion, ActionIcon, Image, List, Text } from "@mantine/core";
+import { CourseSummaryTopic } from "../../interfaces/kit.ts";
 
 interface CourseSummaryProps {
   summaryExpanded: boolean;
@@ -133,15 +134,8 @@ const summaryTopicsTest = [
   },
 ];
 
-interface SummaryTopic {
-  value: string;
-  icon: ReactNode;
-  information?: string;
-  informationList?: string[];
-}
-
 interface SummaryAccordionProps {
-  topics: SummaryTopic[];
+  topics: CourseSummaryTopic[];
   isExpanded: boolean;
 }
 
