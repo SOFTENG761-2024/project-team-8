@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Parse from "../../../parseconfig";
+import { Box } from "@mantine/core";
+import PdfViewer from "../PdfViewer/PdfViewer";
 
 interface LessonOverlayProps {
   lessonId: string;
@@ -29,9 +31,9 @@ const LessonOverlay = ({ lessonId }: LessonOverlayProps) => {
 
       for (const file of lesson.get("content")) {
         if (file.text === "Teacher_handout") {
-          pdfUrls.teacherHandout = file.printout.url;
+          pdfUrls.teacherHandout = file.printout.url();
         } else if (file.text === "Worksheet") {
-          pdfUrls.studentWorksheet = file.printout.url;
+          pdfUrls.studentWorksheet = file.printout.url();
         }
       }
 
@@ -49,10 +51,11 @@ const LessonOverlay = ({ lessonId }: LessonOverlayProps) => {
   }, []);
 
   return (
-    <>
-      <p>{lessonPdfUrls?.teacherHandout}</p>
-      <p>{lessonPdfUrls?.studentWorksheet}</p>
-    </>
+    <Box>
+      {lessonPdfUrls && lessonPdfUrls.teacherHandout && (
+        <PdfViewer url={lessonPdfUrls.teacherHandout} />
+      )}
+    </Box>
   );
 };
 
