@@ -14,7 +14,7 @@ import Parse from "../../../parseconfig";
 
 interface CourseContentProps {
   courseId: string | undefined;
-  summaryExpanded?: boolean;
+  summaryExpanded: boolean;
 }
 
 interface ModulesData {
@@ -82,7 +82,7 @@ const CourseContent = ({ courseId, summaryExpanded }: CourseContentProps) => {
   }, []);
 
   return (
-    <Box w="50%">
+    <Box flex={1}>
       <Group gap="xs" pl="md" pr="md">
         <IconBooks size={24} color={theme.colors.primary[3]} />
         <Text size="textLg" fw={700} c="primary.5">
