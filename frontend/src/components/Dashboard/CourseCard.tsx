@@ -17,7 +17,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
     <Link
       to={`/user/courses/${course.id}`}
       style={{ textDecoration: "none" }}
-      // state={{ course }} // if we want to pass the course data to the next page
+    // state={{ course }} // if we want to pass the course data to the next page
     >
       <Card
         shadow="sm"
@@ -68,30 +68,34 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
               style={{ height: "100%" }}
             >
               <Box>
-                <Text size="xl">{course.title}</Text>
-                <Text c="dark" size="md">
+                <Text size="xl" fw={700} c="primary.5">
+                  {course.title}
+                </Text>
+                <Text c="primary.4" fw={500} size="md">
                   {course.course}
                 </Text>
-                <Text size="sm">{course.lessons} Lessons</Text>
-                {/* Status Badge (only for completed courses) */}
-                {course.status === "Completed" && !isSmallScreen && (
-                  <Text
-                    size="xs"
-                    color="seagreen"
-                    mt={20}
-                    style={{
-                      backgroundColor: "aquamarine",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      padding: "0.2rem 0.6rem",
-                      borderRadius: "30px",
-                    }}
-                  >
-                    <IconAward style={{ marginRight: "4px" }} />
-                    {course.status}
-                  </Text>
-                )}
+                <Text size="sm" c="gray">
+                  {course.lessons} Lessons
+                </Text>
               </Box>
+              {/* Status Badge (only for completed courses)
+              {course.status === "Completed" && !isSmallScreen && (
+                <Text
+                  size="xs"
+                  c="seagreen"
+                  w="fit-content"
+                  style={{
+                    backgroundColor: "aquamarine",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    padding: "0.1rem 0.4rem",
+                    borderRadius: "1rem"
+                  }}
+                >
+                  <IconAward size={15} style={{ marginRight: "0.2rem" }} />
+                  {course.status}
+                </Text>
+              )} */}
             </Flex>
           </Grid.Col>
         </Grid>
