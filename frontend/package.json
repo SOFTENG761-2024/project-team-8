@@ -20,12 +20,13 @@
     "@mantine/core": "^7.12.1",
     "@mantine/form": "^7.12.2",
     "@mantine/hooks": "^7.12.1",
-    "@types/parse": "^3.0.9",
     "@tabler/icons-react": "^3.15.0",
+    "@types/parse": "^3.0.9",
     "frontend": "file:",
     "parse": "^5.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-pdf": "^9.1.0",
     "react-router-dom": "^6.26.0"
   },
   "devDependencies": {
