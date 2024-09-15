@@ -1,11 +1,11 @@
-import { Container, Text } from "@mantine/core";
+import { Container, Text, Avatar } from "@mantine/core";
 import classes from "./Header.module.css";
-import { IconUserFilled } from "@tabler/icons-react";
 import explorer from "../../assets/explorer.png";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const Header = () => {
+  const name = "Thomas Male"; // TODO: Replace with user's name in future
   const location = useLocation();
   const [page, setPage] = useState("");
   useEffect(() => {
@@ -33,7 +33,7 @@ const Header = () => {
         </Text>
       </div>
       <div className={classes.detailsWrapper}>
-        <IconUserFilled size={50} />
+        <Avatar size={50} key={name} name={name} color="initials" allowedInitialsColors={['primary.4']} />
         <div className={classes.nameWrapper}>
           <Text size="1.125rem" c="primary.4">
             Hello,

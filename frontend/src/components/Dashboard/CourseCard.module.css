@@ -1,0 +1,17 @@
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    transition: box-shadow 0.25s ease;
+}
+
+.cardHovered {
+    box-shadow: 5px 5px 15px rgba(16, 55, 107, 0.25);
+}
+
+.cardDefault {
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+}

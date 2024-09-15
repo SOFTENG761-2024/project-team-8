@@ -26,7 +26,7 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
       {/* Display a message when no courses are available */}
       {courses.length === 0 ? (
         <Flex justify="center" align="center" h="100px">
-          <Text size="xl">
+          <Text c={"neutral.5"} size="xl">
             Could not find the course you're looking for &#128546;
           </Text>
         </Flex>

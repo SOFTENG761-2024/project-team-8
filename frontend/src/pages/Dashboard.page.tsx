@@ -1,13 +1,12 @@
-import { Welcome } from "../components/Welcome/Welcome";
-import { ColorSchemeToggle } from "../components/ColorSchemeToggle/ColorSchemeToggle";
 import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
 import DummyCourseImage from "../assets/dummy_course.png";
 import { Input, Select, Grid, Stack, Box } from "@mantine/core";
 import { useState, useEffect } from "react";
+import { IconFilter } from '@tabler/icons-react';
 
 // defininng the Course type and create some dummy data
 export interface Course {
-  id: number;
+  id: string | number;
   title: string;
   course: string;
   lessons: number;
@@ -18,7 +17,7 @@ export interface Course {
 // dummy course data
 const dummyCourses: Course[] = [
   {
-    id: 1,
+    id: "OD8B3IFblh",
     title: "Farming & Agriculture",
     course: "Dinosaur Steps",
     lessons: 17,
@@ -26,7 +25,7 @@ const dummyCourses: Course[] = [
     image: DummyCourseImage,
   },
   {
-    id: 2,
+    id: "IYoDFvC311",
     title: "Science & Nature",
     course: "Dinosaur Steps",
     lessons: 12,
@@ -34,7 +33,7 @@ const dummyCourses: Course[] = [
     image: DummyCourseImage,
   },
   {
-    id: 3,
+    id: "SSRXHpmY3V",
     title: "Math & Logic",
     course: "Dinosaur Steps",
     lessons: 20,
@@ -42,7 +41,7 @@ const dummyCourses: Course[] = [
     image: DummyCourseImage,
   },
   {
-    id: 4,
+    id: "1",
     title: "History & Culture",
     course: "Dinosaur Steps",
     lessons: 8,
@@ -50,7 +49,7 @@ const dummyCourses: Course[] = [
     image: DummyCourseImage,
   },
   {
-    id: 5,
+    id: "2",
     title: "TEAMATE",
     course: "Dinosaur Steps",
     lessons: 17,
@@ -58,7 +57,7 @@ const dummyCourses: Course[] = [
     image: DummyCourseImage,
   },
   {
-    id: 6,
+    id: "3",
     title: "Helooo",
     course: "Dinosaur Steps",
     lessons: 12,
@@ -66,7 +65,7 @@ const dummyCourses: Course[] = [
     image: DummyCourseImage,
   },
   {
-    id: 7,
+    id: "4",
     title: "Test",
     course: "Dinosaur Steps",
     lessons: 20,
@@ -74,7 +73,7 @@ const dummyCourses: Course[] = [
     image: DummyCourseImage,
   },
   {
-    id: 8,
+    id: "5",
     title: "Bob",
     course: "Dinosaur Steps",
     lessons: 8,
@@ -122,13 +121,12 @@ const DashboardPage = () => {
 
   return (
     <Box w={"100%"} h={"100%"}>
-      {/* <Welcome />
-      <ColorSchemeToggle /> */}
       <Stack h="auto" align="stretch">
         <Grid pb={10}>
           <Grid.Col span={8}>
             <Input
               size="md"
+              variant="filled"
               placeholder="Search for course..."
               onChange={(e) => setSearchQuery(e.currentTarget.value)}
             />
@@ -136,6 +134,7 @@ const DashboardPage = () => {
           <Grid.Col span={4}>
             <Select
               size="md"
+              variant="filled"
               defaultValue={"recently-viewed"}
               onChange={(value) => setFilter(value)}
               data={[
@@ -147,6 +146,7 @@ const DashboardPage = () => {
                 { value: "name-desc", label: "Name Z-A" },
               ]}
               placeholder="Filter & Sort"
+              rightSection={<IconFilter />}
             />
           </Grid.Col>
         </Grid>
