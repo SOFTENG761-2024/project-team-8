@@ -5,7 +5,7 @@ import {
   IconHomeFilled,
   IconLogout,
 } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 interface NavbarLinkProps {
@@ -46,16 +46,31 @@ function NavbarLink({
 
 const Navbar = () => {
   const [expanded, setExpanded] = useState<boolean>(true);
+  const location = useLocation();
 
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
   const links = [{ icon: IconHomeFilled, label: "Dashboard", path: "/user" }];
-  const navbarItems = links.map((link) => (
-    <Link to={link.path} style={{ textDecoration: "none" }}>
-      <NavbarLink key={link.label} {...link} expanded={expanded} />
-    </Link>
-  ));
+  const navbarItems = links.map((link) => {
+    // e.g. /user/dashboard
+    const pathWithLabel = `${link.path}/${link.label.toLowerCase()}`;
+
+    // checks if current path matches the link's path or subpath
+    const isActive =
+      location.pathname === link.path ||
+      location.pathname.startsWith(pathWithLabel);
+
+    return (
+      <Link
+        key={link.label}
+        to={isActive ? "#" : link.path} // disable navigation if already on the active page (to avoid page reload)
+        style={{ textDecoration: "none" }}
+      >
+        <NavbarLink {...link} expanded={expanded} active={isActive} />
+      </Link>
+    );
+  });
   return (
     <nav
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}
