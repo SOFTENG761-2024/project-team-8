@@ -5,7 +5,7 @@ import {
   IconHomeFilled,
   IconLogout,
 } from "@tabler/icons-react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 interface NavbarLinkProps {
@@ -13,14 +13,12 @@ interface NavbarLinkProps {
   label: string;
   active?: boolean;
   expanded?: boolean;
-  onClick?: () => void;
 }
 
 function NavbarLink({
   icon: Icon,
   label,
   active,
-  onClick,
   expanded = true,
 }: NavbarLinkProps) {
   const iconSize = rem("calc(4vw + 12px)");
@@ -28,7 +26,6 @@ function NavbarLink({
   return (
     <div className={`${classes.link} ${expanded ? classes.linkExpanded : ""}`}>
       <ActionIcon
-        onClick={onClick}
         variant="transparent"
         data-active={active || undefined}
         className={classes.linkIcon}
@@ -48,8 +45,6 @@ function NavbarLink({
 }
 
 const Navbar = () => {
-  const navigate = useNavigate();
-
   const [expanded, setExpanded] = useState<boolean>(true);
 
   const toggleExpand = () => {
@@ -57,12 +52,9 @@ const Navbar = () => {
   };
   const links = [{ icon: IconHomeFilled, label: "Dashboard", path: "/user" }];
   const navbarItems = links.map((link) => (
-    <NavbarLink
-      key={link.label}
-      {...link}
-      onClick={() => navigate(link.path)}
-      expanded={expanded}
-    />
+    <Link to={link.path} style={{ textDecoration: "none" }}>
+      <NavbarLink key={link.label} {...link} expanded={expanded} />
+    </Link>
   ));
   return (
     <nav
@@ -78,13 +70,14 @@ const Navbar = () => {
 
       <Stack gap="1vh" style={{ width: "100%" }}>
         <Divider color="neutral.1" />
-        <NavbarLink
-          key={"Logout"}
-          onClick={() => navigate("/login")}
-          expanded={expanded}
-          icon={IconLogout}
-          label={"Logout"}
-        />
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          <NavbarLink
+            key={"Logout"}
+            expanded={expanded}
+            icon={IconLogout}
+            label={"Logout"}
+          />
+        </Link>
       </Stack>
     </nav>
   );
