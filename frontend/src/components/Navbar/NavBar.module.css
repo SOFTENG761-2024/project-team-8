@@ -1,5 +1,5 @@
 .navbar {
-  width: 75px;
+  width: 80px;
   min-height: 62vh;
   height: auto;
   margin-left: 1.5vh;
@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   left: 0;
-  border-radius: 2vmax;
+  border-radius: 1.5rem;
   background-color: var(--mantine-color-primary-5);
   position: relative;
   transition: width 0.5s ease;
@@ -58,7 +58,7 @@
 
 .link {
   width: 100%;
-  border-radius: 1.5vmax;
+  border-radius: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -85,6 +85,10 @@
     opacity: 0.25;
     background-color: transparent;
   }
+}
+
+.linkActive {
+  background-color: var(--mantine-color-primary-3);
 }
 
 .linkIcon {

@@ -24,7 +24,9 @@ function NavbarLink({
   const iconSize = rem("calc(4vw + 12px)");
 
   return (
-    <div className={`${classes.link} ${expanded ? classes.linkExpanded : ""}`}>
+    <div
+      className={`${classes.link} ${expanded ? classes.linkExpanded : ""} ${active ? classes.linkActive : ""}`}
+    >
       <ActionIcon
         variant="transparent"
         data-active={active || undefined}
