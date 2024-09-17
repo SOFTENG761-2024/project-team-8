@@ -1,6 +1,6 @@
 import { Box, Center, Group, Text } from "@mantine/core";
 import styles from "./PdfViewer.module.css";
-import { IconMinimize } from "@tabler/icons-react";
+import { IconSquareRoundedXFilled } from "@tabler/icons-react";
 
 interface PdfViewerProps {
   url: string;
@@ -21,7 +21,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
             <Text size="1.5rem" c="white">
               Exit Fullscreen
             </Text>
-            <IconMinimize
+            <IconSquareRoundedXFilled
               size={50}
               className={styles.minimizeIcon}
               onClick={minimizePdf}
@@ -31,7 +31,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
       )}
       <Center>
         <object
-          data={url}
+          data={url + "#view=Fit"}
           type="text/html"
           className={
             fullscreen ? styles.fullscreenView : styles.nonFullscreenView
