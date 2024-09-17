@@ -27,8 +27,10 @@ const UserLogin: FC = () => {
       rememberMe: !!savedUsername,
     },
     validate: {
-      username: (value) => (!value ? "Username is required." : null),
-      password: (value) => (!value ? "Password is required." : null),
+      username: (value) =>
+        value.trim().length === 0 ? "Username is required." : null,
+      password: (value) =>
+        value.trim().length === 0 ? "Password is required." : null,
     },
   });
 
@@ -110,7 +112,7 @@ const UserLogin: FC = () => {
         <Center>
           <Button
             variant="filled"
-            px="100"
+            px="6rem"
             mt="xl"
             loading={isLoading}
             type="submit"
