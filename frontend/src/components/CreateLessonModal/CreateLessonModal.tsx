@@ -12,6 +12,7 @@ import {
   Textarea,
   Select,
   rem,
+  Table,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
@@ -23,6 +24,19 @@ const FormLabel = ({ text }) => (
     {text}
   </Title>
 );
+
+const resourceList = [
+  {
+    name: 1,
+    type: "PDF",
+    size: 1,
+  },
+  {
+    name: 2,
+    type: "PDF",
+    size: 2,
+  },
+];
 
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -48,6 +62,23 @@ const CreateLessonModal = () => {
     setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
+
+  const rows = resourceList.map((element) => (
+    <Table.Tr key={element.name}>
+      <Table.Td>{element.name}</Table.Td>
+      <Table.Td>{element.type}</Table.Td>
+      <Table.Td>{element.size}</Table.Td>
+    </Table.Tr>
+  ));
+
+  const ths = (
+    <Table.Tr>
+      <Table.Th>FILE NAME</Table.Th>
+      <Table.Th>TYPE</Table.Th>
+      <Table.Th>SIZE</Table.Th>
+    </Table.Tr>
+  );
+
   return (
     <>
       <Modal
@@ -152,10 +183,17 @@ const CreateLessonModal = () => {
                   {/* step 2 (TODO) */}
                   {active === 1 && (
                     <>
-                      <Group>
-                        <Divider orientation="vertical" mx="lg" />
-                        <Text>Page 2</Text>
+                      <Group w="100%">
+                        <Title size="h2" c="primary.4" w="100%">
+                          Resoure List
+                        </Title>
                       </Group>
+
+                      <Divider />
+                      <Table>
+                        <Table.Thead>{ths}</Table.Thead>
+                        <Table.Tbody>{rows}</Table.Tbody>
+                      </Table>
                     </>
                   )}
                   {/* step 3 (TODO) */}
