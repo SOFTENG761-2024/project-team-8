@@ -1,14 +1,22 @@
-import { Box } from "@mantine/core";
+import { Center } from "@mantine/core";
+import styles from "./PdfViewer.module.css";
 
 interface PdfViewerProps {
   url: string;
+  fullscreen?: boolean;
 }
 
-const PdfViewer = ({ url }: PdfViewerProps) => {
+const PdfViewer = ({ url, fullscreen = false }: PdfViewerProps) => {
   return (
-    <Box style={{ height: "50vh", display: "flex", justifyContent: "center" }}>
-      <object data={url} type="text/html" width="50%"></object>
-    </Box>
+    <Center>
+      <object
+        data={url}
+        type="application/pdf"
+        className={
+          fullscreen ? styles.fullscreenView : styles.nonFullscreenView
+        }
+      ></object>
+    </Center>
   );
 };
 
