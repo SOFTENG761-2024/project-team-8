@@ -11,9 +11,17 @@ import {
   Group,
   Checkbox,
 } from "@mantine/core";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "@mantine/form";
+import { useNavigate } from "react-router-dom";
 
+/**
+ * User Login Component
+ *
+ * This component handles the logic to interact with the backend to log a user in.
+ * It also handles form errors and validation for users when trying to log in.
+ * It will redirect users to the dashboard upon successful login.
+ *
+ */
 const UserLogin: FC = () => {
   const navigate = useNavigate();
   const savedUsername = localStorage.getItem("savedUsername");

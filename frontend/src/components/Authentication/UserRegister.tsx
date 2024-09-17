@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import Parse from "../../../parseconfig.ts";
 import { useForm } from "@mantine/form";
 import {
@@ -12,7 +12,15 @@ import {
 } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
-const UserRegister = () => {
+/**
+ * User Registration Component
+ *
+ * This component handles the logic to interact with the backend to create a new user account.
+ * It also handles form errors and validation for users when creating an account.
+ * It will redirect users to the dashboard upon successful sign up.
+ *
+ */
+const UserRegister: FC = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -56,24 +64,16 @@ const UserRegister = () => {
 
     try {
       await user.signUp();
-      console.log(
-        "User created successfully with name: " +
-          user.getUsername() +
-          " and email: " +
-          user.getEmail()
-      );
       setIsLoading(false);
       // Navigate to dashboard on successful creation
       navigate("/user");
     } catch (err: unknown) {
       const error = err as Parse.Error;
       setIsLoading(false);
-      console.log(error.message);
 
-      const fields = ["username", "email", "password"];
       let hasFieldError = false;
       // loop through fields to see if any have resulted in an error and render this
-      fields.forEach((field) => {
+      ["username", "email", "password"].forEach((field) => {
         if (checkFieldError(field, error.message)) {
           registerForm.setFieldError(field, error.message);
           hasFieldError = true;
