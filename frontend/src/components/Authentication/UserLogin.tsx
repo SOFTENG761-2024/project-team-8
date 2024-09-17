@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from "react";
+import { FC, useState } from "react";
 import Parse from "../../../parseconfig.ts";
 import {
   Text,
@@ -11,26 +11,49 @@ import {
   Group,
   Checkbox,
 } from "@mantine/core";
+import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * User Login Component
+ *
+ * This component handles the logic to interact with the backend to log a user in.
+ * It also handles form errors and validation for users when trying to log in.
+ * It will redirect users to the dashboard upon successful login.
+ *
+ */
 const UserLogin: FC = () => {
   const navigate = useNavigate();
-
   const savedUsername = localStorage.getItem("savedUsername");
-  const [username, setUsername] = useState<string>(savedUsername || "");
-  const [rememberMe, setRememberMe] = useState<boolean>(!!savedUsername);
-  const [password, setPassword] = useState<string>("");
-  const [usernameError, setUsernameError] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const doUserLogIn = async function (event: FormEvent): Promise<void> {
-    setIsLoading(true);
-    event.preventDefault();
-    const usernameValue: string = username;
-    const passwordValue: string = password;
+  const loginForm = useForm({
+    mode: "uncontrolled",
+    initialValues: {
+      username: savedUsername || "",
+      password: "",
+      rememberMe: !!savedUsername,
+    },
+    validate: {
+      username: (value) =>
+        value.trim().length === 0 ? "Username is required." : null,
+      password: (value) =>
+        value.trim().length === 0 ? "Password is required." : null,
+    },
+  });
 
-    // store username if "remember me" is selected
+  const doUserLogIn = async function ({
+    username,
+    password,
+    rememberMe,
+  }: {
+    username: string;
+    password: string;
+    rememberMe: boolean;
+  }): Promise<void> {
+    setIsLoading(true);
+
+    // Store username if "remember me" is selected
     if (rememberMe) {
       localStorage.setItem("savedUsername", username);
     } else {
@@ -38,71 +61,43 @@ const UserLogin: FC = () => {
     }
 
     try {
-      // logIn will return the corresponding ParseUser object if it exists
-      const loggedInUser: Parse.User = await Parse.User.logIn(
-        usernameValue,
-        passwordValue
-      );
-      // logIn returns the corresponding ParseUser object
-      // To verify that this is in fact the current user, `current` can be used
-      const currentUser: Parse.User | undefined = Parse.User.current();
-      console.log(loggedInUser === currentUser);
-
-      setUsername("");
-      setPassword("");
+      // Note that logIn can also return the corresponding ParseUser object if login is successful
+      // To verify the current user `Parse.User.current();` can be used
+      await Parse.User.logIn(username, password);
       setIsLoading(false);
-
       // Navigate to dashboard on successful login
       navigate("/user");
     } catch {
       setIsLoading(false);
-
-      if (usernameValue.trim() === "") {
-        setUsernameError("Username is required.");
-      } else if (passwordValue.trim() === "") {
-        setPasswordError("Password is required.");
-      } else {
-        setUsernameError(" ");
-        setPasswordError("Invalid username or password, please try again.");
-      }
+      loginForm.setErrors({
+        username: " ",
+        password: "Invalid username or password, please try again.",
+      });
     }
   };
 
   return (
     <>
-      <form onSubmit={(event: FormEvent) => doUserLogIn(event)}>
+      <form onSubmit={loginForm.onSubmit((values) => doUserLogIn(values))}>
         <Container mt={25}>
           <TextInput
             label="Username"
             placeholder="Your username"
             variant="filled"
-            value={username}
-            error={usernameError}
-            onChange={(event) => {
-              setUsername(event.target.value);
-              setUsernameError("");
-              setPasswordError("");
-            }}
+            {...loginForm.getInputProps("username")}
           />
           <PasswordInput
             label="Password"
             placeholder="Your password"
             variant="filled"
-            value={password}
-            error={passwordError}
-            onChange={(event) => {
-              setPassword(event.target.value);
-              setUsernameError("");
-              setPasswordError("");
-            }}
+            {...loginForm.getInputProps("password")}
             mt="md"
           />
           <Group justify="space-between" mt="lg">
             <Checkbox
               c="neutral.4"
               label="Remember me"
-              checked={rememberMe}
-              onChange={(event) => setRememberMe(event.target.checked)}
+              {...loginForm.getInputProps("rememberMe", { type: "checkbox" })}
             />
             <Anchor
               c="primary.5"
@@ -118,7 +113,7 @@ const UserLogin: FC = () => {
         <Center>
           <Button
             variant="filled"
-            px="100"
+            px="6rem"
             mt="xl"
             loading={isLoading}
             type="submit"
@@ -135,6 +130,7 @@ const UserLogin: FC = () => {
           component="a"
           ml={5}
           underline="always"
+          onClick={() => navigate("/register")}
         >
           Sign up
         </Anchor>
