@@ -7,7 +7,7 @@ interface WelcomeContainerProps {
 }
 const WelcomeContainer: FC<WelcomeContainerProps> = ({ title, children }) => (
   <Center bg="primary.3" h="100vh" w="100vw">
-    <Paper bg="neutral.0" shadow="lg" w="600" p={50} radius="md">
+    <Paper bg="neutral.0" shadow="lg" w="37.5rem" p={50} radius="md">
       <Title ta="center" size="h1" c="primary.4">
         {title}
       </Title>
