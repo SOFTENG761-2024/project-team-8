@@ -1,8 +1,8 @@
 .navbar {
   min-height: 62vh;
   height: auto;
-  margin-left: 1.5vh;
-  padding: 2vh;
+  margin-left: 1.5vw;
+  padding: 2vh 1.5vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
