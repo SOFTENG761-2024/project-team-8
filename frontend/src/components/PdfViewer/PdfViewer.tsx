@@ -71,7 +71,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
             fullscreen ? styles.fullscreenView : styles.nonFullscreenView
           }
           style={{
-            height: barMinimized ? "99vh" : "95vh",
+            height: fullscreen ? (barMinimized ? "99vh" : "95vh") : "50vh",
             transition: "ease-in-out 0.3s",
           }}
         ></object>
