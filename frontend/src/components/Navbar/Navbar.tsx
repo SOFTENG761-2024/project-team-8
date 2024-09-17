@@ -84,7 +84,7 @@ const Navbar = () => {
       </Stack>
 
       <Stack gap="1vh" style={{ width: "100%" }}>
-        <Divider color="neutral.1" />
+        <Divider color="primary.3" />
         <Link to="/login" style={{ textDecoration: "none" }}>
           <NavbarLink
             key={"Logout"}

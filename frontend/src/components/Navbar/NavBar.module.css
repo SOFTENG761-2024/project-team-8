@@ -68,7 +68,7 @@
   transition: background-color 500ms ease-out 100ms;
 
   &:hover {
-    background-color: var(--mantine-color-primary-3);
+    background-color: var(--mantine-color-primary-4);
     color: var(--mantine-color-neutral-1);
     cursor: pointer;
   }
@@ -108,7 +108,7 @@
 
 .menuHeading {
   align-self: flex-start;
-  color: var(--mantine-color-primary-3);
+  color: var(--mantine-color-primary-2);
   margin: 0.5rem 0;
 }
 
