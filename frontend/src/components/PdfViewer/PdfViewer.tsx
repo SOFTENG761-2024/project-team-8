@@ -13,6 +13,14 @@ interface PdfViewerProps {
   setFullscreen: (fullscreen: boolean) => void;
 }
 
+/**
+ * This component handles the logic for displaying a PDF file on the page, using the default browser PDF viewer.
+ * It also provides a fullscreen mode to view the PDF file.
+ *
+ * @param {string} url - The URL of the PDF file to display.
+ * @param {boolean} fullscreen - Indicates whether the viewer is in fullscreen mode.
+ * @param {function} setFullscreen - A function to set the fullscreen mode of the viewer.
+ */
 const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   const [barMinimized, setBarMinimized] = useState<boolean>(false);
 
