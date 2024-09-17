@@ -1,22 +1,44 @@
-import { Center } from "@mantine/core";
+import { Box, Center, Group, Text } from "@mantine/core";
 import styles from "./PdfViewer.module.css";
+import { IconMinimize } from "@tabler/icons-react";
 
 interface PdfViewerProps {
   url: string;
-  fullscreen?: boolean;
+  fullscreen: boolean;
+  setFullscreen: (fullscreen: boolean) => void;
 }
 
-const PdfViewer = ({ url, fullscreen = false }: PdfViewerProps) => {
+const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
+  const minimizePdf = () => {
+    setFullscreen(false);
+  };
+
   return (
-    <Center>
-      <object
-        data={url}
-        type="application/pdf"
-        className={
-          fullscreen ? styles.fullscreenView : styles.nonFullscreenView
-        }
-      ></object>
-    </Center>
+    <Box className={fullscreen ? styles.fullscreenContainer : ""}>
+      {fullscreen && (
+        <Box className={styles.fullscreenTopMenu} bg="primary.5">
+          <Group gap="1rem">
+            <Text size="1.5rem" c="white">
+              Exit Fullscreen
+            </Text>
+            <IconMinimize
+              size={50}
+              className={styles.minimizeIcon}
+              onClick={minimizePdf}
+            />
+          </Group>
+        </Box>
+      )}
+      <Center>
+        <object
+          data={url}
+          type="text/html"
+          className={
+            fullscreen ? styles.fullscreenView : styles.nonFullscreenView
+          }
+        ></object>
+      </Center>
+    </Box>
   );
 };
 
