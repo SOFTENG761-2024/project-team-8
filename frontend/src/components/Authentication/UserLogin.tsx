@@ -53,7 +53,7 @@ const UserLogin: FC = () => {
   }): Promise<void> {
     setIsLoading(true);
 
-    // store username if "remember me" is selected
+    // Store username if "remember me" is selected
     if (rememberMe) {
       localStorage.setItem("savedUsername", username);
     } else {
@@ -61,16 +61,9 @@ const UserLogin: FC = () => {
     }
 
     try {
-      // logIn will return the corresponding ParseUser object if it exists
-      const loggedInUser: Parse.User = await Parse.User.logIn(
-        username,
-        password
-      );
-      // logIn returns the corresponding ParseUser object
-      // To verify that this is in fact the current user, `current` can be used
-      const currentUser: Parse.User | undefined = Parse.User.current();
-      console.log(loggedInUser === currentUser);
-
+      // Note that logIn can also return the corresponding ParseUser object if login is successful
+      // To verify the current user `Parse.User.current();` can be used
+      await Parse.User.logIn(username, password);
       setIsLoading(false);
       // Navigate to dashboard on successful login
       navigate("/user");

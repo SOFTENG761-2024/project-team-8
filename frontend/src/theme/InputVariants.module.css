@@ -4,8 +4,16 @@
     border-radius: 12px;
     padding: 0.5rem 1rem;
     line-height: 2;
+
     &:focus-within {
       border-color: var(--mantine-color-primary-4);
+    }
+
+    &[data-error="true"] {
+      &:focus-within {
+        /* override focus border color when in error state */
+        border-color: var(--mantine-color-error);
+      }
     }
   }
 }

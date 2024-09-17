@@ -72,14 +72,14 @@ const UserRegister: FC = () => {
       setIsLoading(false);
 
       let hasFieldError = false;
-      // loop through fields to see if any have resulted in an error and render this
+      // Loop through form fields to check and render any related errors
       ["username", "email", "password"].forEach((field) => {
         if (checkFieldError(field, error.message)) {
           registerForm.setFieldError(field, error.message);
           hasFieldError = true;
         }
       });
-      // if no field-specific errors, set a generic error
+      // If no field-specific errors, set a generic error
       if (!hasFieldError) {
         registerForm.setErrors({
           username: " ",
