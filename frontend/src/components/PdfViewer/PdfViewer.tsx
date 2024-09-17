@@ -7,7 +7,7 @@ interface PdfViewerProps {
 const PdfViewer = ({ url }: PdfViewerProps) => {
   return (
     <Box style={{ height: "50vh", display: "flex", justifyContent: "center" }}>
-      <object data={url} type="application/pdf" width="50%"></object>
+      <object data={url} type="text/html" width="50%"></object>
     </Box>
   );
 };
