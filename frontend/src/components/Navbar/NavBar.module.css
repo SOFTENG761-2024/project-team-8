@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   left: 0;
-  border-radius: 1vmax;
+  border-radius: 2vmax;
   background-color: var(--mantine-color-primary-5);
   position: relative;
   transition: width 0.5s ease;
@@ -58,12 +58,12 @@
 
 .link {
   width: 100%;
-  border-radius: 1vmax;
+  border-radius: 1.5vmax;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
   color: var(--mantine-color-neutral-1);
   transition: background-color 500ms ease-out 100ms;
 
