@@ -89,7 +89,7 @@ const CreateLessonModal = () => {
       <Modal
         opened={opened}
         onClose={close}
-        size="90%"
+        size="100%"
         styles={{
           content: { height: "90vh", maxWidth: "1200px" },
           header: { height: "10%" },
@@ -186,7 +186,7 @@ const CreateLessonModal = () => {
                       />
                     </>
                   )}
-                  {/* step 2 (TODO) */}
+                  {/* step 2 */}
                   {active === 1 && (
                     <>
                       <Group w="100%">
@@ -196,40 +196,42 @@ const CreateLessonModal = () => {
                       </Group>
 
                       <Divider />
-                      <Stack className={classes.tableContainer}>
-                        <Table
-                          className={classes.table}
-                          horizontalSpacing="xl"
-                          highlightOnHover
-                          highlightOnHoverColor="neutral.3"
-                          striped
-                          stripedColor="neutral.2"
-                        >
-                          <Table.Thead>{ths}</Table.Thead>
-                          <Table.Tbody>{rows}</Table.Tbody>
-                        </Table>
+                      <Stack h="75%">
+                        <Stack className={classes.tableContainer}>
+                          <Table
+                            className={classes.table}
+                            horizontalSpacing="xl"
+                            highlightOnHover
+                            highlightOnHoverColor="neutral.3"
+                            striped
+                            stripedColor="neutral.2"
+                          >
+                            <Table.Thead>{ths}</Table.Thead>
+                            <Table.Tbody>{rows}</Table.Tbody>
+                          </Table>
+                        </Stack>
+                        <Group className={classes.buttonContainer}>
+                          <Button
+                            variant="outline"
+                            className={classes.formButton}
+                            rightSection={
+                              <IconUpload className={classes.buttonIcon} />
+                            }
+                          >
+                            UPLOAD NEW FILE
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className={classes.formButton}
+                            rightSection={
+                              <IconCopyPlus className={classes.buttonIcon} />
+                            }
+                            disabled
+                          >
+                            USE EXISTING UPLOAD
+                          </Button>
+                        </Group>
                       </Stack>
-                      <Group className={classes.buttonContainer}>
-                        <Button
-                          variant="outline"
-                          className={classes.formButton}
-                          rightSection={
-                            <IconUpload className={classes.buttonIcon} />
-                          }
-                        >
-                          UPLOAD NEW FILE
-                        </Button>
-                        <Button
-                          variant="outline"
-                          className={classes.formButton}
-                          rightSection={
-                            <IconCopyPlus className={classes.buttonIcon} />
-                          }
-                          disabled
-                        >
-                          USE EXISTING UPLOAD
-                        </Button>
-                      </Group>
                     </>
                   )}
                   {/* step 3 (TODO) */}
