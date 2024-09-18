@@ -14,7 +14,6 @@ interface Kit {
     id: string;
     title: string;
     courses: Course[];
-
 }
 
 interface Course {
@@ -23,7 +22,7 @@ interface Course {
     yearLevel: number;
     description: string;
     outcomes: string[];
-    modules: string[]; // references to those objects
+    modules: Module[]; // references to those objects
     assessments: Assessment[];
     courseImage: Parse.File;
 }
@@ -45,11 +44,13 @@ interface Assessment {
 interface Lesson {
     id: string;
     title: string;
+    overview: string;
     content: Content[];
 }
 
 interface Content {
-    text: string;
+    title: string;
+    description?: string;
     printout: Parse.File;
 }
 
