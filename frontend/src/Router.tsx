@@ -4,11 +4,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import DashboardPage from "./pages/Dashboard.page";
-import RegisterPage from "./pages/Register.page";
 import CoursePage from "./pages/Course.page";
 import CreateLessonPage from "./pages/admin/CreateLesson.page";
 import BaseLayout from "./components/BaseLayout/BaseLayout";
-import LoginPage from "./pages/Login.page";
+import WelcomePage from "./pages/Welcome.page";
 
 const router = createBrowserRouter([
   {
@@ -17,11 +16,11 @@ const router = createBrowserRouter([
   },
   {
     path: "login",
-    element: <LoginPage />,
+    element: <WelcomePage state="login" />,
   },
   {
     path: "register",
-    element: <RegisterPage />,
+    element: <WelcomePage state="register" />,
   },
   {
     path: "user",

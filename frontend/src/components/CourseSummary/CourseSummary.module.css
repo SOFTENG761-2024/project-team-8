@@ -1,0 +1,76 @@
+.courseSummaryContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.courseSummaryWrapper {
+  transition: width 0.5s ease;
+  overflow: clip;
+  width: 430px;
+}
+
+.collapsed {
+  width: 0;
+}
+
+.courseSummary {
+  width: 430px;
+  background-color: white;
+  border: 1px solid var(--mantine-color-neutral-2);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 10px 20px;
+  gap: 30px;
+}
+
+.collapseButton {
+  width: 30px;
+  height: 100px;
+  border-radius: 25px;
+  transition: 0.5s;
+  margin-top: 60%;
+}
+
+.collapseButtonExpanded {
+  width: 60px;
+  height: 660px;
+  margin-top: 0;
+}
+
+.collapseButton .icon {
+  color: var(--mantine-color-secondary-0)
+}
+
+.courseHighlights {
+  background: var(--mantine-color-secondary-2);
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 10px;
+}
+
+.courseHighlights .item {
+  /*background-color: white;*/
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 15px;
+  gap: 10px;
+  color: var(--mantine-color-secondary-6);
+}
+
+.accordionRoot {
+  width: 100%;
+  border-top: 1px solid var(--mantine-color-neutral-2);
+}
+
+.accordionRoot .item {
+  border-bottom: 1px solid var(--mantine-color-neutral-2);
+}

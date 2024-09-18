@@ -3,7 +3,8 @@ import classes from "./BaseLayout.module.css";
 import Navbar from "../Navbar/Navbar";
 import Header from "../Header/Header";
 import { Box } from "@mantine/core";
-import logo from '../../assets/logo.png';
+import logo from "../../assets/logo.png";
+import Footer from "../Footer/Footer";
 
 const BaseLayout = () => {
   return (
@@ -25,6 +26,7 @@ const BaseLayout = () => {
         </main>
       </div>
       <div className={classes.footerWrapper}>
+        <Footer />
       </div>
     </Box>
   );
