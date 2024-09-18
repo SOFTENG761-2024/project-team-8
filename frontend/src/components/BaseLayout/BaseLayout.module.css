@@ -42,7 +42,6 @@ body {
   padding-top: 5rem;
   flex-direction: row;
   width: 100%;
-  /* min-height: 50rem; */
   height: min-content;
   padding: 1rem;
 }
