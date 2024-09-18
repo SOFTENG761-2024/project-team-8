@@ -9,12 +9,12 @@ export interface Kit {
 export interface Course {
   id: string;
   title: string
-  yearLevel: number;
+  yearLevel: string;
   description: string;
   outcomes: string[];
   modules: Module[]; // references to those objects
   assessments: Assessment[];
-  courseImage: Parse.File;
+  courseImage?: Parse.File;
 }
 
 export interface Module {

@@ -19,12 +19,12 @@ interface Kit {
 interface Course {
     id: string;
     title: string
-    yearLevel: number;
+    yearLevel: string;
     description: string;
     outcomes: string[];
     modules: Module[]; // references to those objects
     assessments: Assessment[];
-    courseImage: Parse.File;
+    courseImage?: Parse.File;
 }
 
 
@@ -76,8 +76,8 @@ async function createLesson(title: string, teacherHandoutPath: string, worksheet
     const lessonObj = new Parse.Object("lesson");
     lessonObj.set('title', title as any);
     const content: Content[] = [
-        {text: "Teacher_handout", printout: teacherHandout},
-        {text: "Worksheet", printout: worksheet}
+        {title: "Teacher handout", printout: teacherHandout},
+        {title: "Worksheet", printout: worksheet}
     ];
     lessonObj.set('content', content as any);
 
@@ -133,7 +133,7 @@ async function uploadDinoSteps() {
 
     /* Create course */
     const newCourse = new Parse.Object("course");
-    newCourse.set("yearLevel", 2 as any);
+    newCourse.set("yearLevel", "Beginner" as any);
     newCourse.set("description", 'To create content in programming, students need to develop a sound understanding of ' +
     'computational thinking (CT). In this module students will develop skills and knowledge to ' +
     'support their understanding of CT through unplugged and digital activities.' as any);
@@ -201,7 +201,7 @@ async function uploadDinoLoops() {
 
     /* Create course */
     const newCourse = new Parse.Object("course");
-    newCourse.set("yearLevel", 3 as any);
+    newCourse.set("yearLevel", "Beginner" as any);
     newCourse.set("description", 'To create content in programming, students need to develop a sound understanding of computational thinking (CT). In this module students will develop skills and knowledge to support their understanding of CT through unplugged and digital activities.' as any);
     newCourse.set("outcomes", ["A", "B"] as any);
     newCourse.set("modules", module as any);
@@ -267,7 +267,7 @@ async function uploadDinoCommands() {
 
     /* Create course */
     const newCourse = new Parse.Object("course");
-    newCourse.set("yearLevel", 4 as any);
+    newCourse.set("yearLevel", "Intermediate" as any);
     newCourse.set("description", "To create content in programming, students need to develop a good understanding of computational thinking (CT). In this module, students will develop skills and knowledge to support their understanding of CT through a gamified approach using unplugged and digital activities." as any);
     newCourse.set("outcomes", ["A", "B"] as any);
     newCourse.set("modules", module as any);
