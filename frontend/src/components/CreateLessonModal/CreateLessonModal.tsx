@@ -19,7 +19,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
-import { IconCopyPlus, IconUpload } from "@tabler/icons-react";
+import { IconCopyPlus, IconPlus, IconUpload } from "@tabler/icons-react";
 
 const FormLabel = ({ text }) => (
   <Title size="h5" c="neutral.5" tt={"uppercase"} lts="0.08em">
@@ -234,13 +234,64 @@ const CreateLessonModal = () => {
                       </Stack>
                     </>
                   )}
-                  {/* step 3 (TODO) */}
+                  {/* step 3 */}
                   {active === 2 && (
                     <>
-                      <Group>
-                        <Divider orientation="vertical" mx="lg" />
-                        <Text>Page 3</Text>
+                      <Group w="100%">
+                        <Title size="h2" c="primary.4" w="100%">
+                          Lesson content
+                        </Title>
                       </Group>
+
+                      <Divider />
+                      <Stack h="75%">
+                        <Stack align="flex-start" gap="xs">
+                          <Select
+                            variant="filled"
+                            maw="30rem"
+                            w="100%"
+                            data={["Activity 1", "Activity 2"]}
+                            placeholder="Select activity to edit"
+                          />
+                          <Button
+                            variant="transparent"
+                            leftSection={
+                              <IconPlus className={classes.buttonIcon} />
+                            }
+                            style={{ textDecoration: "underline", padding: 0 }}
+                          >
+                            Add more activity
+                          </Button>
+                        </Stack>
+                        <Stack className={classes.tableContainer}>
+                          <TextInput
+                            label={<FormLabel text="Title" />}
+                            placeholder="Insert title of this activity here..."
+                          />
+                          <Textarea
+                            label={<FormLabel text="Description" />}
+                            placeholder="Insert text about what this activity entails here..."
+                            autosize
+                            minRows={3}
+                            maxRows={6}
+                          />
+                        </Stack>
+                        <Group className={classes.buttonContainer}>
+                          <Button
+                            variant="outline"
+                            className={`${classes.formButton} ${classes.saveButton}`}
+                            c="accentGreen.5"
+                          >
+                            SAVE CHANGES
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className={`${classes.formButton} ${classes.deleteButton}`}
+                          >
+                            DELETE ACTIVITY
+                          </Button>
+                        </Group>
+                      </Stack>
                     </>
                   )}
                 </Stack>

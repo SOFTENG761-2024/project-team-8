@@ -97,3 +97,15 @@
   color: var(--mantine-color-primary-6);
   height: calc(0.3vw + 0.8rem);
 }
+
+.saveButton {
+  color: var(--mantine-color-accentGreen-5);
+  border-color: var(--mantine-color-accentGreen-5);
+  border-radius: 0.8rem;
+}
+
+.deleteButton {
+  color: var(--mantine-color-accentRed-5);
+  border-color: var(--mantine-color-accentRed-5);
+  border-radius: 0.8rem;
+}
