@@ -1,11 +1,18 @@
-import { ActionIcon, Box, Center, Tooltip } from "@mantine/core";
+import { Box, Stack } from "@mantine/core";
 import styles from "./PdfViewer.module.css";
-import {
-  IconChevronDown,
-  IconChevronUp,
-  IconMinimize,
-} from "@tabler/icons-react";
+// import {
+//   IconChevronDown,
+//   IconChevronUp,
+//   IconMinimize,
+// } from "@tabler/icons-react";
 import { useState } from "react";
+import { Document, Page } from "react-pdf";
+import { pdfjs } from "react-pdf";
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url
+).toString();
 
 interface PdfViewerProps {
   url: string;
@@ -22,61 +29,118 @@ interface PdfViewerProps {
  * @param {function} setFullscreen - A function to set the fullscreen mode of the viewer.
  */
 const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
-  const [barMinimized, setBarMinimized] = useState<boolean>(false);
+  // const [barMinimized, setBarMinimized] = useState<boolean>(false);
+  const [numPages, setNumPages] = useState<number>();
+  const [pageNumber, setPageNumber] = useState<number>(1);
 
-  const minimizePdf = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setFullscreen(false);
-  };
+  // const minimizePdf = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   event.stopPropagation();
+  //   setFullscreen(false);
+  // };
 
-  const toggleBar = () => {
-    setBarMinimized(!barMinimized);
-  };
+  // const toggleBar = () => {
+  //   setBarMinimized(!barMinimized);
+  // };
+
+  console.log(setFullscreen);
+
+  function onDocumentLoadSuccess({ numPages: nextNumPages }): void {
+    setNumPages(nextNumPages);
+    setPageNumber(1);
+  }
+
+  function changePage(offset) {
+    setPageNumber((prevPageNumber) => prevPageNumber + offset);
+  }
+
+  function previousPage() {
+    changePage(-1);
+  }
+
+  function nextPage() {
+    changePage(1);
+  }
 
   return (
-    <Box className={fullscreen ? styles.fullscreenContainer : ""}>
-      {fullscreen && (
-        <Box
-          className={styles.fullscreenTopMenu}
-          bg="primary.5"
-          onClick={toggleBar}
-          style={{
-            height: barMinimized ? "1vh" : "5vh",
-            transition: "height ease-out 0.2s",
-          }}
+    <Stack>
+      <div>
+        <p>
+          Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
+        </p>
+        <button type="button" disabled={pageNumber <= 1} onClick={previousPage}>
+          Previous
+        </button>
+        <button
+          type="button"
+          disabled={pageNumber >= numPages}
+          onClick={nextPage}
         >
-          {barMinimized ? (
-            <Tooltip label="Expand">
-              <IconChevronDown color="white" style={{ marginLeft: "50vw" }} />
-            </Tooltip>
-          ) : (
-            <>
-              <Tooltip label="Hide">
-                <IconChevronUp color="white" style={{ marginLeft: "50vw" }} />
-              </Tooltip>
-              <Tooltip label="Exit Fullscreen">
-                <ActionIcon onClick={minimizePdf} size={30}>
-                  <IconMinimize size={40} className={styles.minimizeIcon} />
-                </ActionIcon>
-              </Tooltip>
-            </>
-          )}
-        </Box>
-      )}
-      <Center>
-        <object
-          data={url + "#view=Fit"}
-          type="text/html"
+          Next
+        </button>
+      </div>
+      <Box className={fullscreen ? styles.fullscreenContainer : ""}>
+        {/* TODO: Add navbar type element here to display page number, navigation buttons and fullscreen button then won't need stack */}
+        <Document
+          file={url}
+          onLoadSuccess={onDocumentLoadSuccess}
           className={
             fullscreen ? styles.fullscreenView : styles.nonFullscreenView
           }
-          style={{
-            height: fullscreen ? (barMinimized ? "99vh" : "95vh") : "50vh",
-            transition: "height ease-out 0.2s",
-          }}
-        ></object>
-      </Center>
-    </Box>
+        >
+          <Page
+            pageNumber={pageNumber}
+            renderAnnotationLayer={false}
+            renderTextLayer={false}
+            className={
+              fullscreen ? styles.fullscreenView : styles.nonFullscreenView
+            }
+          />
+        </Document>
+      </Box>
+    </Stack>
+    // <Box className={fullscreen ? styles.fullscreenContainer : ""}>
+    //   {fullscreen && (
+    //     <Box
+    //       className={styles.fullscreenTopMenu}
+    //       bg="primary.5"
+    //       onClick={toggleBar}
+    //       style={{
+    //         height: barMinimized ? "1vh" : "5vh",
+    //         transition: "height ease-out 0.2s",
+    //       }}
+    //     >
+    //       {barMinimized ? (
+    //         <Tooltip label="Expand">
+    //           <IconChevronDown color="white" style={{ marginLeft: "50vw" }} />
+    //         </Tooltip>
+    //       ) : (
+    //         <>
+    //           <Tooltip label="Hide">
+    //             <IconChevronUp color="white" style={{ marginLeft: "50vw" }} />
+    //           </Tooltip>
+    //           <Tooltip label="Exit Fullscreen">
+    //             <ActionIcon onClick={minimizePdf} size={30}>
+    //               <IconMinimize size={40} className={styles.minimizeIcon} />
+    //             </ActionIcon>
+    //           </Tooltip>
+    //         </>
+    //       )}
+    //     </Box>
+    //   )}
+    //   <Center>
+    //     <object
+    //       data={url + "#view=Fit"}
+    //       type="text/html"
+    //       className={
+    //         fullscreen ? styles.fullscreenView : styles.nonFullscreenView
+    //       }
+    //       style={{
+    //         height: fullscreen ? (barMinimized ? "99vh" : "95vh") : "50vh",
+    //         transition: "height ease-out 0.2s",
+    //       }}
+    //     ></object>
+    //   </Center>
+    // </Box>
   );
 };
 

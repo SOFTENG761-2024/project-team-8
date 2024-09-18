@@ -30,7 +30,8 @@
 }
 
 .fullscreenView {
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -38,7 +39,16 @@
 }
 
 .nonFullscreenView {
-    width: 50%;
     height: 50vh;
     position: relative;
+    width: fit-content;
+}
+
+.pdfDocument {
+    height: 45vh;
+}
+
+canvas {
+    width: auto !important;
+    height: 100% !important;
 }
