@@ -20,9 +20,7 @@ const BaseLayout = () => {
       <div className={classes.horizontalWrapper}>
         <Navbar />
         <main className={classes.mainContentWrapper}>
-          <div className={classes.mainContent}>
-            <Outlet />
-          </div>
+          <Outlet />
         </main>
       </div>
       <div className={classes.footerWrapper}>
