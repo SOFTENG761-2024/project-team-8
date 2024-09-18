@@ -13,11 +13,13 @@ import {
   Select,
   rem,
   Table,
+  ActionIcon,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
+import { IconCopyPlus, IconUpload } from "@tabler/icons-react";
 
 const FormLabel = ({ text }) => (
   <Title size="h5" c="neutral.5" tt={"uppercase"} lts="0.08em">
@@ -91,12 +93,13 @@ const CreateLessonModal = () => {
         styles={{
           content: { height: "90vh", maxWidth: "1200px" },
           header: { height: "10%" },
-          body: { height: "85%", padding: "1rem 4rem" },
+          body: { height: "85%", padding: "1rem 3rem" },
         }}
+        radius="lg"
         centered
       >
         <Flex h="100%" gap="xl">
-          <Stack h="100%" align="stretch" justify="flex-start" gap="md" w="30%">
+          <Stack h="100%" align="stretch" justify="flex-start" gap="md" w="25%">
             <Title size="h1" c="primary.4">
               Create a new lesson
             </Title>
@@ -137,7 +140,7 @@ const CreateLessonModal = () => {
               />
             </Stepper>
           </Stack>
-          <Group w="70%" justify="flex-start" gap="md">
+          <Group w="75%" justify="space-around" gap="md">
             <Divider orientation="vertical" mx="lg" />
 
             <form
@@ -206,6 +209,27 @@ const CreateLessonModal = () => {
                           <Table.Tbody>{rows}</Table.Tbody>
                         </Table>
                       </Stack>
+                      <Group className={classes.buttonContainer}>
+                        <Button
+                          variant="outline"
+                          className={classes.formButton}
+                          rightSection={
+                            <IconUpload className={classes.buttonIcon} />
+                          }
+                        >
+                          UPLOAD NEW FILE
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className={classes.formButton}
+                          rightSection={
+                            <IconCopyPlus className={classes.buttonIcon} />
+                          }
+                          disabled
+                        >
+                          USE EXISTING UPLOAD
+                        </Button>
+                      </Group>
                     </>
                   )}
                   {/* step 3 (TODO) */}
