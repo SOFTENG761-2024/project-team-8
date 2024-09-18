@@ -19,11 +19,13 @@ interface Kit {
 
 interface Course {
     id: string;
+    title: string
     yearLevel: number;
     description: string;
     outcomes: string[];
     modules: string[]; // references to those objects
     assessments: Assessment[];
+    courseImage: Parse.File;
 }
 
 
@@ -137,6 +139,8 @@ async function uploadDinoSteps() {
     newCourse.set("outcomes", ["A", "B"] as any);
     newCourse.set("modules", module as any);
     newCourse.set("assessments", [assessment] as any);
+    newCourse.set("title", "" as any);
+    newCourse.set("courseImage", undefined as any);
     const savedCourse = await newCourse.save();
 
     /* Create kit */
@@ -201,6 +205,8 @@ async function uploadDinoLoops() {
     newCourse.set("outcomes", ["A", "B"] as any);
     newCourse.set("modules", module as any);
     newCourse.set("assessments", [assessment] as any);
+    newCourse.set("title", "" as any);
+    newCourse.set("courseImage", undefined as any);
     const savedCourse = await newCourse.save();
 
     /* Create kit */
@@ -265,6 +271,8 @@ async function uploadDinoCommands() {
     newCourse.set("outcomes", ["A", "B"] as any);
     newCourse.set("modules", module as any);
     newCourse.set("assessments", [assessment] as any);
+    newCourse.set("title", "" as any);
+    newCourse.set("courseImage", undefined as any);
     const savedCourse = await newCourse.save();
 
     /* Create kit */
