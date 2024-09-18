@@ -66,16 +66,19 @@ const CreateLessonModal = () => {
   const rows = resourceList.map((element) => (
     <Table.Tr key={element.name}>
       <Table.Td>{element.name}</Table.Td>
-      <Table.Td>{element.type}</Table.Td>
-      <Table.Td>{element.size}</Table.Td>
+      <Table.Td align={"center"}>{element.type}</Table.Td>
+      <Table.Td align={"center"}>{element.size}</Table.Td>
+      <Table.Td align={"center"}>{element.size}</Table.Td>
     </Table.Tr>
   ));
 
   const ths = (
     <Table.Tr>
-      <Table.Th>FILE NAME</Table.Th>
-      <Table.Th>TYPE</Table.Th>
-      <Table.Th>SIZE</Table.Th>
+      <Table.Th ta={"left"} className={classes.tableHeader}>
+        FILE NAME
+      </Table.Th>
+      <Table.Th className={classes.tableHeader}>TYPE</Table.Th>
+      <Table.Th className={classes.tableHeader}>SIZE</Table.Th>
     </Table.Tr>
   );
 
@@ -190,10 +193,19 @@ const CreateLessonModal = () => {
                       </Group>
 
                       <Divider />
-                      <Table>
-                        <Table.Thead>{ths}</Table.Thead>
-                        <Table.Tbody>{rows}</Table.Tbody>
-                      </Table>
+                      <Stack className={classes.tableContainer}>
+                        <Table
+                          className={classes.table}
+                          horizontalSpacing="xl"
+                          highlightOnHover
+                          highlightOnHoverColor="neutral.3"
+                          striped
+                          stripedColor="neutral.2"
+                        >
+                          <Table.Thead>{ths}</Table.Thead>
+                          <Table.Tbody>{rows}</Table.Tbody>
+                        </Table>
+                      </Stack>
                     </>
                   )}
                   {/* step 3 (TODO) */}
