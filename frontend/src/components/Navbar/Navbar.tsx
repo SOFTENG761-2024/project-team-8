@@ -24,7 +24,9 @@ function NavbarLink({
   const iconSize = rem("calc(4vw + 12px)");
 
   return (
-    <div className={`${classes.link} ${expanded ? classes.linkExpanded : ""}`}>
+    <div
+      className={`${classes.link} ${expanded ? classes.linkExpanded : ""} ${active ? classes.linkActive : ""}`}
+    >
       <ActionIcon
         variant="transparent"
         data-active={active || undefined}
@@ -84,7 +86,7 @@ const Navbar = () => {
       </Stack>
 
       <Stack gap="1vh" style={{ width: "100%" }}>
-        <Divider color="neutral.1" />
+        <Divider color="primary.3" />
         <Link to="/login" style={{ textDecoration: "none" }}>
           <NavbarLink
             key={"Logout"}
