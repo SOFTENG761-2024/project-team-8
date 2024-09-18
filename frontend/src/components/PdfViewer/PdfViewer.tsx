@@ -42,7 +42,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
           onClick={toggleBar}
           style={{
             height: barMinimized ? "1vh" : "5vh",
-            transition: "ease-in-out 0.3s",
+            transition: "height ease-out 0.2s",
           }}
         >
           {barMinimized ? (
@@ -72,7 +72,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
           }
           style={{
             height: fullscreen ? (barMinimized ? "99vh" : "95vh") : "50vh",
-            transition: "ease-in-out 0.3s",
+            transition: "height ease-out 0.2s",
           }}
         ></object>
       </Center>
