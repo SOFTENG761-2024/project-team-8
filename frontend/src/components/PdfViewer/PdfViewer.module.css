@@ -31,11 +31,14 @@
 
 .fullscreenView {
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
     position: absolute;
     bottom: 0;
     left: 0;
     z-index: 10;
+    display: flex;
+    justify-content: center;
+    background-color: var(--mantine-color-neutral-3) !important;
 }
 
 .nonFullscreenView {

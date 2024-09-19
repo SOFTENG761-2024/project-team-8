@@ -62,42 +62,44 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   }
 
   return (
-    <Stack>
-      <div>
-        <p>
-          Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
-        </p>
-        <button type="button" disabled={pageNumber <= 1} onClick={previousPage}>
-          Previous
-        </button>
-        <button
-          type="button"
-          disabled={pageNumber >= numPages}
-          onClick={nextPage}
-        >
-          Next
-        </button>
-      </div>
-      <Box className={fullscreen ? styles.fullscreenContainer : ""}>
-        {/* TODO: Add navbar type element here to display page number, navigation buttons and fullscreen button then won't need stack */}
-        <Document
-          file={url}
-          onLoadSuccess={onDocumentLoadSuccess}
-          className={
-            fullscreen ? styles.fullscreenView : styles.nonFullscreenView
-          }
-        >
-          <Page
-            pageNumber={pageNumber}
-            renderAnnotationLayer={false}
-            renderTextLayer={false}
+    <Box className={fullscreen ? styles.fullscreenContainer : ""}>
+      <Stack>
+        <div>
+          <p>
+            Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
+          </p>
+          <button type="button" disabled={pageNumber <= 1} onClick={previousPage}>
+            Previous
+          </button>
+          <button
+            type="button"
+            disabled={pageNumber >= numPages}
+            onClick={nextPage}
+          >
+            Next
+          </button>
+        </div>
+        <Box style={{ display: "flex", justifyContent: "center" }}>
+          {/* TODO: Add navbar type element here to display page number, navigation buttons and fullscreen button then won't need stack */}
+          <Document
+            file={url}
+            onLoadSuccess={onDocumentLoadSuccess}
             className={
               fullscreen ? styles.fullscreenView : styles.nonFullscreenView
             }
-          />
-        </Document>
-      </Box>
-    </Stack>
+          >
+            <Page
+              pageNumber={pageNumber}
+              renderAnnotationLayer={false}
+              renderTextLayer={false}
+              className={
+                fullscreen ? styles.fullscreenView : styles.nonFullscreenView
+              }
+            />
+          </Document>
+        </Box>
+      </Stack>
+    </Box>
     // <Box className={fullscreen ? styles.fullscreenContainer : ""}>
     //   {fullscreen && (
     //     <Box
