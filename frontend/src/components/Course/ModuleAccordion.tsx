@@ -2,6 +2,7 @@ import { Accordion, Box, Group, Modal, Stack, Text, useMantineTheme } from "@man
 import { IconBook2, IconSquareRoundedChevronDownFilled, IconFile } from "@tabler/icons-react";
 import styles from "./ModuleAccordion.module.css";
 import { useState } from "react";
+import Lesson from "../Lesson/Lesson";
 
 interface ModuleAccordionProps {
     module: {
@@ -29,7 +30,9 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
                 title="Lesson Details"
                 centered
             >
-                <Text>{selectedLesson}</Text>
+                {selectedLesson && (
+                    <Lesson module={module} selectedLesson={selectedLesson} />
+                )}
             </Modal>
 
             <Accordion variant="separated" className={styles.accordionContainer} chevron={<IconSquareRoundedChevronDownFilled stroke={2.5} color={theme.colors.neutral[5]} />} chevronSize={20}>
