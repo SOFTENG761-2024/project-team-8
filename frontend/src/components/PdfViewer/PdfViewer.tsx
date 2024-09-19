@@ -54,9 +54,11 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
       const handleKeyDown = (event: KeyboardEvent) => {
         switch (event.key) {
           case "ArrowLeft":
+          case "ArrowUp":
             changePage(-1);
             break;
           case "ArrowRight":
+          case "ArrowDown":
             changePage(1);
             break;
           case "Escape":
@@ -85,7 +87,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   return (
     <Box className={fullscreen ? styles.fullscreenContainer : ""}>
       <Stack>
-        <Box style={{ display: "flex", justifyContent: "center" }}>
+        <Box className={styles.pdfContainer}>
           <Document
             file={url}
             onLoadSuccess={onDocumentLoadSuccess}
@@ -98,7 +100,9 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
               renderAnnotationLayer={false}
               renderTextLayer={false}
               className={
-                fullscreen ? styles.fullscreenView : styles.nonFullscreenView
+                fullscreen
+                  ? styles.fullscreenView
+                  : `${styles.nonFullscreenView} ${styles.page}`
               }
             />
           </Document>

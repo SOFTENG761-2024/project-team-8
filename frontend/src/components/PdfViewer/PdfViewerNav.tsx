@@ -19,7 +19,7 @@ const PdfViewerNav = ({
     <Group
       gap="2rem"
       m="0 auto"
-      className={fullscreen ? styles.fullscrenNav : ""}
+      className={fullscreen ? styles.fullscrenNav : styles.nonFullscreenNav}
     >
       <ActionIcon
         variant="transparent"

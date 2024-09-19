@@ -41,6 +41,11 @@
     color: var(--mantine-color-primary-2);
 }
 
+.pdfContainer {
+    display: flex;
+    justify-content: center;
+}
+
 .fullscreenView {
     width: 100vw;
     height: 100vh;
@@ -57,6 +62,13 @@
     height: 50vh;
     position: relative;
     width: fit-content;
+    padding: 1rem;
+}
+
+.page {
+    padding: 1.3rem;
+    background-color: var(--mantine-color-primary-6) !important;
+    border-radius: 1rem;
 }
 
 canvas {
@@ -77,6 +89,10 @@ canvas {
     padding: 0.5rem;
     border-radius: 1rem;
     color: var(--mantine-color-neutral-0);
+}
+
+.nonFullscreenNav {
+    padding-top: 0.5rem;
 }
 
 .fullscrenNav:hover {
