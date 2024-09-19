@@ -1,13 +1,4 @@
-import {
-  ActionIcon,
-  Box,
-  Button,
-  Group,
-  Stack,
-  Text,
-  Tooltip,
-} from "@mantine/core";
-import { IconMinimize } from "@tabler/icons-react";
+import { Box, Button, Group, Paper, Stack, Text } from "@mantine/core";
 import styles from "./PdfViewer.module.css";
 import { useCallback, useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
@@ -39,11 +30,7 @@ interface OnLoadSuccessProps {
 const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
-
-  const minimizePdf = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setFullscreen(false);
-  };
+  const [displayAlert, setDisplayAlert] = useState<boolean>(false);
 
   const onDocumentLoadSuccess = ({ numPages }: OnLoadSuccessProps): void => {
     setNumPages(numPages);
@@ -71,6 +58,9 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
           case "ArrowRight":
             changePage(1);
             break;
+          case "Escape":
+            setFullscreen(false);
+            break;
           default:
             break;
         }
@@ -83,6 +73,13 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
       };
     }
   }, [fullscreen, changePage]);
+
+  useEffect(() => {
+    setDisplayAlert(true);
+    setTimeout(() => {
+      setDisplayAlert(false);
+    }, 2000);
+  }, [fullscreen]);
 
   return (
     <Box className={fullscreen ? styles.fullscreenContainer : ""}>
@@ -105,14 +102,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
             />
           </Document>
         </Box>
-        <Box
-          display="flex"
-          className={styles.navigationMenu}
-          bg={fullscreen ? "primary.2" : "transparent"}
-          w={fullscreen ? "100%" : "auto"}
-          h={fullscreen ? "7vh" : "auto"}
-          style={{ position: fullscreen ? "absolute" : "relative", top: 0 }}
-        >
+        {!fullscreen && (
           <Group gap="2rem" m="0 auto">
             <Button
               onClick={() => changePage(-1)}
@@ -132,16 +122,16 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
               Next
             </Button>
           </Group>
-          {fullscreen && (
-            <Box>
-              <Tooltip label="Exit Fullscreen">
-                <ActionIcon onClick={minimizePdf} size={40}>
-                  <IconMinimize size={40} className={styles.minimizeIcon} />
-                </ActionIcon>
-              </Tooltip>
-            </Box>
-          )}
-        </Box>
+        )}
+        {fullscreen && displayAlert && (
+          <Box className={styles.alertContainer}>
+            <Paper radius="xl" p="sm" w="20%" bg="dark">
+              <Text ta="center" size="1.5rem" c="white">
+                Press ESC to exit fullscreen
+              </Text>
+            </Paper>
+          </Box>
+        )}
       </Stack>
     </Box>
   );

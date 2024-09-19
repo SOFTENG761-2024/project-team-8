@@ -17,6 +17,12 @@
     padding-right: 1rem;
 }
 
+.alertContainer {
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
 .minimizeIcon {
     cursor: pointer;
     color: #FFFFFF;
@@ -28,7 +34,7 @@
 
 .fullscreenView {
     width: 100vw;
-    height: 93vh;
+    height: 100vh;
     position: absolute;
     bottom: 0;
     left: 0;
