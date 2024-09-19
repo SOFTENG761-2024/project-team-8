@@ -1,5 +1,5 @@
 import { ActionIcon, Group, Text } from "@mantine/core";
-import styles from "./PdfViewer.module.css";
+import styles from "./PdfViewerNav.module.css";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 
 interface PdfViewerNavProps {
