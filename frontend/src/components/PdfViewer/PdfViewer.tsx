@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { IconMinimize } from "@tabler/icons-react";
 import styles from "./PdfViewer.module.css";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 
@@ -44,16 +44,45 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
     event.stopPropagation();
     setFullscreen(false);
   };
-  console.log(setFullscreen);
 
-  function onDocumentLoadSuccess({ numPages }: OnLoadSuccessProps): void {
+  const onDocumentLoadSuccess = ({ numPages }: OnLoadSuccessProps): void => {
     setNumPages(numPages);
     setPageNumber(1);
-  }
+  };
 
-  function changePage(offset: number) {
-    setPageNumber((prevPageNumber) => prevPageNumber + offset);
-  }
+  const changePage = useCallback(
+    (offset: number) => {
+      const newPageNumber = pageNumber + offset;
+
+      if (newPageNumber >= 1 && newPageNumber <= numPages) {
+        setPageNumber((prevPageNumber) => prevPageNumber + offset);
+      }
+    },
+    [pageNumber, numPages]
+  );
+
+  useEffect(() => {
+    if (fullscreen) {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        switch (event.key) {
+          case "ArrowLeft":
+            changePage(-1);
+            break;
+          case "ArrowRight":
+            changePage(1);
+            break;
+          default:
+            break;
+        }
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+  }, [fullscreen, changePage]);
 
   return (
     <Box className={fullscreen ? styles.fullscreenContainer : ""}>
