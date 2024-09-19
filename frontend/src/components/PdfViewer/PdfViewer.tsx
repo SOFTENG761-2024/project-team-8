@@ -79,7 +79,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
     setDisplayAlert(true);
     setTimeout(() => {
       setDisplayAlert(false);
-    }, 2000);
+    }, 1000);
   }, [fullscreen]);
 
   return (
@@ -113,7 +113,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
         {fullscreen && displayAlert && (
           <Box className={styles.alertContainer}>
             <Paper className={styles.alertPopUp}>
-              <Text size="1.5rem">Press ESC to exit fullscreen</Text>
+              <Text size="1.5rem">Press ESC to exit present mode</Text>
             </Paper>
           </Box>
         )}
