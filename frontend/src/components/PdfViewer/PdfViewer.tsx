@@ -100,9 +100,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
               renderAnnotationLayer={false}
               renderTextLayer={false}
               className={
-                fullscreen
-                  ? styles.fullscreenView
-                  : `${styles.nonFullscreenView} ${styles.page}`
+                fullscreen ? styles.fullscreenView : styles.nonFullscreenView
               }
             />
           </Document>
