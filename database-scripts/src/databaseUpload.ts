@@ -76,8 +76,8 @@ async function createLesson(title: string, teacherHandoutPath: string, worksheet
     const lessonObj = new Parse.Object("lesson");
     lessonObj.set('title', title as any);
     const content: Content[] = [
-        {title: "Teacher handout", printout: teacherHandout},
-        {title: "Worksheet", printout: worksheet}
+        {title: "Teacher handout", description: "description", printout: teacherHandout},
+        {title: "Worksheet", description: "description", printout: worksheet}
     ];
     lessonObj.set('content', content as any);
 
