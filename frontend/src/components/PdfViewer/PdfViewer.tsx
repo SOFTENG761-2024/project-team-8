@@ -1,8 +1,9 @@
-import { Box, Button, Group, Paper, Stack, Text } from "@mantine/core";
+import { Box, Paper, Stack, Text } from "@mantine/core";
 import styles from "./PdfViewer.module.css";
 import { useCallback, useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
+import PdfViewerNav from "./PdfViewerNav";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -102,33 +103,17 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
             />
           </Document>
         </Box>
-        {!fullscreen && (
-          <Group gap="2rem" m="0 auto">
-            <Button
-              onClick={() => changePage(-1)}
-              disabled={pageNumber <= 1}
-              size="md"
-            >
-              Previous
-            </Button>
-            <Text size="1.5rem">
-              Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
-            </Text>
-            <Button
-              onClick={() => changePage(1)}
-              disabled={pageNumber >= numPages}
-              size="md"
-            >
-              Next
-            </Button>
-          </Group>
-        )}
+        <PdfViewerNav
+          changePage={changePage}
+          pageNumber={pageNumber}
+          numPages={numPages}
+          fullscreen={fullscreen}
+        />
+
         {fullscreen && displayAlert && (
           <Box className={styles.alertContainer}>
-            <Paper radius="xl" p="sm" w="20%" bg="dark">
-              <Text ta="center" size="1.5rem" c="white">
-                Press ESC to exit fullscreen
-              </Text>
+            <Paper className={styles.alertPopUp}>
+              <Text size="1.5rem">Press ESC to exit fullscreen</Text>
             </Paper>
           </Box>
         )}

@@ -23,9 +23,18 @@
     z-index: 100;
 }
 
+.alertPopUp {
+    width: 20%;
+    background-color: rgba(20, 28, 40, 0.75);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    color: var(--mantine-color-neutral-0);
+    text-align: center;
+}
+
 .minimizeIcon {
     cursor: pointer;
-    color: #FFFFFF;
+    color: var(--mantine-color-neutral-0);
 }
 
 .minimizeIcon:hover {
@@ -53,4 +62,33 @@
 canvas {
     width: auto !important;
     height: 100% !important;
+}
+
+.fullscrenNav {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.5s;
+    transition-delay: 1s;
+    background-color: rgba(20, 28, 40, 0.75);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    color: var(--mantine-color-neutral-0);
+}
+
+.fullscrenNav:hover {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.arrowButtons {
+    &:disabled,
+    &[data-disabled] {
+        color: var(--mantine-color-neutral-3) !important;
+        border-color: none;
+        background-color: transparent;
+    }
 }
