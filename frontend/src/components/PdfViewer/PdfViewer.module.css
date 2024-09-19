@@ -10,14 +10,11 @@
     left: 0;
 }
 
-.fullscreenTopMenu {
-    width: 100%;
+.navigationMenu {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
     padding-right: 1rem;
-    margin: 0;
-    cursor: pointer;
 }
 
 .minimizeIcon {
@@ -31,7 +28,7 @@
 
 .fullscreenView {
     width: 100vw;
-    height: 90vh;
+    height: 93vh;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -45,10 +42,6 @@
     height: 50vh;
     position: relative;
     width: fit-content;
-}
-
-.pdfDocument {
-    height: 45vh;
 }
 
 canvas {
