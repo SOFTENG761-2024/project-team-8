@@ -4,17 +4,17 @@ import { Navigate, Outlet } from "react-router-dom";
 import { Loader } from "@mantine/core";
 
 const AdminRoute = () => {
-  const { currentUserData } = useContext(AuthContext);
+  const { currentUserData, loadingData } = useContext(AuthContext);
 
-  if (currentUserData === null) {
+  if (loadingData) {
     return <Loader color="primary.5" />;
   }
 
-  if (!currentUserData) {
-    return <Navigate to="/login" />;
+  if (currentUserData === null && !loadingData) {
+    return <Navigate to="/login" replace />;
   }
 
-  if (currentUserData.role !== "admin") {
+  if (currentUserData && currentUserData.role !== "admin") {
     return <Navigate to="/login" replace />;
   }
 

@@ -29,7 +29,7 @@ const UserLogin: FC = () => {
   const navigate = useNavigate();
   const savedUsername = localStorage.getItem("savedUsername");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { clearStoredData, setCurrentUserData } = useContext(AuthContext);
+  const { clearStoredUserData, setCurrentUserData } = useContext(AuthContext);
 
   const loginForm = useForm({
     mode: "uncontrolled",
@@ -95,7 +95,7 @@ const UserLogin: FC = () => {
   };
 
   useEffect(() => {
-    clearStoredData();
+    clearStoredUserData();
   }, []);
 
   return (
