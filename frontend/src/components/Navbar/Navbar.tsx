@@ -79,7 +79,7 @@ const Navbar = () => {
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}
     >
       <Text className={classes.menuHeading}>MENU</Text>
-      <Tooltip label={expanded ? "Collapse Navbar" : "Open Navbar"} position="right" offset={10}>
+      <Tooltip label={expanded ? "Collapse Navbar" : "Open Navbar"} transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" offset={10}>
         <ActionIcon className={classes.expandIcon} onClick={toggleExpand}>
           <IconChevronRight />
         </ActionIcon>
