@@ -3,11 +3,13 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import DashboardPage from "./pages/Dashboard.page";
-import CoursePage from "./pages/Course.page";
-import CreateLessonPage from "./pages/admin/CreateLesson.page";
-import BaseLayout from "./components/BaseLayout/BaseLayout";
-import WelcomePage from "./pages/Welcome.page";
+import DashboardPage from "../pages/Dashboard.page";
+import CoursePage from "../pages/Course.page";
+import CreateLessonPage from "../pages/admin/CreateLesson.page";
+import BaseLayout from "../components/BaseLayout/BaseLayout";
+import WelcomePage from "../pages/Welcome.page";
+import UserRoute from "./UserRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -32,11 +34,23 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <DashboardPage />,
+        element: <UserRoute />,
+        children: [
+          {
+            index: true,
+            element: <DashboardPage />,
+          },
+        ],
       },
       {
         path: "courses/:courseId",
-        element: <CoursePage />,
+        element: <UserRoute />,
+        children: [
+          {
+            index: true,
+            element: <CoursePage />,
+          },
+        ],
       },
     ],
   },
@@ -46,7 +60,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "create-lesson",
-        element: <CreateLessonPage />,
+        element: <AdminRoute />,
+        children: [
+          {
+            index: true,
+            element: <CreateLessonPage />,
+          },
+        ],
       },
     ],
   },
