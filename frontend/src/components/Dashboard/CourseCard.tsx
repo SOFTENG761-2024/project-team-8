@@ -41,7 +41,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
               }}
             >
               <Image
-                src={course.image}
+                src={course.image._url}
                 alt="Course Image"
                 height={150}
                 width={150}
@@ -57,7 +57,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                 {course.title}
               </Text>
               <Text c="primary.4" fw={500} size="md">
-                {course.course}
+                {course.kitName}
               </Text>
               <Text size="sm" c="gray">
                 {course.lessons} Lessons

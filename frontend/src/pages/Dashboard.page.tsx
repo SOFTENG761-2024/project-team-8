@@ -1,5 +1,6 @@
 import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
-import DummyCourseImage from "../assets/dummy_course.png";
+import Parse from "../../parseconfig.ts";
+
 import { Input, Select, Grid, Stack, Box } from "@mantine/core";
 import { useState, useEffect } from "react";
 import { IconFilter, IconSearch } from '@tabler/icons-react';
@@ -8,79 +9,11 @@ import { IconFilter, IconSearch } from '@tabler/icons-react';
 export interface Course {
   id: string | number;
   title: string;
-  course: string;
+  kitName: string;
   lessons: number;
   status: string;
-  image: string;
+  image: Parse.File;
 }
-
-// dummy course data
-const dummyCourses: Course[] = [
-  {
-    id: "OD8B3IFblh",
-    title: "Farming & Agriculture",
-    course: "Dinosaur Steps",
-    lessons: 17,
-    status: "Completed",
-    image: DummyCourseImage,
-  },
-  {
-    id: "IYoDFvC311",
-    title: "Science & Nature",
-    course: "Dinosaur Steps",
-    lessons: 12,
-    status: "Active",
-    image: DummyCourseImage,
-  },
-  {
-    id: "SSRXHpmY3V",
-    title: "Math & Logic",
-    course: "Dinosaur Steps",
-    lessons: 20,
-    status: "Active",
-    image: DummyCourseImage,
-  },
-  {
-    id: "1",
-    title: "History & Culture",
-    course: "Dinosaur Steps",
-    lessons: 8,
-    status: "Active",
-    image: DummyCourseImage,
-  },
-  {
-    id: "2",
-    title: "TEAMATE",
-    course: "Dinosaur Steps",
-    lessons: 17,
-    status: "Active",
-    image: DummyCourseImage,
-  },
-  {
-    id: "3",
-    title: "Helooo",
-    course: "Dinosaur Steps",
-    lessons: 12,
-    status: "Active",
-    image: DummyCourseImage,
-  },
-  {
-    id: "4",
-    title: "Test",
-    course: "Dinosaur Steps",
-    lessons: 20,
-    status: "Active",
-    image: DummyCourseImage,
-  },
-  {
-    id: "5",
-    title: "Bob",
-    course: "Dinosaur Steps",
-    lessons: 8,
-    status: "Completed",
-    image: DummyCourseImage,
-  },
-];
 
 const DashboardPage = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -89,10 +22,18 @@ const DashboardPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   // simulating fetch data (REPLACE THIS WITH OUR API CALL)
-  useEffect(() => {
-    // mock api call
-
-    setCourses(dummyCourses);
+  useEffect( () => {
+    const fetchUserCourses = async () => {
+      try {
+        const results = await Parse.Cloud.run("getUserKitsAndCourses");
+        setCourses(results);
+        console.log(results);
+        setFilteredCourses(results);
+      } catch (error){
+        console.log(error)
+      }
+    }
+    fetchUserCourses()
   }, []);
 
   // update the courses shown whenever courses, search query, or filter changes
