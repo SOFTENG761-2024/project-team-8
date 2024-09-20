@@ -7,6 +7,7 @@ import {
 } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { Tooltip } from "@mantine/core";
 
 interface NavbarLinkProps {
   icon: typeof IconHomeFilled;
@@ -78,9 +79,11 @@ const Navbar = () => {
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}
     >
       <Text className={classes.menuHeading}>MENU</Text>
-      <ActionIcon className={classes.expandIcon} onClick={toggleExpand}>
-        <IconChevronRight />
-      </ActionIcon>
+      <Tooltip label={expanded ? "Collapse Navbar" : "Open Navbar"} position="right" offset={10}>
+        <ActionIcon className={classes.expandIcon} onClick={toggleExpand}>
+          <IconChevronRight />
+        </ActionIcon>
+      </Tooltip>
       <Stack gap="2vh" className={classes.navbarMain}>
         {navbarItems}
       </Stack>
