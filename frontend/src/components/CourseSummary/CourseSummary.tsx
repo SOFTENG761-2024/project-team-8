@@ -29,9 +29,8 @@ export const CourseSummary = ({
 
   return (
     <div className={classes.courseSummaryContainer}>
-
       <CourseSummaryBase isExpanded={summaryExpanded} />
-      <Tooltip multiline w={"130"} label={summaryExpanded ? "Collapse Course Summary" : "Open Course Summary"} transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" color="neutral.5" offset={10}>
+      <Tooltip multiline w={"130"} label={summaryExpanded ? "Collapse Course Summary" : "Expand Course Summary"} transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" color="neutral.5" offset={10}>
         <ActionIcon
           variant="filled"
           color="secondary.6"
