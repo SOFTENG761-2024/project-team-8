@@ -79,7 +79,7 @@ const Navbar = () => {
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}
     >
       <Text className={classes.menuHeading}>MENU</Text>
-      <Tooltip label={expanded ? "Collapse Navbar" : "Open Navbar"} transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" offset={10}>
+      <Tooltip label={expanded ? "Collapse Navbar" : "Open Navbar"} transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" color="neutral.5" offset={10}>
         <ActionIcon className={classes.expandIcon} onClick={toggleExpand}>
           <IconChevronRight />
         </ActionIcon>
@@ -102,7 +102,7 @@ const Navbar = () => {
           </Link>
         ) : (
           // renders with Tooltip when navar is collapsed
-          <Tooltip label="Log Out" transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" offset={10}>
+          <Tooltip label="Log Out" transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" color="neutral.5" offset={10}>
             <Link to="/login" style={{ textDecoration: "none" }}>
               <NavbarLink
                 key={"Logout"}
