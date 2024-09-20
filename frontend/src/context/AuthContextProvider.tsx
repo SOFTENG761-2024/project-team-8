@@ -1,25 +1,42 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode } from "react";
+import UserData from "../interfaces/UserData";
+import { useLocalStorage } from "@mantine/hooks";
 
-const AuthContext = createContext({
-    currentUser: null,
-});
-
-interface AuthContextProviderProps {
-    children: ReactNode;
+interface AuthContextType {
+  currentUserData: UserData | null;
+  setCurrentUserData: (user: UserData | null) => void;
+  clearStoredData: () => void;
 }
 
+interface AuthContextProviderProps {
+  children: ReactNode;
+}
+
+export const AuthContext = createContext<AuthContextType>({
+  currentUserData: null,
+  setCurrentUserData: () => {},
+  clearStoredData: () => {},
+});
+
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-    const [currentUser, setCurrentUser] = useState(null);
+  const [currentUserData, setCurrentUserData] =
+    useLocalStorage<UserData | null>({
+      key: "currentUserData",
+      defaultValue: null,
+    });
 
-    useEffect(() => {
-        // TODO: Set the current user state
-    }, []);
+  const clearStoredData = () => {
+    localStorage.clear();
+    setCurrentUserData(null);
+  };
 
-    return (
-        <AuthContext.Provider value={{ currentUser }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  const context = {
+    currentUserData,
+    setCurrentUserData,
+    clearStoredData,
+  };
+
+  return (
+    <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
+  );
 };
-
-export default AuthContext;
