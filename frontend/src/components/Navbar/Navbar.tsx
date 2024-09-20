@@ -90,16 +90,31 @@ const Navbar = () => {
 
       <Stack gap="1vh" style={{ width: "100%" }}>
         <Divider color="primary.3" />
-        <Link to="/login" style={{ textDecoration: "none" }}>
-          <NavbarLink
-            key={"Logout"}
-            expanded={expanded}
-            icon={IconLogout}
-            label={"Logout"}
-          />
-        </Link>
+        {expanded ? (
+          // Render without Tooltip when expanded is true
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            <NavbarLink
+              key={"Logout"}
+              expanded={expanded}
+              icon={IconLogout}
+              label={"Logout"}
+            />
+          </Link>
+        ) : (
+          // renders with Tooltip when navar is collapsed
+          <Tooltip label="Log Out" transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" offset={10}>
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              <NavbarLink
+                key={"Logout"}
+                expanded={expanded}
+                icon={IconLogout}
+                label={"Logout"}
+              />
+            </Link>
+          </Tooltip>
+        )}
       </Stack>
-    </nav>
+    </nav >
   );
 };
 
