@@ -1,7 +1,12 @@
+.noXOverflow {
+  overflow: hidden;
+}
+
 .centerHeader {
   display: flex;
   justify-content: center;
   background-color: var(--mantine-color-primary-5);
+  position: unset;
 }
 
 .closeButton {
@@ -35,7 +40,7 @@
 }
 
 .lessonNavButtonPrev:hover {
-  background-color: var(--mantine-color-accentYellow-2);
+  background-color: var(--mantine-color-accentYellow-3);
 }
 
 .lessonNavButtonNext {
@@ -54,5 +59,19 @@
 }
 
 .lessonNavButtonNext:hover {
-  background-color: var(--mantine-color-accentGreen-3);
+  background-color: var(--mantine-color-accentGreen-4);
+}
+
+.lessonNavButtonPrev:disabled, .lessonNavButtonNext:disabled {
+  background-color: lightgray;
+  color:darkgray;
+  cursor: default;
+}
+
+.alignTextIcon {
+  display: flex;
+  flex-direction: "row";
+  align-items: center;
+  justify-content: start;
+  gap: 0.5rem;
 }

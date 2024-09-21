@@ -38,6 +38,7 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
     <>
       {selectedLesson && (
         <LessonOverlay
+          courseTitle={"Course Title - Dinosaur Steps"}
           moduleTitle={module.title}
           selectedLesson={selectedLesson}
           opened={opened}
