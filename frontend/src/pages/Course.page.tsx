@@ -1,12 +1,12 @@
 import {useParams} from "react-router-dom";
-import {Box, Center, Group, Loader, Text, Title} from "@mantine/core";
+import {Box, Center, Group, Loader, Text, Title, useMantineTheme} from "@mantine/core";
 import CourseContent from "../components/Course/CourseContent";
 import {CourseSummary} from "../components/CourseSummary/CourseSummary.tsx";
 import {useContext, useEffect, useState} from "react";
 import Parse from "../../parseconfig.ts";
 import {Course} from "../interfaces/kit.ts";
 import {CourseContext} from "../components/Course/CourseContext.tsx";
-import {theme} from "../theme/theme.ts";
+
 
 export interface CoursePage extends Course {
     num_lessons: number,
@@ -15,6 +15,7 @@ export interface CoursePage extends Course {
 
 const CoursePage = () => {
     const {courseId} = useParams();
+    const theme = useMantineTheme();
     const {currentCourseData, setCurrentCourseData} = useContext(CourseContext);
     const [summaryExpanded, setSummaryExpanded] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(true);
