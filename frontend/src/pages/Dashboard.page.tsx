@@ -27,7 +27,6 @@ const DashboardPage = () => {
             try {
                 const results = await Parse.Cloud.run("getUserKitsAndCourses");
                 setCourses(results);
-                console.log(results);
             } catch (error) {
                 console.log(error)
             }
