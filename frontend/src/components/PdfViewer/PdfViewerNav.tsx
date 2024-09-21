@@ -27,7 +27,7 @@ const PdfViewerNav = ({
         disabled={pageNumber <= 1}
         size="md"
         className={styles.arrowButtons}
-        c={fullscreen ? "neutral.0" : "primary.6"}
+        c={fullscreen ? "neutral.0" : "neutral.0"}
       >
         <IconArrowLeft />
       </ActionIcon>
@@ -40,7 +40,7 @@ const PdfViewerNav = ({
         disabled={pageNumber >= numPages}
         size="md"
         className={styles.arrowButtons}
-        c={fullscreen ? "neutral.0" : "primary.6"}
+        c={fullscreen ? "neutral.0" : "neutral.0"}
       >
         <IconArrowRight />
       </ActionIcon>

@@ -10,6 +10,17 @@
     left: 0;
 }
 
+.nonFullscreenContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.viewerBackground {
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    background-color: var(--mantine-color-primary-6) !important;
+    border-radius: 1rem;
+}
+
 .navigationMenu {
     display: flex;
     align-items: center;
@@ -41,11 +52,6 @@
     color: var(--mantine-color-primary-2);
 }
 
-.pdfContainer {
-    display: flex;
-    justify-content: center;
-}
-
 .fullscreenView {
     width: 100vw;
     height: 100vh;
@@ -62,12 +68,6 @@
     height: 50vh;
     position: relative;
     width: fit-content;
-}
-
-.page {
-    padding: 1.3rem;
-    background-color: var(--mantine-color-primary-6) !important;
-    border-radius: 1rem;
 }
 
 canvas {

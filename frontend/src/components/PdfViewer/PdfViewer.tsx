@@ -85,9 +85,13 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   }, [fullscreen]);
 
   return (
-    <Box className={fullscreen ? styles.fullscreenContainer : ""}>
-      <Stack>
-        <Box className={styles.pdfContainer}>
+    <Box
+      className={
+        fullscreen ? styles.fullscreenContainer : styles.nonFullscreenContainer
+      }
+    >
+      <Stack className={styles.viewerBackground}>
+        <Box>
           <Document
             file={url}
             onLoadSuccess={onDocumentLoadSuccess}
