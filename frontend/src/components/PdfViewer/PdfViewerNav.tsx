@@ -9,6 +9,14 @@ interface PdfViewerNavProps {
   fullscreen?: boolean;
 }
 
+/**
+ * This component provides navigation controls for the PDF viewer.
+ *
+ * @param {function} changePage - This function changes the current page of the PDF viewer. It takes an offset as an argument, which determines the direction and number of pages to move.
+ * @param {number} pageNumber - The current page number of the PDF viewer.
+ * @param {number} numPages - The total number of pages in the PDF document being viewed.
+ * @param {boolean} fullscreen - Indicates whether the viewer is in fullscreen mode. Defaults to false if not provided.
+ */
 const PdfViewerNav = ({
   changePage,
   pageNumber,

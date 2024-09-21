@@ -21,7 +21,7 @@ interface OnLoadSuccessProps {
 }
 
 /**
- * This component handles the logic for displaying a PDF file on the page, using the default browser PDF viewer.
+ * This component handles the logic for displaying a PDF file on the page, using the react-pdf library.
  * It also provides a fullscreen mode to view the PDF file.
  *
  * @param {string} url - The URL of the PDF file to display.
