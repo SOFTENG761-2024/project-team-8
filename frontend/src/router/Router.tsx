@@ -59,6 +59,10 @@ const router = createBrowserRouter([
     element: <BaseLayout />,
     children: [
       {
+        index: true,
+        element: <AdminRoute />,
+      },
+      {
         path: "create-lesson",
         element: <AdminRoute />,
         children: [
