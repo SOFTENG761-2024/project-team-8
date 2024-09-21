@@ -1,12 +1,11 @@
 import {Alert, Box, Grid, Group, Loader, Text, useMantineTheme,} from "@mantine/core";
 import {IconBooks, IconExclamationCircle} from "@tabler/icons-react";
 import ModuleAccordion from "./ModuleAccordion";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Parse from "../../../parseconfig";
-import {CoursePage} from "../../pages/Course.page.tsx";
+import {CourseContext} from "./CourseContext.tsx";
 
 interface CourseContentProps {
-    course: CoursePage | null;
     summaryExpanded: boolean;
 }
 
@@ -15,9 +14,10 @@ interface ModulesData {
     lessons: string[];
 }
 
-const CourseContent = ({course, summaryExpanded}: CourseContentProps) => {
+const CourseContent = ({summaryExpanded}: CourseContentProps) => {
     const theme = useMantineTheme();
     const [modulesData, setModulesData] = useState<ModulesData[]>([]);
+    const {currentCourseData} = useContext(CourseContext);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -26,10 +26,10 @@ const CourseContent = ({course, summaryExpanded}: CourseContentProps) => {
      * Fetches course data from the Parse server
      */
     const fetchCourseData = async () => {
-        if (course) {
+        if (currentCourseData) {
             try {
                 const modules = [];
-                const courseModules = course.modules;
+                const courseModules = currentCourseData.modules;
                 for (const module of courseModules) {
                     const lessonTitles = [];
 
@@ -68,7 +68,7 @@ const CourseContent = ({course, summaryExpanded}: CourseContentProps) => {
 
     useEffect(() => {
         fetchCourseData();
-    }, [course,]);
+    }, [currentCourseData,]);
 
     return (
         <Box flex={1}>

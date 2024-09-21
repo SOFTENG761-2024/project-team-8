@@ -2,9 +2,10 @@ import {useParams} from "react-router-dom";
 import {Box, Group, Text, Title} from "@mantine/core";
 import CourseContent from "../components/Course/CourseContent";
 import {CourseSummary} from "../components/CourseSummary/CourseSummary.tsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Parse from "../../parseconfig.ts";
 import {Course} from "../interfaces/kit.ts";
+import {CourseContext} from "../components/Course/CourseContext.tsx";
 
 export interface CoursePage extends Course {
     num_lessons: number,
@@ -13,7 +14,7 @@ export interface CoursePage extends Course {
 
 const CoursePage = () => {
     const {courseId} = useParams();
-    const [course, setCourse] = useState<CoursePage | null>(null);
+    const {currentCourseData, setCurrentCourseData} = useContext(CourseContext);
     const [summaryExpanded, setSummaryExpanded] = useState<boolean>(true);
     useEffect(() => {
         const fetchCourseData = async () => {
@@ -21,7 +22,7 @@ const CoursePage = () => {
                 const results = await Parse.Cloud.run("getCourse", {
                     courseId: courseId
                 });
-                setCourse(results);
+                setCurrentCourseData(results);
             } catch (error) {
                 console.log(error)
             }
@@ -29,24 +30,25 @@ const CoursePage = () => {
         fetchCourseData()
     }, [])
     return (
+
         <Box h="100%" w="100%">
             <Title order={3} c="primary.5">
-                {course?.title + " "}
+                {currentCourseData?.title + " "}
                 <Text inherit span c="primary.3">
-                    - {course?.kit}
+                    - {currentCourseData?.kit}
                 </Text>
             </Title>
             <Group justify="space-between" align="top" h="100%" mt="1rem">
                 <Box h="100%">
                     <CourseSummary
-                        course={course}
                         summaryExpanded={summaryExpanded}
                         setSummaryExpanded={setSummaryExpanded}
                     />
                 </Box>
-                <CourseContent course={course} summaryExpanded={summaryExpanded}/>
+                <CourseContent summaryExpanded={summaryExpanded}/>
             </Group>
         </Box>
+
     );
 };
 

@@ -1,28 +1,27 @@
-import {Dispatch, SetStateAction, useState} from "react";
+import {Dispatch, SetStateAction, useContext, useState} from "react";
 import classes from "./CourseSummary.module.css";
 import {
-  IconAwardFilled,
-  IconBulbFilled,
-  IconChevronLeft,
-  IconChevronRight,
-  IconFileDescription,
-  IconInfoSquareFilled,
-  IconStarFilled,
-  IconUserFilled,
+    IconAwardFilled,
+    IconBulbFilled,
+    IconChevronLeft,
+    IconChevronRight,
+    IconFileDescription,
+    IconInfoSquareFilled,
+    IconStarFilled,
+    IconUserFilled,
 } from "@tabler/icons-react";
 import {Accordion, ActionIcon, Image, List, Text} from "@mantine/core";
 import {CourseSummaryTopic} from "../../interfaces/componentInterfaces.ts";
-import {CoursePage} from "../../pages/Course.page.tsx";
+import {CourseContext} from "../Course/CourseContext.tsx";
 
 interface CourseSummaryProps {
-    course: CoursePage | null
     summaryExpanded: boolean;
     setSummaryExpanded: Dispatch<SetStateAction<boolean>>;
 }
 
+
 export const CourseSummary = ({
                                   summaryExpanded,
-                                  course,
                                   setSummaryExpanded,
                               }: CourseSummaryProps) => {
     const toggleCourseSummary = () => {
@@ -31,7 +30,7 @@ export const CourseSummary = ({
 
     return (
         <div className={classes.courseSummaryContainer}>
-            <CourseSummaryBase course={course} isExpanded={summaryExpanded}/>
+            <CourseSummaryBase isExpanded={summaryExpanded}/>
             <ActionIcon
                 variant="filled"
                 color="secondary.6"
@@ -49,34 +48,32 @@ export const CourseSummary = ({
 };
 
 interface CourseSummaryBaseProps {
-    course: CoursePage | null;
     isExpanded: boolean;
 }
 
-const CourseSummaryBase = ({isExpanded, course}: CourseSummaryBaseProps) => {
+const CourseSummaryBase = ({isExpanded}: CourseSummaryBaseProps) => {
+    const {currentCourseData} = useContext(CourseContext);
     return (
         <div
             className={`${classes.courseSummaryWrapper} ${isExpanded ? "" : classes.collapsed}`}
         >
             <div className={classes.courseSummary}>
-                <Image h={300} src={course?.courseImage._url} radius="10px"/>
-                <CourseAttributes course={course}/>
-                <SummaryAccordion topics={summaryTopics(course)} isExpanded={isExpanded}/>
+                <Image h={300} src={currentCourseData?.courseImage._url} radius="10px"/>
+                <CourseAttributes/>
+                <SummaryAccordion topics={SummaryTopics()} isExpanded={isExpanded}/>
             </div>
         </div>
     );
 };
 
-interface CourseAttributesProps {
-    course?: CoursePage | null
-}
 
-const CourseAttributes = ({course}: CourseAttributesProps) => {
+const CourseAttributes = () => {
+    const {currentCourseData} = useContext(CourseContext);
     return (
         <div className={classes.courseHighlights}>
             <div className={classes.item}>
                 <IconStarFilled/>
-                <Text size="textSm">{course?.yearLevel}</Text>
+                <Text size="textSm">{currentCourseData?.yearLevel}</Text>
             </div>
             <div className={classes.item}>
                 <IconAwardFilled/>
@@ -86,12 +83,13 @@ const CourseAttributes = ({course}: CourseAttributesProps) => {
     );
 };
 
-const summaryTopics = (course: CoursePage | null) => {
-    return [
+const SummaryTopics = () => {
+    const {currentCourseData} = useContext(CourseContext);
+    return ([
         {
             value: "About Course",
             icon: <IconInfoSquareFilled/>,
-            information: course?.description || '',
+            information: currentCourseData?.description || '',
             informationList: [
                 "Use the ByteEd app to explore the theme",
                 "Decomposition",
@@ -105,7 +103,7 @@ const summaryTopics = (course: CoursePage | null) => {
         {
             value: "Learning Outcomes",
             icon: <IconBulbFilled/>,
-            informationList: course?.outcomes || [],
+            informationList: currentCourseData?.outcomes || [],
         },
         {
             value: "Materials Include",
@@ -122,7 +120,7 @@ const summaryTopics = (course: CoursePage | null) => {
             icon: <IconUserFilled/>,
             information: "Teachers or Tutors",
         },
-    ];
+    ]);
 }
 
 interface SummaryAccordionProps {
