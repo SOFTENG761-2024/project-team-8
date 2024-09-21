@@ -91,7 +91,7 @@ const summaryTopics = (course: CoursePage | null) => {
         {
             value: "About Course",
             icon: <IconInfoSquareFilled/>,
-            information: course?.description || 'sfsafsa',
+            information: course?.description || '',
             informationList: [
                 "Use the ByteEd app to explore the theme",
                 "Decomposition",
