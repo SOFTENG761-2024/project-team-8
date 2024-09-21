@@ -74,7 +74,7 @@ const UserLogin: FC = () => {
         if (currentUser) {
           const userData = {
             id: currentUser.id,
-            username: currentUser.attributes.email,
+            username: currentUser.attributes.username,
             role: currentUser.attributes.role,
           };
 
