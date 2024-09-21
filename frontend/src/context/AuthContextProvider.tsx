@@ -20,6 +20,11 @@ export const AuthContext = createContext<AuthContextType>({
   clearStoredUserData: () => {},
 });
 
+/**
+ * This component provides the AuthContext to the rest of the application.
+ *
+ * @param children The children of the component, which will have access to the AuthContext.
+ */
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [currentUserData, setCurrentUserData] =
     useLocalStorage<UserData | null>({
@@ -28,6 +33,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     });
   const [loadingData, setLoadingData] = useState<boolean>(true);
 
+  // Load the user data from local storage when the component mounts
   useEffect(() => {
     const storedUserData = localStorage.getItem("currentUserData");
     if (storedUserData) {
