@@ -39,6 +39,7 @@ const CoursePage = () => {
             <Group justify="space-between" align="top" h="100%" mt="1rem">
                 <Box h="100%">
                     <CourseSummary
+                        course={course}
                         summaryExpanded={summaryExpanded}
                         setSummaryExpanded={setSummaryExpanded}
                     />
