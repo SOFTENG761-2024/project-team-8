@@ -1,4 +1,4 @@
-import { Container, Text, Avatar } from "@mantine/core";
+import { Avatar, Container, Text } from "@mantine/core";
 import classes from "./Header.module.css";
 import explorer from "../../assets/explorer.png";
 import { useContext, useEffect, useState } from "react";
