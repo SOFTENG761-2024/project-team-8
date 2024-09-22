@@ -9,6 +9,7 @@ import {
   UnstyledButton,
   Image,
   Flex,
+  useMantineTheme,
 } from "@mantine/core";
 import {
   IconBook2,
@@ -36,6 +37,7 @@ const LessonOverlay = ({
   onClose,
 }: LessonOverlayProps) => {
   const biggerViewport = useMediaQuery("(min-width: 70rem)");
+  const theme = useMantineTheme();
   return (
     <Modal
       classNames={{
@@ -51,10 +53,19 @@ const LessonOverlay = ({
       closeButtonProps={{
         icon: (
           <Chip
-            icon={<IconX style={{ width: rem(16), height: rem(16) }} />}
-            color="accentRed.4"
+            icon={
+              <IconX
+                style={{
+                  width: rem(16),
+                  height: rem(16),
+                  color: theme.colors.accentRed[4],
+                }}
+              />
+            }
+            color="accentRed.1"
             variant="filled"
             checked
+            classNames={{ root: styles.exitChip }}
           >
             Exit
           </Chip>

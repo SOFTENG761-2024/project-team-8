@@ -40,7 +40,7 @@
 }
 
 .lessonNavButtonPrev:hover {
-  background-color: var(--mantine-color-accentYellow-3);
+  background-color: var(--mantine-color-accentYellow-2);
 }
 
 .lessonNavButtonNext {
@@ -59,7 +59,7 @@
 }
 
 .lessonNavButtonNext:hover {
-  background-color: var(--mantine-color-accentGreen-4);
+  background-color: var(--mantine-color-accentGreen-3);
 }
 
 .lessonNavButtonPrev:disabled, .lessonNavButtonNext:disabled {
@@ -74,4 +74,8 @@
   align-items: center;
   justify-content: start;
   gap: 0.5rem;
+}
+
+.exitChip span {
+  color: var(--mantine-color-accentRed-4);
 }
