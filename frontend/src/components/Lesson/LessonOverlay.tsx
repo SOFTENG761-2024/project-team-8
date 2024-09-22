@@ -21,23 +21,34 @@ import {
 import styles from "./LessonOverlay.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 import LessonContentSection from "./LessonContentSection";
-import { dummyLessonOverview, dummyContentArray } from "./LessonDummyData";
+import { useState } from "react";
+import { Lesson } from "../../interfaces/kit";
 
 interface LessonOverlayProps extends ModalProps {
   courseTitle: string;
   moduleTitle: string;
-  selectedLesson: string;
+  currentLessonIndex: number; // The index of the current lesson
+  moduleLessons: Lesson[]; // The full list of lessons in the module
+  opened: boolean;
+  onClose: () => void;
 }
 
 const LessonOverlay = ({
   courseTitle,
   moduleTitle,
-  selectedLesson,
+  currentLessonIndex: initialLessonIndex,
+  moduleLessons,
   opened,
   onClose,
 }: LessonOverlayProps) => {
   const biggerViewport = useMediaQuery("(min-width: 70rem)");
   const theme = useMantineTheme();
+
+  // tracking the current lesson index locally within the overlay
+  const [lessonIndex, setLessonIndex] = useState(initialLessonIndex);
+
+  const currentLesson = moduleLessons[lessonIndex];  // getting the current lesson
+
   return (
     <Modal
       classNames={{
@@ -92,17 +103,19 @@ const LessonOverlay = ({
             {/* Previous and Next button group */}
             <Flex w="100%" py="0.5rem">
               <UnstyledButton
+                disabled={lessonIndex === 0} // Disable if on first lesson
                 className={styles.lessonNavButtonPrev}
-                disabled={false}
+                onClick={() => setLessonIndex(lessonIndex - 1)}
               >
                 <IconCircleArrowLeftFilled size="1.55rem" />
-                Previous lesson
+                {lessonIndex === 0 ? "Start of module" : "Previous lesson"}
               </UnstyledButton>
               <UnstyledButton
+                disabled={lessonIndex === moduleLessons.length - 1} // Disable if on last lesson
                 className={styles.lessonNavButtonNext}
-                disabled={false}
+                onClick={() => setLessonIndex(lessonIndex + 1)}
               >
-                Next lesson
+                {lessonIndex === moduleLessons.length - 1 ? "End of module" : "Next lesson"}
                 <IconCircleArrowRightFilled size="1.55rem" />
               </UnstyledButton>
             </Flex>
@@ -119,7 +132,7 @@ const LessonOverlay = ({
             py="1rem"
           >
             <IconFile size="2rem" />
-            {selectedLesson}
+            {currentLesson.title}
           </Title>
           <Image
             radius="md"
@@ -128,14 +141,15 @@ const LessonOverlay = ({
           />
           <Text py="1rem" ta="justify">
             {" "}
-            {dummyLessonOverview}
+            {currentLesson.overview || "No overview available"}
           </Text>
-          {dummyContentArray.map(
-            ({ contentTitle, contentDescription, fileUrl }) => (
+          {currentLesson.content.map(
+            ({ title, description, printout }, index) => (
               <LessonContentSection
-                title={contentTitle}
-                description={contentDescription}
-                fileUrl={fileUrl}
+                key={index}
+                title={title}
+                description={description}
+                fileUrl={printout.url()}
               />
             )
           )}
