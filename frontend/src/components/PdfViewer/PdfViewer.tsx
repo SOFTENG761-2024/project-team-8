@@ -1,4 +1,4 @@
-import { Box, Paper, Stack, Text } from "@mantine/core";
+import { Box, Group, Loader, Paper, Stack, Text } from "@mantine/core";
 import styles from "./PdfViewer.module.css";
 import { useCallback, useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
@@ -90,40 +90,75 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
         fullscreen ? styles.fullscreenContainer : styles.nonFullscreenContainer
       }
     >
-      <Stack className={styles.viewerBackground}>
-        <Box>
-          <Document
-            file={url}
-            onLoadSuccess={onDocumentLoadSuccess}
-            className={
-              fullscreen ? styles.fullscreenView : styles.nonFullscreenView
-            }
-          >
-            <Page
-              pageNumber={pageNumber}
-              renderAnnotationLayer={false}
-              renderTextLayer={false}
+      {fullscreen ? (
+        <Stack className={styles.viewerBackground}>
+          <Box>
+            <Document
+              file={url}
+              onLoadSuccess={onDocumentLoadSuccess}
               className={
                 fullscreen ? styles.fullscreenView : styles.nonFullscreenView
               }
-            />
-          </Document>
-        </Box>
-        <PdfViewerNav
-          changePage={changePage}
-          pageNumber={pageNumber}
-          numPages={numPages}
-          fullscreen={fullscreen}
-        />
-
-        {fullscreen && displayAlert && (
-          <Box className={styles.alertContainer}>
-            <Paper className={styles.alertPopUp}>
-              <Text size="1.5rem">Press ESC to exit present mode</Text>
-            </Paper>
+              loading={<Loader color="primary.5" />}
+            >
+              <Page
+                pageNumber={pageNumber}
+                renderAnnotationLayer={false}
+                renderTextLayer={false}
+                className={
+                  fullscreen ? styles.fullscreenView : styles.nonFullscreenView
+                }
+                loading={<Loader color="primary.5" />}
+              />
+            </Document>
           </Box>
-        )}
-      </Stack>
+          <PdfViewerNav
+            changePage={changePage}
+            pageNumber={pageNumber}
+            numPages={numPages}
+            fullscreen={fullscreen}
+          />
+        </Stack>
+      ) : (
+        <Group className={styles.viewerBackground}>
+          <Stack>
+            <Text size="1.5rem" c="neutral.0" ta="center">
+              Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
+            </Text>
+            <Document
+              file={url}
+              onLoadSuccess={onDocumentLoadSuccess}
+              className={
+                fullscreen ? styles.fullscreenView : styles.nonFullscreenView
+              }
+              loading={<Loader color="primary.5" w="100%" />}
+            >
+              <Page
+                pageNumber={pageNumber}
+                renderAnnotationLayer={false}
+                renderTextLayer={false}
+                className={
+                  fullscreen ? styles.fullscreenView : styles.nonFullscreenView
+                }
+                loading={<Loader color="primary.5" w="100%" />}
+              />
+            </Document>
+          </Stack>
+          <PdfViewerNav
+            changePage={changePage}
+            pageNumber={pageNumber}
+            numPages={numPages}
+            fullscreen={fullscreen}
+          />
+        </Group>
+      )}
+      {fullscreen && displayAlert && (
+        <Box className={styles.alertContainer}>
+          <Paper className={styles.alertPopUp}>
+            <Text size="1.5rem">Press ESC to exit present mode</Text>
+          </Paper>
+        </Box>
+      )}
     </Box>
   );
 };

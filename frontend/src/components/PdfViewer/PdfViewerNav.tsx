@@ -1,6 +1,11 @@
-import { ActionIcon, Group, Text } from "@mantine/core";
+import { ActionIcon, Group, Stack, Text, Tooltip } from "@mantine/core";
 import styles from "./PdfViewerNav.module.css";
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import {
+  IconArrowDown,
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowUp,
+} from "@tabler/icons-react";
 
 interface PdfViewerNavProps {
   changePage: (offset: number) => void;
@@ -23,19 +28,15 @@ const PdfViewerNav = ({
   numPages,
   fullscreen = false,
 }: PdfViewerNavProps) => {
-  return (
-    <Group
-      gap="2rem"
-      m="0 auto"
-      className={fullscreen ? styles.fullscrenNav : styles.nonFullscreenNav}
-    >
+  return fullscreen ? (
+    <Group gap="2rem" m="0 auto" className={styles.fullscrenNav}>
       <ActionIcon
         variant="transparent"
         onClick={() => changePage(-1)}
         disabled={pageNumber <= 1}
         size="md"
         className={styles.arrowButtons}
-        c={fullscreen ? "neutral.0" : "neutral.0"}
+        c="neutral.0"
       >
         <IconArrowLeft />
       </ActionIcon>
@@ -48,11 +49,38 @@ const PdfViewerNav = ({
         disabled={pageNumber >= numPages}
         size="md"
         className={styles.arrowButtons}
-        c={fullscreen ? "neutral.0" : "neutral.0"}
+        c="neutral.0"
       >
         <IconArrowRight />
       </ActionIcon>
     </Group>
+  ) : (
+    <Stack gap="3rem">
+      <Tooltip label="Previous Page">
+        <ActionIcon
+          variant="transparent"
+          onClick={() => changePage(-1)}
+          disabled={pageNumber <= 1}
+          size="lg"
+          className={styles.arrowButtons}
+          c="neutral.0"
+        >
+          <IconArrowUp size={50} />
+        </ActionIcon>
+      </Tooltip>
+      <Tooltip label="Next Page">
+        <ActionIcon
+          variant="transparent"
+          onClick={() => changePage(1)}
+          disabled={pageNumber >= numPages}
+          size="lg"
+          className={styles.arrowButtons}
+          c="neutral.0"
+        >
+          <IconArrowDown size={50} />
+        </ActionIcon>
+      </Tooltip>
+    </Stack>
   );
 };
 
