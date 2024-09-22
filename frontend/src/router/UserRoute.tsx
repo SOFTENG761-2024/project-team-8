@@ -16,6 +16,7 @@ const UserRoute = () => {
   }
 
   if (currentUserData === null && !loadingData) {
+    sessionStorage.removeItem("sessionToken");
     return <Navigate to="/login" replace />;
   }
   return <Outlet />;

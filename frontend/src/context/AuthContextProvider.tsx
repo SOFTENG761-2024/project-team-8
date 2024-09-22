@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import Parse from "../../parseconfig";
 
+const APP_ID = import.meta.env.VITE_BACK4APP_APP_ID;
+
 interface AuthContextType {
   currentUserData: Parse.User | null;
   setCurrentUserData: (user: Parse.User | null) => void;
@@ -32,13 +34,26 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
   // Load the user data when the component mounts
   useEffect(() => {
-    const currentUser = Parse.User.current();
+    const loadUser = async () => {
+      const sessionToken = sessionStorage.getItem("sessionToken");
 
-    if (currentUser) {
-      setCurrentUserData(currentUser);
-    }
+      if (sessionToken) {
+        try {
+          const currentUser = await Parse.User.become(sessionToken);
+          setCurrentUserData(currentUser);
+          localStorage.removeItem(`Parse/${APP_ID}/currentUser`);
+        } catch (error) {
+          console.error(
+            "Failed to authenticate user with session token:",
+            error
+          );
+        }
+      }
 
-    setLoadingData(false);
+      setLoadingData(false);
+    };
+
+    loadUser();
   }, []);
 
   // Clear the stored user data

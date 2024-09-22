@@ -72,6 +72,7 @@ const UserLogin: FC = () => {
 
         if (currentUser) {
           setCurrentUserData(currentUser);
+          sessionStorage.setItem("sessionToken", currentUser.getSessionToken());
         }
       });
 

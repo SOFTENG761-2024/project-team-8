@@ -75,6 +75,11 @@ const Navbar = () => {
       </Link>
     );
   });
+
+  const logout = () => {
+    clearStoredUserData();
+    sessionStorage.removeItem("sessionToken");
+  };
   return (
     <nav
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}
@@ -92,7 +97,7 @@ const Navbar = () => {
         <Link
           to="/login"
           style={{ textDecoration: "none" }}
-          onClick={clearStoredUserData}
+          onClick={() => logout()}
         >
           <NavbarLink
             key={"Logout"}

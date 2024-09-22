@@ -16,10 +16,12 @@ const AdminRoute = () => {
   }
 
   if (currentUserData === null && !loadingData) {
+    sessionStorage.removeItem("sessionToken");
     return <Navigate to="/login" replace />;
   }
 
   if (currentUserData && currentUserData.attributes.role !== "admin") {
+    sessionStorage.removeItem("sessionToken");
     return <Navigate to="/login" replace />;
   }
 
