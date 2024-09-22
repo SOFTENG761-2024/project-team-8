@@ -58,7 +58,7 @@ const CourseSummaryBase = ({isExpanded}: CourseSummaryBaseProps) => {
             className={`${classes.courseSummaryWrapper} ${isExpanded ? "" : classes.collapsed}`}
         >
             <div className={classes.courseSummary}>
-                <Image h={300} src={currentCourseData?.courseImage._url} radius="10px"/>
+                <Image h={300} src={currentCourseData?.courseImage?._url} radius="10px"/>
                 <CourseAttributes/>
                 <SummaryAccordion topics={SummaryTopics()} isExpanded={isExpanded}/>
             </div>
@@ -90,15 +90,6 @@ const SummaryTopics = () => {
             value: "About Course",
             icon: <IconInfoSquareFilled/>,
             information: currentCourseData?.description || '',
-            informationList: [
-                "Use the ByteEd app to explore the theme",
-                "Decomposition",
-                "Algorithmic Thinking",
-                "Logical Thinking",
-                "Pattern Recognition",
-                "Abstraction",
-                "Debugging",
-            ],
         },
         {
             value: "Learning Outcomes",
