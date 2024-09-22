@@ -126,7 +126,7 @@ const LessonOverlay = ({
 
               {/* NEXT button group */}
               {lessonIndex === moduleLessons.length - 1 ?
-                <Tooltip label="Module Finished" transitionProps={{ transition: 'pop', duration: 300 }} position="bottom">
+                <Tooltip label="Complete the module" transitionProps={{ transition: 'pop', duration: 300 }} position="bottom">
                   <UnstyledButton
                     // disabled={lessonIndex === moduleLessons.length - 1} // could disable if last lesson?
                     className={styles.lessonNavButtonNext}
