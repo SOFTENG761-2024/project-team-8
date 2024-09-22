@@ -10,6 +10,7 @@ import BaseLayout from "../components/BaseLayout/BaseLayout";
 import WelcomePage from "../pages/Welcome.page";
 import UserRoute from "./UserRoute";
 import AdminRoute from "./AdminRoute";
+import { CourseContextProvider } from "../components/Course/CourseContext";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +49,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <CoursePage />,
+            element: (
+              <CourseContextProvider>
+                <CoursePage />
+              </CourseContextProvider>
+            ),
           },
         ],
       },

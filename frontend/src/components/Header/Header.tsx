@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthContextProvider";
 
 const Header = () => {
   const { currentUserData } = useContext(AuthContext);
-  const name = currentUserData?.attributes.username; // TODO: Replace with user's name in future
+  const name = currentUserData?.attributes.username;
   const location = useLocation();
   const [page, setPage] = useState("");
   useEffect(() => {

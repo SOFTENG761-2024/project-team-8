@@ -30,7 +30,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   );
   const [loadingData, setLoadingData] = useState<boolean>(true);
 
-  // Load the user data from local storage when the component mounts
+  // Load the user data when the component mounts
   useEffect(() => {
     const currentUser = Parse.User.current();
 
@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     setLoadingData(false);
   }, []);
 
-  // Clear only the specific key instead of clearing all local storage
+  // Clear the stored user data
   const clearStoredUserData = () => {
     setCurrentUserData(null);
   };
