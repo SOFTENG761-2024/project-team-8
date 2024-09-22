@@ -19,7 +19,7 @@ const AdminRoute = () => {
     return <Navigate to="/login" replace />;
   }
 
-  if (currentUserData && currentUserData.role !== "admin") {
+  if (currentUserData && currentUserData.attributes.role !== "admin") {
     return <Navigate to="/login" replace />;
   }
 

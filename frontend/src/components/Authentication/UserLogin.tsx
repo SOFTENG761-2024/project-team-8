@@ -68,20 +68,14 @@ const UserLogin: FC = () => {
       // Note that logIn can also return the corresponding ParseUser object if login is successful
       // To verify the current user `Parse.User.current();` can be used
       await Parse.User.logIn(username, password).then(() => {
-        localStorage.removeItem(`Parse/${APP_ID}/currentUser`);
         const currentUser = Parse.User.current();
 
         if (currentUser) {
-          const userData = {
-            id: currentUser.id,
-            username: currentUser.attributes.username,
-            role: currentUser.attributes.role,
-          };
-
-          setCurrentUserData(userData);
+          setCurrentUserData(currentUser);
         }
       });
 
+      localStorage.removeItem(`Parse/${APP_ID}/currentUser`);
       setIsLoading(false);
       // Navigate to dashboard on successful login
       navigate("/user");

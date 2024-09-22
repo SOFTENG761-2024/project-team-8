@@ -1,10 +1,9 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import UserData from "../interfaces/UserData";
-import { useLocalStorage } from "@mantine/hooks";
+import Parse from "../../parseconfig";
 
 interface AuthContextType {
-  currentUserData: UserData | null;
-  setCurrentUserData: (user: UserData | null) => void;
+  currentUserData: Parse.User | null;
+  setCurrentUserData: (user: Parse.User | null) => void;
   loadingData: boolean;
   clearStoredUserData: () => void;
 }
@@ -26,25 +25,24 @@ export const AuthContext = createContext<AuthContextType>({
  * @param children The children of the component, which will have access to the AuthContext.
  */
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [currentUserData, setCurrentUserData] =
-    useLocalStorage<UserData | null>({
-      key: "currentUserData",
-      defaultValue: null,
-    });
+  const [currentUserData, setCurrentUserData] = useState<Parse.User | null>(
+    null
+  );
   const [loadingData, setLoadingData] = useState<boolean>(true);
 
   // Load the user data from local storage when the component mounts
   useEffect(() => {
-    const storedUserData = localStorage.getItem("currentUserData");
-    if (storedUserData) {
-      setCurrentUserData(JSON.parse(storedUserData));
-      setLoadingData(false);
+    const currentUser = Parse.User.current();
+
+    if (currentUser) {
+      setCurrentUserData(currentUser);
     }
+
+    setLoadingData(false);
   }, []);
 
   // Clear only the specific key instead of clearing all local storage
   const clearStoredUserData = () => {
-    localStorage.removeItem("currentUserData");
     setCurrentUserData(null);
   };
 
