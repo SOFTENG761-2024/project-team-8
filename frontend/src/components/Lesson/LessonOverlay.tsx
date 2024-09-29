@@ -18,6 +18,7 @@ import {
   IconCircleArrowRightFilled,
   IconFile,
   IconX,
+  IconCircleCheckFilled
 } from "@tabler/icons-react";
 import styles from "./LessonOverlay.module.css";
 import { useMediaQuery } from "@mantine/hooks";
@@ -133,7 +134,7 @@ const LessonOverlay = ({
                     onClick={lessonIndex === moduleLessons.length - 1 ? onClose : () => setLessonIndex(lessonIndex + 1)}
                   >
                     {lessonIndex === moduleLessons.length - 1 ? "Finish Module" : "Next lesson"}
-                    <IconCircleArrowRightFilled size="1.55rem" />
+                    {lessonIndex === moduleLessons.length - 1 ? <IconCircleCheckFilled size="1.55rem" /> : <IconCircleArrowRightFilled size="1.55rem" />}
                   </UnstyledButton>
                 </Tooltip>
                 :
