@@ -10,12 +10,12 @@ export interface Course {
   id: string;
   title: string
   kitTitle: string;
-  yearLevel: number; // string?
+  yearLevel: string; // changed from number to string
   description: string;
   outcomes: string[];
-  modules: string[]; // references to those objects
+  modules: Module[]; // references to those objects
   assessments: Assessment[];
-  image: string;
+  courseImage: Parse.File;
 }
 
 export interface Module {
