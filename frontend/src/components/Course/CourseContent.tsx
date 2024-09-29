@@ -1,10 +1,19 @@
-import { Alert, Box, Grid, Group, Loader, Text, useMantineTheme, } from "@mantine/core";
+import {
+  Alert,
+  Box,
+  Grid,
+  Group,
+  Loader,
+  Text,
+  useMantineTheme,
+} from "@mantine/core";
 import { IconBooks, IconExclamationCircle } from "@tabler/icons-react";
 import ModuleAccordion from "./ModuleAccordion";
 import { useContext, useEffect, useState } from "react";
 import Parse from "../../../parseconfig";
 import { CourseContext } from "./CourseContext.tsx";
 import { Lesson } from "../../interfaces/kit.ts";
+
 
 interface CourseContentProps {
   summaryExpanded: boolean;
