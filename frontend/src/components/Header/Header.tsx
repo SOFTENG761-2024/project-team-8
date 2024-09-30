@@ -1,11 +1,13 @@
-import { Container, Text, Avatar } from "@mantine/core";
+import { Avatar, Container, Text } from "@mantine/core";
 import classes from "./Header.module.css";
 import explorer from "../../assets/explorer.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 const Header = () => {
-  const name = "Thomas Male"; // TODO: Replace with user's name in future
+  const { currentUserData } = useContext(AuthContext);
+  const name = currentUserData?.attributes.username;
   const location = useLocation();
   const [page, setPage] = useState("");
   useEffect(() => {
@@ -33,13 +35,19 @@ const Header = () => {
         </Text>
       </div>
       <div className={classes.detailsWrapper}>
-        <Avatar size={50} key={name} name={name} color="initials" allowedInitialsColors={['primary.4']} />
+        <Avatar
+          size={50}
+          key={name}
+          name={name}
+          color="initials"
+          allowedInitialsColors={["primary.4"]}
+        />
         <div className={classes.nameWrapper}>
           <Text size="1.125rem" c="primary.4">
             Hello,
           </Text>
           <Text fw={700} size="1.125rem" c="primary.4">
-            Username
+            {currentUserData?.attributes.username}
           </Text>
         </div>
       </div>
