@@ -22,7 +22,7 @@ import { useForm } from "@mantine/form";
 import { IconCopyPlus, IconPlus, IconUpload } from "@tabler/icons-react";
 
 const FormLabel = ({ text }) => (
-  <Title size="h5" c="neutral.5" tt={"uppercase"} lts="0.08em">
+  <Title size="h5" c="neutral.5" lts="0.08em">
     {text}
   </Title>
 );
@@ -125,14 +125,14 @@ const CreateLessonModal = () => {
                 }}
               />
               <Stepper.Step
-                label="Add or upload resources"
+                label="Add lesson content"
                 classNames={{
                   stepIcon:
                     active < 1 ? classes.stepIcon : classes.stepActiveIcon,
                 }}
               />
               <Stepper.Step
-                label="Add lesson content"
+                label="Preview lesson"
                 classNames={{
                   stepIcon:
                     active < 2 ? classes.stepIcon : classes.stepActiveIcon,
@@ -161,13 +161,13 @@ const CreateLessonModal = () => {
                       <Divider />
 
                       <TextInput
-                        label={<FormLabel text="Lesson Name" />}
+                        label={<FormLabel text="Lesson title" />}
                         placeholder="Insert name of this lesson here..."
                         variant="filled"
                         {...form.getInputProps("lessonName")}
                       />
                       <Textarea
-                        label={<FormLabel text="Lesson Overview" />}
+                        label={<FormLabel text="Lesson overview" />}
                         variant="filled"
                         placeholder="Insert overview of lesson content here..."
                         {...form.getInputProps("lessonOverview")}
@@ -176,9 +176,7 @@ const CreateLessonModal = () => {
                         maxRows={6}
                       />
                       <Select
-                        label={
-                          <FormLabel text="select course for this lesson" />
-                        }
+                        label={<FormLabel text="Module" />}
                         data={courses}
                         variant="filled"
                         maw="30rem"
@@ -191,55 +189,7 @@ const CreateLessonModal = () => {
                     <>
                       <Group w="100%">
                         <Title size="h2" c="primary.4" w="100%">
-                          Resoure List
-                        </Title>
-                      </Group>
-
-                      <Divider />
-                      <Stack h="75%">
-                        <Stack className={classes.tableContainer}>
-                          <Table
-                            className={classes.table}
-                            horizontalSpacing="xl"
-                            highlightOnHover
-                            highlightOnHoverColor="neutral.3"
-                            striped
-                            stripedColor="neutral.2"
-                          >
-                            <Table.Thead>{ths}</Table.Thead>
-                            <Table.Tbody>{rows}</Table.Tbody>
-                          </Table>
-                        </Stack>
-                        <Group className={classes.buttonContainer}>
-                          <Button
-                            variant="outline"
-                            className={classes.formButton}
-                            rightSection={
-                              <IconUpload className={classes.buttonIcon} />
-                            }
-                          >
-                            UPLOAD NEW FILE
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className={classes.formButton}
-                            rightSection={
-                              <IconCopyPlus className={classes.buttonIcon} />
-                            }
-                            disabled
-                          >
-                            USE EXISTING UPLOAD
-                          </Button>
-                        </Group>
-                      </Stack>
-                    </>
-                  )}
-                  {/* step 3 */}
-                  {active === 2 && (
-                    <>
-                      <Group w="100%">
-                        <Title size="h2" c="primary.4" w="100%">
-                          Lesson content
+                          Create and add lesson content
                         </Title>
                       </Group>
 
@@ -292,6 +242,18 @@ const CreateLessonModal = () => {
                           </Button>
                         </Group>
                       </Stack>
+                    </>
+                  )}
+                  {/* step 3 */}
+                  {active === 2 && (
+                    <>
+                      <Group w="100%">
+                        <Title size="h2" c="primary.4" w="100%">
+                          Confirm lesson
+                        </Title>
+                      </Group>
+
+                      <Divider />
                     </>
                   )}
                 </Stack>
