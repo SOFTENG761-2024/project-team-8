@@ -12,14 +12,13 @@ import {
   Textarea,
   Select,
   rem,
-  Table,
-  ActionIcon,
+
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
-import { IconPlus, IconUpload } from "@tabler/icons-react";
+import { IconUpload } from "@tabler/icons-react";
 
 const FormLabel = ({ text }) => (
   <Title size="h4" c="neutral.5">
@@ -198,7 +197,7 @@ const CreateLessonModal = () => {
                             classNames={{ input: classes.whiteInput }}
                           />
                           <FormLabel text="Resource upload" />
-                          {/* <div className={classes.uploadContainer}> */}
+
                           <Button
                             variant="white"
                             fullWidth
@@ -208,7 +207,6 @@ const CreateLessonModal = () => {
                           >
                             Upload new file
                           </Button>
-                          {/* </div> */}
                         </Stack>
                         <Group className={classes.buttonContainer}>
                           <Button
