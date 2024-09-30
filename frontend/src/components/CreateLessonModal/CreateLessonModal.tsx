@@ -19,26 +19,13 @@ import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
-import { IconCopyPlus, IconPlus, IconUpload } from "@tabler/icons-react";
+import { IconPlus, IconUpload } from "@tabler/icons-react";
 
 const FormLabel = ({ text }) => (
-  <Title size="h5" c="neutral.5" lts="0.08em">
+  <Title size="h4" c="neutral.5">
     {text}
   </Title>
 );
-
-const resourceList = [
-  {
-    name: 1,
-    type: "PDF",
-    size: 1,
-  },
-  {
-    name: 2,
-    type: "PDF",
-    size: 2,
-  },
-];
 
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -64,25 +51,6 @@ const CreateLessonModal = () => {
     setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
-
-  const rows = resourceList.map((element) => (
-    <Table.Tr key={element.name}>
-      <Table.Td>{element.name}</Table.Td>
-      <Table.Td align={"center"}>{element.type}</Table.Td>
-      <Table.Td align={"center"}>{element.size}</Table.Td>
-      <Table.Td align={"center"}>{element.size}</Table.Td>
-    </Table.Tr>
-  ));
-
-  const ths = (
-    <Table.Tr>
-      <Table.Th ta={"left"} className={classes.tableHeader}>
-        FILE NAME
-      </Table.Th>
-      <Table.Th className={classes.tableHeader}>TYPE</Table.Th>
-      <Table.Th className={classes.tableHeader}>SIZE</Table.Th>
-    </Table.Tr>
-  );
 
   return (
     <>
@@ -196,27 +164,30 @@ const CreateLessonModal = () => {
                       <Divider />
                       <Stack h="75%">
                         <Stack align="flex-start" gap="xs">
-                          <Select
-                            variant="filled"
-                            maw="30rem"
-                            w="100%"
-                            data={["Activity 1", "Activity 2"]}
-                            placeholder="Select activity to edit"
-                          />
-                          <Button
-                            variant="transparent"
-                            leftSection={
-                              <IconPlus className={classes.buttonIcon} />
-                            }
-                            style={{ textDecoration: "underline", padding: 0 }}
-                          >
-                            Add more activity
-                          </Button>
+                          <Text tt="uppercase" lts="0.08em">
+                            Content
+                          </Text>
+                          <Group w="100%" justify="space-between">
+                            <Select
+                              variant="filled"
+                              maw="30rem"
+                              w="60%"
+                              data={["Activity 1", "Activity 2"]}
+                              placeholder="Select activity to edit"
+                            />
+                            <Button
+                              variant="outline"
+                              className={classes.addContentButton}
+                            >
+                              ADD NEW CONTENT
+                            </Button>
+                          </Group>
                         </Stack>
-                        <Stack className={classes.tableContainer}>
+                        <Stack className={classes.container}>
                           <TextInput
                             label={<FormLabel text="Title" />}
                             placeholder="Insert title of this activity here..."
+                            classNames={{ input: classes.whiteInput }}
                           />
                           <Textarea
                             label={<FormLabel text="Description" />}
@@ -224,7 +195,20 @@ const CreateLessonModal = () => {
                             autosize
                             minRows={3}
                             maxRows={6}
+                            classNames={{ input: classes.whiteInput }}
                           />
+                          <FormLabel text="Resource upload" />
+                          {/* <div className={classes.uploadContainer}> */}
+                          <Button
+                            variant="white"
+                            fullWidth
+                            rightSection={
+                              <IconUpload className={classes.icon} />
+                            }
+                          >
+                            Upload new file
+                          </Button>
+                          {/* </div> */}
                         </Stack>
                         <Group className={classes.buttonContainer}>
                           <Button

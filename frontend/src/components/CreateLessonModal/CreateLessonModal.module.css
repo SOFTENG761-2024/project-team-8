@@ -58,7 +58,7 @@
 }
 
 /* step 2 */
-.tableContainer {
+.container {
   background-color: var(--mantine-color-neutral-1);
   border-radius: 1rem;
   height: 100%;
@@ -108,4 +108,29 @@
   color: var(--mantine-color-accentRed-5);
   border-color: var(--mantine-color-accentRed-5);
   border-radius: 0.8rem;
+}
+
+.addContentButton {
+  border-radius: 0.8rem;
+  border-color: var(--mantine-color-primary-5);
+  font-size: 0.8rem;
+}
+
+.whiteInput {
+  border: none;
+  font-style: italic;
+}
+
+.uploadContainer {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.3rem;
+}
+
+.icon {
+  color: var(--mantine-color-primary-5);
+  height: 1.2rem;
+  stroke-width: 2px;
 }
