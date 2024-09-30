@@ -50,21 +50,20 @@ const CoursePage = () => {
     fetchCourseData();
   }, [courseId]);
 
-  const handleFavorite = async () => {
+  const handleBookmark = async () => {
     if (!currentUserData) {
       console.log("No user is logged in.");
       return;
     }
 
     try {
-      await Parse.Cloud.run("toggleFavoriteCourse", {
+      await Parse.Cloud.run("toggleBookmarkCourse", {
         courseId: courseId,
         userId: currentUserData.id, // user logged in ID
       });
-      isBookmarked ? console.log("Unfavorited successfully.") : console.log("Favorited successfully.");
       setIsBookmarked(!isBookmarked);
     } catch (error) {
-      console.error("Error toggling favorite:", error);
+      console.error("Error toggling bookmarking:", error);
     }
   };
   return (
@@ -82,10 +81,10 @@ const CoursePage = () => {
                 - {currentCourseData?.kit}
               </Text>
             </Title>
-            <Button onClick={() => handleFavorite()} mr="xl" bg={"pink"}>
+            <Button onClick={() => handleBookmark()} mr="xl" bg={"pink"}>
               <Group align="center">
                 {isBookmarked ? <IconHeartFilled /> : <IconHeart />}
-                <Text inherit>{isBookmarked ? "Unfavorite" : "Favorite"}</Text>
+                <Text inherit>{isBookmarked ? "Unbookmark" : "Bookmark"}</Text>
               </Group>
             </Button>
           </Group>
