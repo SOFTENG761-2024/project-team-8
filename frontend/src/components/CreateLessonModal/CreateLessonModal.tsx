@@ -12,13 +12,17 @@ import {
   Textarea,
   Select,
   rem,
-
+  Anchor,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
-import { IconUpload } from "@tabler/icons-react";
+import {
+  IconCheck,
+  IconCircleCheckFilled,
+  IconUpload,
+} from "@tabler/icons-react";
 
 const FormLabel = ({ text }) => (
   <Title size="h4" c="neutral.5">
@@ -196,17 +200,18 @@ const CreateLessonModal = () => {
                             maxRows={6}
                             classNames={{ input: classes.whiteInput }}
                           />
-                          <FormLabel text="Resource upload" />
-
-                          <Button
-                            variant="white"
-                            fullWidth
-                            rightSection={
-                              <IconUpload className={classes.icon} />
-                            }
-                          >
-                            Upload new file
-                          </Button>
+                          <Stack gap={6}>
+                            <FormLabel text="Resource upload" />
+                            <Button
+                              variant="white"
+                              fullWidth
+                              rightSection={
+                                <IconUpload className={classes.icon} />
+                              }
+                            >
+                              Upload new file
+                            </Button>
+                          </Stack>
                         </Stack>
                         <Group className={classes.buttonContainer}>
                           <Button
@@ -236,6 +241,28 @@ const CreateLessonModal = () => {
                       </Group>
 
                       <Divider />
+                      <Stack align="center">
+                        <IconCircleCheckFilled
+                          className={classes.confirmIcon}
+                          size="6rem"
+                        />
+                        <Title size="h2" c="neutral.5">
+                          Confirmation
+                        </Title>
+                        <Text c="neutral.5">
+                          View preview of this lesson by clicking{" "}
+                          <Anchor c="primary.5" underline="always">
+                            here
+                          </Anchor>
+                        </Text>
+
+                        <Title size="h5" tt="uppercase" lts="0.08em" mt="5vh">
+                          Lesson summary
+                        </Title>
+                        <Stack w="100%" className={classes.summaryContainer}>
+                          hi
+                        </Stack>
+                      </Stack>
                     </>
                   )}
                 </Stack>

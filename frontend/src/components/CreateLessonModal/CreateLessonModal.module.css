@@ -108,3 +108,11 @@
   height: 1.2rem;
   stroke-width: 2px;
 }
+
+.confirmIcon {
+  color: var(--mantine-color-accentGreen-3);
+}
+
+.summaryContainer {
+  background-color: var(--mantine-color-neutral-1);
+}
