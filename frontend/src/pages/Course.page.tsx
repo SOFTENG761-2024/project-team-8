@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import {
   Box,
+  Button,
   Center,
   Group,
   Loader,
@@ -14,13 +15,18 @@ import { useContext, useEffect, useState } from "react";
 import Parse from "../../parseconfig.ts";
 import { Course } from "../interfaces/kit.ts";
 import { CourseContext } from "../components/Course/CourseContext.tsx";
+import { IconBookmark, IconBookmarkFilled, IconHeart, IconHeartFilled } from "@tabler/icons-react";
 
 export interface CoursePage extends Course {
   num_lessons: number;
   kit: string;
 }
 
-const CoursePage = () => {
+interface CoursePageProps {
+  isBookmarked: boolean;
+}
+
+const CoursePage: React.FC<CoursePageProps> = ({ isBookmarked = false }) => {
   const { courseId } = useParams();
   const theme = useMantineTheme();
   const { currentCourseData, setCurrentCourseData } = useContext(CourseContext);
@@ -48,12 +54,20 @@ const CoursePage = () => {
         </Center>
       ) : (
         <>
-          <Title order={3} c="primary.5">
-            {currentCourseData?.title + " "}
-            <Text inherit span c="primary.3">
-              - {currentCourseData?.kit}
-            </Text>
-          </Title>
+          <Group align="center" justify="space-between">
+            <Title order={3} c="primary.5">
+              {currentCourseData?.title + " "}
+              <Text inherit span c="primary.3">
+                - {currentCourseData?.kit}
+              </Text>
+            </Title>
+            <Button onClick={() => console.log("click")} mr="xl" bg={"pink"}>
+              <Group align="center">
+                {isBookmarked ? <IconHeart /> : <IconHeartFilled />}
+                <Text inherit>{isBookmarked ? "Unfavorite" : "Favorite"}</Text>
+              </Group>
+            </Button>
+          </Group>
           <Group justify="space-between" align="top" h="100%" mt="1rem">
             <Box h="100%">
               <CourseSummary
