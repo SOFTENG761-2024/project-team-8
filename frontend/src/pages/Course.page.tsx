@@ -7,6 +7,7 @@ import {
   Loader,
   Text,
   Title,
+  Tooltip,
   useMantineTheme,
 } from "@mantine/core";
 import CourseContent from "../components/Course/CourseContent";
@@ -86,12 +87,26 @@ const CoursePage = () => {
                 - {currentCourseData?.kit}
               </Text>
             </Title>
-            <Button radius={"xl"} bg={theme.colors.accentRed[1]} c={theme.colors.accentRed[4]} onClick={() => handleBookmark()} mr="xl">
-              <Group align="center">
-                {isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />}
-                <Text inherit>{isBookmarked ? "Unbookmark" : "Bookmark"}</Text>
-              </Group>
-            </Button>
+            <Tooltip
+              multiline
+              label={isBookmarked ? "Remove from bookmarks" : "Add to bookmarks"}
+              position="bottom"
+              transitionProps={{ transition: 'pop', duration: 300 }}
+            >
+              <Button
+                radius="xl"
+                bg={theme.colors.accentRed[1]}
+                c={theme.colors.accentRed[4]}
+                onClick={() => handleBookmark()}
+                mr="xl"
+              >
+                <Group align="center">
+                  {isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />}
+                  <Text inherit>{isBookmarked ? "Unbookmark" : "Bookmark"}</Text>
+                </Group>
+              </Button>
+            </Tooltip>
+
           </Group>
           <Group justify="space-between" align="top" h="100%" mt="1rem">
             <Box h="100%">
