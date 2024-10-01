@@ -1,6 +1,7 @@
 import { ActionIcon, rem, Stack, Text, Divider } from "@mantine/core";
 import classes from "./NavBar.module.css";
 import {
+  IconBookmarkFilled,
   IconChevronRight,
   IconHomeFilled,
   IconLogout,
@@ -55,7 +56,7 @@ const Navbar = () => {
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
-  const links = [{ icon: IconHomeFilled, label: "Dashboard", path: "/user" }];
+  const links = [{ icon: IconHomeFilled, label: "Dashboard", path: "/user" }, { icon: IconBookmarkFilled, label: "Bookmarks", path: "/user/bookmarks" }];
   const navbarItems = links.map((link) => {
     // e.g. /user/dashboard
     const pathWithLabel = `${link.path}/${link.label.toLowerCase()}`;

@@ -15,7 +15,7 @@ import { useContext, useEffect, useState } from "react";
 import Parse from "../../parseconfig.ts";
 import { Course } from "../interfaces/kit.ts";
 import { CourseContext } from "../components/Course/CourseContext.tsx";
-import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
+import { IconBookmark, IconBookmarkFilled } from "@tabler/icons-react";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
 
 export interface CoursePage extends Course {
@@ -30,7 +30,7 @@ const CoursePage = () => {
   const [summaryExpanded, setSummaryExpanded] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   const { currentUserData } = useContext(AuthContext);
-  const [isBookmarked, setIsBookmarked] = useState<boolean>(false); // State to track bookmarked status
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   useEffect(() => {
     const fetchCourseData = async () => {
       try {
@@ -40,15 +40,20 @@ const CoursePage = () => {
         setCurrentCourseData(results);
         setLoading(false);
 
-        // checking if the current course is bookmarked
-        const bookmarks = currentUserData?.get("bookmarks") || [];
-        setIsBookmarked(bookmarks.includes(courseId));
+        // check if the current course is bookmarked using cloud function
+        if (currentUserData) {
+          const isBookmarked = await Parse.Cloud.run("isCourseBookmarked", {
+            courseId: courseId,
+            userId: currentUserData.id,
+          });
+          setIsBookmarked(isBookmarked);
+        }
       } catch (error) {
         console.log(error);
       }
     };
     fetchCourseData();
-  }, [courseId]);
+  }, [courseId, currentUserData]);
 
   const handleBookmark = async () => {
     if (!currentUserData) {
@@ -83,7 +88,7 @@ const CoursePage = () => {
             </Title>
             <Button onClick={() => handleBookmark()} mr="xl" bg={"pink"}>
               <Group align="center">
-                {isBookmarked ? <IconHeartFilled /> : <IconHeart />}
+                {isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />}
                 <Text inherit>{isBookmarked ? "Unbookmark" : "Bookmark"}</Text>
               </Group>
             </Button>
