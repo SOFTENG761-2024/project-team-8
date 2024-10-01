@@ -41,8 +41,11 @@ export const AddContentForm: FC<AddContentFormProps> = ({
         printout: parseFile,
       };
       onSave(newContent);
+      handleCleanContent();
     }
+  };
 
+  const handleCleanContent = () => {
     setTitle("");
     setDescription("");
     setFile(null);
@@ -55,6 +58,7 @@ export const AddContentForm: FC<AddContentFormProps> = ({
           label={<FormLabel text="Title" />}
           placeholder="Insert title of this activity here..."
           classNames={{ input: classes.whiteInput }}
+          value={title}
           onChange={(event) => setTitle(event.currentTarget.value)}
         />
         <Textarea
@@ -64,6 +68,7 @@ export const AddContentForm: FC<AddContentFormProps> = ({
           minRows={3}
           maxRows={6}
           classNames={{ input: classes.whiteInput }}
+          value={description}
           onChange={(event) => setDescription(event.currentTarget.value)}
         />
         <FileInput
@@ -71,6 +76,7 @@ export const AddContentForm: FC<AddContentFormProps> = ({
             input: classes.fileText,
           }}
           label={<FormLabel text="Resource upload" />}
+          value={file}
           onChange={(file) => setFile(file)}
           placeholder={
             <Group justify="center" gap={0}>
@@ -94,8 +100,9 @@ export const AddContentForm: FC<AddContentFormProps> = ({
         <Button
           variant="outline"
           className={`${classes.formButton} ${classes.deleteButton}`}
+          onClick={handleCleanContent}
         >
-          DELETE ACTIVITY
+          DELETE CONTENT
         </Button>
       </Group>
     </Stack>
