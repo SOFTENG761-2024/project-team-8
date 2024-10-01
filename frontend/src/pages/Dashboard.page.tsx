@@ -20,7 +20,6 @@ export interface Course {
   title: string;
   kitName: string;
   lessons: number;
-  status: string;
   image: Parse.File;
 }
 
@@ -58,10 +57,6 @@ const DashboardPage = () => {
             return a.title.localeCompare(b.title);
           case "name-desc":
             return b.title.localeCompare(a.title);
-          case "completed":
-            return a.status === "Completed" ? -1 : 1;
-          case "active":
-            return a.status === "Active" ? -1 : 1;
           default:
             return 0;
         }
@@ -92,8 +87,6 @@ const DashboardPage = () => {
               data={[
                 { value: "all", label: "All" },
                 { value: "recently-viewed", label: "Recently Viewed" },
-                { value: "active", label: "Active" },
-                { value: "completed", label: "Completed" },
                 { value: "name-asc", label: "Name A-Z" },
                 { value: "name-desc", label: "Name Z-A" },
               ]}
