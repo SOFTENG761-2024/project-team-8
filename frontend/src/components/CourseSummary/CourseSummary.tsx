@@ -116,7 +116,7 @@ const SummaryTopics = () => {
       icon: <IconUserFilled />,
       information: "Teachers or Tutors",
     },
-  ]);
+  ];
 }
 
 

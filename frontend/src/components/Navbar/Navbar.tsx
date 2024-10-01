@@ -98,7 +98,7 @@ const Navbar = () => {
         <Divider color="primary.3" />
         {expanded ? (
           // Render without Tooltip when expanded is true
-          <Link to="/login" style={{ textDecoration: "none" }}>
+          <Link to="/login" style={{ textDecoration: "none" }} onClick={() => logout()}>
             <NavbarLink
               key={"Logout"}
               expanded={expanded}
@@ -109,7 +109,7 @@ const Navbar = () => {
         ) : (
           // renders with Tooltip when navar is collapsed
           <Tooltip label="Log Out" transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" color="neutral.5" offset={10}>
-            <Link to="/login" style={{ textDecoration: "none" }}>
+            <Link to="/login" style={{ textDecoration: "none" }} onClick={() => logout()}>
               <NavbarLink
                 key={"Logout"}
                 expanded={expanded}
