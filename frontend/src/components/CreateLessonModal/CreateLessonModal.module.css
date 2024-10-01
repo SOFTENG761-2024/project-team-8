@@ -113,6 +113,10 @@
   color: var(--mantine-color-accentGreen-3);
 }
 
+.errorIcon {
+  color: var(--mantine-color-accentRed-3);
+}
+
 .summaryContainer {
   background-color: var(--mantine-color-neutral-1);
   padding: 2rem 1.5rem;
