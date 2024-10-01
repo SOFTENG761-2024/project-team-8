@@ -18,17 +18,14 @@ import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
+import { Content } from "../../interfaces/kit";
 import {
   IconCheck,
   IconCircleCheckFilled,
   IconUpload,
 } from "@tabler/icons-react";
-
-const FormLabel = ({ text }) => (
-  <Title size="h4" c="neutral.5">
-    {text}
-  </Title>
-);
+import { FormLabel } from "./FormLabel";
+import { AddContentForm } from "./AddContentForm";
 
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -41,6 +38,7 @@ const CreateLessonModal = () => {
       lessonName: "",
       lessonOverview: "",
       course: "",
+      content: [],
     },
   });
 
@@ -186,48 +184,8 @@ const CreateLessonModal = () => {
                             </Button>
                           </Group>
                         </Stack>
-                        <Stack className={classes.container}>
-                          <TextInput
-                            label={<FormLabel text="Title" />}
-                            placeholder="Insert title of this activity here..."
-                            classNames={{ input: classes.whiteInput }}
-                          />
-                          <Textarea
-                            label={<FormLabel text="Description" />}
-                            placeholder="Insert text about what this activity entails here..."
-                            autosize
-                            minRows={3}
-                            maxRows={6}
-                            classNames={{ input: classes.whiteInput }}
-                          />
-                          <Stack gap={6}>
-                            <FormLabel text="Resource upload" />
-                            <Button
-                              variant="white"
-                              fullWidth
-                              rightSection={
-                                <IconUpload className={classes.icon} />
-                              }
-                            >
-                              Upload new file
-                            </Button>
-                          </Stack>
-                        </Stack>
-                        <Group className={classes.buttonContainer}>
-                          <Button
-                            variant="outline"
-                            className={`${classes.formButton} ${classes.saveButton}`}
-                            c="accentGreen.5"
-                          >
-                            SAVE CHANGES
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className={`${classes.formButton} ${classes.deleteButton}`}
-                          >
-                            DELETE ACTIVITY
-                          </Button>
-                        </Group>
+
+                        <AddContentForm />
                       </Stack>
                     </>
                   )}
