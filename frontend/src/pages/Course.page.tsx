@@ -86,7 +86,7 @@ const CoursePage = () => {
                 - {currentCourseData?.kit}
               </Text>
             </Title>
-            <Button radius={"xl"} onClick={() => handleBookmark()} mr="xl" bg={"pink"}>
+            <Button radius={"xl"} bg={theme.colors.accentRed[1]} c={theme.colors.accentRed[4]} onClick={() => handleBookmark()} mr="xl">
               <Group align="center">
                 {isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />}
                 <Text inherit>{isBookmarked ? "Unbookmark" : "Bookmark"}</Text>
