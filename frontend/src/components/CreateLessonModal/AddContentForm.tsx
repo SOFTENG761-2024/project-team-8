@@ -17,11 +17,13 @@ import Parse from "parse";
 interface AddContentFormProps {
   oldContent: Content | null;
   onSave: (content: Content) => void;
+  onDelete: () => void;
 }
 
 export const AddContentForm: FC<AddContentFormProps> = ({
   oldContent,
   onSave,
+  onDelete,
 }) => {
   // Local state to manage form inputs
   const [title, setTitle] = useState(oldContent ? oldContent.title : "");
@@ -58,6 +60,11 @@ export const AddContentForm: FC<AddContentFormProps> = ({
       onSave(newContent);
       handleCleanContent();
     }
+  };
+
+  const handleDeleteContent = () => {
+    onDelete();
+    handleCleanContent();
   };
 
   const handleCleanContent = () => {
@@ -115,7 +122,7 @@ export const AddContentForm: FC<AddContentFormProps> = ({
         <Button
           variant="outline"
           className={`${classes.formButton} ${classes.deleteButton}`}
-          onClick={handleCleanContent}
+          onClick={handleDeleteContent}
         >
           DELETE CONTENT
         </Button>

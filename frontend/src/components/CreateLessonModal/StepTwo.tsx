@@ -23,6 +23,14 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
     console.log(newContent);
     setContents([...contents, newContent]); // Update parent state
   };
+
+  const handleDelete = () => {
+    if (editContent) {
+      setContents(
+        contents.filter((content) => content.title != editContent.title)
+      );
+    }
+  };
   return (
     <>
       <Group w="100%">
@@ -59,7 +67,7 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
           </Group>
         </Stack>
 
-        <AddContentForm oldContent={editContent} onSave={handleSave} />
+        <AddContentForm oldContent={editContent} onSave={handleSave} onDelete={handleDelete} />
         {error && (
           <Text size="sm" c="accentRed.3">
             {error}

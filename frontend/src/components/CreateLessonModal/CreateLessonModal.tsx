@@ -6,22 +6,14 @@ import {
   Stack,
   Stepper,
   Title,
-  Text,
   Flex,
-  TextInput,
-  Textarea,
-  Select,
   rem,
-  Anchor,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
 import { Content } from "../../interfaces/kit";
-import { IconCircleCheckFilled } from "@tabler/icons-react";
-import { FormLabel } from "./FormLabel";
-import { AddContentForm } from "./AddContentForm";
 import { StepOne } from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
