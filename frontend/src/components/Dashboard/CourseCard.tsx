@@ -63,7 +63,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, isBookmarked }) => {
               <Text size="sm" c="gray">
                 {course.lessons} Lessons
               </Text>
-              {isBookmarked && (<Chip mt={5} icon={< IconBookmarkFilled size={14} />} defaultChecked color="blue" variant="light" size="xs">Bookmarked</Chip>)}
+              {isBookmarked && (<Chip mt={5} icon={< IconBookmarkFilled size={14} />} defaultChecked color="pink" variant="light" size="xs"><Text size="xs" fw={700}>Bookmarked</Text></Chip>)}
             </Box>
           </Grid.Col>
         </Grid>
