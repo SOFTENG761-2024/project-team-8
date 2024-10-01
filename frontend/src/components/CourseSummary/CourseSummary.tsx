@@ -60,14 +60,17 @@ const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
       className={`${classes.courseSummaryWrapper} ${isExpanded ? "" : classes.collapsed}`}
     >
       <div className={classes.courseSummary}>
-        <Image h={300} src={currentCourseData?.courseImage?._url} radius="10px" />
+        <Image
+          h={300}
+          src={currentCourseData?.courseImage?._url}
+          radius="10px"
+        />
         <CourseAttributes />
         <SummaryAccordion topics={SummaryTopics()} isExpanded={isExpanded} />
       </div>
     </div>
   );
 };
-
 
 const CourseAttributes = () => {
   const { currentCourseData } = useContext(CourseContext);
@@ -87,11 +90,11 @@ const CourseAttributes = () => {
 
 const SummaryTopics = () => {
   const { currentCourseData } = useContext(CourseContext);
-  return ([
+  return [
     {
       value: "About Course",
       icon: <IconInfoSquareFilled />,
-      information: currentCourseData?.description || '',
+      information: currentCourseData?.description || "",
     },
     {
       value: "Learning Outcomes",
@@ -115,6 +118,7 @@ const SummaryTopics = () => {
     },
   ]);
 }
+
 
 interface SummaryAccordionProps {
   topics: CourseSummaryTopic[];

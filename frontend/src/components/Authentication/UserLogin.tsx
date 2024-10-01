@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import Parse from "../../../parseconfig.ts";
 import {
   Text,
@@ -13,6 +13,9 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContextProvider.tsx";
+
+const APP_ID = import.meta.env.VITE_BACK4APP_APP_ID;
 
 /**
  * User Login Component
@@ -26,6 +29,7 @@ const UserLogin: FC = () => {
   const navigate = useNavigate();
   const savedUsername = localStorage.getItem("savedUsername");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { clearStoredUserData, setCurrentUserData } = useContext(AuthContext);
 
   const loginForm = useForm({
     mode: "uncontrolled",
@@ -63,7 +67,16 @@ const UserLogin: FC = () => {
     try {
       // Note that logIn can also return the corresponding ParseUser object if login is successful
       // To verify the current user `Parse.User.current();` can be used
-      await Parse.User.logIn(username, password);
+      await Parse.User.logIn(username, password).then(() => {
+        const currentUser = Parse.User.current();
+
+        if (currentUser) {
+          setCurrentUserData(currentUser);
+          sessionStorage.setItem("sessionToken", currentUser.getSessionToken());
+        }
+      });
+
+      localStorage.removeItem(`Parse/${APP_ID}/currentUser`);
       setIsLoading(false);
       // Navigate to dashboard on successful login
       navigate("/user");
@@ -75,6 +88,10 @@ const UserLogin: FC = () => {
       });
     }
   };
+
+  useEffect(() => {
+    clearStoredUserData();
+  }, []);
 
   return (
     <>

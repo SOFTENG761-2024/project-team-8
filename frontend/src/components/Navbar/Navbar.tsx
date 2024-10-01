@@ -1,4 +1,4 @@
-import { ActionIcon, rem, Stack, Text, Divider } from "@mantine/core";
+import { ActionIcon, rem, Stack, Text, Divider, Tooltip } from "@mantine/core";
 import classes from "./NavBar.module.css";
 import {
   IconChevronRight,
@@ -6,8 +6,8 @@ import {
   IconLogout,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
-import { Tooltip } from "@mantine/core";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 interface NavbarLinkProps {
   icon: typeof IconHomeFilled;
@@ -50,6 +50,7 @@ function NavbarLink({
 const Navbar = () => {
   const [expanded, setExpanded] = useState<boolean>(true);
   const location = useLocation();
+  const { clearStoredUserData } = useContext(AuthContext);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -74,6 +75,11 @@ const Navbar = () => {
       </Link>
     );
   });
+
+  const logout = () => {
+    clearStoredUserData();
+    sessionStorage.removeItem("sessionToken");
+  };
   return (
     <nav
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}
