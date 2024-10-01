@@ -15,10 +15,10 @@ import {
   Anchor,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
+import { act, useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
-import { Content } from "../../interfaces/kit";
+import { Content, Module } from "../../interfaces/kit";
 import {
   IconCheck,
   IconCircleCheckFilled,
@@ -30,7 +30,7 @@ import { AddContentForm } from "./AddContentForm";
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [active, setActive] = useState(0);
-  const courses = ["Course 1", "Course 2"]; // TODO: render with fetched data
+  const modules = ["Module 1", "Module 2"]; // TODO: render with fetched data
   const [editContent, setEditContent] = useState<Content | null>(null);
   const [contents, setContents] = useState<Content[]>([]);
 
@@ -39,7 +39,7 @@ const CreateLessonModal = () => {
     initialValues: {
       lessonName: "",
       lessonOverview: "",
-      course: "",
+      module: "",
       content: [],
     },
   });
@@ -54,6 +54,8 @@ const CreateLessonModal = () => {
     console.log("TODO: on submit logic", form.getValues());
 
     e.preventDefault();
+    setActive(0);
+    close();
   };
 
   const nextStep = () =>
@@ -154,10 +156,10 @@ const CreateLessonModal = () => {
                       />
                       <Select
                         label={<FormLabel text="Module" />}
-                        data={courses}
+                        data={modules}
                         variant="filled"
                         maw="30rem"
-                        {...form.getInputProps("course")}
+                        {...form.getInputProps("module")}
                       />
                     </>
                   )}
@@ -236,7 +238,22 @@ const CreateLessonModal = () => {
                           Lesson summary
                         </Title>
                         <Stack w="100%" className={classes.summaryContainer}>
-                          hi
+                          <Group justify="space-between">
+                            <Text c="neutral.5">Lesson name</Text>
+                            <Text c="neutral.4">
+                              {form.getValues().lessonName}
+                            </Text>
+                          </Group>
+                          <Group justify="space-between">
+                            <Text c="neutral.5">Module</Text>
+                            <Text c="neutral.4">{form.getValues().module}</Text>
+                          </Group>
+                          <Group justify="space-between">
+                            <Text c="neutral.5">
+                              Number of content sections
+                            </Text>
+                            <Text c="neutral.4">{contents.length}</Text>
+                          </Group>
                         </Stack>
                       </Stack>
                     </>

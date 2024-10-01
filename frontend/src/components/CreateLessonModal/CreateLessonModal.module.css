@@ -115,6 +115,9 @@
 
 .summaryContainer {
   background-color: var(--mantine-color-neutral-1);
+  padding: 2rem 1.5rem;
+  border-radius: 0.8rem;
+  max-width: 600px;
 }
 
 .fileText {
