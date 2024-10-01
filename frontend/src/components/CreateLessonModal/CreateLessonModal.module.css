@@ -116,3 +116,8 @@
 .summaryContainer {
   background-color: var(--mantine-color-neutral-1);
 }
+
+.fileText {
+  text-align: center;
+  border: none;
+}

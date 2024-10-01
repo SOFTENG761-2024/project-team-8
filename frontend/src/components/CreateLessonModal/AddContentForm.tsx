@@ -5,6 +5,7 @@ import {
   Stack,
   Textarea,
   TextInput,
+  Text,
 } from "@mantine/core";
 import classes from "./CreateLessonModal.module.css";
 import { FormLabel } from "./FormLabel";
@@ -66,9 +67,19 @@ export const AddContentForm: FC<AddContentFormProps> = ({
           onChange={(event) => setDescription(event.currentTarget.value)}
         />
         <FileInput
-          classNames={{ input: classes.whiteInput }}
+          classNames={{
+            input: classes.fileText,
+          }}
           label={<FormLabel text="Resource upload" />}
           onChange={(file) => setFile(file)}
+          placeholder={
+            <Group justify="center" gap={0}>
+              <Text c="primary.5" size="sm" td="underline">
+                Upload new file
+              </Text>
+              <IconUpload className={classes.icon} />
+            </Group>
+          }
         />
       </Stack>
       <Group className={classes.buttonContainer}>
