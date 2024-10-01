@@ -7,6 +7,7 @@ import { Course } from './Dashboard.page';
 
 const BookmarksPage = () => {
     const [bookmarkedCourses, setBookmarkedCourses] = useState<Course[]>([]);
+    const [bookmarkedCoursesId, setBookmarkedCoursesId] = useState<string[]>([]);
     const { currentUserData } = useContext(AuthContext);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -30,6 +31,10 @@ const BookmarksPage = () => {
                     image: course.image as Parse.File,
                 }));
 
+                // extract and store just the course IDs
+                const bookmarkedCourseIds = mappedCourses.map((course: any) => course.id);
+                setBookmarkedCoursesId(bookmarkedCourseIds);
+
                 setBookmarkedCourses(mappedCourses);
                 setLoading(false);
             } catch (error) {
@@ -48,7 +53,7 @@ const BookmarksPage = () => {
     return (
         <Box>
             {bookmarkedCourses.length > 0 ? (
-                <CourseCardCollection courses={bookmarkedCourses} />
+                <CourseCardCollection bookmarkedCourseIds={bookmarkedCoursesId} courses={bookmarkedCourses} />
             ) : (
                 <Text>No bookmarked courses found</Text>
             )
