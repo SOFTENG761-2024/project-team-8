@@ -11,7 +11,7 @@ import classes from "./CreateLessonModal.module.css";
 import { FormLabel } from "./FormLabel";
 import { IconUpload } from "@tabler/icons-react";
 import { Content } from "../../interfaces/kit";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Parse from "parse";
 
 interface AddContentFormProps {
@@ -29,6 +29,21 @@ export const AddContentForm: FC<AddContentFormProps> = ({
     oldContent ? oldContent.description : ""
   );
   const [file, setFile] = useState<File | null>(null);
+  console.log(oldContent, title, description, file);
+
+  // Update local state when oldContent changes
+  useEffect(() => {
+    if (oldContent) {
+      setTitle(oldContent.title);
+      setDescription(oldContent.description);
+      setFile(null); // Reset the file if needed
+    } else {
+      // Reset to empty if oldContent is null
+      setTitle("");
+      setDescription("");
+      setFile(null);
+    }
+  }, [oldContent]); // Dependency array with oldContent
 
   // Handle new content submission
   const handleNewContent = () => {

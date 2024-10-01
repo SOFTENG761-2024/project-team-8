@@ -31,6 +31,7 @@ const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [active, setActive] = useState(0);
   const courses = ["Course 1", "Course 2"]; // TODO: render with fetched data
+  const [editContent, setEditContent] = useState<Content | null>(null);
   const [contents, setContents] = useState<Content[]>([]);
 
   const form = useForm({
@@ -180,8 +181,15 @@ const CreateLessonModal = () => {
                               variant="filled"
                               maw="30rem"
                               w="60%"
-                              data={["Activity 1", "Activity 2"]}
+                              data={contents.map((content) => content.title)}
                               placeholder="Select activity to edit"
+                              value={editContent ? editContent.title : null} // Use the id or unique identifier for value
+                              onChange={(value) => {
+                                const selectedContent = contents.find(
+                                  (content) => content.title === value
+                                );
+                                setEditContent(selectedContent || null); // Set the entire object or null if not found
+                              }}
                             />
                             <Button
                               variant="outline"
@@ -192,7 +200,10 @@ const CreateLessonModal = () => {
                           </Group>
                         </Stack>
 
-                        <AddContentForm oldContent={null} onSave={handleSave} />
+                        <AddContentForm
+                          oldContent={editContent}
+                          onSave={handleSave}
+                        />
                       </Stack>
                     </>
                   )}
