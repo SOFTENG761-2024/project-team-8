@@ -31,6 +31,7 @@ const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [active, setActive] = useState(0);
   const courses = ["Course 1", "Course 2"]; // TODO: render with fetched data
+  const [contents, setContents] = useState<Content[]>([]);
 
   const form = useForm({
     mode: "uncontrolled",
@@ -41,6 +42,12 @@ const CreateLessonModal = () => {
       content: [],
     },
   });
+
+  const handleSave = (newContent: Content) => {
+    console.log(newContent);
+    setContents([...contents, newContent]); // Update parent state
+    // Don't close the modal here unless you want to
+  };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     console.log("TODO: on submit logic", form.getValues());
@@ -185,7 +192,7 @@ const CreateLessonModal = () => {
                           </Group>
                         </Stack>
 
-                        <AddContentForm />
+                        <AddContentForm oldContent={null} onSave={handleSave} />
                       </Stack>
                     </>
                   )}
