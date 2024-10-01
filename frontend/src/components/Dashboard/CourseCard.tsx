@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Box, Button, Card, Grid, Image, Text } from "@mantine/core";
+import { Box, Button, Card, Chip, Grid, Image, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/Dashboard.page";
-import { IconEye } from "@tabler/icons-react";
+import { IconBookmarkFilled, IconEye } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import styles from "./CourseCard.module.css";
 
 interface CourseCardProps {
   course: Course;
+  isBookmarked: boolean;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course, isBookmarked }) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
 
@@ -18,7 +19,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
     <Link
       to={`/user/courses/${course.id}`}
       style={{ textDecoration: "none" }}
-      // state={{ course }} // if we want to pass the course data to the next page
+    // state={{ course }} // if we want to pass the course data to the next page
     >
       <Card
         shadow="sm"
@@ -62,6 +63,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
               <Text size="sm" c="gray">
                 {course.lessons} Lessons
               </Text>
+              {isBookmarked && (<Chip mt={5} icon={< IconBookmarkFilled size={14} />} defaultChecked color="blue" variant="light" size="xs">Bookmarked</Chip>)}
             </Box>
           </Grid.Col>
         </Grid>
@@ -78,7 +80,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           <IconEye style={{ marginRight: "8px" }} /> View
         </Button>
       </Card>
-    </Link>
+    </Link >
   );
 };
 

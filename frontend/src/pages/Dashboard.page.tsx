@@ -11,8 +11,9 @@ import {
   Stack,
   useMantineTheme,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
+import { AuthContext } from "../context/AuthContextProvider.tsx";
 
 // defininng the Course type and create some dummy data
 export interface Course {
@@ -30,6 +31,8 @@ const DashboardPage = () => {
   const [filter, setFilter] = useState<string | null>("recently-viewed");
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const { currentUserData } = useContext(AuthContext);
+  const [bookmarkedCourses, setBookmarkedCourses] = useState<string[]>([]);
 
   // fetch data
   useEffect(() => {
@@ -37,6 +40,16 @@ const DashboardPage = () => {
       try {
         const results = await Parse.Cloud.run("getUserKitsAndCourses");
         setCourses(results);
+
+        // Fetch bookmarked course IDs
+        const bookmarkResults = await Parse.Cloud.run("getBookmarkedCourses", {
+          userId: currentUserData?.id,
+        });
+
+        // Extract and store just the course IDs
+        const bookmarkedCourseIds = bookmarkResults.map((course: any) => course.id);
+        setBookmarkedCourses(bookmarkedCourseIds);
+
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -107,7 +120,7 @@ const DashboardPage = () => {
               />
             </Center>
           ) : (
-            <CourseCardCollection courses={filteredCourses} />
+            <CourseCardCollection bookmarkedCourseIds={bookmarkedCourses} courses={filteredCourses} />
           )}
         </Box>
       </Stack>
