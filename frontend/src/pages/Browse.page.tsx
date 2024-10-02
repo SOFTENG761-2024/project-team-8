@@ -32,7 +32,7 @@ const BrowsePage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // fetch data
+  // fetch data TO BE CHANGED FOR UNSUBSCRIBED COURSES
   useEffect(() => {
     const fetchUserCourses = async () => {
       try {
@@ -104,11 +104,11 @@ const BrowsePage = () => {
                 m="0 auto"
                 size={40}
                 color={theme.colors.primary[4]}
-                style={{ margin: "0 auto", display: "block" }} // Optional inline styling for centering
+                style={{ margin: "0 auto", display: "block" }}
               />
             </Center>
           ) : (
-            <CourseCardCollection courses={filteredCourses} />
+            <CourseCardCollection courses={filteredCourses} unsubscribed={true}/>
           )}
         </Box>
       </Stack>

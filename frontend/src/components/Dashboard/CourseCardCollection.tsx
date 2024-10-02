@@ -5,10 +5,12 @@ import { Course } from "../../pages/Dashboard.page";
 
 interface CourseCardCollectionProps {
   courses: Course[];
+  unsubscribed: Boolean;
 }
 
 const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
   courses,
+  unsubscribed,
 }) => {
   // Setting the active page for pagination
   const [activePage, setPage] = useState(1);
@@ -39,7 +41,7 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
                 span={6} // this makes two rows
                 key={course.id}
               >
-                <CourseCard course={course} />
+                <CourseCard course={course} unsubscribed={unsubscribed} />
               </Grid.Col>
             ))}
           </Grid>

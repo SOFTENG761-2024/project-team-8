@@ -8,9 +8,10 @@ import styles from "./CourseCard.module.css";
 
 interface CourseCardProps {
   course: Course;
+  unsubscribed: Boolean;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course, unsubscribed }) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
 
@@ -66,17 +67,31 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </Grid.Col>
         </Grid>
         {/* View Button positioned at the bottom-right */}
-        <Button
-          variant="filled"
-          bg="var(--mantine-color-primary-5)"
-          style={{
-            position: !isSmallScreen ? "absolute" : "static",
-            bottom: "20px",
-            right: "20px",
-          }}
-        >
-          <IconEye style={{ marginRight: "8px" }} /> View
-        </Button>
+        {unsubscribed ? (
+          <Button
+            variant="filled"
+            bg="var(--mantine-color-primary-5)"
+            style={{
+              position: !isSmallScreen ? "absolute" : "static",
+              bottom: "20px",
+              right: "20px",
+            }}
+          >
+            <IconEye style={{ marginRight: "8px" }} /> Preview
+          </Button>
+        ) : (
+          <Button
+            variant="filled"
+            bg="var(--mantine-color-primary-5)"
+            style={{
+              position: !isSmallScreen ? "absolute" : "static",
+              bottom: "20px",
+              right: "20px",
+            }}
+          >
+            <IconEye style={{ marginRight: "8px" }} /> View
+          </Button>
+        )}
       </Card>
     </Link>
   );
