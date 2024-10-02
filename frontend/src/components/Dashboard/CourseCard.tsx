@@ -16,11 +16,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, unsubscribed }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Link
-      to={`/user/courses/${course.id}`}
-      style={{ textDecoration: "none" }}
-      // state={{ course }} // if we want to pass the course data to the next page
-    >
+    <Box>
       <Card
         shadow="sm"
         padding="sm"
@@ -85,20 +81,26 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, unsubscribed }) => {
             <IconEye style={{ marginRight: "8px" }} /> Preview
           </Button>
         ) : (
-          <Button
-            variant="filled"
-            bg="var(--mantine-color-primary-5)"
-            style={{
-              position: !isSmallScreen ? "absolute" : "static",
-              bottom: "20px",
-              right: "20px",
-            }}
+          <Link
+            to={`/user/courses/${course.id}`}
+            style={{ textDecoration: "none" }}
+            // state={{ course }} // if we want to pass the course data to the next page
           >
-            <IconEye style={{ marginRight: "8px" }} /> View
-          </Button>
+            <Button
+              variant="filled"
+              bg="var(--mantine-color-primary-5)"
+              style={{
+                position: !isSmallScreen ? "absolute" : "static",
+                bottom: "20px",
+                right: "20px",
+              }}
+            >
+              <IconEye style={{ marginRight: "8px" }} /> View
+            </Button>
+          </Link>
         )}
       </Card>
-    </Link>
+    </Box>
   );
 };
 
