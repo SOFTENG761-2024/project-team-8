@@ -63,6 +63,9 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, unsubscribed }) => {
               <Text size="sm" c="gray">
                 {course.lessons} Lessons
               </Text>
+              <Text size="sm" c="red">
+                Contact us to subscribe to this content!
+              </Text>
             </Box>
           </Grid.Col>
         </Grid>

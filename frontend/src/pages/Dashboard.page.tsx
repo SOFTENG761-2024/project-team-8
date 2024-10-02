@@ -114,7 +114,7 @@ const DashboardPage = () => {
               />
             </Center>
           ) : (
-            <CourseCardCollection courses={filteredCourses} />
+            <CourseCardCollection courses={filteredCourses} unsubscribed={false} />
           )}
         </Box>
       </Stack>
