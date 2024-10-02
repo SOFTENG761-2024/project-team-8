@@ -58,7 +58,7 @@ const Navbar = () => {
   };
   const links = [
     { icon: IconHomeFilled, label: "Dashboard", path: "/user" },
-    { icon: IconBookFilled, label: "Browse", path: "/user" }
+    { icon: IconBookFilled, label: "Browse", path: "/user/browse" }
   ];
   const navbarItems = links.map((link) => {
     // e.g. /user/dashboard
