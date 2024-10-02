@@ -4,6 +4,7 @@ import {
   IconChevronRight,
   IconHomeFilled,
   IconLogout,
+  IconBookFilled,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
@@ -55,7 +56,10 @@ const Navbar = () => {
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
-  const links = [{ icon: IconHomeFilled, label: "Dashboard", path: "/user" }];
+  const links = [
+    { icon: IconHomeFilled, label: "Dashboard", path: "/user" },
+    { icon: IconBookFilled, label: "Browse", path: "/user" }
+  ];
   const navbarItems = links.map((link) => {
     // e.g. /user/dashboard
     const pathWithLabel = `${link.path}/${link.label.toLowerCase()}`;
