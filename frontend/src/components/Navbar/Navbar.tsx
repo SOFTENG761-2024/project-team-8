@@ -107,7 +107,7 @@ const Navbar = () => {
             />
           </Link>
         ) : (
-          // renders with Tooltip when navar is collapsed
+          // renders with Tooltip when navbar is collapsed
           <Tooltip label="Log Out" transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" color="neutral.5" offset={10}>
             <Link to="/login" style={{ textDecoration: "none" }} onClick={() => logout()}>
               <NavbarLink
