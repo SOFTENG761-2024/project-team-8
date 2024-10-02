@@ -8,15 +8,13 @@ interface WelcomePagePropTypes {
   state: "login" | "register";
 }
 const WelcomePage = ({ state }: WelcomePagePropTypes) => {
-  const path = location.pathname;
-
   useEffect(() => {
-    if (path.includes("login")) {
+    if (state === "login") {
       document.title = formattedPageTitle("LOGIN");
-    } else if (path.includes("register")) {
+    } else if (state === "register") {
       document.title = formattedPageTitle("REGISTER");
     }
-  }, [path]);
+  }, [state]);
 
   return (
     <>
