@@ -32,12 +32,22 @@ const BrowsePage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // fetch data TO BE CHANGED FOR UNSUBSCRIBED COURSES
+  // fetch data ********** TO BE CHANGED FOR UNSUBSCRIBED COURSES *********
   useEffect(() => {
     const fetchUserCourses = async () => {
       try {
-        const results = await Parse.Cloud.run("getUserKitsAndCourses");
-        setCourses(results);
+        // get course content
+        const sub = await Parse.Cloud.run("getUserKitsAndCourses");
+        const allCourses = await Parse.Cloud.run("getAllKitCourses");
+        // remove duplicates from all available courses
+        const uniqueAllCourses = allCourses.filter((obj: { id: any; }, index: any, self: any[]) =>
+          index === self.findIndex((o: { id: any; }) => o.id === obj.id)
+        );
+        // filter out subscribed courses to get unsubscribed courses
+        const result = uniqueAllCourses.filter(
+          (obj1: {id: any}) => !sub.some((obj2: { id: any; title: any; }) => obj1.id === obj2.id)
+        );
+        setCourses(result);
         setLoading(false);
       } catch (error) {
         console.log(error);
