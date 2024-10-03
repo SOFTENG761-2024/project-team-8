@@ -20,6 +20,8 @@ const Header = () => {
       setPage("Dashboard");
     } else if (path.includes("courses")) {
       setPage("Course Details");
+    } else if (path.includes("browse")) {
+      setPage("Browse Unsubscribed Courses");
     } else {
       // CAN ADD MORE!
       setPage("");
