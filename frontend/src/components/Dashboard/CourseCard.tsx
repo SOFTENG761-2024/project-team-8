@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Card, Grid, Image, Text } from "@mantine/core";
+import { Box, Button, Card, Grid, Image, Modal, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/Dashboard.page";
 import { IconEye } from "@tabler/icons-react";
@@ -14,9 +14,18 @@ interface CourseCardProps {
 const CourseCard: React.FC<CourseCardProps> = ({ course, unsubscribed }) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
+  const [opened, setOpened] = useState(false);
 
   return (
     <Box>
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title="Message"
+      >
+        Hello
+      </Modal>
+
       <Card
         shadow="sm"
         padding="sm"
@@ -73,10 +82,11 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, unsubscribed }) => {
             variant="filled"
             bg="var(--mantine-color-primary-5)"
             style={{
-              position: !isSmallScreen ? "absolute" : "static",
-              bottom: "20px",
-              right: "20px",
+              position: 'absolute',
+              bottom: '20px',
+              right: '20px',
             }}
+            onClick={() => setOpened(true)}
           >
             <IconEye style={{ marginRight: "8px" }} /> Preview
           </Button>
