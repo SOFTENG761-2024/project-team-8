@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Card, Grid, Image, Modal, Text } from "@mantine/core";
+import { Box, Button, Card, Grid, Image, Modal, Stack, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/Dashboard.page";
 import { IconEye } from "@tabler/icons-react";
@@ -21,9 +21,29 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, unsubscribed }) => {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Message"
       >
-        Hello
+        <Stack>
+          <Image
+              src={course.image._url}
+              alt="Course Image"
+              height={150}
+              width={150}
+              radius="md"
+              style={{ objectFit: "cover" }}
+            />
+          <Text size="xl" fw={700} c="primary.5">
+            {course.title}
+          </Text>
+          <Text c="primary.4" fw={500} size="md">
+            {course.kitName}
+          </Text>
+          <Text size="sm" c="gray" style={{ paddingTop: "1.5rem" }}>
+            Description:
+          </Text>
+          <Text size="sm" c="gray">
+            {course?.description || "No description available"}
+          </Text>
+        </Stack>
       </Modal>
 
       <Card
