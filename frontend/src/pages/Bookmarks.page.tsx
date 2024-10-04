@@ -4,6 +4,7 @@ import CourseCardCollection from '../components/Dashboard/CourseCardCollection';
 import { AuthContext } from '../context/AuthContextProvider';
 import Parse from '../../parseconfig';
 import { Course } from './Dashboard.page';
+import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 const BookmarksPage = () => {
     const [bookmarkedCourses, setBookmarkedCourses] = useState<Course[]>([]);
@@ -12,6 +13,7 @@ const BookmarksPage = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
+        document.title = formattedPageTitle("BOOKMARKS");
         const fetchBookmarkedCourses = async () => {
             if (!currentUserData) {
                 console.log("User not logged in");
