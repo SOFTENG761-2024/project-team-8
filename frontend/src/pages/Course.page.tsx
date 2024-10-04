@@ -17,6 +17,7 @@ import { Course } from "../interfaces/kit.ts";
 import { CourseContext } from "../components/Course/CourseContext.tsx";
 import { useToggle } from "@mantine/hooks";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
+import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 export interface CoursePage extends Course {
   num_lessons: number;
@@ -32,6 +33,8 @@ const CoursePage = () => {
   const [summaryExpanded, setSummaryExpanded] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
+    document.title = formattedPageTitle("COURSE");
+
     const fetchCourseData = async () => {
       try {
         const courseResult = await Parse.Cloud.run("getCourse", {
@@ -39,7 +42,7 @@ const CoursePage = () => {
         });
         const completedResult = await Parse.Cloud.run("isCourseCompleted", {
           courseId: courseId,
-          userId: currentUserData.id,
+          userId: currentUserData?.id,
         });
         setCurrentCourseData(courseResult);
         console.log(courseResult);
@@ -54,13 +57,13 @@ const CoursePage = () => {
       }
     };
     fetchCourseData();
-  }, []);
+  });
 
   const toggleIsComplete = async () => {
     try {
       const result = await Parse.Cloud.run("toggleCompleteCourse", {
         courseId: courseId,
-        userId: currentUserData.id,
+        userId: currentUserData?.id,
       });
       console.log(result);
       toggle();
