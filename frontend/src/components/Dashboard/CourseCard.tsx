@@ -1,17 +1,23 @@
 import React, { useState } from "react";
-import { Box, Button, Card, Chip, Grid, Image, Text } from "@mantine/core";
+import { Box, Button, Card, Flex, Grid, Image, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/Dashboard.page";
-import { IconBookmarkFilled, IconEye } from "@tabler/icons-react";
+import { IconEye } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import styles from "./CourseCard.module.css";
+import CourseTag from "./CourseTag";
 
 interface CourseCardProps {
   course: Course;
-  isBookmarked: boolean;
+  isBookmarked?: boolean;
+  isComplete?: boolean;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ course, isBookmarked }) => {
+const CourseCard: React.FC<CourseCardProps> = ({
+  course,
+  isBookmarked = false,
+  isComplete = false,
+}) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
 
@@ -63,7 +69,15 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, isBookmarked }) => {
               <Text size="sm" c="gray">
                 {course.lessons} Lessons
               </Text>
-              {isBookmarked && (<Chip mt={5} icon={< IconBookmarkFilled size={14} />} defaultChecked color="pink" variant="light" size="xs"><Text size="xs" fw={700}>Bookmarked</Text></Chip>)}
+              {/* COURSE TAGS */}
+              <Flex
+                gap="0.25rem"
+                mt="0.25rem"
+                direction={isSmallScreen ? "column" : "row"}
+              >
+                {isComplete && <CourseTag variant="complete" />}
+                {isBookmarked && <CourseTag variant="favorite" />}
+              </Flex>
             </Box>
           </Grid.Col>
         </Grid>

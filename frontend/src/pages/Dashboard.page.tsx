@@ -14,6 +14,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
+import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 // defininng the Course type and create some dummy data
 export interface Course {
@@ -33,6 +34,10 @@ const DashboardPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const { currentUserData } = useContext(AuthContext);
   const [bookmarkedCourses, setBookmarkedCourses] = useState<string[]>([]);
+
+  useEffect(() => {
+    document.title = formattedPageTitle("DASHBOARD");
+  }, []);
 
   // fetch data
   useEffect(() => {

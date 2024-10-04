@@ -12,6 +12,8 @@ import ModuleAccordion from "./ModuleAccordion";
 import { useContext, useEffect, useState } from "react";
 import Parse from "../../../parseconfig";
 import { CourseContext } from "./CourseContext.tsx";
+import { Lesson } from "../../interfaces/kit.ts";
+
 
 interface CourseContentProps {
   summaryExpanded: boolean;
@@ -19,7 +21,7 @@ interface CourseContentProps {
 
 interface ModulesData {
   title: string;
-  lessons: string[];
+  lessons: Lesson[];
 }
 
 const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
@@ -29,45 +31,52 @@ const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+
   /**
-   * Fetches course data from the Parse server
-   */
+  * Fetches course data from the Parse server
+  */
   const fetchCourseData = async () => {
     if (currentCourseData) {
       try {
-        const modules = [];
+        const modules: ModulesData[] = [];  // Initialize an empty array for modules
         const courseModules = currentCourseData.modules;
-        for (const module of courseModules) {
-          const lessonTitles = [];
 
+        // Iterate over each module
+        for (const module of courseModules) {
+          const lessonDetails: Lesson[] = [];  // Array to hold lessons with title & id
+
+          // Fetch data for each lesson in the module
           for (const lesson of module.lessons) {
             try {
               const lessonData = await Parse.Cloud.run("getLesson", {
-                lessonId: lesson,
+                lessonId: lesson,  // Using lesson ID to fetch lesson data
               });
-              lessonTitles.push(lessonData.title);
-            } catch {
-              setError(
-                "There was a problem loading the course data, please try again."
-              );
+              // Store both lesson ID and title in the array
+              lessonDetails.push({
+                id: lessonData.id,      // Store lesson ID
+                title: lessonData.title, // Store lesson title
+                overview: lessonData.overview, // Store lesson overview
+                content: lessonData.content, // Store full lesson content
+              });
+            } catch (err) {
+              setError("There was a problem loading the course data, please try again.");
               setLoading(false);
+              return;  // Exit if there's an error
             }
           }
 
+          // Push the module data with lessons into modules array
           modules.push({
-            title: module.title,
-            lessons: lessonTitles,
+            title: module.title,  // Module title
+            lessons: lessonDetails,  // Array of lesson details (ID & title)
           });
         }
-        if (error === null) {
-          setModulesData(modules);
-        }
 
-        setLoading(false);
-      } catch {
-        setError(
-          "There was a problem loading the course data, please try again."
-        );
+        // Update state with the fetched modules and lessons
+        setModulesData(modules);
+        setLoading(false);  // Stop loading
+      } catch (err) {
+        setError("There was a problem loading the course data, please try again.");
         setLoading(false);
       }
     }
@@ -75,7 +84,7 @@ const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
 
   useEffect(() => {
     fetchCourseData();
-  }, [currentCourseData]);
+  }, [currentCourseData,]);
 
   return (
     <Box flex={1}>

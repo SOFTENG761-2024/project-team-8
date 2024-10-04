@@ -18,6 +18,7 @@ import { Course } from "../interfaces/kit.ts";
 import { CourseContext } from "../components/Course/CourseContext.tsx";
 import { IconBookmark, IconBookmarkFilled } from "@tabler/icons-react";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
+import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 export interface CoursePage extends Course {
   num_lessons: number;
@@ -33,6 +34,8 @@ const CoursePage = () => {
   const { currentUserData } = useContext(AuthContext);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   useEffect(() => {
+    document.title = formattedPageTitle("COURSE");
+
     const fetchCourseData = async () => {
       try {
         const results = await Parse.Cloud.run("getCourse", {
