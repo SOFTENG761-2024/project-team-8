@@ -13,37 +13,47 @@ import {
   IconFile,
 } from "@tabler/icons-react";
 import styles from "./ModuleAccordion.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import LessonOverlay from "../Lesson/LessonOverlay";
 import { useDisclosure } from "@mantine/hooks";
+import { Lesson } from "../../interfaces/kit";
+import { CourseContext } from "./CourseContext";
 
 interface ModuleAccordionProps {
   module: {
     title: string;
-    lessons: string[];
+    lessons: Lesson[];
   };
 }
 
 const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
   const theme = useMantineTheme();
-
+  const { currentCourseData } = useContext(CourseContext);
   const [opened, { open, close }] = useDisclosure(false);
-  const [selectedLesson, setSelectedLesson] = useState<string | null>(null);
+  const [initialLessonIndex, setInitialLessonIndex] = useState<number | null>(null);
 
-  const handleLessonClick = (lesson: string) => {
-    setSelectedLesson(lesson);
-    open();
+  // opens modal and sets the selected lesson index
+  const handleLessonClick = (index: number) => {
+    setInitialLessonIndex(index); // Store the clicked lesson index
+    open(); // Open the modal
+  };
+
+  // custom onClose resets initialLessonIndex when modal is closed
+  const handleClose = () => {
+    setInitialLessonIndex(null);
+    close();
   };
 
   return (
     <>
-      {selectedLesson && (
+      {initialLessonIndex !== null && (
         <LessonOverlay
-          courseTitle={"Course Title - Dinosaur Steps"}
+          courseTitle={currentCourseData?.title + " - " + currentCourseData?.kit}
           moduleTitle={module.title}
-          selectedLesson={selectedLesson}
+          currentLessonIndex={initialLessonIndex} // current lesson index
+          moduleLessons={module.lessons} // full module lessons array, including content
           opened={opened}
-          onClose={close}
+          onClose={handleClose}
         />
       )}
 
@@ -74,18 +84,19 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
           </Accordion.Control>
           <Accordion.Panel>
             <Stack>
-              {module.lessons.map((lesson) => (
+              {module.lessons.map((lesson, index) => (
                 <Tooltip arrowOffset={10} arrowSize={5} withArrow label={"Open Lesson"} transitionProps={{ transition: 'fade-down', duration: 300 }} position="bottom" color="neutral.5" offset={5}>
                   <Box
-                    key={lesson}
+                    key={lesson.title}
                     className={styles.lessonCard}
                     p="1rem"
-                    onClick={() => handleLessonClick(lesson)}
+                    onClick={() => handleLessonClick(index)}
                   >
                     <Group>
                       <IconFile />
-                      <Text c="neutral.5">{lesson}</Text>
+                      <Text c="neutral.5">{lesson.title}</Text>
                     </Group>
+
                   </Box>
                 </Tooltip>
               ))}

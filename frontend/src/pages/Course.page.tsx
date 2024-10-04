@@ -14,6 +14,7 @@ import { useContext, useEffect, useState } from "react";
 import Parse from "../../parseconfig.ts";
 import { Course } from "../interfaces/kit.ts";
 import { CourseContext } from "../components/Course/CourseContext.tsx";
+import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 export interface CoursePage extends Course {
   num_lessons: number;
@@ -27,6 +28,8 @@ const CoursePage = () => {
   const [summaryExpanded, setSummaryExpanded] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
+    document.title = formattedPageTitle("COURSE");
+
     const fetchCourseData = async () => {
       try {
         const results = await Parse.Cloud.run("getCourse", {

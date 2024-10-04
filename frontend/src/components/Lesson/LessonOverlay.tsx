@@ -10,6 +10,7 @@ import {
   Image,
   Flex,
   useMantineTheme,
+  Tooltip,
 } from "@mantine/core";
 import {
   IconBook2,
@@ -17,27 +18,39 @@ import {
   IconCircleArrowRightFilled,
   IconFile,
   IconX,
+  IconCircleCheckFilled
 } from "@tabler/icons-react";
 import styles from "./LessonOverlay.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 import LessonContentSection from "./LessonContentSection";
-import { dummyLessonOverview, dummyContentArray } from "./LessonDummyData";
+import { useState } from "react";
+import { Lesson } from "../../interfaces/kit";
 
 interface LessonOverlayProps extends ModalProps {
   courseTitle: string;
   moduleTitle: string;
-  selectedLesson: string;
+  currentLessonIndex: number; // The index of the current lesson
+  moduleLessons: Lesson[]; // The full list of lessons in the module
+  opened: boolean;
+  onClose: () => void;
 }
 
 const LessonOverlay = ({
   courseTitle,
   moduleTitle,
-  selectedLesson,
+  currentLessonIndex: initialLessonIndex,
+  moduleLessons,
   opened,
   onClose,
 }: LessonOverlayProps) => {
   const biggerViewport = useMediaQuery("(min-width: 70rem)");
   const theme = useMantineTheme();
+
+  // tracking the current lesson index locally within the overlay
+  const [lessonIndex, setLessonIndex] = useState(initialLessonIndex);
+
+  const currentLesson = moduleLessons[lessonIndex];  // getting the current lesson
+
   return (
     <Modal
       classNames={{
@@ -89,22 +102,50 @@ const LessonOverlay = ({
               {moduleTitle}
             </Title>
 
-            {/* Previous and Next button group */}
+            {/* PREVIOUS button group */}
             <Flex w="100%" py="0.5rem">
-              <UnstyledButton
-                className={styles.lessonNavButtonPrev}
-                disabled={false}
-              >
-                <IconCircleArrowLeftFilled size="1.55rem" />
-                Previous lesson
-              </UnstyledButton>
-              <UnstyledButton
-                className={styles.lessonNavButtonNext}
-                disabled={false}
-              >
-                Next lesson
-                <IconCircleArrowRightFilled size="1.55rem" />
-              </UnstyledButton>
+              {lessonIndex === 0 ?
+                <Tooltip label="No Previous Lesson" transitionProps={{ transition: 'pop', duration: 300 }} position="bottom">
+                  <UnstyledButton
+                    disabled={lessonIndex === 0} // Disable if on first lesson
+                    className={styles.lessonNavButtonPrev}
+                    onClick={() => setLessonIndex(lessonIndex - 1)}
+                  >
+                    <IconCircleArrowLeftFilled size="1.55rem" />
+                    {lessonIndex === 0 ? "Start of module" : "Previous lesson"}
+                  </UnstyledButton>
+                </Tooltip>
+                :
+                <UnstyledButton
+                  disabled={lessonIndex === 0} // Disable if on first lesson
+                  className={styles.lessonNavButtonPrev}
+                  onClick={() => setLessonIndex(lessonIndex - 1)}
+                >
+                  <IconCircleArrowLeftFilled size="1.55rem" />
+                  {lessonIndex === 0 ? "Start of module" : "Previous lesson"}
+                </UnstyledButton>}
+
+              {/* NEXT button group */}
+              {lessonIndex === moduleLessons.length - 1 ?
+                <Tooltip label="Complete the module" transitionProps={{ transition: 'pop', duration: 300 }} position="bottom">
+                  <UnstyledButton
+                    // disabled={lessonIndex === moduleLessons.length - 1} // could disable if last lesson?
+                    className={styles.lessonNavButtonNext}
+                    onClick={lessonIndex === moduleLessons.length - 1 ? onClose : () => setLessonIndex(lessonIndex + 1)}
+                  >
+                    {lessonIndex === moduleLessons.length - 1 ? "Finish Module" : "Next lesson"}
+                    {lessonIndex === moduleLessons.length - 1 ? <IconCircleCheckFilled size="1.55rem" /> : <IconCircleArrowRightFilled size="1.55rem" />}
+                  </UnstyledButton>
+                </Tooltip>
+                :
+                <UnstyledButton
+                  // disabled={lessonIndex === moduleLessons.length - 1} // could disable if last lesson?
+                  className={styles.lessonNavButtonNext}
+                  onClick={lessonIndex === moduleLessons.length - 1 ? onClose : () => setLessonIndex(lessonIndex + 1)}
+                >
+                  {lessonIndex === moduleLessons.length - 1 ? "Finish Module" : "Next lesson"}
+                  <IconCircleArrowRightFilled size="1.55rem" />
+                </UnstyledButton>}
             </Flex>
           </Stack>
         </Stack>
@@ -119,7 +160,7 @@ const LessonOverlay = ({
             py="1rem"
           >
             <IconFile size="2rem" />
-            {selectedLesson}
+            {currentLesson.title}
           </Title>
           <Image
             radius="md"
@@ -128,14 +169,15 @@ const LessonOverlay = ({
           />
           <Text py="1rem" ta="justify">
             {" "}
-            {dummyLessonOverview}
+            {currentLesson.overview || "No overview available"}
           </Text>
-          {dummyContentArray.map(
-            ({ contentTitle, contentDescription, fileUrl }) => (
+          {currentLesson.content.map(
+            ({ title, description, printout }, index) => (
               <LessonContentSection
-                title={contentTitle}
-                description={contentDescription}
-                fileUrl={fileUrl}
+                key={index}
+                title={title}
+                description={description}
+                fileUrl={printout.url()}
               />
             )
           )}

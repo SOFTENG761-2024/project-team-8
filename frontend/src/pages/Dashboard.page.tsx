@@ -13,6 +13,7 @@ import {
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
+import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 // defininng the Course type and create some dummy data
 export interface Course {
@@ -31,6 +32,10 @@ const DashboardPage = () => {
   const [filter, setFilter] = useState<string | null>("recently-viewed");
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  useEffect(() => {
+    document.title = formattedPageTitle("DASHBOARD");
+  }, []);
 
   // fetch data
   useEffect(() => {
