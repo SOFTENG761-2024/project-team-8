@@ -20,7 +20,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
-
   return (
     <Link
       to={`/user/courses/${course.id}`}

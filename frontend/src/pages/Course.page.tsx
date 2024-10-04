@@ -45,7 +45,6 @@ const CoursePage = () => {
           userId: currentUserData?.id,
         });
         setCurrentCourseData(courseResult);
-        console.log(courseResult);
         if (completedResult) {
           toggle("Complete");
         } else {

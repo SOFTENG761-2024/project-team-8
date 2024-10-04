@@ -11,9 +11,10 @@ import {
   Stack,
   useMantineTheme,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
+import { AuthContext } from "../context/AuthContextProvider.tsx";
 
 // defininng the Course type and create some dummy data
 export interface Course {
@@ -32,7 +33,9 @@ const DashboardPage = () => {
   const [filter, setFilter] = useState<string | null>("recently-viewed");
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const { currentUserData } = useContext(AuthContext);
 
+  const [completedCourses, setCompletedCourses] = useState<string[]>([]);
   useEffect(() => {
     document.title = formattedPageTitle("DASHBOARD");
   }, []);
@@ -41,8 +44,12 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchUserCourses = async () => {
       try {
-        const results = await Parse.Cloud.run("getUserKitsAndCourses");
-        setCourses(results);
+        const courses = await Parse.Cloud.run("getUserKitsAndCourses");
+        setCourses(courses);
+        const completedCourses = await Parse.Cloud.run("getCompletedCourses", {
+          userId: currentUserData?.id,
+        });
+        setCompletedCourses(completedCourses);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -119,7 +126,10 @@ const DashboardPage = () => {
               />
             </Center>
           ) : (
-            <CourseCardCollection courses={filteredCourses} />
+            <CourseCardCollection
+              courses={filteredCourses}
+              completedCourseList={completedCourses}
+            />
           )}
         </Box>
       </Stack>

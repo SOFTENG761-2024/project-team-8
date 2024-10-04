@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import { Pagination, Grid, Flex, Text, Box } from "@mantine/core";
+import { Box, Flex, Grid, Pagination, Text } from "@mantine/core";
 import CourseCard from "./CourseCard";
 import { Course } from "../../pages/Dashboard.page";
 
 interface CourseCardCollectionProps {
   courses: Course[];
+  completedCourseList: string[];
 }
 
 const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
   courses,
+  completedCourseList,
 }) => {
   // Setting the active page for pagination
   const [activePage, setPage] = useState(1);
   const coursesPerPage = 4;
-
   // Calculating the index range for the current page
   const startIndex = (activePage - 1) * coursesPerPage;
   const endIndex = startIndex + coursesPerPage;
@@ -39,7 +40,10 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
                 span={6} // this makes two rows
                 key={course.id}
               >
-                <CourseCard course={course} />
+                <CourseCard
+                  course={course}
+                  isComplete={completedCourseList.includes(course.id)}
+                />
               </Grid.Col>
             ))}
           </Grid>
