@@ -59,6 +59,7 @@
 
 .contentContainer {
   overflow: auto;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column;
 }
