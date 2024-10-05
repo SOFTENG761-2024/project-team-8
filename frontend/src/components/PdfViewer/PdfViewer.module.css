@@ -16,7 +16,8 @@
 }
 
 .viewerBackground {
-    padding: 2.5rem;
+    padding-left: 2.2rem;
+    padding-bottom: 2.2rem;
     background-color: var(--mantine-color-primary-6) !important;
     border-radius: 1.5rem;
 }

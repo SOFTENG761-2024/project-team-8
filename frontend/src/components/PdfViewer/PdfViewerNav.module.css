@@ -23,12 +23,13 @@
 }
 
 .arrowButtons {
-    background-color: var(--mantine-color-neutral-0) !important;
+    background-color: var(--mantine-color-primary-2) !important;
     color: var(--mantine-color-neutral-6) !important;
+    border-radius: 10rem;
     &:disabled,
     &[data-disabled] {
         color: var(--mantine-color-neutral-3) !important;
         border-color: none;
-        background-color: transparent;
+        background-color: var(--mantine-color-neutral-1) !important;
     }
 }

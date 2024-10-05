@@ -64,6 +64,7 @@ const PdfViewerNav = ({
           size="lg"
           className={styles.arrowButtons}
           c="neutral.0"
+          mx="0.2rem"
         >
           <IconArrowUp size={50} />
         </ActionIcon>
@@ -76,6 +77,7 @@ const PdfViewerNav = ({
           size="lg"
           className={styles.arrowButtons}
           c="neutral.0"
+          mx="0.2rem"
         >
           <IconArrowDown size={50} />
         </ActionIcon>
