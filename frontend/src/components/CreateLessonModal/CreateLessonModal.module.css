@@ -106,6 +106,9 @@
 
 .whiteInput {
   border: none;
+}
+
+.whiteInput::placeholder {
   font-style: italic;
 }
 
