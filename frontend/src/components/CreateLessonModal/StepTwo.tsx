@@ -43,7 +43,7 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
       <Stack h="75%">
         <Stack align="flex-start" gap="xs">
           <Text tt="uppercase" lts="0.08em">
-            Content
+            Content <span style={{ color: "red" }}>*</span>
           </Text>
 
           <Group w="100%" justify="space-between">
@@ -67,7 +67,11 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
           </Group>
         </Stack>
 
-        <AddContentForm oldContent={editContent} onSave={handleSave} onDelete={handleDelete} />
+        <AddContentForm
+          oldContent={editContent}
+          onSave={handleSave}
+          onDelete={handleDelete}
+        />
         {error && (
           <Text size="sm" c="accentRed.3">
             {error}

@@ -38,7 +38,7 @@ export const StepOne: FC<StepOneProps> = ({ form, modules }) => {
       <Divider />
 
       <TextInput
-        label={<FormLabel text="Lesson title" />}
+        label={<FormLabel text="Lesson title" required />}
         placeholder="Insert name of this lesson here..."
         variant="filled"
         {...form.getInputProps("lessonName")}
@@ -54,7 +54,7 @@ export const StepOne: FC<StepOneProps> = ({ form, modules }) => {
         maxRows={6}
       />
       <Select
-        label={<FormLabel text="Module" />}
+        label={<FormLabel text="Module" required />}
         data={moduleOptions}
         variant="filled"
         maw="30rem"
