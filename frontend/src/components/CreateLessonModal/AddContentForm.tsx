@@ -85,14 +85,14 @@ export const AddContentForm: FC<AddContentFormProps> = ({
       <Stack className={classes.container}>
         <TextInput
           label={<FormLabel text="Title" />}
-          placeholder="Insert title of this activity here..."
+          placeholder="Insert title of this section..."
           classNames={{ input: classes.whiteInput }}
           value={title}
           onChange={(event) => setTitle(event.currentTarget.value)}
         />
         <Textarea
           label={<FormLabel text="Description" />}
-          placeholder="Insert text about what this activity entails here..."
+          placeholder=" Insert description for the attached content..."
           autosize
           minRows={3}
           maxRows={6}

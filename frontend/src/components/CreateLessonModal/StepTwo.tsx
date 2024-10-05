@@ -58,7 +58,7 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
               maw="30rem"
               w="60%"
               data={contents.map((content) => content.title)}
-              placeholder="Select activity to edit"
+              placeholder="Select content to edit"
               value={editContent ? editContent.title : null} // Use the id or unique identifier for value
               onChange={(value) => {
                 const selectedContent = contents.find(
