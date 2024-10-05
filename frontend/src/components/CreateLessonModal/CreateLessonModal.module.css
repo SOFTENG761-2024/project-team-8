@@ -136,4 +136,6 @@
 .fileText {
   text-align: center;
   border: none;
+  text-decoration: underline;
+  color: var(--mantine-color-primary-5);
 }
