@@ -34,6 +34,7 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
   };
 
   const handleClearForm = () => {
+    setEditContent(null);
     setResetForm((prev) => !prev); // Toggle the reset state to trigger form reset
   };
 
