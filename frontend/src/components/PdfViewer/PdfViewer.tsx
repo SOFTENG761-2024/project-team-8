@@ -14,6 +14,7 @@ interface PdfViewerProps {
   url: string;
   fullscreen: boolean;
   setFullscreen: (fullscreen: boolean) => void;
+  setIsAnyPdfFullscreen: (fullscreen: boolean) => void;
 }
 
 interface OnLoadSuccessProps {
@@ -28,7 +29,12 @@ interface OnLoadSuccessProps {
  * @param {boolean} fullscreen - Indicates whether the viewer is in fullscreen mode.
  * @param {function} setFullscreen - A function to set the fullscreen mode of the viewer.
  */
-const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
+const PdfViewer = ({
+  url,
+  fullscreen,
+  setFullscreen,
+  setIsAnyPdfFullscreen: setIsAnyPdfFullscreen,
+}: PdfViewerProps) => {
   const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [displayAlerts, setDisplayAlerts] = useState<boolean>(false);
@@ -63,6 +69,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
             break;
           case "Escape":
             setFullscreen(false);
+            setIsAnyPdfFullscreen(false);
             break;
           default:
             break;
@@ -96,18 +103,14 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
             <Document
               file={url}
               onLoadSuccess={onDocumentLoadSuccess}
-              className={
-                fullscreen ? styles.fullscreenView : styles.nonFullscreenView
-              }
+              className={styles.fullscreenView}
               loading={<Loader color="primary.5" />}
             >
               <Page
                 pageNumber={pageNumber}
                 renderAnnotationLayer={false}
                 renderTextLayer={false}
-                className={
-                  fullscreen ? styles.fullscreenView : styles.nonFullscreenView
-                }
+                className={styles.fullscreenView}
                 loading={<Loader color="primary.5" pt="2rem" />}
               />
             </Document>
@@ -140,9 +143,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
             <Document
               file={url}
               onLoadSuccess={onDocumentLoadSuccess}
-              className={
-                fullscreen ? styles.fullscreenView : styles.nonFullscreenView
-              }
+              className={styles.nonFullscreenView}
               loading={
                 <Flex
                   w="34vw"
@@ -159,9 +160,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
                 pageNumber={pageNumber}
                 renderAnnotationLayer={false}
                 renderTextLayer={false}
-                className={
-                  fullscreen ? styles.fullscreenView : styles.nonFullscreenView
-                }
+                className={styles.nonFullscreenView}
                 loading={
                   <Flex w="34.5vw" justify="center" align="center" pt="2rem">
                     <Loader color="primary.5" />

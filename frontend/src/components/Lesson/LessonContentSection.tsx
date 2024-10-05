@@ -7,14 +7,21 @@ interface LessonContentSectionProps {
   title: string;
   description: string;
   fileUrl: string;
+  setIsAnyPdfFullscreen: (fullscreen: boolean) => void;
 }
 
 const LessonContentSection = ({
   title,
   description,
   fileUrl,
+  setIsAnyPdfFullscreen: setIsAnyPdfFullscreen,
 }: LessonContentSectionProps) => {
   const [fullscreen, setFullscreen] = useState<boolean>(false);
+
+  const handlePdfFullscreen = () => {
+    setFullscreen(true);
+    setIsAnyPdfFullscreen(true);
+  };
 
   return (
     <Stack py="0.5rem">
@@ -38,7 +45,7 @@ const LessonContentSection = ({
         <Button
           variant="filled"
           leftSection={<IconArrowsMaximize size="1.25rem" />}
-          onClick={() => setFullscreen(true)}
+          onClick={handlePdfFullscreen}
         >
           View Fullscreen
         </Button>
@@ -47,6 +54,7 @@ const LessonContentSection = ({
         url={fileUrl}
         fullscreen={fullscreen}
         setFullscreen={setFullscreen}
+        setIsAnyPdfFullscreen={setIsAnyPdfFullscreen}
       />
     </Stack>
   );
