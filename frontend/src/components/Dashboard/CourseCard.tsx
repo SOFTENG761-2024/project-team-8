@@ -1,16 +1,23 @@
 import React, { useState } from "react";
-import { Card, Button, Text, Image, Grid, Flex, Box } from "@mantine/core";
+import { Box, Button, Card, Flex, Grid, Image, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/Dashboard.page";
 import { IconEye } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import styles from "./CourseCard.module.css";
+import CourseTag from "./CourseTag";
 
 interface CourseCardProps {
   course: Course;
+  isFavorite?: boolean;
+  isComplete?: boolean;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
+const CourseCard: React.FC<CourseCardProps> = ({
+  course,
+  isFavorite = false,
+  isComplete = false,
+}) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
 
@@ -18,7 +25,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
     <Link
       to={`/user/courses/${course.id}`}
       style={{ textDecoration: "none" }}
-    // state={{ course }} // if we want to pass the course data to the next page
+      // state={{ course }} // if we want to pass the course data to the next page
     >
       <Card
         shadow="sm"
@@ -41,7 +48,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
               }}
             >
               <Image
-                src={course.image}
+                src={course.image._url}
                 alt="Course Image"
                 height={150}
                 width={150}
@@ -57,11 +64,20 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                 {course.title}
               </Text>
               <Text c="primary.4" fw={500} size="md">
-                {course.course}
+                {course.kitName}
               </Text>
               <Text size="sm" c="gray">
                 {course.lessons} Lessons
               </Text>
+              {/* COURSE TAGS */}
+              <Flex
+                gap="0.25rem"
+                mt="0.25rem"
+                direction={isSmallScreen ? "column" : "row"}
+              >
+                {isComplete && <CourseTag variant="complete" />}
+                {isFavorite && <CourseTag variant="favorite" />}
+              </Flex>
             </Box>
           </Grid.Col>
         </Grid>

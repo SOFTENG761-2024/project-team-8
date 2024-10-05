@@ -6,7 +6,8 @@ import {
   IconLogout,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 interface NavbarLinkProps {
   icon: typeof IconHomeFilled;
@@ -49,6 +50,7 @@ function NavbarLink({
 const Navbar = () => {
   const [expanded, setExpanded] = useState<boolean>(true);
   const location = useLocation();
+  const { clearStoredUserData } = useContext(AuthContext);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -73,6 +75,11 @@ const Navbar = () => {
       </Link>
     );
   });
+
+  const logout = () => {
+    clearStoredUserData();
+    sessionStorage.removeItem("sessionToken");
+  };
   return (
     <nav
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}
@@ -87,7 +94,11 @@ const Navbar = () => {
 
       <Stack gap="1vh" style={{ width: "100%" }}>
         <Divider color="primary.3" />
-        <Link to="/login" style={{ textDecoration: "none" }}>
+        <Link
+          to="/login"
+          style={{ textDecoration: "none" }}
+          onClick={() => logout()}
+        >
           <NavbarLink
             key={"Logout"}
             expanded={expanded}
