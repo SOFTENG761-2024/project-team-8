@@ -1,4 +1,4 @@
-import { Box, Group, Loader, Paper, Stack, Text } from "@mantine/core";
+import { Box, Flex, Group, Loader, Paper, Stack, Text } from "@mantine/core";
 import styles from "./PdfViewer.module.css";
 import { useCallback, useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
@@ -131,7 +131,17 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
               className={
                 fullscreen ? styles.fullscreenView : styles.nonFullscreenView
               }
-              loading={<Loader color="primary.5" w="100%" />}
+              loading={
+                <Flex
+                  w="34vw"
+                  h="100%"
+                  justify="center"
+                  align="center"
+                  pt="2rem"
+                >
+                  <Loader color="primary.2" />
+                </Flex>
+              }
             >
               <Page
                 pageNumber={pageNumber}
@@ -140,7 +150,11 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
                 className={
                   fullscreen ? styles.fullscreenView : styles.nonFullscreenView
                 }
-                loading={<Loader color="primary.5" w="100%" />}
+                loading={
+                  <Flex w="34.5vw" justify="center" align="center" pt="2rem">
+                    <Loader color="primary.5" />
+                  </Flex>
+                }
               />
             </Document>
           </Stack>
