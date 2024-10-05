@@ -31,7 +31,7 @@ interface OnLoadSuccessProps {
 const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const [displayAlert, setDisplayAlert] = useState<boolean>(false);
+  const [displayAlerts, setDisplayAlerts] = useState<boolean>(false);
 
   const onDocumentLoadSuccess = ({ numPages }: OnLoadSuccessProps): void => {
     setNumPages(numPages);
@@ -78,9 +78,9 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   }, [fullscreen, changePage]);
 
   useEffect(() => {
-    setDisplayAlert(true);
+    setDisplayAlerts(true);
     setTimeout(() => {
-      setDisplayAlert(false);
+      setDisplayAlerts(false);
     }, 3000);
   }, [fullscreen]);
 
@@ -117,6 +117,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
             pageNumber={pageNumber}
             numPages={numPages}
             fullscreen={fullscreen}
+            className={displayAlerts ? styles.showNav : ""}
           />
         </Stack>
       ) : (
@@ -177,10 +178,14 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
           />
         </Flex>
       )}
-      {fullscreen && displayAlert && (
+      {fullscreen && (
         <Box className={styles.alertContainer}>
-          <Paper className={styles.alertPopUp}>
-            <Text size="1.5rem">Press ESC to exit present mode</Text>
+          <Paper
+            className={
+              displayAlerts ? styles.alertPopUp : styles.alertPopUpHidden
+            }
+          >
+            <Text size="1.3rem">Press ESC to exit present mode</Text>
           </Paper>
         </Box>
       )}

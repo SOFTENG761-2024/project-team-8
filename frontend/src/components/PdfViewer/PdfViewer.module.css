@@ -35,15 +35,35 @@
     display: flex;
     justify-content: center;
     z-index: 100;
+    transition: opacity 0.5s;
+
+}
+
+.alertPopUpHidden {
+    width: 20%;
+    background-color: rgba(20, 28, 40, 0.75);
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    color: var(--mantine-color-neutral-0);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+    transition-delay: 1s;
 }
 
 .alertPopUp {
     width: 20%;
     background-color: rgba(20, 28, 40, 0.75);
     padding: 0.5rem;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     color: var(--mantine-color-neutral-0);
     text-align: center;
+    opacity: 1 !important;
+    transition: opacity 0.5s;
+}
+
+.showNav {
+    opacity: 1 !important;
 }
 
 .minimizeIcon {

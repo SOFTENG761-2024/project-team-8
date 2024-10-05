@@ -6,12 +6,14 @@ import {
   IconArrowRight,
   IconArrowUp,
 } from "@tabler/icons-react";
+import { FC } from "react";
 
 interface PdfViewerNavProps {
   changePage: (offset: number) => void;
   pageNumber: number;
   numPages: number;
   fullscreen?: boolean;
+  className?: string;
 }
 
 /**
@@ -22,14 +24,19 @@ interface PdfViewerNavProps {
  * @param {number} numPages - The total number of pages in the PDF document being viewed.
  * @param {boolean} fullscreen - Indicates whether the viewer is in fullscreen mode. Defaults to false if not provided.
  */
-const PdfViewerNav = ({
+const PdfViewerNav: FC<PdfViewerNavProps> = ({
   changePage,
   pageNumber,
   numPages,
   fullscreen = false,
-}: PdfViewerNavProps) => {
+  className,
+}) => {
   return fullscreen ? (
-    <Group gap="2rem" m="0 auto" className={styles.fullscrenNav}>
+    <Group
+      gap="2rem"
+      m="0 auto"
+      className={`${styles.fullscrenNav} ${className}`}
+    >
       <ActionIcon
         variant="transparent"
         onClick={() => changePage(-1)}
