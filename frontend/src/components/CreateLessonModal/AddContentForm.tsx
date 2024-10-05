@@ -100,6 +100,14 @@ export const AddContentForm: FC<AddContentFormProps> = ({
           value={description}
           onChange={(event) => setDescription(event.currentTarget.value)}
         />
+        {/* Display existing file name if oldContent has a file */}
+        {oldContent && oldContent.printout && (
+          <Text>
+            Existing file: {oldContent.printout.name()}
+            {/* Assuming .name exists */}
+            {/* Alternatively, if using a method, use: {oldContent.printout.getName()} */}
+          </Text>
+        )}
         <FileInput
           classNames={{
             input: classes.fileText,
@@ -108,12 +116,18 @@ export const AddContentForm: FC<AddContentFormProps> = ({
           value={file}
           onChange={(file) => setFile(file)}
           placeholder={
-            <Group justify="center" gap={0}>
+            oldContent && oldContent.printout ? (
               <Text c="primary.5" size="sm" td="underline">
-                Upload new file
+                {oldContent.printout.name()}
               </Text>
-              <IconUpload className={classes.icon} />
-            </Group>
+            ) : (
+              <Group justify="center" gap={0}>
+                <Text c="primary.5" size="sm" td="underline">
+                  Upload new file
+                </Text>
+                <IconUpload className={classes.icon} />
+              </Group>
+            )
           }
         />
       </Stack>
