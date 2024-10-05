@@ -57,6 +57,12 @@
   border-radius: 0.8rem;
 }
 
+.contentContainer {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
 /* step 2 */
 .container {
   background-color: var(--mantine-color-neutral-1);

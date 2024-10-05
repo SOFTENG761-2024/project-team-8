@@ -142,8 +142,13 @@ const CreateLessonModal = () => {
               onSubmit={handleSubmit}
               style={{ height: "100%", width: "85%" }}
             >
-              <Stack h="100%" w="100%">
-                <Stack h="100%" w="100%" gap="xl">
+              <Stack h="100%" w="100%" className={classes.contentContainer}>
+                <Stack
+                  h="100%"
+                  w="100%"
+                  gap="l"
+                  style={{ flexGrow: 1, overflowY: "auto" }}
+                >
                   {/* step 1 */}
                   {active === 0 && <StepOne form={form} modules={modules} />}
                   {/* step 2 */}
@@ -160,7 +165,7 @@ const CreateLessonModal = () => {
                   )}
                 </Stack>
                 {/* navigation buttons */}
-                <Group className={classes.buttonGroup}>
+                <Group className={classes.buttonGroup} h="auto">
                   <Button
                     variant="filled"
                     onClick={prevStep}

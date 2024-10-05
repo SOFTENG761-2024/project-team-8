@@ -35,7 +35,7 @@ const StepThree: FC<StepThreeProps> = ({ form, contentLength }) => {
           </Anchor>
         </Text>
 
-        <Title size="h5" tt="uppercase" lts="0.08em" mt="5vh">
+        <Title size="h5" tt="uppercase" lts="0.08em" mt="3vh">
           Lesson summary
         </Title>
         <Stack w="100%" className={classes.summaryContainer}>
