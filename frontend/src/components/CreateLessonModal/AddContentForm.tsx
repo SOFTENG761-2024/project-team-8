@@ -84,7 +84,7 @@ export const AddContentForm: FC<AddContentFormProps> = ({
     <Stack>
       <Stack className={classes.container}>
         <TextInput
-          label={<FormLabel text="Title" />}
+          label={<FormLabel text="Title" required />}
           placeholder="Insert title of this section..."
           classNames={{ input: classes.whiteInput }}
           value={title}
@@ -104,7 +104,7 @@ export const AddContentForm: FC<AddContentFormProps> = ({
           classNames={{
             input: classes.fileText,
           }}
-          label={<FormLabel text="Resource upload" />}
+          label={<FormLabel text="Resource upload" required />}
           value={file}
           onChange={(file) => setFile(file)}
           placeholder={
