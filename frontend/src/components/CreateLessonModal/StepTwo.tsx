@@ -19,6 +19,8 @@ interface StepTwoProps {
 }
 const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
   const [editContent, setEditContent] = useState<Content | null>(null);
+  const [resetForm, setResetForm] = useState(false);
+
   const handleSave = (newContent: Content) => {
     console.log(newContent);
     setContents([...contents, newContent]); // Update parent state
@@ -31,6 +33,11 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
       );
     }
   };
+
+  const handleClearForm = () => {
+    setResetForm((prev) => !prev); // Toggle the reset state to trigger form reset
+  };
+
   return (
     <>
       <Group w="100%">
@@ -61,8 +68,12 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
                 setEditContent(selectedContent || null); // Set the entire object or null if not found
               }}
             />
-            <Button variant="outline" className={classes.addContentButton}>
-              ADD NEW CONTENT
+            <Button
+              variant="outline"
+              className={classes.addContentButton}
+              onClick={handleClearForm}
+            >
+              ADD CONTENT
             </Button>
           </Group>
         </Stack>
@@ -71,6 +82,7 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
           oldContent={editContent}
           onSave={handleSave}
           onDelete={handleDelete}
+          resetForm={resetForm}
         />
         {error && (
           <Text size="sm" c="accentRed.3">

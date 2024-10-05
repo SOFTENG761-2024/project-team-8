@@ -18,12 +18,14 @@ interface AddContentFormProps {
   oldContent: Content | null;
   onSave: (content: Content) => void;
   onDelete: () => void;
+  resetForm: boolean;
 }
 
 export const AddContentForm: FC<AddContentFormProps> = ({
   oldContent,
   onSave,
   onDelete,
+  resetForm,
 }) => {
   // Local state to manage form inputs
   const [title, setTitle] = useState(oldContent ? oldContent.title : "");
@@ -46,6 +48,11 @@ export const AddContentForm: FC<AddContentFormProps> = ({
       setFile(null);
     }
   }, [oldContent]); // Dependency array with oldContent
+
+  // Clear form when resetForm changes
+  useEffect(() => {
+    handleCleanContent(); // Clear form
+  }, [resetForm]);
 
   // Handle new content submission
   const handleNewContent = () => {
