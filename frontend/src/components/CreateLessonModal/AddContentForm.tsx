@@ -129,6 +129,7 @@ export const AddContentForm: FC<AddContentFormProps> = ({
         <Button
           variant="outline"
           className={`${classes.formButton} ${classes.deleteButton}`}
+          c="accentRed.5"
           onClick={handleDeleteContent}
         >
           DELETE CONTENT
