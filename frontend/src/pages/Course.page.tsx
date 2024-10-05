@@ -56,7 +56,7 @@ const CoursePage = () => {
       }
     };
     fetchCourseData();
-  });
+  }, []);
 
   const toggleIsComplete = async () => {
     try {
