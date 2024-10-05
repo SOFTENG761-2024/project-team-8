@@ -81,7 +81,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
     setDisplayAlert(true);
     setTimeout(() => {
       setDisplayAlert(false);
-    }, 1000);
+    }, 3000);
   }, [fullscreen]);
 
   return (
@@ -108,7 +108,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
                 className={
                   fullscreen ? styles.fullscreenView : styles.nonFullscreenView
                 }
-                loading={<Loader color="primary.5" />}
+                loading={<Loader color="primary.5" pt="2rem" />}
               />
             </Document>
           </Box>
