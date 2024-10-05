@@ -9,13 +9,13 @@ import CourseTag from "./CourseTag";
 
 interface CourseCardProps {
   course: Course;
-  isFavorite?: boolean;
+  isBookmarked?: boolean;
   isComplete?: boolean;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
   course,
-  isFavorite = false,
+  isBookmarked = false,
   isComplete = false,
 }) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
@@ -25,7 +25,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
     <Link
       to={`/user/courses/${course.id}`}
       style={{ textDecoration: "none" }}
-      // state={{ course }} // if we want to pass the course data to the next page
+    // state={{ course }} // if we want to pass the course data to the next page
     >
       <Card
         shadow="sm"
@@ -76,7 +76,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 direction={isSmallScreen ? "column" : "row"}
               >
                 {isComplete && <CourseTag variant="complete" />}
-                {isFavorite && <CourseTag variant="favorite" />}
+                {isBookmarked && <CourseTag variant="favorite" />}
               </Flex>
             </Box>
           </Grid.Col>
@@ -94,7 +94,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           <IconEye style={{ marginRight: "8px" }} /> View
         </Button>
       </Card>
-    </Link>
+    </Link >
   );
 };
 
