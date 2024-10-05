@@ -22,7 +22,6 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
   const [resetForm, setResetForm] = useState(false);
 
   const handleSave = (newContent: Content) => {
-    console.log(newContent);
     setContents([...contents, newContent]); // Update parent state
   };
 
