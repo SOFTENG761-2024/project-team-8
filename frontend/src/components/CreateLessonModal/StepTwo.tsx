@@ -30,6 +30,7 @@ const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
       setContents(
         contents.filter((content) => content.title != editContent.title)
       );
+      handleClearForm();
     }
   };
 
