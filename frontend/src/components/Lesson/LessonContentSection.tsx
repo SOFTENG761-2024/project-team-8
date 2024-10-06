@@ -1,22 +1,23 @@
 import { Group, Button, Stack, Title, Text, Divider } from "@mantine/core";
 import { IconArrowsMaximize, IconDownload } from "@tabler/icons-react";
 import PdfViewer from "../PdfViewer/PdfViewer";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { FullscreenContext } from "../../context/FullscreenContextProvider";
 
 interface LessonContentSectionProps {
   title: string;
   description: string;
   fileUrl: string;
-  setIsAnyPdfFullscreen: (fullscreen: boolean) => void;
 }
 
 const LessonContentSection = ({
   title,
   description,
   fileUrl,
-  setIsAnyPdfFullscreen: setIsAnyPdfFullscreen,
 }: LessonContentSectionProps) => {
   const [fullscreen, setFullscreen] = useState<boolean>(false);
+
+  const { setIsAnyPdfFullscreen } = useContext(FullscreenContext);
 
   const handlePdfFullscreen = () => {
     setFullscreen(true);
@@ -54,7 +55,6 @@ const LessonContentSection = ({
         url={fileUrl}
         fullscreen={fullscreen}
         setFullscreen={setFullscreen}
-        setIsAnyPdfFullscreen={setIsAnyPdfFullscreen}
       />
     </Stack>
   );

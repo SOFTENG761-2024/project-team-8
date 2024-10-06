@@ -1,9 +1,10 @@
 import { Box, Flex, Loader, Paper, Stack, Text } from "@mantine/core";
 import styles from "./PdfViewer.module.css";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 import PdfViewerNav from "./PdfViewerNav";
+import { FullscreenContext } from "../../context/FullscreenContextProvider";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -14,10 +15,9 @@ interface PdfViewerProps {
   url: string;
   fullscreen: boolean;
   setFullscreen: (fullscreen: boolean) => void;
-  setIsAnyPdfFullscreen: (fullscreen: boolean) => void;
 }
 
-interface OnLoadSuccessProps {
+interface OnLoadSuccessTypes {
   numPages: number;
 }
 
@@ -29,17 +29,14 @@ interface OnLoadSuccessProps {
  * @param {boolean} fullscreen - Indicates whether the viewer is in fullscreen mode.
  * @param {function} setFullscreen - A function to set the fullscreen mode of the viewer.
  */
-const PdfViewer = ({
-  url,
-  fullscreen,
-  setFullscreen,
-  setIsAnyPdfFullscreen: setIsAnyPdfFullscreen,
-}: PdfViewerProps) => {
+const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [displayAlerts, setDisplayAlerts] = useState<boolean>(false);
 
-  const onDocumentLoadSuccess = ({ numPages }: OnLoadSuccessProps): void => {
+  const { setIsAnyPdfFullscreen } = useContext(FullscreenContext);
+
+  const onDocumentLoadSuccess = ({ numPages }: OnLoadSuccessTypes): void => {
     setNumPages(numPages);
     setPageNumber(1);
   };

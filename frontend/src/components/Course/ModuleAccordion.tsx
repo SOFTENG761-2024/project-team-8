@@ -17,6 +17,7 @@ import LessonOverlay from "../Lesson/LessonOverlay";
 import { useDisclosure } from "@mantine/hooks";
 import { Lesson } from "../../interfaces/kit";
 import { CourseContext } from "./CourseContext";
+import { FullscreenContextProvider } from "../../context/FullscreenContextProvider";
 
 interface ModuleAccordionProps {
   module: {
@@ -29,7 +30,9 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
   const theme = useMantineTheme();
   const { currentCourseData } = useContext(CourseContext);
   const [opened, { open, close }] = useDisclosure(false);
-  const [initialLessonIndex, setInitialLessonIndex] = useState<number | null>(null);
+  const [initialLessonIndex, setInitialLessonIndex] = useState<number | null>(
+    null
+  );
 
   // opens modal and sets the selected lesson index
   const handleLessonClick = (index: number) => {
@@ -46,14 +49,18 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
   return (
     <>
       {initialLessonIndex !== null && (
-        <LessonOverlay
-          courseTitle={currentCourseData?.title + " - " + currentCourseData?.kit}
-          moduleTitle={module.title}
-          currentLessonIndex={initialLessonIndex} // current lesson index
-          moduleLessons={module.lessons} // full module lessons array, including content
-          opened={opened}
-          onClose={handleClose}
-        />
+        <FullscreenContextProvider>
+          <LessonOverlay
+            courseTitle={
+              currentCourseData?.title + " - " + currentCourseData?.kit
+            }
+            moduleTitle={module.title}
+            currentLessonIndex={initialLessonIndex} // current lesson index
+            moduleLessons={module.lessons} // full module lessons array, including content
+            opened={opened}
+            onClose={handleClose}
+          />
+        </FullscreenContextProvider>
       )}
 
       <Accordion

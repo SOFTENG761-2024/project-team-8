@@ -23,8 +23,9 @@ import {
 import styles from "./LessonOverlay.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 import LessonContentSection from "./LessonContentSection";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Lesson } from "../../interfaces/kit";
+import { FullscreenContext } from "../../context/FullscreenContextProvider";
 
 interface LessonOverlayProps extends ModalProps {
   courseTitle: string;
@@ -51,7 +52,7 @@ const LessonOverlay = ({
 
   const currentLesson = moduleLessons[lessonIndex]; // getting the current lesson
 
-  const [isAnyPdfFullscreen, setIsAnyPdfFullscreen] = useState<boolean>(false);
+  const { isAnyPdfFullscreen } = useContext(FullscreenContext);
 
   return (
     <Modal
@@ -207,7 +208,6 @@ const LessonOverlay = ({
                 title={title}
                 description={description}
                 fileUrl={printout.url()}
-                setIsAnyPdfFullscreen={setIsAnyPdfFullscreen}
               />
             )
           )}
