@@ -38,7 +38,6 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
 
   const onDocumentLoadSuccess = ({ numPages }: OnLoadSuccessTypes): void => {
     setNumPages(numPages);
-    setPageNumber(1);
   };
 
   const changePage = useCallback(
