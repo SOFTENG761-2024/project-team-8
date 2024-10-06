@@ -35,7 +35,7 @@ const PdfViewerNav: FC<PdfViewerNavProps> = ({
     <Group
       gap="2rem"
       m="0 auto"
-      className={`${styles.fullscrenNav} ${className}`}
+      className={`${styles.fullscreenNav} ${className}`}
     >
       <ActionIcon
         variant="transparent"
@@ -62,7 +62,7 @@ const PdfViewerNav: FC<PdfViewerNavProps> = ({
       </ActionIcon>
     </Group>
   ) : (
-    <Stack gap="3rem">
+    <Stack gap="3rem" className={styles.nonFullscreenNav}>
       <Tooltip label="Previous Page">
         <ActionIcon
           variant="transparent"

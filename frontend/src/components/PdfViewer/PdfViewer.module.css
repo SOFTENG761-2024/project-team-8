@@ -91,10 +91,6 @@
     width: fit-content;
 }
 
-.nonFullscreenView canvas {
-    border-radius: 1.25rem;
-}
-
 canvas {
     width: auto !important;
     height: 100% !important;

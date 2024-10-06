@@ -1,4 +1,4 @@
-.fullscrenNav {
+.fullscreenNav {
     position: absolute;
     bottom: 2rem;
     left: 50%;
@@ -8,27 +8,28 @@
     transition: opacity 0.5s;
     background-color: rgba(20, 28, 40, 0.75);
     padding: 0.5rem;
-    border-radius: 2rem;
+    border-radius: 0.5rem;
     color: var(--mantine-color-neutral-0);
 }
 
-.nonFullscreenNav {
-    color: var(--mantine-color-neutral-0);
-}
-
-.fullscrenNav:hover {
+.fullscreenNav:hover {
     opacity: 1;
     transition: opacity 0.5s;
 }
 
+.nonFullscreenNav {
+    color: var(--mantine-color-neutral-0);
+    padding-top: 2.2rem;
+}
+
 .arrowButtons {
-    background-color: var(--mantine-color-primary-2) !important;
-    color: var(--mantine-color-neutral-6) !important;
-    border-radius: 10rem;
+    background-color: var(--mantine-color-primary-3) !important;
+    color: var(--mantine-color-neutral-1) !important;
+    
     &:disabled,
     &[data-disabled] {
-        color: var(--mantine-color-neutral-3) !important;
+        color: var(--mantine-color-neutral-4) !important;
         border-color: none;
-        background-color: var(--mantine-color-neutral-1) !important;
+        background-color: var(--mantine-color-neutral-3) !important;
     }
 }
