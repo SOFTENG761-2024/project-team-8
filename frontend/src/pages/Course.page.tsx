@@ -16,8 +16,12 @@ import { useContext, useEffect, useState } from "react";
 import Parse from "../../parseconfig.ts";
 import { Course } from "../interfaces/kit.ts";
 import { CourseContext } from "../components/Course/CourseContext.tsx";
-import { useToggle } from "@mantine/hooks";
-import { IconBookmark, IconBookmarkFilled } from "@tabler/icons-react";
+import {
+  IconAward,
+  IconAwardFilled,
+  IconBookmark,
+  IconBookmarkFilled,
+} from "@tabler/icons-react";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
 
@@ -30,7 +34,7 @@ const CoursePage = () => {
   const { courseId } = useParams();
   const { currentUserData } = useContext(AuthContext);
   const theme = useMantineTheme();
-  const [isComplete, toggle] = useToggle(["Complete", "Incomplete"]);
+  const [isComplete, setIsComplete] = useState(false);
   const { currentCourseData, setCurrentCourseData } = useContext(CourseContext);
   const [summaryExpanded, setSummaryExpanded] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
@@ -48,11 +52,7 @@ const CoursePage = () => {
           userId: currentUserData?.id,
         });
         setCurrentCourseData(courseResult);
-        if (completedResult) {
-          toggle("Complete");
-        } else {
-          toggle("Incomplete");
-        }
+        setIsComplete(completedResult);
 
         // check if the current course is bookmarked using cloud function
         if (currentUserData) {
@@ -76,7 +76,7 @@ const CoursePage = () => {
         courseId: courseId,
         userId: currentUserData?.id,
       });
-      toggle();
+      setIsComplete(!isComplete);
     } catch (error) {
       console.log(error);
     }
@@ -112,30 +112,45 @@ const CoursePage = () => {
                 - {currentCourseData?.kit}
               </Text>
             </Title>
-            <Button onClick={toggleIsComplete}>{isComplete}</Button>
-            <Tooltip
-              multiline
-              label={
-                isBookmarked ? "Remove from bookmarks" : "Add to bookmarks"
-              }
-              position="bottom"
-              transitionProps={{ transition: "pop", duration: 300 }}
-            >
+            <Group>
               <Button
                 radius="xl"
-                bg={theme.colors.accentRed[1]}
-                c={theme.colors.accentRed[4]}
-                onClick={() => handleBookmark()}
+                bg={theme.colors.accentGreen[2]}
+                c={theme.colors.accentGreen[5]}
+                onClick={toggleIsComplete}
                 mr="xl"
               >
                 <Group align="center">
-                  {isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />}
+                  {isComplete ? <IconAwardFilled /> : <IconAward />}
                   <Text inherit>
-                    {isBookmarked ? "Unbookmark" : "Bookmark"}
+                    {isComplete ? "Mark as incomplete" : "Mark as complete"}
                   </Text>
                 </Group>
               </Button>
-            </Tooltip>
+              <Tooltip
+                multiline
+                label={
+                  isBookmarked ? "Remove from bookmarks" : "Add to bookmarks"
+                }
+                position="bottom"
+                transitionProps={{ transition: "pop", duration: 300 }}
+              >
+                <Button
+                  radius="xl"
+                  bg={theme.colors.accentRed[1]}
+                  c={theme.colors.accentRed[4]}
+                  onClick={() => handleBookmark()}
+                  mr="xl"
+                >
+                  <Group align="center">
+                    {isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />}
+                    <Text inherit>
+                      {isBookmarked ? "Unbookmark" : "Bookmark"}
+                    </Text>
+                  </Group>
+                </Button>
+              </Tooltip>
+            </Group>
           </Group>
           <Group justify="space-between" align="top" h="100%" mt="1rem">
             <Box h="100%">
