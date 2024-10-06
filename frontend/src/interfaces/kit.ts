@@ -8,7 +8,7 @@ export interface Kit {
 
 export interface Course {
   id: string;
-  title: string
+  title: string;
   kitTitle: string;
   yearLevel: string; // changed from number to string
   description: string;

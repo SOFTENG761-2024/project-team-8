@@ -9,18 +9,17 @@ import CourseTag from "./CourseTag";
 
 interface CourseCardProps {
   course: Course;
-  isFavorite?: boolean;
+  isBookmarked?: boolean;
   isComplete?: boolean;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
   course,
-  isFavorite = false,
+  isBookmarked = false,
   isComplete = false,
 }) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
-
   return (
     <Link
       to={`/user/courses/${course.id}`}
@@ -76,7 +75,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 direction={isSmallScreen ? "column" : "row"}
               >
                 {isComplete && <CourseTag variant="complete" />}
-                {isFavorite && <CourseTag variant="favorite" />}
+                {isBookmarked && <CourseTag variant="favorite" />}
               </Flex>
             </Box>
           </Grid.Col>

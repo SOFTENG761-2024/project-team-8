@@ -49,7 +49,6 @@ const LessonOverlay = ({
 
   // tracking the current lesson index locally within the overlay
   const [lessonIndex, setLessonIndex] = useState(initialLessonIndex);
-
   const currentLesson = moduleLessons[lessonIndex]; // getting the current lesson
 
   const { isAnyPdfFullscreen } = useContext(FullscreenContext);

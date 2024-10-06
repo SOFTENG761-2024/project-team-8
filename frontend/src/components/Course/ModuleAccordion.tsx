@@ -5,6 +5,7 @@ import {
   Stack,
   Text,
   useMantineTheme,
+  Tooltip,
 } from "@mantine/core";
 import {
   IconBook2,
@@ -91,17 +92,28 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
           <Accordion.Panel>
             <Stack>
               {module.lessons.map((lesson, index) => (
-                <Box
-                  key={lesson.title}
-                  className={styles.lessonCard}
-                  p="1rem"
-                  onClick={() => handleLessonClick(index)}
+                <Tooltip
+                  arrowOffset={10}
+                  arrowSize={5}
+                  withArrow
+                  label={"Open Lesson"}
+                  transitionProps={{ transition: "fade-down", duration: 300 }}
+                  position="bottom"
+                  color="neutral.5"
+                  offset={5}
                 >
-                  <Group>
-                    <IconFile />
-                    <Text c="neutral.5">{lesson.title}</Text>
-                  </Group>
-                </Box>
+                  <Box
+                    key={lesson.title}
+                    className={styles.lessonCard}
+                    p="1rem"
+                    onClick={() => handleLessonClick(index)}
+                  >
+                    <Group>
+                      <IconFile />
+                      <Text c="neutral.5">{lesson.title}</Text>
+                    </Group>
+                  </Box>
+                </Tooltip>
               ))}
             </Stack>
           </Accordion.Panel>

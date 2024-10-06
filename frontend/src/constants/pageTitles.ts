@@ -4,6 +4,7 @@ export const PAGE_TITLES: Record<string, string> = {
   DASHBOARD: "Dashboard",
   COURSE: "Course Details",
   DEFAULT: "ByteEd",
+  BOOKMARKS: "Bookmarked Courses",
 };
 
 /**
