@@ -113,20 +113,26 @@ const CoursePage = () => {
               </Text>
             </Title>
             <Group>
-              <Button
-                radius="xl"
-                bg={theme.colors.accentGreen[2]}
-                c={theme.colors.accentGreen[5]}
-                onClick={toggleIsComplete}
-                mr="xl"
+              <Tooltip
+                multiline
+                label={
+                  isComplete
+                    ? "Mark this course as incomplete"
+                    : "Mark this course as complete"
+                }
+                position="bottom"
+                transitionProps={{ transition: "pop", duration: 300 }}
               >
-                <Group align="center">
-                  {isComplete ? <IconAwardFilled /> : <IconAward />}
-                  <Text inherit>
-                    {isComplete ? "Mark as incomplete" : "Mark as complete"}
-                  </Text>
-                </Group>
-              </Button>
+                <Button
+                  radius="xl"
+                  bg={theme.colors.accentGreen[2]}
+                  c={theme.colors.accentGreen[5]}
+                  onClick={toggleIsComplete}
+                  leftSection={isComplete ? <IconAwardFilled /> : <IconAward />}
+                >
+                  {isComplete ? "Mark as incomplete" : "Mark as complete"}
+                </Button>
+              </Tooltip>
               <Tooltip
                 multiline
                 label={
@@ -140,14 +146,12 @@ const CoursePage = () => {
                   bg={theme.colors.accentRed[1]}
                   c={theme.colors.accentRed[4]}
                   onClick={() => handleBookmark()}
-                  mr="xl"
+                  leftSection={
+                    isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />
+                  }
+                  mr={"1rem"}
                 >
-                  <Group align="center">
-                    {isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />}
-                    <Text inherit>
-                      {isBookmarked ? "Unbookmark" : "Bookmark"}
-                    </Text>
-                  </Group>
+                  {isBookmarked ? "Unbookmark" : "Bookmark"}
                 </Button>
               </Tooltip>
             </Group>
