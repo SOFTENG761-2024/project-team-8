@@ -1,6 +1,7 @@
-import { ActionIcon, rem, Stack, Text, Divider } from "@mantine/core";
+import { ActionIcon, rem, Stack, Text, Divider, Tooltip } from "@mantine/core";
 import classes from "./NavBar.module.css";
 import {
+  IconBookmarkFilled,
   IconChevronRight,
   IconHomeFilled,
   IconLogout,
@@ -57,7 +58,10 @@ const Navbar = () => {
     setExpanded(!expanded);
   };
   const links = [
+    
     { icon: IconHomeFilled, label: "Dashboard", path: "/user" },
+    { icon: IconBookmarkFilled, label: "Bookmarks", path: "/user/bookmarks" },
+  ,
     { icon: IconBookFilled, label: "Browse", path: "/user/browse" }
   ];
   const navbarItems = links.map((link) => {
@@ -89,27 +93,60 @@ const Navbar = () => {
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}
     >
       <Text className={classes.menuHeading}>MENU</Text>
-      <ActionIcon className={classes.expandIcon} onClick={toggleExpand}>
-        <IconChevronRight />
-      </ActionIcon>
+      <Tooltip
+        label={expanded ? "Collapse Navbar" : "Open Navbar"}
+        transitionProps={{ transition: "fade-right", duration: 250 }}
+        position="right"
+        color="neutral.5"
+        offset={10}
+      >
+        <ActionIcon className={classes.expandIcon} onClick={toggleExpand}>
+          <IconChevronRight />
+        </ActionIcon>
+      </Tooltip>
       <Stack gap="2vh" className={classes.navbarMain}>
         {navbarItems}
       </Stack>
 
       <Stack gap="1vh" style={{ width: "100%" }}>
         <Divider color="primary.3" />
-        <Link
-          to="/login"
-          style={{ textDecoration: "none" }}
-          onClick={() => logout()}
-        >
-          <NavbarLink
-            key={"Logout"}
-            expanded={expanded}
-            icon={IconLogout}
-            label={"Logout"}
-          />
-        </Link>
+        {expanded ? (
+          // Render without Tooltip when expanded is true
+          <Link
+            to="/login"
+            style={{ textDecoration: "none" }}
+            onClick={() => logout()}
+          >
+            <NavbarLink
+              key={"Logout"}
+              expanded={expanded}
+              icon={IconLogout}
+              label={"Logout"}
+            />
+          </Link>
+        ) : (
+          // renders with Tooltip when navbar is collapsed
+          <Tooltip
+            label="Log Out"
+            transitionProps={{ transition: "fade-right", duration: 250 }}
+            position="right"
+            color="neutral.5"
+            offset={10}
+          >
+            <Link
+              to="/login"
+              style={{ textDecoration: "none" }}
+              onClick={() => logout()}
+            >
+              <NavbarLink
+                key={"Logout"}
+                expanded={expanded}
+                icon={IconLogout}
+                label={"Logout"}
+              />
+            </Link>
+          </Tooltip>
+        )}
       </Stack>
     </nav>
   );

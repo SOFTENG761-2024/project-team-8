@@ -1,6 +1,6 @@
 .input {
   &[data-variant="filled"] {
-    background-color: var(--mantine-color-primary-0);
+    background-color: var(--mantine-color-neutral-1);
     border-radius: 12px;
     padding: 0.5rem 1rem;
     line-height: 2;
@@ -16,6 +16,10 @@
       }
     }
   }
+}
+
+.input::placeholder {
+  color: var(--mantine-color-neutral-4);
 }
 
 label {
