@@ -93,6 +93,7 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
             <Stack>
               {module.lessons.map((lesson, index) => (
                 <Tooltip
+                  key={lesson.id}
                   arrowOffset={10}
                   arrowSize={5}
                   withArrow

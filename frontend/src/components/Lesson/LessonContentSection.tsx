@@ -1,4 +1,4 @@
-import { Group, Button, Stack, Title, Text, Divider } from "@mantine/core";
+import { Group, Button, Stack, Title, Text, Divider, Box } from "@mantine/core";
 import { IconArrowsMaximize, IconDownload } from "@tabler/icons-react";
 import PdfViewer from "../PdfViewer/PdfViewer";
 import { useContext, useState } from "react";
@@ -34,28 +34,32 @@ const LessonContentSection = ({
       </Title>
       <Text ta="justify"> {description}</Text>
       {/* PDF button group */}
-      <Group justify="center" gap="1rem" py="0.5rem">
-        <a target="_blank" href={fileUrl}>
-          <Button
-            variant="filled"
-            leftSection={<IconDownload size="1.25rem" />}
-          >
-            Download File
-          </Button>
-        </a>
-        <Button
-          variant="filled"
-          leftSection={<IconArrowsMaximize size="1.25rem" />}
-          onClick={handlePdfFullscreen}
-        >
-          View Fullscreen
-        </Button>
-      </Group>
-      <PdfViewer
-        url={fileUrl}
-        fullscreen={fullscreen}
-        setFullscreen={setFullscreen}
-      />
+      {fileUrl && (
+        <Box>
+          <Group justify="center" gap="1rem" py="0.5rem">
+            <a target="_blank" href={fileUrl}>
+              <Button
+                variant="filled"
+                leftSection={<IconDownload size="1.25rem" />}
+              >
+                Download File
+              </Button>
+            </a>
+            <Button
+              variant="filled"
+              leftSection={<IconArrowsMaximize size="1.25rem" />}
+              onClick={handlePdfFullscreen}
+            >
+              View Fullscreen
+            </Button>
+          </Group>
+          <PdfViewer
+            url={fileUrl}
+            fullscreen={fullscreen}
+            setFullscreen={setFullscreen}
+          />
+        </Box>
+      )}
     </Stack>
   );
 };

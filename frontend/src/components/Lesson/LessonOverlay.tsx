@@ -206,7 +206,7 @@ const LessonOverlay = ({
                 key={index}
                 title={title}
                 description={description}
-                fileUrl={printout.url()}
+                fileUrl={printout && printout.url()}
               />
             )
           )}
