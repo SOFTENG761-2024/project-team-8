@@ -13,16 +13,15 @@ import {
 } from "@mantine/core";
 import { useContext, useEffect, useState } from "react";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
-import { formattedPageTitle } from "../constants/pageTitles.ts";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
+import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 // defininng the Course type and create some dummy data
 export interface Course {
-  id: string | number;
+  id: string;
   title: string;
   kitName: string;
   lessons: number;
-  status: string;
   image: Parse.File;
 }
 
@@ -34,7 +33,7 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const { currentUserData } = useContext(AuthContext);
-
+  const [bookmarkedCourses, setBookmarkedCourses] = useState<string[]>([]);
   const [completedCourseIds, setCompletedCourseIds] = useState<string[]>([]);
   useEffect(() => {
     document.title = formattedPageTitle("DASHBOARD");
@@ -50,6 +49,16 @@ const DashboardPage = () => {
           userId: currentUserData?.id,
         });
         setCompletedCourseIds(completedCourses);
+        // Fetch bookmarked course IDs
+        const bookmarkResults = await Parse.Cloud.run("getBookmarkedCourses", {
+          userId: currentUserData?.id,
+        });
+
+        // Extract and store just the course IDs
+        const bookmarkedCourseIds = bookmarkResults.map(
+          (course: Course) => course.id
+        );
+        setBookmarkedCourses(bookmarkedCourseIds);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -70,10 +79,6 @@ const DashboardPage = () => {
             return a.title.localeCompare(b.title);
           case "name-desc":
             return b.title.localeCompare(a.title);
-          case "completed":
-            return a.status === "Completed" ? -1 : 1;
-          case "active":
-            return a.status === "Active" ? -1 : 1;
           default:
             return 0;
         }
@@ -104,8 +109,6 @@ const DashboardPage = () => {
               data={[
                 { value: "all", label: "All" },
                 { value: "recently-viewed", label: "Recently Viewed" },
-                { value: "active", label: "Active" },
-                { value: "completed", label: "Completed" },
                 { value: "name-asc", label: "Name A-Z" },
                 { value: "name-desc", label: "Name Z-A" },
               ]}
@@ -128,7 +131,8 @@ const DashboardPage = () => {
           ) : (
             <CourseCardCollection
               courses={filteredCourses}
-              completedCourseIdList={completedCourseIds}
+              completedCourseIds={completedCourseIds}
+              bookmarkedCourseIds={bookmarkedCourses}
             />
           )}
         </Box>

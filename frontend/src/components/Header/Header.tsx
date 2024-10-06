@@ -20,6 +20,8 @@ const Header = () => {
       setPage("Dashboard");
     } else if (path.includes("courses")) {
       setPage("Course Details");
+    } else if (path.includes("bookmarks")) {
+      setPage("Bookmarked Courses");
     } else {
       // CAN ADD MORE!
       setPage("");

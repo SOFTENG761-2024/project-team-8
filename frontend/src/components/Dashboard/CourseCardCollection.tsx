@@ -5,12 +5,14 @@ import { Course } from "../../pages/Dashboard.page";
 
 interface CourseCardCollectionProps {
   courses: Course[];
-  completedCourseIdList: string[];
+  completedCourseIds: string[];
+  bookmarkedCourseIds: string[];
 }
 
 const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
   courses,
-  completedCourseIdList,
+  completedCourseIds,
+  bookmarkedCourseIds,
 }) => {
   // Setting the active page for pagination
   const [activePage, setPage] = useState(1);
@@ -42,7 +44,8 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
               >
                 <CourseCard
                   course={course}
-                  isComplete={completedCourseIdList.includes(
+                  isComplete={completedCourseIds.includes(course.id.toString())}
+                  isBookmarked={bookmarkedCourseIds.includes(
                     course.id.toString()
                   )}
                 />

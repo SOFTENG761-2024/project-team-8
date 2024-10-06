@@ -7,6 +7,7 @@ import {
   Loader,
   Text,
   Title,
+  Tooltip,
   useMantineTheme,
 } from "@mantine/core";
 import CourseContent from "../components/Course/CourseContent";
@@ -16,6 +17,7 @@ import Parse from "../../parseconfig.ts";
 import { Course } from "../interfaces/kit.ts";
 import { CourseContext } from "../components/Course/CourseContext.tsx";
 import { useToggle } from "@mantine/hooks";
+import { IconBookmark, IconBookmarkFilled } from "@tabler/icons-react";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
 
@@ -32,6 +34,7 @@ const CoursePage = () => {
   const { currentCourseData, setCurrentCourseData } = useContext(CourseContext);
   const [summaryExpanded, setSummaryExpanded] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   useEffect(() => {
     document.title = formattedPageTitle("COURSE");
 
@@ -50,27 +53,50 @@ const CoursePage = () => {
         } else {
           toggle("Incomplete");
         }
+
+        // check if the current course is bookmarked using cloud function
+        if (currentUserData) {
+          const isBookmarked = await Parse.Cloud.run("isCourseBookmarked", {
+            courseId: courseId,
+            userId: currentUserData.id,
+          });
+          setIsBookmarked(isBookmarked);
+        }
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
     fetchCourseData();
-  }, []);
+  }, [courseId, currentUserData]);
 
   const toggleIsComplete = async () => {
     try {
-      const result = await Parse.Cloud.run("toggleCompleteCourse", {
+      await Parse.Cloud.run("toggleCompleteCourse", {
         courseId: courseId,
         userId: currentUserData?.id,
       });
-      console.log(result);
       toggle();
     } catch (error) {
       console.log(error);
     }
   };
+  const handleBookmark = async () => {
+    if (!currentUserData) {
+      console.log("No user is logged in.");
+      return;
+    }
 
+    try {
+      await Parse.Cloud.run("toggleBookmarkCourse", {
+        courseId: courseId,
+        userId: currentUserData.id, // user logged in ID
+      });
+      setIsBookmarked(!isBookmarked);
+    } catch (error) {
+      console.error("Error toggling bookmarking:", error);
+    }
+  };
   return (
     <Box h="100%" w="100%">
       {loading ? (
@@ -79,7 +105,7 @@ const CoursePage = () => {
         </Center>
       ) : (
         <>
-          <Group justify="space-between">
+          <Group align="center" justify="space-between">
             <Title order={3} c="primary.5">
               {currentCourseData?.title + " "}
               <Text inherit span c="primary.3">
@@ -87,6 +113,29 @@ const CoursePage = () => {
               </Text>
             </Title>
             <Button onClick={toggleIsComplete}>{isComplete}</Button>
+            <Tooltip
+              multiline
+              label={
+                isBookmarked ? "Remove from bookmarks" : "Add to bookmarks"
+              }
+              position="bottom"
+              transitionProps={{ transition: "pop", duration: 300 }}
+            >
+              <Button
+                radius="xl"
+                bg={theme.colors.accentRed[1]}
+                c={theme.colors.accentRed[4]}
+                onClick={() => handleBookmark()}
+                mr="xl"
+              >
+                <Group align="center">
+                  {isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />}
+                  <Text inherit>
+                    {isBookmarked ? "Unbookmark" : "Bookmark"}
+                  </Text>
+                </Group>
+              </Button>
+            </Tooltip>
           </Group>
           <Group justify="space-between" align="top" h="100%" mt="1rem">
             <Box h="100%">
@@ -102,5 +151,4 @@ const CoursePage = () => {
     </Box>
   );
 };
-
 export default CoursePage;

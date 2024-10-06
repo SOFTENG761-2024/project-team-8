@@ -54,4 +54,89 @@
 
 .button {
   width: 8rem;
+  border-radius: 0.8rem;
+}
+
+.contentContainer {
+  overflow: auto;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* step 2 */
+.container {
+  background-color: var(--mantine-color-neutral-1);
+  border-radius: 1rem;
+  height: 100%;
+  min-width: fit-content;
+  width: 100%;
+  padding: 1rem;
+}
+
+.buttonContainer {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.formButton {
+  width: 47%;
+  font-size: calc(0.3vw + 0.5rem);
+  color: var(--mantine-color-primary-5);
+  border-color: var(--mantine-color-primary-5);
+  border-radius: 0.8rem;
+}
+
+.saveButton {
+  color: var(--mantine-color-accentGreen-5);
+  border-color: var(--mantine-color-accentGreen-5);
+  border-radius: 0.8rem;
+}
+
+.deleteButton {
+  color: var(--mantine-color-accentRed-5);
+  border-color: var(--mantine-color-accentRed-5);
+  border-radius: 0.8rem;
+}
+
+.addContentButton {
+  border-radius: 0.8rem;
+  border-color: var(--mantine-color-primary-5);
+  font-size: 0.8rem;
+}
+
+.whiteInput {
+  border: none;
+}
+
+.whiteInput::placeholder {
+  font-style: italic;
+}
+
+.icon {
+  color: var(--mantine-color-primary-5);
+  height: 1.2rem;
+  stroke-width: 2px;
+}
+
+.confirmIcon {
+  color: var(--mantine-color-accentGreen-3);
+}
+
+.errorIcon {
+  color: var(--mantine-color-accentRed-3);
+}
+
+.summaryContainer {
+  background-color: var(--mantine-color-neutral-1);
+  padding: 2rem 1.5rem;
+  border-radius: 0.8rem;
+  max-width: 600px;
+}
+
+.fileText {
+  text-align: center;
+  border: none;
+  text-decoration: underline;
+  color: var(--mantine-color-primary-5);
 }
