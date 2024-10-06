@@ -13,16 +13,7 @@ import {
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
-
-// defininng the Course type and create some dummy data
-export interface Course {
-  id: string | number;
-  title: string;
-  kitName: string;
-  lessons: number;
-  status: string;
-  image: Parse.File;
-}
+import { Course } from "./Dashboard.page.tsx";
 
 const BrowsePage = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -118,7 +109,7 @@ const BrowsePage = () => {
               />
             </Center>
           ) : (
-            <CourseCardCollection courses={filteredCourses} unsubscribed={true}/>
+            <CourseCardCollection courses={filteredCourses} unsubscribed={true} completedCourseIds={[]} bookmarkedCourseIds={[]}/>
           )}
         </Box>
       </Stack>

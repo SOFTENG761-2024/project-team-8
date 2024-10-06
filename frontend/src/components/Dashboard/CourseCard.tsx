@@ -118,7 +118,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             variant="filled"
             bg="var(--mantine-color-primary-5)"
             style={{
-              position: 'absolute',
+              position: !isSmallScreen ? "absolute" : "static",
               bottom: '20px',
               right: '20px',
             }}
