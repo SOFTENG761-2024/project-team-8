@@ -36,9 +36,15 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   const { setIsAnyPdfFullscreen } = useContext(FullscreenContext);
   const [pdfSize, setPdfSize] = useState({ width: 0, height: 0 });
   const pdfCanvasRef = useRef(null);
+  const [documentLoaded, setdocumentLoaded] = useState<boolean>(false);
 
   const onDocumentLoadSuccess = ({ numPages }: OnLoadSuccessTypes): void => {
     setNumPages(numPages);
+    setdocumentLoaded(true);
+  };
+
+  const onDocumentLoading = () => {
+    setdocumentLoaded(false);
   };
 
   const changePage = useCallback(
@@ -127,67 +133,60 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
           />
         </Stack>
       ) : (
-        <Flex
-          direction="row"
-          wrap="nowrap"
-          align="center"
-          className={styles.viewerBackground}
-        >
-          <Stack gap="0">
-            <Text
-              size="1.1rem"
-              c="neutral.2"
-              ta="center"
-              py="0.7rem"
-              tt="uppercase"
-            >
-              Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
-            </Text>
-            <Document
-              file={url}
-              onLoadSuccess={onDocumentLoadSuccess}
-              className={styles.nonFullscreenView}
-              loading={
-                <Flex
-                  w="34vw"
-                  h="100%"
-                  justify="center"
-                  align="center"
-                  pt="2rem"
-                >
-                  <Loader color="primary.2" />
-                </Flex>
-              }
-            >
-              <Page
-                canvasRef={pdfCanvasRef}
-                canvasBackground="transparent"
-                pageNumber={pageNumber}
-                renderAnnotationLayer={false}
-                renderTextLayer={false}
+        <>
+          {!documentLoaded && <Loader color="primary.5" />}
+          <Flex
+            direction="row"
+            wrap="nowrap"
+            align="center"
+            className={documentLoaded ? styles.viewerBackground : styles.hidden} // only render pdf view once document is fully loaded
+          >
+            <Stack gap="0">
+              <Text
+                size="1.1rem"
+                c="neutral.2"
+                ta="center"
+                py="0.7rem"
+                tt="uppercase"
+              >
+                Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
+              </Text>
+              <Document
+                file={url}
+                onLoadProgress={onDocumentLoading}
+                onLoadSuccess={onDocumentLoadSuccess}
                 className={styles.nonFullscreenView}
-                onRenderSuccess={handlePageRenderSuccess}
-                loading={
-                  <Flex
-                    w={pdfSize.width}
-                    h={pdfSize.height}
-                    justify="center"
-                    align="center"
-                    pt="2rem"
-                  >
-                    <Loader color="primary.2" />
-                  </Flex>
-                }
-              />
-            </Document>
-          </Stack>
-          <PdfViewerNav
-            changePage={changePage}
-            pageNumber={pageNumber}
-            numPages={numPages}
-            fullscreen={fullscreen}
-          />
-        </Flex>
+              >
+                <Page
+                  canvasRef={pdfCanvasRef}
+                  canvasBackground="transparent"
+                  pageNumber={pageNumber}
+                  renderAnnotationLayer={false}
+                  renderTextLayer={false}
+                  className={styles.nonFullscreenView}
+                  onRenderSuccess={handlePageRenderSuccess}
+                  loading={
+                    <Flex
+                      w={pdfSize.width}
+                      h={pdfSize.height}
+                      justify="center"
+                      align="center"
+                      pt="2rem"
+                    >
+                      <Loader color="primary.2" />
+                    </Flex>
+                  }
+                />
+              </Document>
+            </Stack>
+            <PdfViewerNav
+              changePage={changePage}
+              pageNumber={pageNumber}
+              numPages={numPages}
+              fullscreen={fullscreen}
+            />
+          </Flex>
+        </>
       )}
       {fullscreen && (
         <Box className={styles.alertContainer}>
