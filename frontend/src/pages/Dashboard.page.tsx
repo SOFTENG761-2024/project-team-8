@@ -25,6 +25,9 @@ export interface Course {
   image: Parse.File;
 }
 
+/**
+ * Page containing the content used to populate the dashboard, main functionality to display the user's courses
+ */
 const DashboardPage = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const theme = useMantineTheme();
