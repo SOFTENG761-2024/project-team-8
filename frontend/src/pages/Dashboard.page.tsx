@@ -35,7 +35,7 @@ const DashboardPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const { currentUserData } = useContext(AuthContext);
 
-  const [completedCourses, setCompletedCourses] = useState<string[]>([]);
+  const [completedCourseIds, setCompletedCourseIds] = useState<string[]>([]);
   useEffect(() => {
     document.title = formattedPageTitle("DASHBOARD");
   }, []);
@@ -49,7 +49,7 @@ const DashboardPage = () => {
         const completedCourses = await Parse.Cloud.run("getCompletedCourses", {
           userId: currentUserData?.id,
         });
-        setCompletedCourses(completedCourses);
+        setCompletedCourseIds(completedCourses);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -128,7 +128,7 @@ const DashboardPage = () => {
           ) : (
             <CourseCardCollection
               courses={filteredCourses}
-              completedCourseList={completedCourses}
+              completedCourseIdList={completedCourseIds}
             />
           )}
         </Box>
