@@ -18,7 +18,7 @@ import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 // defininng the Course type and create some dummy data
 export interface Course {
-  id: string;
+  id: string | number;
   title: string;
   kitName: string;
   lessons: number;
@@ -129,15 +129,11 @@ const DashboardPage = () => {
               />
             </Center>
           ) : (
-<<<<<<< HEAD
-            <CourseCardCollection courses={filteredCourses} unsubscribed={false} />
-=======
             <CourseCardCollection
-              courses={filteredCourses}
+              courses={filteredCourses} unsubscribed={false}
               completedCourseIds={completedCourseIds}
               bookmarkedCourseIds={bookmarkedCourses}
             />
->>>>>>> main
           )}
         </Box>
       </Stack>

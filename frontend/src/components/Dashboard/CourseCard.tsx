@@ -48,7 +48,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             Description:
           </Text>
           <Text size="sm" c="gray">
-            {course?.description || "No description available"}
+            {"No description available"}
           </Text>
         </Stack>
       </Modal>
