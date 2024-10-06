@@ -20,12 +20,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
-
   return (
     <Link
       to={`/user/courses/${course.id}`}
       style={{ textDecoration: "none" }}
-    // state={{ course }} // if we want to pass the course data to the next page
+      // state={{ course }} // if we want to pass the course data to the next page
     >
       <Card
         shadow="sm"
@@ -94,7 +93,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           <IconEye style={{ marginRight: "8px" }} /> View
         </Button>
       </Card>
-    </Link >
+    </Link>
   );
 };
 

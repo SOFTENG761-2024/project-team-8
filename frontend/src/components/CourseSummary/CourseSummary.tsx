@@ -10,10 +10,16 @@ import {
   IconStarFilled,
   IconUserFilled,
 } from "@tabler/icons-react";
-import { Accordion, ActionIcon, Image, List, Text, Tooltip } from "@mantine/core";
+import {
+  Accordion,
+  ActionIcon,
+  Image,
+  List,
+  Text,
+  Tooltip,
+} from "@mantine/core";
 import { CourseSummaryTopic } from "../../interfaces/componentInterfaces.ts";
 import { CourseContext } from "../Course/CourseContext.tsx";
-
 
 interface CourseSummaryProps {
   summaryExpanded: boolean;
@@ -31,7 +37,17 @@ export const CourseSummary = ({
   return (
     <div className={classes.courseSummaryContainer}>
       <CourseSummaryBase isExpanded={summaryExpanded} />
-      <Tooltip multiline w={"130"} label={summaryExpanded ? "Collapse Course Summary" : "Expand Course Summary"} transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" color="neutral.5" offset={10}>
+      <Tooltip
+        multiline
+        w={"130"}
+        label={
+          summaryExpanded ? "Collapse Course Summary" : "Expand Course Summary"
+        }
+        transitionProps={{ transition: "fade-right", duration: 250 }}
+        position="right"
+        color="neutral.5"
+        offset={10}
+      >
         <ActionIcon
           variant="filled"
           color="secondary.6"
@@ -44,7 +60,7 @@ export const CourseSummary = ({
             <IconChevronRight className={classes.icon} stroke={3} />
           )}
         </ActionIcon>
-      </Tooltip >
+      </Tooltip>
     </div>
   );
 };
@@ -117,8 +133,7 @@ const SummaryTopics = () => {
       information: "Teachers or Tutors",
     },
   ];
-}
-
+};
 
 interface SummaryAccordionProps {
   topics: CourseSummaryTopic[];

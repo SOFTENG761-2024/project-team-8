@@ -30,7 +30,9 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
   const theme = useMantineTheme();
   const { currentCourseData } = useContext(CourseContext);
   const [opened, { open, close }] = useDisclosure(false);
-  const [initialLessonIndex, setInitialLessonIndex] = useState<number | null>(null);
+  const [initialLessonIndex, setInitialLessonIndex] = useState<number | null>(
+    null
+  );
 
   // opens modal and sets the selected lesson index
   const handleLessonClick = (index: number) => {
@@ -48,7 +50,9 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
     <>
       {initialLessonIndex !== null && (
         <LessonOverlay
-          courseTitle={currentCourseData?.title + " - " + currentCourseData?.kit}
+          courseTitle={
+            currentCourseData?.title + " - " + currentCourseData?.kit
+          }
           moduleTitle={module.title}
           currentLessonIndex={initialLessonIndex} // current lesson index
           moduleLessons={module.lessons} // full module lessons array, including content
@@ -85,7 +89,16 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
           <Accordion.Panel>
             <Stack>
               {module.lessons.map((lesson, index) => (
-                <Tooltip arrowOffset={10} arrowSize={5} withArrow label={"Open Lesson"} transitionProps={{ transition: 'fade-down', duration: 300 }} position="bottom" color="neutral.5" offset={5}>
+                <Tooltip
+                  arrowOffset={10}
+                  arrowSize={5}
+                  withArrow
+                  label={"Open Lesson"}
+                  transitionProps={{ transition: "fade-down", duration: 300 }}
+                  position="bottom"
+                  color="neutral.5"
+                  offset={5}
+                >
                   <Box
                     key={lesson.title}
                     className={styles.lessonCard}
@@ -96,7 +109,6 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
                       <IconFile />
                       <Text c="neutral.5">{lesson.title}</Text>
                     </Group>
-
                   </Box>
                 </Tooltip>
               ))}

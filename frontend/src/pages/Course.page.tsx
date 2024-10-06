@@ -16,7 +16,12 @@ import { useContext, useEffect, useState } from "react";
 import Parse from "../../parseconfig.ts";
 import { Course } from "../interfaces/kit.ts";
 import { CourseContext } from "../components/Course/CourseContext.tsx";
-import { IconBookmark, IconBookmarkFilled } from "@tabler/icons-react";
+import {
+  IconAward,
+  IconAwardFilled,
+  IconBookmark,
+  IconBookmarkFilled,
+} from "@tabler/icons-react";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
 
@@ -27,22 +32,27 @@ export interface CoursePage extends Course {
 
 const CoursePage = () => {
   const { courseId } = useParams();
+  const { currentUserData } = useContext(AuthContext);
   const theme = useMantineTheme();
+  const [isComplete, setIsComplete] = useState(false);
   const { currentCourseData, setCurrentCourseData } = useContext(CourseContext);
   const [summaryExpanded, setSummaryExpanded] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
-  const { currentUserData } = useContext(AuthContext);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   useEffect(() => {
     document.title = formattedPageTitle("COURSE");
 
     const fetchCourseData = async () => {
       try {
-        const results = await Parse.Cloud.run("getCourse", {
+        const courseResult = await Parse.Cloud.run("getCourse", {
           courseId: courseId,
         });
-        setCurrentCourseData(results);
-        setLoading(false);
+        const completedResult = await Parse.Cloud.run("isCourseCompleted", {
+          courseId: courseId,
+          userId: currentUserData?.id,
+        });
+        setCurrentCourseData(courseResult);
+        setIsComplete(completedResult);
 
         // check if the current course is bookmarked using cloud function
         if (currentUserData) {
@@ -52,6 +62,7 @@ const CoursePage = () => {
           });
           setIsBookmarked(isBookmarked);
         }
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -59,6 +70,17 @@ const CoursePage = () => {
     fetchCourseData();
   }, [courseId, currentUserData]);
 
+  const toggleIsComplete = async () => {
+    try {
+      await Parse.Cloud.run("toggleCompleteCourse", {
+        courseId: courseId,
+        userId: currentUserData?.id,
+      });
+      setIsComplete(!isComplete);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleBookmark = async () => {
     if (!currentUserData) {
       console.log("No user is logged in.");
@@ -90,26 +112,49 @@ const CoursePage = () => {
                 - {currentCourseData?.kit}
               </Text>
             </Title>
-            <Tooltip
-              multiline
-              label={isBookmarked ? "Remove from bookmarks" : "Add to bookmarks"}
-              position="bottom"
-              transitionProps={{ transition: 'pop', duration: 300 }}
-            >
-              <Button
-                radius="xl"
-                bg={theme.colors.accentRed[1]}
-                c={theme.colors.accentRed[4]}
-                onClick={() => handleBookmark()}
-                mr="xl"
+            <Group>
+              <Tooltip
+                multiline
+                label={
+                  isComplete
+                    ? "Mark this course as incomplete"
+                    : "Mark this course as complete"
+                }
+                position="bottom"
+                transitionProps={{ transition: "pop", duration: 300 }}
               >
-                <Group align="center">
-                  {isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />}
-                  <Text inherit>{isBookmarked ? "Unbookmark" : "Bookmark"}</Text>
-                </Group>
-              </Button>
-            </Tooltip>
-
+                <Button
+                  radius="xl"
+                  bg={theme.colors.accentGreen[2]}
+                  c={theme.colors.accentGreen[5]}
+                  onClick={toggleIsComplete}
+                  leftSection={isComplete ? <IconAwardFilled /> : <IconAward />}
+                >
+                  {isComplete ? "Mark as incomplete" : "Mark as complete"}
+                </Button>
+              </Tooltip>
+              <Tooltip
+                multiline
+                label={
+                  isBookmarked ? "Remove from bookmarks" : "Add to bookmarks"
+                }
+                position="bottom"
+                transitionProps={{ transition: "pop", duration: 300 }}
+              >
+                <Button
+                  radius="xl"
+                  bg={theme.colors.accentRed[1]}
+                  c={theme.colors.accentRed[4]}
+                  onClick={() => handleBookmark()}
+                  leftSection={
+                    isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />
+                  }
+                  mr={"1rem"}
+                >
+                  {isBookmarked ? "Unbookmark" : "Bookmark"}
+                </Button>
+              </Tooltip>
+            </Group>
           </Group>
           <Group justify="space-between" align="top" h="100%" mt="1rem">
             <Box h="100%">
@@ -125,5 +170,4 @@ const CoursePage = () => {
     </Box>
   );
 };
-
 export default CoursePage;

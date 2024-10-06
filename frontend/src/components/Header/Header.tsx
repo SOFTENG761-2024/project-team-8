@@ -23,7 +23,7 @@ const Header = () => {
     } else if (path.includes("bookmarks")) {
       setPage("Bookmarked Courses");
     } else {
-      // CAN ADD MORE! 
+      // CAN ADD MORE!
       setPage("");
     }
   };

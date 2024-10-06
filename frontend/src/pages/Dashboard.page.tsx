@@ -18,7 +18,7 @@ import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 // defininng the Course type and create some dummy data
 export interface Course {
-  id: string | number;
+  id: string;
   title: string;
   kitName: string;
   lessons: number;
@@ -34,7 +34,7 @@ const DashboardPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const { currentUserData } = useContext(AuthContext);
   const [bookmarkedCourses, setBookmarkedCourses] = useState<string[]>([]);
-
+  const [completedCourseIds, setCompletedCourseIds] = useState<string[]>([]);
   useEffect(() => {
     document.title = formattedPageTitle("DASHBOARD");
   }, []);
@@ -43,18 +43,22 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchUserCourses = async () => {
       try {
-        const results = await Parse.Cloud.run("getUserKitsAndCourses");
-        setCourses(results);
-
+        const courses = await Parse.Cloud.run("getUserKitsAndCourses");
+        setCourses(courses);
+        const completedCourses = await Parse.Cloud.run("getCompletedCourses", {
+          userId: currentUserData?.id,
+        });
+        setCompletedCourseIds(completedCourses);
         // Fetch bookmarked course IDs
         const bookmarkResults = await Parse.Cloud.run("getBookmarkedCourses", {
           userId: currentUserData?.id,
         });
 
         // Extract and store just the course IDs
-        const bookmarkedCourseIds = bookmarkResults.map((course: any) => course.id);
+        const bookmarkedCourseIds = bookmarkResults.map(
+          (course: Course) => course.id
+        );
         setBookmarkedCourses(bookmarkedCourseIds);
-
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -125,7 +129,11 @@ const DashboardPage = () => {
               />
             </Center>
           ) : (
-            <CourseCardCollection bookmarkedCourseIds={bookmarkedCourses} courses={filteredCourses} />
+            <CourseCardCollection
+              courses={filteredCourses}
+              completedCourseIds={completedCourseIds}
+              bookmarkedCourseIds={bookmarkedCourses}
+            />
           )}
         </Box>
       </Stack>

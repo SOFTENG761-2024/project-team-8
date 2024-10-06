@@ -56,7 +56,10 @@ const Navbar = () => {
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
-  const links = [{ icon: IconHomeFilled, label: "Dashboard", path: "/user" }, { icon: IconBookmarkFilled, label: "Bookmarks", path: "/user/bookmarks" }];
+  const links = [
+    { icon: IconHomeFilled, label: "Dashboard", path: "/user" },
+    { icon: IconBookmarkFilled, label: "Bookmarks", path: "/user/bookmarks" },
+  ];
   const navbarItems = links.map((link) => {
     // e.g. /user/dashboard
     const pathWithLabel = `${link.path}/${link.label.toLowerCase()}`;
@@ -86,7 +89,13 @@ const Navbar = () => {
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}
     >
       <Text className={classes.menuHeading}>MENU</Text>
-      <Tooltip label={expanded ? "Collapse Navbar" : "Open Navbar"} transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" color="neutral.5" offset={10}>
+      <Tooltip
+        label={expanded ? "Collapse Navbar" : "Open Navbar"}
+        transitionProps={{ transition: "fade-right", duration: 250 }}
+        position="right"
+        color="neutral.5"
+        offset={10}
+      >
         <ActionIcon className={classes.expandIcon} onClick={toggleExpand}>
           <IconChevronRight />
         </ActionIcon>
@@ -99,7 +108,11 @@ const Navbar = () => {
         <Divider color="primary.3" />
         {expanded ? (
           // Render without Tooltip when expanded is true
-          <Link to="/login" style={{ textDecoration: "none" }} onClick={() => logout()}>
+          <Link
+            to="/login"
+            style={{ textDecoration: "none" }}
+            onClick={() => logout()}
+          >
             <NavbarLink
               key={"Logout"}
               expanded={expanded}
@@ -109,8 +122,18 @@ const Navbar = () => {
           </Link>
         ) : (
           // renders with Tooltip when navbar is collapsed
-          <Tooltip label="Log Out" transitionProps={{ transition: 'fade-right', duration: 250 }} position="right" color="neutral.5" offset={10}>
-            <Link to="/login" style={{ textDecoration: "none" }} onClick={() => logout()}>
+          <Tooltip
+            label="Log Out"
+            transitionProps={{ transition: "fade-right", duration: 250 }}
+            position="right"
+            color="neutral.5"
+            offset={10}
+          >
+            <Link
+              to="/login"
+              style={{ textDecoration: "none" }}
+              onClick={() => logout()}
+            >
               <NavbarLink
                 key={"Logout"}
                 expanded={expanded}
@@ -121,7 +144,7 @@ const Navbar = () => {
           </Tooltip>
         )}
       </Stack>
-    </nav >
+    </nav>
   );
 };
 
