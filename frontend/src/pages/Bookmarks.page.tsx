@@ -70,8 +70,9 @@ const BookmarksPage = () => {
         <CourseCardCollection
           bookmarkedCourseIds={bookmarkedCoursesId}
           completedCourseIds={completedCourseIds}
-          courses={bookmarkedCourses}
-        />
+          courses={bookmarkedCourses} 
+          unsubscribed={false}        
+          />
       ) : (
         <Text>No bookmarked courses found</Text>
       )}

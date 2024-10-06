@@ -18,7 +18,7 @@ import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 // defininng the Course type and create some dummy data
 export interface Course {
-  id: string | number;
+  id: string;
   title: string;
   kitName: string;
   lessons: number;

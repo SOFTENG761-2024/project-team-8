@@ -38,6 +38,7 @@ const BrowsePage = () => {
         const result = uniqueAllCourses.filter(
           (obj1: {id: string}) => !sub.some((obj2: { id: string}) => obj1.id === obj2.id)
         );
+        console.log(uniqueAllCourses);
         setCourses(result);
         setLoading(false);
       } catch (error) {
