@@ -1,6 +1,6 @@
 import { Box, Flex, Loader, Paper, Stack, Text } from "@mantine/core";
 import styles from "./PdfViewer.module.css";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 import PdfViewerNav from "./PdfViewerNav";
@@ -33,8 +33,9 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [displayAlerts, setDisplayAlerts] = useState<boolean>(false);
-
   const { setIsAnyPdfFullscreen } = useContext(FullscreenContext);
+  const [pdfSize, setPdfSize] = useState({ width: 0, height: 0 });
+  const pdfCanvasRef = useRef(null);
 
   const onDocumentLoadSuccess = ({ numPages }: OnLoadSuccessTypes): void => {
     setNumPages(numPages);
@@ -43,7 +44,6 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   const changePage = useCallback(
     (offset: number) => {
       const newPageNumber = pageNumber + offset;
-
       if (newPageNumber >= 1 && newPageNumber <= numPages) {
         setPageNumber((prevPageNumber) => prevPageNumber + offset);
       }
@@ -71,7 +71,6 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
             break;
         }
       };
-
       window.addEventListener("keydown", handleKeyDown);
 
       return () => {
@@ -79,6 +78,14 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
       };
     }
   }, [fullscreen, changePage]);
+
+  const handlePageRenderSuccess = () => {
+    // Ensure  canvas is rendered before accessing its dimensions for rendering loading spinner
+    if (pdfCanvasRef.current) {
+      const { clientWidth, clientHeight } = pdfCanvasRef.current;
+      setPdfSize({ width: clientWidth, height: clientHeight });
+    }
+  };
 
   useEffect(() => {
     setDisplayAlerts(true);
@@ -153,13 +160,22 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
               }
             >
               <Page
+                canvasRef={pdfCanvasRef}
+                canvasBackground="transparent"
                 pageNumber={pageNumber}
                 renderAnnotationLayer={false}
                 renderTextLayer={false}
                 className={styles.nonFullscreenView}
+                onRenderSuccess={handlePageRenderSuccess}
                 loading={
-                  <Flex w="34.5vw" justify="center" align="center" pt="2rem">
-                    <Loader color="primary.5" />
+                  <Flex
+                    w={pdfSize.width}
+                    h={pdfSize.height}
+                    justify="center"
+                    align="center"
+                    pt="2rem"
+                  >
+                    <Loader color="primary.2" />
                   </Flex>
                 }
               />

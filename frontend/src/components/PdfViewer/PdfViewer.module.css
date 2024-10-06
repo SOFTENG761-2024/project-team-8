@@ -19,7 +19,7 @@
     padding-left: 2.2rem;
     padding-bottom: 2.2rem;
     background-color: var(--mantine-color-primary-6) !important;
-    border-radius: 1.5rem;
+    border-radius: 1.25rem;
 }
 
 .navigationMenu {
@@ -48,7 +48,6 @@
     text-align: center;
     opacity: 0;
     transition: opacity 0.5s;
-    transition-delay: 1s;
 }
 
 .alertPopUp {
@@ -88,9 +87,12 @@
 }
 
 .nonFullscreenView {
-    height: 50vh;
-    position: relative;
+    height: 65vh;
     width: fit-content;
+}
+
+.nonFullscreenView canvas {
+    border-radius: 1.25rem;
 }
 
 canvas {
