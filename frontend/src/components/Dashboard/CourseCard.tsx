@@ -3,7 +3,7 @@ import { Box, Button, Card, Flex, Grid, Image, Modal, Stack, Text } from "@manti
 import { useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/Dashboard.page";
 import { IconEye } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./CourseCard.module.css";
 import CourseTag from "./CourseTag";
 
@@ -22,6 +22,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
   const [opened, setOpened] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <Box>
@@ -113,8 +114,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </Grid.Col>
         </Grid>
         {/* View Button positioned at the bottom-right */}
-        {unsubscribed ? (
-          <Button
+        <Button
             variant="filled"
             bg="var(--mantine-color-primary-5)"
             style={{
@@ -122,29 +122,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
               bottom: '20px',
               right: '20px',
             }}
-            onClick={() => setOpened(true)}
+            onClick={() => unsubscribed ? setOpened(true) : navigate(`/user/courses/${course.id}`)}
+            leftSection={<IconEye style={{ marginRight: "8px" }}/>}
           >
-            <IconEye style={{ marginRight: "8px" }} /> Preview
+            {unsubscribed ? "Preview" : "View"}
           </Button>
-        ) : (
-          <Link
-            to={`/user/courses/${course.id}`}
-            style={{ textDecoration: "none" }}
-            // state={{ course }} // if we want to pass the course data to the next page
-          >
-            <Button
-              variant="filled"
-              bg="var(--mantine-color-primary-5)"
-              style={{
-                position: !isSmallScreen ? "absolute" : "static",
-                bottom: "20px",
-                right: "20px",
-              }}
-            >
-              <IconEye style={{ marginRight: "8px" }} /> View
-            </Button>
-          </Link>
-        )}
       </Card>
     </Box>
   );
