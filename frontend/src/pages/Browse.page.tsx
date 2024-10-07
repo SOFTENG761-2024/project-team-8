@@ -38,7 +38,6 @@ const BrowsePage = () => {
         const result = uniqueAllCourses.filter(
           (obj1: {id: string}) => !sub.some((obj2: { id: string}) => obj1.id === obj2.id)
         );
-        console.log(uniqueAllCourses);
         setCourses(result);
         setLoading(false);
       } catch (error) {
@@ -52,7 +51,8 @@ const BrowsePage = () => {
   useEffect(() => {
     const filtered = courses
       .filter((course) =>
-        course.title.toLowerCase().includes(searchQuery.toLowerCase())
+        course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        course.kitName.toLowerCase().includes(searchQuery.toLowerCase())
       )
       .sort((a, b) => {
         switch (filter) {
