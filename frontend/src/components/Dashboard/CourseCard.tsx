@@ -3,7 +3,7 @@ import { Box, Button, Card, Flex, Grid, Image, Modal, Stack, Text } from "@manti
 import { useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/Dashboard.page";
 import { IconEye } from "@tabler/icons-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./CourseCard.module.css";
 import CourseTag from "./CourseTag";
 
@@ -49,7 +49,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             Description:
           </Text>
           <Text size="sm" c="gray">
-            {"No description available"}
+            {course?.description || "No description available"}
           </Text>
         </Stack>
       </Modal>
