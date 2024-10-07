@@ -7,12 +7,14 @@ interface CourseCardCollectionProps {
   courses: Course[];
   completedCourseIds: string[];
   bookmarkedCourseIds: string[];
+  unsubscribed: boolean;
 }
 
 const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
   courses,
   completedCourseIds,
   bookmarkedCourseIds,
+  unsubscribed,
 }) => {
   // Setting the active page for pagination
   const [activePage, setPage] = useState(1);
@@ -42,13 +44,19 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
                 span={6} // this makes two rows
                 key={course.id}
               >
-                <CourseCard
-                  course={course}
-                  isComplete={completedCourseIds.includes(course.id.toString())}
-                  isBookmarked={bookmarkedCourseIds.includes(
-                    course.id.toString()
-                  )}
-                />
+                {unsubscribed ? 
+                  <CourseCard
+                  course={course} unsubscribed={unsubscribed}
+                  /> : 
+                  <CourseCard
+                    course={course} unsubscribed={unsubscribed}
+                    isComplete={completedCourseIds.includes(course.id.toString())}
+                    isBookmarked={bookmarkedCourseIds.includes(
+                      course.id.toString()
+                    )}
+                  />
+                }
+                
               </Grid.Col>
             ))}
           </Grid>

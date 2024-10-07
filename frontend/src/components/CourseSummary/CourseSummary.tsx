@@ -175,3 +175,4 @@ const SummaryAccordion = ({ topics, isExpanded }: SummaryAccordionProps) => {
     </Accordion>
   );
 };
+

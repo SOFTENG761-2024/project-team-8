@@ -12,6 +12,7 @@ import UserRoute from "./UserRoute";
 import AdminRoute from "./AdminRoute";
 import { CourseContextProvider } from "../components/Course/CourseContext";
 import BookmarksPage from "../pages/Bookmarks.page";
+import BrowsePage from "../pages/Browse.page";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,16 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <DashboardPage />,
+          },
+        ],
+      },
+      {
+        path: "browse",
+        element: <UserRoute />,
+        children: [
+          {
+            index: true,
+            element: <BrowsePage />,
           },
         ],
       },

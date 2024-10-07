@@ -11,58 +11,34 @@ import {
   Stack,
   useMantineTheme,
 } from "@mantine/core";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
-import { AuthContext } from "../context/AuthContextProvider.tsx";
-import { formattedPageTitle } from "../constants/pageTitles.ts";
+import { Course } from "./Dashboard.page.tsx";
 
-// defining the Course type and create some dummy data
-export interface Course {
-  id: string;
-  description: string;
-  title: string;
-  kitName: string;
-  lessons: number;
-  image: Parse.File;
-}
-
-/**
- * Page containing the content used to populate the dashboard, main functionality to display the user's courses
- */
-const DashboardPage = () => {
+const BrowsePage = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const theme = useMantineTheme();
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
   const [filter, setFilter] = useState<string | null>("recently-viewed");
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const { currentUserData } = useContext(AuthContext);
-  const [bookmarkedCourses, setBookmarkedCourses] = useState<string[]>([]);
-  const [completedCourseIds, setCompletedCourseIds] = useState<string[]>([]);
-  useEffect(() => {
-    document.title = formattedPageTitle("DASHBOARD");
-  }, []);
 
   // fetch data
   useEffect(() => {
     const fetchUserCourses = async () => {
       try {
-        const courses = await Parse.Cloud.run("getUserKitsAndCourses");
-        setCourses(courses);
-        const completedCourses = await Parse.Cloud.run("getCompletedCourses", {
-          userId: currentUserData?.id,
-        });
-        setCompletedCourseIds(completedCourses);
-        // Fetch bookmarked course IDs
-        const bookmarkResults = await Parse.Cloud.run("getBookmarkedCourses", {
-          userId: currentUserData?.id,
-        });
-
-        // Extract and store just the course IDs
-        const bookmarkedCourseIds = bookmarkResults.map(
-          (course: Course) => course.id
+        // get course content
+        const sub = await Parse.Cloud.run("getUserKitsAndCourses");
+        const allCourses = await Parse.Cloud.run("getAllKitCourses");
+        // remove duplicates from all available courses
+        const uniqueAllCourses = allCourses.filter((obj: { id: string; }, index: any, self: any[]) =>
+          index === self.findIndex((o: { id: string; }) => o.id === obj.id)
         );
-        setBookmarkedCourses(bookmarkedCourseIds);
+        // filter out subscribed courses to get unsubscribed courses
+        const result = uniqueAllCourses.filter(
+          (obj1: {id: string}) => !sub.some((obj2: { id: string}) => obj1.id === obj2.id)
+        );
+        setCourses(result);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -74,10 +50,9 @@ const DashboardPage = () => {
   // update the courses shown whenever courses, search query, or filter changes
   useEffect(() => {
     const filtered = courses
-      .filter(
-        (course) =>
-          course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          course.kitName.toLowerCase().includes(searchQuery.toLowerCase())
+      .filter((course) =>
+        course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        course.kitName.toLowerCase().includes(searchQuery.toLowerCase())
       )
       .sort((a, b) => {
         switch (filter) {
@@ -131,15 +106,11 @@ const DashboardPage = () => {
                 m="0 auto"
                 size={40}
                 color={theme.colors.primary[4]}
-                style={{ margin: "0 auto", display: "block" }} // Optional inline styling for centering
+                style={{ margin: "0 auto", display: "block" }}
               />
             </Center>
           ) : (
-            <CourseCardCollection
-              courses={filteredCourses} unsubscribed={false}
-              completedCourseIds={completedCourseIds}
-              bookmarkedCourseIds={bookmarkedCourses}
-            />
+            <CourseCardCollection courses={filteredCourses} unsubscribed={true} completedCourseIds={[]} bookmarkedCourseIds={[]}/>
           )}
         </Box>
       </Stack>
@@ -147,4 +118,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default BrowsePage;

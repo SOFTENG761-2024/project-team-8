@@ -22,6 +22,8 @@ const Header = () => {
       setPage("Course Details");
     } else if (path.includes("bookmarks")) {
       setPage("Bookmarked Courses");
+    } else if (path.includes("browse")) {
+      setPage("Browse Unsubscribed Courses");
     } else {
       // CAN ADD MORE!
       setPage("");
