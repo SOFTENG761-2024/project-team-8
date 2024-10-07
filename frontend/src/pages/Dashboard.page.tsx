@@ -76,7 +76,6 @@ const DashboardPage = () => {
       .filter(
         (course) =>
           course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          course.kitName.toLowerCase().includes(searchQuery.toLowerCase()) ||
           course.kitName.toLowerCase().includes(searchQuery.toLowerCase())
       )
       .sort((a, b) => {
