@@ -23,8 +23,9 @@ import {
 import styles from "./LessonOverlay.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 import LessonContentSection from "./LessonContentSection";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Lesson } from "../../interfaces/kit";
+import { FullscreenContext } from "../../context/FullscreenContextProvider";
 
 interface LessonOverlayProps extends ModalProps {
   courseTitle: string;
@@ -48,8 +49,9 @@ const LessonOverlay = ({
 
   // tracking the current lesson index locally within the overlay
   const [lessonIndex, setLessonIndex] = useState(initialLessonIndex);
-
   const currentLesson = moduleLessons[lessonIndex]; // getting the current lesson
+
+  const { isAnyPdfFullscreen } = useContext(FullscreenContext);
 
   return (
     <Modal
@@ -62,6 +64,7 @@ const LessonOverlay = ({
       onClose={onClose}
       fullScreen
       radius={0}
+      closeOnEscape={!isAnyPdfFullscreen}
       transitionProps={{ transition: "fade", duration: 200 }}
       closeButtonProps={{
         icon: (
@@ -203,7 +206,7 @@ const LessonOverlay = ({
                 key={index}
                 title={title}
                 description={description}
-                fileUrl={printout.url()}
+                fileUrl={printout && printout.url()}
               />
             )
           )}

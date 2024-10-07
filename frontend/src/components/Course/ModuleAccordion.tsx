@@ -18,6 +18,7 @@ import LessonOverlay from "../Lesson/LessonOverlay";
 import { useDisclosure } from "@mantine/hooks";
 import { Lesson } from "../../interfaces/kit";
 import { CourseContext } from "./CourseContext";
+import { FullscreenContextProvider } from "../../context/FullscreenContextProvider";
 
 interface ModuleAccordionProps {
   module: {
@@ -49,16 +50,18 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
   return (
     <>
       {initialLessonIndex !== null && (
-        <LessonOverlay
-          courseTitle={
-            currentCourseData?.title + " - " + currentCourseData?.kit
-          }
-          moduleTitle={module.title}
-          currentLessonIndex={initialLessonIndex} // current lesson index
-          moduleLessons={module.lessons} // full module lessons array, including content
-          opened={opened}
-          onClose={handleClose}
-        />
+        <FullscreenContextProvider>
+          <LessonOverlay
+            courseTitle={
+              currentCourseData?.title + " - " + currentCourseData?.kit
+            }
+            moduleTitle={module.title}
+            currentLessonIndex={initialLessonIndex} // current lesson index
+            moduleLessons={module.lessons} // full module lessons array, including content
+            opened={opened}
+            onClose={handleClose}
+          />
+        </FullscreenContextProvider>
       )}
 
       <Accordion
@@ -90,6 +93,7 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
             <Stack>
               {module.lessons.map((lesson, index) => (
                 <Tooltip
+                  key={lesson.id}
                   arrowOffset={10}
                   arrowSize={5}
                   withArrow

@@ -1,0 +1,101 @@
+.fullscreenContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 50;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.nonFullscreenContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.viewerBackground {
+    padding-left: 2.2rem;
+    padding-bottom: 2.2rem;
+    background-color: var(--mantine-color-primary-6) !important;
+    border-radius: 1.25rem;
+}
+
+.navigationMenu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alertContainer {
+    position: absolute;
+    top: 2rem;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity 0.5s;
+
+}
+
+.alertPopUpHidden {
+    width: 20%;
+    background-color: rgba(20, 28, 40, 0.75);
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    color: var(--mantine-color-neutral-0);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.alertPopUp {
+    width: 20%;
+    background-color: rgba(20, 28, 40, 0.75);
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    color: var(--mantine-color-neutral-0);
+    text-align: center;
+    opacity: 1 !important;
+    transition: opacity 0.5s;
+}
+
+.showNav {
+    opacity: 1 !important;
+}
+
+.minimizeIcon {
+    cursor: pointer;
+    color: var(--mantine-color-neutral-0);
+}
+
+.minimizeIcon:hover {
+    color: var(--mantine-color-primary-2);
+}
+
+.fullscreenView {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    background-color: var(--mantine-color-neutral-3) !important;
+}
+
+.nonFullscreenView {
+    height: 60vh;
+    width: fit-content;
+}
+
+canvas {
+    width: auto !important;
+    height: 100% !important;
+}
+
+.hidden {
+    display: none;
+}
