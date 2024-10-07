@@ -7,7 +7,7 @@ interface CourseCardCollectionProps {
   courses: Course[];
   completedCourseIds: string[];
   bookmarkedCourseIds: string[];
-  unsubscribed: Boolean;
+  unsubscribed: boolean;
 }
 
 const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({

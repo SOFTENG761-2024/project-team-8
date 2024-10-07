@@ -11,7 +11,7 @@ interface CourseCardProps {
   course: Course;
   isBookmarked?: boolean;
   isComplete?: boolean;
-  unsubscribed: Boolean;
+  unsubscribed: boolean;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -123,7 +123,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
               right: '20px',
             }}
             onClick={() => unsubscribed ? setOpened(true) : navigate(`/user/courses/${course.id}`)}
-            leftSection={<IconEye style={{ marginRight: "8px" }}/>}
+            leftSection={<IconEye/>}
           >
             {unsubscribed ? "Preview" : "View"}
           </Button>
