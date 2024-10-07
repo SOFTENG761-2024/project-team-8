@@ -16,7 +16,7 @@ import { IconFilter, IconSearch } from "@tabler/icons-react";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
 
-// defininng the Course type and create some dummy data
+// defining the Course type and create some dummy data
 export interface Course {
   id: string;
   title: string;
@@ -25,6 +25,9 @@ export interface Course {
   image: Parse.File;
 }
 
+/**
+ * Page containing the content used to populate the dashboard, main functionality to display the user's courses
+ */
 const DashboardPage = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const theme = useMantineTheme();
@@ -70,8 +73,10 @@ const DashboardPage = () => {
   // update the courses shown whenever courses, search query, or filter changes
   useEffect(() => {
     const filtered = courses
-      .filter((course) =>
-        course.title.toLowerCase().includes(searchQuery.toLowerCase())
+      .filter(
+        (course) =>
+          course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          course.kitName.toLowerCase().includes(searchQuery.toLowerCase())
       )
       .sort((a, b) => {
         switch (filter) {
