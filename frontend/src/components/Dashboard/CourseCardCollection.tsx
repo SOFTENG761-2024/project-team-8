@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Flex, Grid, Pagination, Text } from "@mantine/core";
+import { Flex, Grid, Pagination, Text } from "@mantine/core";
 import CourseCard from "./CourseCard";
 import { Course } from "../../pages/Dashboard.page";
 
@@ -27,7 +27,7 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
   const displayedCourses = courses.slice(startIndex, endIndex);
 
   return (
-    <Box>
+    <>
       {/* Display a message when no courses are available */}
       {courses.length === 0 ? (
         <Flex justify="center" align="center" h="100px">
@@ -44,19 +44,18 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
                 span={6} // this makes two rows
                 key={course.id}
               >
-                {unsubscribed ? 
-                  <CourseCard
-                  course={course} unsubscribed={unsubscribed}
-                  /> : 
-                  <CourseCard
-                    course={course} unsubscribed={unsubscribed}
-                    isComplete={completedCourseIds.includes(course.id.toString())}
-                    isBookmarked={bookmarkedCourseIds.includes(
-                      course.id.toString()
-                    )}
-                  />
-                }
-                
+                <CourseCard
+                  course={course}
+                  unsubscribed={unsubscribed}
+                  isComplete={
+                    !unsubscribed &&
+                    completedCourseIds.includes(course.id.toString())
+                  }
+                  isBookmarked={
+                    !unsubscribed &&
+                    bookmarkedCourseIds.includes(course.id.toString())
+                  }
+                />
               </Grid.Col>
             ))}
           </Grid>
@@ -72,7 +71,7 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
           </Flex>
         </>
       )}
-    </Box>
+    </>
   );
 };
 

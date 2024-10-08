@@ -24,6 +24,7 @@ export interface Course {
   kitName: string;
   lessons: number;
   image: Parse.File;
+  yearLevel: string;
 }
 
 /**
@@ -136,7 +137,8 @@ const DashboardPage = () => {
             </Center>
           ) : (
             <CourseCardCollection
-              courses={filteredCourses} unsubscribed={false}
+              courses={filteredCourses}
+              unsubscribed={false}
               completedCourseIds={completedCourseIds}
               bookmarkedCourseIds={bookmarkedCourses}
             />

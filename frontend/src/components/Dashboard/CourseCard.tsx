@@ -27,7 +27,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const navigate = useNavigate();
 
   return (
-    <Box>
+    <>
       <CourseSummaryModal course={course} opened={opened} onClose={close} />
       <Card
         shadow="sm"
@@ -111,7 +111,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           {unsubscribed ? "Preview" : "View"}
         </Button>
       </Card>
-    </Box>
+    </>
   );
 };
 

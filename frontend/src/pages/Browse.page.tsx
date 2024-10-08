@@ -78,12 +78,11 @@ const BrowsePage = () => {
       <Stack h="auto" align="stretch" gap={0}>
         <Paper bg="primary.0" mb="0.5rem" p="0.75rem" radius="0.75rem">
           <Text c="primary.3" fw="800" size="sm">
-            {" "}
             You do not have access to these courses
-            <Box c="primary.4" fw="500" mt="0.25rem">
-              Please contact ByteEd by email at DEMO@byteed.com with the course
-              name, course kit, and username or email of your ByteEd account.
-            </Box>
+          </Text>
+          <Text c="primary.4" fw="500" mt="0.25rem" size="sm">
+            Please contact ByteEd by email at DEMO@byteed.com with the course
+            name, course kit, and username or email of your ByteEd account.
           </Text>
         </Paper>
         <Grid pb={10}>

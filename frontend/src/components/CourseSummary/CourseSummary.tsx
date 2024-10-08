@@ -1,25 +1,17 @@
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import classes from "./CourseSummary.module.css";
 import {
-  IconAwardFilled,
   IconBulbFilled,
   IconChevronLeft,
   IconChevronRight,
   IconFileDescription,
   IconInfoSquareFilled,
-  IconStarFilled,
   IconUserFilled,
 } from "@tabler/icons-react";
-import {
-  Accordion,
-  ActionIcon,
-  Image,
-  List,
-  Text,
-  Tooltip,
-} from "@mantine/core";
+import { Accordion, ActionIcon, Image, List, Tooltip } from "@mantine/core";
 import { CourseSummaryTopic } from "../../interfaces/componentInterfaces.ts";
 import { CourseContext } from "../Course/CourseContext.tsx";
+import CourseAttributes from "./CourseAttributes.tsx";
 
 interface CourseSummaryProps {
   summaryExpanded: boolean;
@@ -81,24 +73,8 @@ const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
           src={currentCourseData?.courseImage?._url}
           radius="10px"
         />
-        <CourseAttributes />
+        <CourseAttributes yearLevel={currentCourseData?.yearLevel} />
         <SummaryAccordion topics={SummaryTopics()} isExpanded={isExpanded} />
-      </div>
-    </div>
-  );
-};
-
-const CourseAttributes = () => {
-  const { currentCourseData } = useContext(CourseContext);
-  return (
-    <div className={classes.courseHighlights}>
-      <div className={classes.item}>
-        <IconStarFilled />
-        <Text size="textSm">{currentCourseData?.yearLevel}</Text>
-      </div>
-      <div className={classes.item}>
-        <IconAwardFilled />
-        <Text size="textSm">Certificate of Completion</Text>
       </div>
     </div>
   );
@@ -175,4 +151,3 @@ const SummaryAccordion = ({ topics, isExpanded }: SummaryAccordionProps) => {
     </Accordion>
   );
 };
-
