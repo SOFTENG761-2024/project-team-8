@@ -115,22 +115,22 @@ const SummaryTopics = () => {
     {
       value: "About Course",
       icon: <IconInfoSquareFilled />,
-      information: currentCourseData?.description || "",
+      information: currentCourseData?.description,
     },
     {
       value: "Learning Outcomes",
       icon: <IconBulbFilled />,
-      informationList: currentCourseData?.outcomes || [],
+      informationList: currentCourseData?.outcomes,
     },
     {
       value: "Materials Include",
       icon: <IconFileDescription />,
-      informationList: currentCourseData?.materials || [],
+      informationList: currentCourseData?.materials,
     },
     {
       value: "Audience",
       icon: <IconUserFilled />,
-      informationList: currentCourseData?.audience || [],
+      informationList: currentCourseData?.audience,
     },
   ];
 };
@@ -138,8 +138,8 @@ const SummaryTopics = () => {
 interface CourseSummaryTopic {
   value: string;
   icon: ReactNode;
-  information?: string;
-  informationList?: string[]; //  for bullet points
+  information?: string | null;
+  informationList?: string[] | null; //  for bullet points
 }
 
 interface SummaryAccordionProps {
@@ -160,13 +160,19 @@ const SummaryAccordion = ({ topics, isExpanded }: SummaryAccordionProps) => {
         {topic.value}
       </Accordion.Control>
       <Accordion.Panel c="neutral.5">
-        {topic.information}
-        {topic.informationList && (
-          <List>
-            {topic.informationList.map((listItem) => (
-              <List.Item key={listItem}>{listItem}</List.Item>
-            ))}
-          </List>
+        {topic.information || topic.informationList ? (
+          <>
+            {topic.information}
+            {topic.informationList && (
+              <List>
+                {topic.informationList.map((listItem) => (
+                  <List.Item key={listItem}>{listItem}</List.Item>
+                ))}
+              </List>
+            )}
+          </>
+        ) : (
+          "No information available"
         )}
       </Accordion.Panel>
     </Accordion.Item>
