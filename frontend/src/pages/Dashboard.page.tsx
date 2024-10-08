@@ -90,10 +90,11 @@ const DashboardPage = () => {
           return matchesSearchQuery && !isCompleted;
         }
 
-        // for other filters, only apply the search query filter
+        // default filter is the search query
         return matchesSearchQuery;
       })
       .sort((a, b) => {
+        // sorting logic based on selected filter
         switch (filter) {
           case "name-asc":
             return a.title.localeCompare(b.title);
