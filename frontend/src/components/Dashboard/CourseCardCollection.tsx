@@ -44,19 +44,20 @@ const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
                 span={6} // this makes two rows
                 key={course.id}
               >
-                {unsubscribed ? 
+                {unsubscribed ? (
+                  <CourseCard course={course} unsubscribed={unsubscribed} />
+                ) : (
                   <CourseCard
-                  course={course} unsubscribed={unsubscribed}
-                  /> : 
-                  <CourseCard
-                    course={course} unsubscribed={unsubscribed}
-                    isComplete={completedCourseIds.includes(course.id.toString())}
+                    course={course}
+                    unsubscribed={unsubscribed}
+                    isComplete={completedCourseIds.includes(
+                      course.id.toString()
+                    )}
                     isBookmarked={bookmarkedCourseIds.includes(
                       course.id.toString()
                     )}
                   />
-                }
-                
+                )}
               </Grid.Col>
             ))}
           </Grid>

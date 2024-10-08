@@ -151,7 +151,7 @@ const CoursePage = () => {
                   }
                   mr={"1rem"}
                 >
-                  {isBookmarked ? "Unbookmark" : "Bookmark"}
+                  {isBookmarked ? "Unsave" : "Save"}
                 </Button>
               </Tooltip>
             </Group>
