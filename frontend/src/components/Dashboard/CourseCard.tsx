@@ -6,7 +6,7 @@ import { IconEye } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import styles from "./CourseCard.module.css";
 import CourseTag from "./CourseTag";
-import CourseSummaryModal from "./CourseSummaryModal";
+import CoursePreviewModal from "./CoursePreviewModal";
 
 interface CourseCardProps {
   course: Course;
@@ -28,7 +28,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   return (
     <>
-      <CourseSummaryModal course={course} opened={opened} onClose={close} />
+      <CoursePreviewModal course={course} opened={opened} onClose={close} />
       <Card
         shadow="sm"
         padding="sm"

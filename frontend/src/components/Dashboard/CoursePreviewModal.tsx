@@ -2,10 +2,10 @@ import { Flex, Image, Modal, ModalProps, Stack, Text } from "@mantine/core";
 import { FC } from "react";
 import { Course } from "../../pages/Dashboard.page";
 import CourseAttributes from "../CourseSummary/CourseAttributes";
-import styles from "./CourseSummaryModal.module.css";
+import styles from "./CoursePreviewModal.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 
-interface CourseSummaryModalProps extends ModalProps {
+interface CoursePreviewModalProps extends ModalProps {
   course: Course;
   opened: boolean;
   onClose: () => void;
@@ -13,19 +13,19 @@ interface CourseSummaryModalProps extends ModalProps {
 
 /**
  * @component
- * CourseSummaryModal
+ * CoursePreviewModal
  *
  * @description
  * This component is conditionally rendered within the {@link CourseCard} component if the card
  * is used for course preview (in the browse courses page)
  *
- * @param props The component accepts {@link CourseSummaryModalProps}
+ * @param props The component accepts {@link CoursePreviewModalProps}
  * @param props.course - {@link Course} object data
  * @param props.opened - boolean indicating open or closed state of the modal
  * @param props.onClose - function controlling the closed behaviour of the modal
  * @returns {JSX.Element}
  */
-const CourseSummaryModal: FC<CourseSummaryModalProps> = ({
+const CoursePreviewModal: FC<CoursePreviewModalProps> = ({
   course,
   opened,
   onClose,
@@ -37,7 +37,7 @@ const CourseSummaryModal: FC<CourseSummaryModalProps> = ({
       opened={opened}
       onClose={onClose}
       title={
-        <Text size="1.7rem" fw={800} c="primary.4" py="0.25rem" pl="1rem">
+        <Text size="1.7rem" fw={800} c="primary.4" py="0.1rem" pl="1rem">
           Course Preview
         </Text>
       }
@@ -59,7 +59,7 @@ const CourseSummaryModal: FC<CourseSummaryModalProps> = ({
         <Image
           src={course.image._url}
           alt="Course Image"
-          radius="lg"
+          radius="md"
           h={isSmallScreen ? "auto" : "18rem"}
           w={isSmallScreen ? "100%" : "50%"}
         />
@@ -86,4 +86,4 @@ const CourseSummaryModal: FC<CourseSummaryModalProps> = ({
   );
 };
 
-export default CourseSummaryModal;
+export default CoursePreviewModal;
