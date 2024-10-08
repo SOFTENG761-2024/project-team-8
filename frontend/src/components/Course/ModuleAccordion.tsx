@@ -22,6 +22,7 @@ import { Lesson } from "../../interfaces/kit";
 import { CourseContext } from "./CourseContext";
 import { FullscreenContextProvider } from "../../context/FullscreenContextProvider";
 import { AuthContext } from "../../context/AuthContextProvider";
+import CreateLessonModal from "../CreateLessonModal/CreateLessonModal";
 
 interface ModuleAccordionProps {
   module: {
@@ -34,7 +35,12 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
   const theme = useMantineTheme();
   const { currentUserData } = useContext(AuthContext);
   const { currentCourseData } = useContext(CourseContext);
-  const [opened, { open, close }] = useDisclosure(false);
+  const [lessonOverlayOpened, { open: overlayOpen, close: overlayClose }] =
+    useDisclosure(false);
+  const [
+    addLessonModalOpened,
+    { open: addLessonModalOpen, close: addLessonModalClose },
+  ] = useDisclosure(false);
   const [initialLessonIndex, setInitialLessonIndex] = useState<number | null>(
     null
   );
@@ -42,13 +48,13 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
   // opens modal and sets the selected lesson index
   const handleLessonClick = (index: number) => {
     setInitialLessonIndex(index); // Store the clicked lesson index
-    open(); // Open the modal
+    overlayOpen(); // Open the modal
   };
 
   // custom onClose resets initialLessonIndex when modal is closed
   const handleClose = () => {
     setInitialLessonIndex(null);
-    close();
+    overlayClose();
   };
 
   return (
@@ -62,7 +68,7 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
             moduleTitle={module.title}
             currentLessonIndex={initialLessonIndex} // current lesson index
             moduleLessons={module.lessons} // full module lessons array, including content
-            opened={opened}
+            opened={lessonOverlayOpened}
             onClose={handleClose}
           />
         </FullscreenContextProvider>
@@ -128,10 +134,16 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
                 bg="primary.5"
                 w="100%"
                 size="lg"
+                onClick={addLessonModalOpen}
               >
                 <Text fw={600}>Add new lesson</Text>
               </Button>
             )}
+            <CreateLessonModal
+              open={addLessonModalOpened}
+              onClose={addLessonModalClose}
+              moduleTitle={module.title}
+            />
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
