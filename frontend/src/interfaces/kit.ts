@@ -16,6 +16,7 @@ export interface Course {
   modules: Module[]; // references to those objects
   assessments: Assessment[];
   courseImage: Parse.File;
+  isCertificateAvailable: boolean;
 }
 
 export interface Module {

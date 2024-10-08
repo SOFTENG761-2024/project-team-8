@@ -15,11 +15,10 @@ interface CoursePreviewModalProps extends ModalProps {
  * @component
  * CoursePreviewModal
  *
- * @description
- * This component is conditionally rendered within the {@link CourseCard} component if the card
+ * This component is conditionally rendered within the CourseCard component if the card
  * is used for course preview (in the browse courses page)
  *
- * @param props The component accepts {@link CoursePreviewModalProps}
+ * @param props - accepts {@link CoursePreviewModalProps}
  * @param props.course - {@link Course} object data
  * @param props.opened - boolean indicating open or closed state of the modal
  * @param props.onClose - function controlling the closed behaviour of the modal
@@ -73,7 +72,11 @@ const CoursePreviewModal: FC<CoursePreviewModalProps> = ({
           <Text size="sm" fw={400} c="neutral.4" mb="0.5rem">
             {course.lessons} Lessons
           </Text>
-          <CourseAttributes yearLevel={course.yearLevel} />
+          <CourseAttributes
+            variant="small"
+            yearLevel={course.yearLevel}
+            isCertificateAvailable={course.isCertificateAvailable}
+          />
           <Text size="sm" fw={500} c="primary.3" mt="0.6rem">
             Description
           </Text>

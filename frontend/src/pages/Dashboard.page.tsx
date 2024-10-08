@@ -25,6 +25,7 @@ export interface Course {
   lessons: number;
   image: Parse.File;
   yearLevel: string;
+  isCertificateAvailable: boolean;
 }
 
 /**

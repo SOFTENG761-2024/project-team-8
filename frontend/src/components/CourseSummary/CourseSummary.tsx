@@ -73,7 +73,10 @@ const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
           src={currentCourseData?.courseImage?._url}
           radius="10px"
         />
-        <CourseAttributes yearLevel={currentCourseData?.yearLevel} />
+        <CourseAttributes
+          yearLevel={currentCourseData?.yearLevel}
+          isCertificateAvailable={currentCourseData?.isCertificateAvailable}
+        />
         <SummaryAccordion topics={SummaryTopics()} isExpanded={isExpanded} />
       </div>
     </div>
