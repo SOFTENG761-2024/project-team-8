@@ -1,4 +1,4 @@
-import { Box, Text } from "@mantine/core";
+import { Box, Center, Loader, Text, useMantineTheme } from "@mantine/core";
 import { useContext, useEffect, useState } from "react";
 import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
 import { AuthContext } from "../context/AuthContextProvider";
@@ -12,6 +12,8 @@ const BookmarksPage = () => {
   const { currentUserData } = useContext(AuthContext);
   const [loading, setLoading] = useState<boolean>(true);
   const [completedCourseIds, setCompletedCourseIds] = useState<string[]>([]);
+  const theme = useMantineTheme();
+
   useEffect(() => {
     document.title = formattedPageTitle("BOOKMARKS");
     const fetchBookmarkedCourses = async () => {
@@ -60,19 +62,25 @@ const BookmarksPage = () => {
     fetchBookmarkedCourses();
   }, [currentUserData]);
 
-  if (loading) {
-    return <Box>Loading...</Box>;
-  }
-
   return (
     <Box>
-      {bookmarkedCourses.length > 0 ? (
+      {loading ? (
+        <Center h="100%" w="100%">
+          <Loader
+            pt="1rem"
+            m="0 auto"
+            size={40}
+            color={theme.colors.primary[4]}
+            style={{ margin: "0 auto", display: "block" }} // Optional inline styling for centering
+          />
+        </Center>
+      ) : bookmarkedCourses.length > 0 ? (
         <CourseCardCollection
           bookmarkedCourseIds={bookmarkedCoursesId}
           completedCourseIds={completedCourseIds}
-          courses={bookmarkedCourses} 
-          unsubscribed={false}        
-          />
+          courses={bookmarkedCourses}
+          unsubscribed={false}
+        />
       ) : (
         <Text>No bookmarked courses found</Text>
       )}
