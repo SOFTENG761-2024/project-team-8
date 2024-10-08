@@ -31,12 +31,14 @@ const BrowsePage = () => {
         const sub = await Parse.Cloud.run("getUserKitsAndCourses");
         const allCourses = await Parse.Cloud.run("getAllKitCourses");
         // remove duplicates from all available courses
-        const uniqueAllCourses = allCourses.filter((obj: { id: string; }, index: any, self: any[]) =>
-          index === self.findIndex((o: { id: string; }) => o.id === obj.id)
+        const uniqueAllCourses = allCourses.filter(
+          (obj: { id: string }, index: number, self: []) =>
+            index === self.findIndex((o: { id: string }) => o.id === obj.id)
         );
         // filter out subscribed courses to get unsubscribed courses
         const result = uniqueAllCourses.filter(
-          (obj1: {id: string}) => !sub.some((obj2: { id: string}) => obj1.id === obj2.id)
+          (obj1: { id: string }) =>
+            !sub.some((obj2: { id: string }) => obj1.id === obj2.id)
         );
         setCourses(result);
         setLoading(false);
@@ -50,9 +52,10 @@ const BrowsePage = () => {
   // update the courses shown whenever courses, search query, or filter changes
   useEffect(() => {
     const filtered = courses
-      .filter((course) =>
-        course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        course.kitName.toLowerCase().includes(searchQuery.toLowerCase())
+      .filter(
+        (course) =>
+          course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          course.kitName.toLowerCase().includes(searchQuery.toLowerCase())
       )
       .sort((a, b) => {
         switch (filter) {
@@ -110,7 +113,12 @@ const BrowsePage = () => {
               />
             </Center>
           ) : (
-            <CourseCardCollection courses={filteredCourses} unsubscribed={true} completedCourseIds={[]} bookmarkedCourseIds={[]}/>
+            <CourseCardCollection
+              courses={filteredCourses}
+              unsubscribed={true}
+              completedCourseIds={[]}
+              bookmarkedCourseIds={[]}
+            />
           )}
         </Box>
       </Stack>
