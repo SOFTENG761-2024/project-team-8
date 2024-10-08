@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 import classes from "./CourseSummary.module.css";
 import {
   IconAwardFilled,
@@ -18,7 +24,6 @@ import {
   Text,
   Tooltip,
 } from "@mantine/core";
-import { CourseSummaryTopic } from "../../interfaces/componentInterfaces.ts";
 import { CourseContext } from "../Course/CourseContext.tsx";
 
 interface CourseSummaryProps {
@@ -129,6 +134,13 @@ const SummaryTopics = () => {
     },
   ];
 };
+
+interface CourseSummaryTopic {
+  value: string;
+  icon: ReactNode;
+  information?: string;
+  informationList?: string[]; //  for bullet points
+}
 
 interface SummaryAccordionProps {
   topics: CourseSummaryTopic[];
