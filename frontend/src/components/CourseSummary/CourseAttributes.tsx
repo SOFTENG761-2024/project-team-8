@@ -18,7 +18,7 @@ interface CourseAttributesProps {
  * @param props The component accepts {@link CourseAttributesProps}
  * @param props.yearlevel - optional string stating the course's year level.
  * @param props.isCertificateAvailable - optional boolean indicating if the course has a certficate for completion.
- * @param props.variant - optional prop, defunction controlling the closed behaviour of the modal.
+ * @param props.variant - optional prop defining the size of the component. medium by default.
  * @returns {JSX.Element}
  */
 const CourseAttributes: FC<CourseAttributesProps> = ({
