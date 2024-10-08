@@ -16,6 +16,8 @@ export interface Course {
   modules: Module[]; // references to those objects
   assessments: Assessment[];
   courseImage: Parse.File;
+  materials: string[];
+  audience: string[];
 }
 
 export interface Module {

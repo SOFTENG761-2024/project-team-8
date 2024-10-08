@@ -120,17 +120,12 @@ const SummaryTopics = () => {
     {
       value: "Materials Include",
       icon: <IconFileDescription />,
-      informationList: [
-        "A full comprehensive guide for teachers",
-        "Print-outs and activities",
-        "Posters",
-        "Cut-out resources",
-      ],
+      informationList: currentCourseData?.materials || [],
     },
     {
       value: "Audience",
       icon: <IconUserFilled />,
-      information: "Teachers or Tutors",
+      informationList: currentCourseData?.audience || [],
     },
   ];
 };
@@ -175,4 +170,3 @@ const SummaryAccordion = ({ topics, isExpanded }: SummaryAccordionProps) => {
     </Accordion>
   );
 };
-
