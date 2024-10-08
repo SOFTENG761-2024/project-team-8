@@ -37,13 +37,11 @@ const CreateLessonModal = ({
     initialValues: {
       lessonName: "",
       lessonOverview: "",
-      module: "",
       content: [],
     },
     validate: {
       lessonName: (value) =>
         value.length < 2 ? "Lesson name is required" : null,
-      module: (value) => (value && value != "" ? null : "Module is required"),
     },
   });
 
@@ -167,7 +165,11 @@ const CreateLessonModal = ({
                   )}
                   {/* step 3 */}
                   {active === 2 && (
-                    <StepThree form={form} contentLength={contents.length} />
+                    <StepThree
+                      form={form}
+                      contentLength={contents.length}
+                      moduleTitle={moduleTitle}
+                    />
                   )}
                 </Stack>
                 {/* navigation buttons */}

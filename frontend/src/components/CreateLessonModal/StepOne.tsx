@@ -15,7 +15,6 @@ interface StepOneProps {
   form: UseFormReturnType<{
     lessonName: string;
     lessonOverview: string;
-    module: string;
     content: never[];
   }>;
   moduleTitle: string;

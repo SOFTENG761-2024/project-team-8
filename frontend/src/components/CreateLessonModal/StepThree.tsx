@@ -8,12 +8,16 @@ interface StepThreeProps {
   form: UseFormReturnType<{
     lessonName: string;
     lessonOverview: string;
-    module: string;
     content: never[];
   }>;
   contentLength: number;
+  moduleTitle: string;
 }
-const StepThree: FC<StepThreeProps> = ({ form, contentLength }) => {
+const StepThree: FC<StepThreeProps> = ({
+  form,
+  contentLength,
+  moduleTitle,
+}) => {
   return (
     <>
       <Group w="100%">
@@ -45,7 +49,7 @@ const StepThree: FC<StepThreeProps> = ({ form, contentLength }) => {
           </Group>
           <Group justify="space-between">
             <Text c="neutral.5">Module</Text>
-            <Text c="neutral.4">{form.getValues().module}</Text>
+            <Text c="neutral.4">{moduleTitle}</Text>
           </Group>
           <Group justify="space-between">
             <Text c="neutral.5">Number of content sections</Text>
