@@ -30,13 +30,33 @@ function NavbarLink({
     <div
       className={`${classes.link} ${expanded ? classes.linkExpanded : ""} ${active ? classes.linkActive : ""}`}
     >
-      <ActionIcon
-        variant="transparent"
-        data-active={active || undefined}
-        className={classes.linkIcon}
-      >
-        <Icon style={{ width: iconSize, height: iconSize }} stroke={3} />
-      </ActionIcon>
+      {expanded ? (
+        <ActionIcon
+          variant="transparent"
+          data-active={active || undefined}
+          className={classes.linkIcon}
+        >
+          <Icon style={{ width: iconSize, height: iconSize }} stroke={3} />
+        </ActionIcon>
+      ) : (
+        <Tooltip
+          label={label}
+          position="right"
+          arrowOffset={10}
+          arrowSize={5}
+          withArrow
+          color="neutral.5"
+          offset={15}
+        >
+          <ActionIcon
+            variant="transparent"
+            data-active={active || undefined}
+            className={classes.linkIcon}
+          >
+            <Icon style={{ width: iconSize, height: iconSize }} stroke={3} />
+          </ActionIcon>
+        </Tooltip>
+      )}
 
       {expanded && (
         <Text
@@ -58,11 +78,10 @@ const Navbar = () => {
     setExpanded(!expanded);
   };
   const links = [
-    
     { icon: IconHomeFilled, label: "Dashboard", path: "/user" },
     { icon: IconBookmarkFilled, label: "Bookmarks", path: "/user/bookmarks" },
-  ,
-    { icon: IconBookFilled, label: "Browse", path: "/user/browse" }
+    ,
+    { icon: IconBookFilled, label: "Browse", path: "/user/browse" },
   ];
   const navbarItems = links.map((link) => {
     // e.g. /user/dashboard
