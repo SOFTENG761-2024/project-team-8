@@ -1,39 +1,29 @@
-/* STYLES FOR MAIN */
 .courseHighlights {
   background: var(--mantine-color-secondary-2);
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  flex-grow: 1;
+  padding: 1rem;
 }
 
 .small {
   border-radius: 0.5rem;
-  padding: 0.3rem 0.4rem;
+  padding: 0.7rem 0.5rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mantine-color-secondary-6);
   gap: 0.5rem;
 }
 
-.medium {
-  border-radius: 10px;
-  padding: 5px 10px;
-  gap: 10px;
-}
-
-/* STYLES FOR .item */
-.courseHighlights .item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: var(--mantine-color-secondary-6);
-}
-
-.small .item {
-  padding: 0.1rem 0rem;
-  gap: 0.2rem;
-}
-
-.medium .item {
-  padding: 10px 15px;
-  gap: 10px;
+.item p {
+  line-height: 1rem;
+  text-align: center;
 }

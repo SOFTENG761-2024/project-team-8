@@ -29,8 +29,8 @@ const CoursePreviewModal: FC<CoursePreviewModalProps> = ({
   opened,
   onClose,
 }): JSX.Element => {
-  const isSmallScreen = useMediaQuery("(max-width: 768px)");
-
+  const smallerViewport = useMediaQuery("(max-width: 868px)");
+  const contentHeight = "17rem";
   return (
     <Modal
       opened={opened}
@@ -42,7 +42,7 @@ const CoursePreviewModal: FC<CoursePreviewModalProps> = ({
       }
       centered
       radius="1rem"
-      size={isSmallScreen ? "md" : "xl"}
+      size={smallerViewport ? "md" : "xl"}
       classNames={{
         header: styles.styledHeader,
         body: styles.styledBody,
@@ -50,7 +50,7 @@ const CoursePreviewModal: FC<CoursePreviewModalProps> = ({
       closeButtonProps={{ size: "xl" }}
     >
       <Flex
-        direction={isSmallScreen ? "column" : "row"}
+        direction={smallerViewport ? "column" : "row"}
         justify="space-between"
         align="flex-start"
         gap="1.5rem"
@@ -59,10 +59,10 @@ const CoursePreviewModal: FC<CoursePreviewModalProps> = ({
           src={course.image._url}
           alt="Course Image"
           radius="md"
-          h={isSmallScreen ? "auto" : "18rem"}
-          w={isSmallScreen ? "100%" : "50%"}
+          h={smallerViewport ? "auto" : contentHeight}
+          w={smallerViewport ? "100%" : "50%"}
         />
-        <Stack gap="0.1rem" h="17rem">
+        <Stack gap="0.1rem" h={contentHeight}>
           <Text size="1.4rem" fw={800} c="primary.5" mb="0.5rem">
             {course.title}
           </Text>
@@ -80,7 +80,12 @@ const CoursePreviewModal: FC<CoursePreviewModalProps> = ({
           <Text size="sm" fw={500} c="primary.3" mt="0.6rem">
             Description
           </Text>
-          <Text size="sm" c="neutral.5" mt="0.2rem">
+          <Text
+            size="sm"
+            c="neutral.5"
+            mt="0.2rem"
+            className={styles.modalDescription}
+          >
             {course?.description || "No description available"}
           </Text>
         </Stack>

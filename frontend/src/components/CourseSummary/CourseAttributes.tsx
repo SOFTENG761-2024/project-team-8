@@ -1,6 +1,6 @@
 import { IconAwardFilled, IconStarFilled } from "@tabler/icons-react";
 import styles from "./CourseAttributes.module.css";
-import { Text } from "@mantine/core";
+import { Box, Text } from "@mantine/core";
 import { FC } from "react";
 
 interface CourseAttributesProps {
@@ -28,22 +28,22 @@ const CourseAttributes: FC<CourseAttributesProps> = ({
 }): JSX.Element => {
   return (
     <>
-      {/* only render this component if at least one attribute can be displayed */}
+      {/* only render the component if at least one attribute can be displayed */}
       {(yearLevel || isCertificateAvailable) && (
-        <div
-          className={`${styles.courseHighlights} ${variant === "small" ? styles.small : styles.medium}`}
+        <Box
+          className={`${styles.courseHighlights} ${variant === "small" ? styles.small : ""}`}
         >
-          <div className={styles.item}>
-            <IconStarFilled />
+          <Box className={styles.item}>
+            <IconStarFilled size="1.3rem" />
             <Text size="textSm">{yearLevel}</Text>
-          </div>
+          </Box>
           {isCertificateAvailable && (
-            <div className={styles.item}>
-              <IconAwardFilled />
+            <Box className={styles.item}>
+              <IconAwardFilled size="1.4rem" />
               <Text size="textSm">Certificate of Completion</Text>
-            </div>
+            </Box>
           )}
-        </div>
+        </Box>
       )}
     </>
   );
