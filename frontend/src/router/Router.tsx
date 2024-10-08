@@ -13,6 +13,7 @@ import AdminRoute from "./AdminRoute";
 import { CourseContextProvider } from "../components/Course/CourseContext";
 import BookmarksPage from "../pages/Bookmarks.page";
 import BrowsePage from "../pages/Browse.page";
+import NotFoundPage from "../pages/NotFound.page";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "*",
+        element: <NotFoundPage />,
+      },
     ],
   },
   {
@@ -99,7 +104,15 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "*",
+        element: <NotFoundPage />,
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
