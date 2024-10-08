@@ -9,7 +9,6 @@ import {
   Flex,
   rem,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
@@ -18,12 +17,18 @@ import { StepOne } from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 
-const CreateLessonModal = () => {
-  const [opened, { open, close }] = useDisclosure(false);
+interface CreateLessonModalProps {
+  open: boolean;
+  onClose: () => void;
+  moduleTitle: string;
+}
+
+const CreateLessonModal = ({
+  open,
+  onClose,
+  moduleTitle,
+}: CreateLessonModalProps) => {
   const [active, setActive] = useState(0);
-  const modules = [
-    { category: "string", title: "string", description: "string", lessons: [] },
-  ]; // TODO: render with fetched data
   const [contents, setContents] = useState<Content[]>([]);
   const [error, setError] = useState<string>("");
 
@@ -53,9 +58,8 @@ const CreateLessonModal = () => {
     if (active == 0) {
       // Validate fields for step 1
       const lessonNameError = form.validateField("lessonName").hasError;
-      const moduleError = form.validateField("module").hasError;
 
-      if (lessonNameError || moduleError) {
+      if (lessonNameError) {
         canProceed = false; // Prevent proceeding if there are errors
       }
     } else if (active == 1) {
@@ -81,8 +85,8 @@ const CreateLessonModal = () => {
   return (
     <>
       <Modal
-        opened={opened}
-        onClose={close}
+        opened={open}
+        onClose={onClose}
         size="100%"
         styles={{
           content: { height: "90vh", maxWidth: "1200px" },
@@ -150,7 +154,9 @@ const CreateLessonModal = () => {
                   style={{ flexGrow: 1, overflowY: "auto" }}
                 >
                   {/* step 1 */}
-                  {active === 0 && <StepOne form={form} modules={modules} />}
+                  {active === 0 && (
+                    <StepOne form={form} moduleTitle={moduleTitle} />
+                  )}
                   {/* step 2 */}
                   {active === 1 && (
                     <StepTwo
@@ -197,8 +203,6 @@ const CreateLessonModal = () => {
           </Group>
         </Flex>
       </Modal>
-      {/* modal trigger (TODO as not sure how it looks yet) */}
-      <Button onClick={open}>Open create lesson modal</Button>
     </>
   );
 };

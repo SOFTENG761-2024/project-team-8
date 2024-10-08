@@ -1,7 +1,8 @@
 import {
   Divider,
   Group,
-  Select,
+  Stack,
+  Text,
   Textarea,
   TextInput,
   Title,
@@ -9,7 +10,6 @@ import {
 import { FormLabel } from "./FormLabel";
 import { UseFormReturnType } from "@mantine/form";
 import { FC } from "react";
-import { Module } from "../../interfaces/kit";
 
 interface StepOneProps {
   form: UseFormReturnType<{
@@ -18,13 +18,9 @@ interface StepOneProps {
     module: string;
     content: never[];
   }>;
-  modules: Module[];
+  moduleTitle: string;
 }
-export const StepOne: FC<StepOneProps> = ({ form, modules }) => {
-  const moduleOptions: string[] = modules.map(
-    (module) => module.title // Unique identifier for the module
-  );
-
+export const StepOne: FC<StepOneProps> = ({ form, moduleTitle }) => {
   // TODO: module is rendered as string not object, thus should be converted back upon submission
 
   return (
@@ -53,13 +49,10 @@ export const StepOne: FC<StepOneProps> = ({ form, modules }) => {
         minRows={4}
         maxRows={6}
       />
-      <Select
-        label={<FormLabel text="Module" required />}
-        data={moduleOptions}
-        variant="filled"
-        maw="30rem"
-        {...form.getInputProps("module")}
-      />
+      <Stack gap="0.5rem">
+        <FormLabel text="Module" />
+        <Text size="md">{moduleTitle}</Text>
+      </Stack>
     </>
   );
 };
