@@ -9,6 +9,7 @@ import {
   Loader,
   Select,
   Stack,
+  Text,
   useMantineTheme,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
@@ -73,7 +74,14 @@ const BrowsePage = () => {
 
   return (
     <Box w={"100%"} h={"100%"}>
-      <Stack h="auto" align="stretch">
+      <Stack h="auto" align="stretch" gap={0}>
+        <Text size="h6" c="primary.5" fw="500">
+          You do not have access to these courses.
+        </Text>
+        <Text size="h6" mb="0.75rem" lh="1.25rem" c="primary.5" fw="500">
+          Please contact ByteEd by email at DEMO@byteed.com with the course
+          name, course kit, and username or email of your ByteEd account.
+        </Text>
         <Grid pb={10}>
           <Grid.Col span={8}>
             <Input
@@ -115,7 +123,7 @@ const BrowsePage = () => {
           ) : (
             <CourseCardCollection
               courses={filteredCourses}
-              unsubscribed={true}
+              unsubscribed
               completedCourseIds={[]}
               bookmarkedCourseIds={[]}
             />

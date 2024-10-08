@@ -71,11 +71,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
               <Text size="sm" c="gray">
                 {course.lessons} Lessons
               </Text>
-              {unsubscribed && (
-                <Text size="sm" c="red">
-                  Contact us to subscribe to this content!
-                </Text>
-              )}
               {/* COURSE TAGS */}
               <Flex
                 gap="0.25rem"
@@ -91,11 +86,12 @@ const CourseCard: React.FC<CourseCardProps> = ({
         {/* View Button positioned at the bottom-right */}
         <Button
           variant="filled"
+          tt="capitalize"
           bg="var(--mantine-color-primary-5)"
           style={{
             position: !isSmallScreen ? "absolute" : "static",
-            bottom: "20px",
-            right: "20px",
+            bottom: "1rem",
+            right: "1rem",
           }}
           onClick={() =>
             unsubscribed ? open() : navigate(`/user/courses/${course.id}`)
