@@ -100,7 +100,10 @@ const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
           radius="10px"
         />
         <CourseAttributes />
-        <SummaryAccordion topics={SummaryTopics()} isExpanded={isExpanded} />
+        <SummaryAccordion
+          topics={formatSummaryTopics()}
+          isExpanded={isExpanded}
+        />
       </div>
     </div>
   );
@@ -128,7 +131,7 @@ const CourseAttributes = () => {
 /**
  * Formatting course information into CourseSummaryTopic structure to display in the SummaryAccordion component
  */
-const SummaryTopics = () => {
+const formatSummaryTopics = () => {
   const { currentCourseData } = useContext(CourseContext);
   return [
     {
