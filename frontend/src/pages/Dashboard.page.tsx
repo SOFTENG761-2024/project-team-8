@@ -122,16 +122,16 @@ const DashboardPage = () => {
           />
         </Center>
       ) : courses.length === 0 ? (
-        <Center h="100%">
+        <Box p={40}>
           <Blockquote
             color="red"
             radius="xl"
             icon={<IconInfoCircle size={60} />}
-            cite="– ByteEd Support"
+            cite="&mdash; ByteEd Support"
           >
             You currently don&apos;t have access to any courses. Visit the <Link to={"/user/browse"}>Browse</Link> page to explore available courses and request access! &#128512;
           </Blockquote>
-        </Center>
+        </Box>
       ) : (
         <Stack h="auto" align="stretch">
           <Grid pb={10}>
