@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 import DashboardPage from "../pages/Dashboard.page";
 import CoursePage from "../pages/Course.page";
-import CreateLessonPage from "../pages/admin/CreateLesson.page";
 import BaseLayout from "../components/BaseLayout/BaseLayout";
 import WelcomePage from "../pages/Welcome.page";
 import UserRoute from "./UserRoute";
@@ -88,16 +87,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <AdminRoute />,
-      },
-      {
-        path: "create-lesson",
-        element: <AdminRoute />,
-        children: [
-          {
-            index: true,
-            element: <CreateLessonPage />,
-          },
-        ],
       },
     ],
   },
