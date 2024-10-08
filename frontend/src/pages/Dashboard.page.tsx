@@ -124,7 +124,7 @@ const DashboardPage = () => {
       ) : courses.length === 0 ? (
         <Box p={40}>
           <Blockquote
-            color="red"
+            color="blue"
             radius="xl"
             icon={<IconInfoCircle size={60} />}
             cite="&mdash; ByteEd Support"
