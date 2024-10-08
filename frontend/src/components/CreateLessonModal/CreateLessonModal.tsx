@@ -9,13 +9,15 @@ import {
   Flex,
   rem,
 } from "@mantine/core";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import classes from "./CreateLessonModal.module.css";
 import { useForm } from "@mantine/form";
 import { Content } from "../../interfaces/kit";
 import { StepOne } from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import { CourseContext } from "../Course/CourseContext";
+import Parse from "../../../parseconfig";
 
 interface CreateLessonModalProps {
   open: boolean;
@@ -31,6 +33,7 @@ const CreateLessonModal = ({
   const [active, setActive] = useState(0);
   const [contents, setContents] = useState<Content[]>([]);
   const [error, setError] = useState<string>("");
+  const { currentCourseData } = useContext(CourseContext);
 
   const form = useForm({
     mode: "uncontrolled",
@@ -45,10 +48,24 @@ const CreateLessonModal = ({
     },
   });
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
-    form.validate();
-    console.log("TODO: on submit logic", form.getValues(), contents);
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    form.validate();
+
+    try {
+      await Parse.Cloud.run("addLesson", {
+        courseId: currentCourseData?.id,
+        lessonTitle: form.getValues().lessonName,
+        lessonOverview: form.getValues().lessonOverview,
+        lessonContent: contents,
+        moduleName: moduleTitle,
+      });
+    } catch (error) {
+      // TODO: Replace with error message
+      console.error("Error adding lesson: ", error);
+    }
+
+    console.log("TODO: on submit logic", form.getValues(), contents);
   };
 
   const nextStep = () => {
