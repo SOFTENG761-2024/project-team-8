@@ -62,10 +62,20 @@ const CourseCard: React.FC<CourseCardProps> = ({
           {/* Course details */}
           <Grid.Col span={isSmallScreen ? 12 : 9}>
             <Box className={styles.courseDetails}>
-              <Text size="xl" fw={700} c="primary.5">
+              <Text
+                size="xl"
+                fw={700}
+                c="primary.5"
+                truncate={isSmallScreen && "end"}
+              >
                 {course.title}
               </Text>
-              <Text c="primary.4" fw={500} size="md">
+              <Text
+                c="primary.4"
+                fw={500}
+                size="md"
+                truncate={isSmallScreen && "end"}
+              >
                 {course.kitName}
               </Text>
               <Text size="sm" c="gray">

@@ -7,6 +7,7 @@ import {
   Grid,
   Input,
   Loader,
+  Paper,
   Select,
   Stack,
   Text,
@@ -75,13 +76,16 @@ const BrowsePage = () => {
   return (
     <Box w={"100%"} h={"100%"}>
       <Stack h="auto" align="stretch" gap={0}>
-        <Text size="h6" c="primary.5" fw="500">
-          You do not have access to these courses.
-        </Text>
-        <Text size="h6" mb="0.75rem" lh="1.25rem" c="primary.5" fw="500">
-          Please contact ByteEd by email at DEMO@byteed.com with the course
-          name, course kit, and username or email of your ByteEd account.
-        </Text>
+        <Paper bg="primary.0" mb="0.5rem" p="0.75rem" radius="0.75rem">
+          <Text c="primary.3" fw="800" size="sm">
+            {" "}
+            You do not have access to these courses
+            <Box c="primary.4" fw="500" mt="0.25rem">
+              Please contact ByteEd by email at DEMO@byteed.com with the course
+              name, course kit, and username or email of your ByteEd account.
+            </Box>
+          </Text>
+        </Paper>
         <Grid pb={10}>
           <Grid.Col span={8}>
             <Input
