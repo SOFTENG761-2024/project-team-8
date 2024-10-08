@@ -1,4 +1,11 @@
-import { Box, Center, Loader, Text, useMantineTheme } from "@mantine/core";
+import {
+  Box,
+  Center,
+  Flex,
+  Loader,
+  Text,
+  useMantineTheme,
+} from "@mantine/core";
 import { useContext, useEffect, useState } from "react";
 import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
 import { AuthContext } from "../context/AuthContextProvider";
@@ -82,7 +89,11 @@ const BookmarksPage = () => {
           unsubscribed={false}
         />
       ) : (
-        <Text>No bookmarked courses found</Text>
+        <Flex justify="center" align="center" h="100px">
+          <Text c={"neutral.5"} size="xl">
+            No bookmarked courses found &#128546;
+          </Text>
+        </Flex>
       )}
     </Box>
   );
