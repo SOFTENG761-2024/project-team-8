@@ -76,12 +76,27 @@ const DashboardPage = () => {
   // update the courses shown whenever courses, search query, or filter changes
   useEffect(() => {
     const filtered = courses
-      .filter(
-        (course) =>
+      .filter((course) => {
+        // applying search query filter
+        const matchesSearchQuery =
           course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          course.kitName.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+          course.kitName.toLowerCase().includes(searchQuery.toLowerCase());
+
+        // apply completion status filter
+        const isCompleted = completedCourseIds.includes(course.id);
+
+        // filtering based on the selected filter type
+        if (filter === "complete") {
+          return matchesSearchQuery && isCompleted;
+        } else if (filter === "incomplete") {
+          return matchesSearchQuery && !isCompleted;
+        }
+
+        // default filter is the search query
+        return matchesSearchQuery;
+      })
       .sort((a, b) => {
+        // sorting logic based on selected filter
         switch (filter) {
           case "name-asc":
             return a.title.localeCompare(b.title);
@@ -93,7 +108,7 @@ const DashboardPage = () => {
       });
 
     setFilteredCourses(filtered);
-  }, [courses, searchQuery, filter]);
+  }, [courses, searchQuery, filter, completedCourseIds]);
 
   return (
     <Box w={"100%"} h={"100%"}>
@@ -112,11 +127,14 @@ const DashboardPage = () => {
             <Select
               size="md"
               variant="filled"
+              value={filter}
               defaultValue={"recently-viewed"}
               onChange={(value) => setFilter(value)}
               data={[
                 { value: "all", label: "All" },
                 { value: "recently-viewed", label: "Recently Viewed" },
+                { value: "complete", label: "Complete" },
+                { value: "incomplete", label: "Incomplete" },
                 { value: "name-asc", label: "Name A-Z" },
                 { value: "name-desc", label: "Name Z-A" },
               ]}

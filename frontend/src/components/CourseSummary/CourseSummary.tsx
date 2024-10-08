@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 import classes from "./CourseSummary.module.css";
 import {
   IconBulbFilled,
@@ -9,15 +15,21 @@ import {
   IconUserFilled,
 } from "@tabler/icons-react";
 import { Accordion, ActionIcon, Image, List, Tooltip } from "@mantine/core";
-import { CourseSummaryTopic } from "../../interfaces/componentInterfaces.ts";
 import { CourseContext } from "../Course/CourseContext.tsx";
 import CourseAttributes from "./CourseAttributes.tsx";
 
+/* CourseSummary prop types */
 interface CourseSummaryProps {
   summaryExpanded: boolean;
   setSummaryExpanded: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * This component contains the information components of the course and collapsing functionality of the component
+ *
+ * @param {boolean} summaryExpanded - True if the CourseSummary is in expanded form, false otherwise
+ * @param {function} setSummaryExpanded - Function for setting the CourseSummary's expansion status
+ */
 export const CourseSummary = ({
   summaryExpanded,
   setSummaryExpanded,
@@ -57,10 +69,16 @@ export const CourseSummary = ({
   );
 };
 
+/* CourseSummaryBase prop types */
 interface CourseSummaryBaseProps {
   isExpanded: boolean;
 }
 
+/**
+ * Displays the course image and contains the course's information components
+ *
+ * @param {boolean} isExpanded - True if the CourseSummary is in expanded form, false otherwise
+ */
 const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
   const { currentCourseData } = useContext(CourseContext);
   return (
@@ -77,48 +95,64 @@ const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
           yearLevel={currentCourseData?.yearLevel}
           isCertificateAvailable={currentCourseData?.isCertificateAvailable}
         />
-        <SummaryAccordion topics={SummaryTopics()} isExpanded={isExpanded} />
+        <SummaryAccordion
+          topics={useFormatSummaryTopics()}
+          isExpanded={isExpanded}
+        />
       </div>
     </div>
   );
 };
 
-const SummaryTopics = () => {
+/**
+ * Formatting course information into CourseSummaryTopic structure to display in the SummaryAccordion component
+ */
+const useFormatSummaryTopics = () => {
   const { currentCourseData } = useContext(CourseContext);
   return [
     {
       value: "About Course",
       icon: <IconInfoSquareFilled />,
-      information: currentCourseData?.description || "",
+      information: currentCourseData?.description,
     },
     {
       value: "Learning Outcomes",
       icon: <IconBulbFilled />,
-      informationList: currentCourseData?.outcomes || [],
+      informationList: currentCourseData?.outcomes,
     },
     {
       value: "Materials Include",
       icon: <IconFileDescription />,
-      informationList: [
-        "A full comprehensive guide for teachers",
-        "Print-outs and activities",
-        "Posters",
-        "Cut-out resources",
-      ],
+      informationList: currentCourseData?.materials,
     },
     {
       value: "Audience",
       icon: <IconUserFilled />,
-      information: "Teachers or Tutors",
+      informationList: currentCourseData?.audience,
     },
   ];
 };
 
+/* CourseSummaryTopic prop types */
+interface CourseSummaryTopic {
+  value: string;
+  icon: ReactNode;
+  information?: string | null;
+  informationList?: string[] | null; //  for bullet points
+}
+
+/* SummaryAccordion prop types */
 interface SummaryAccordionProps {
   topics: CourseSummaryTopic[];
   isExpanded: boolean;
 }
 
+/**
+ * Accordion used to display the course's description, learning outcomes, materials list, and audience
+ *
+ * @param {CourseSummaryTopic[]} topics - List of CourseSummaryTopics to display in each accordion item
+ * @param {boolean} isExpanded - True if the CourseSummary is in expanded form, false otherwise
+ */
 const SummaryAccordion = ({ topics, isExpanded }: SummaryAccordionProps) => {
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
@@ -132,13 +166,19 @@ const SummaryAccordion = ({ topics, isExpanded }: SummaryAccordionProps) => {
         {topic.value}
       </Accordion.Control>
       <Accordion.Panel c="neutral.5">
-        {topic.information}
-        {topic.informationList && (
-          <List>
-            {topic.informationList.map((listItem) => (
-              <List.Item key={listItem}>{listItem}</List.Item>
-            ))}
-          </List>
+        {topic.information || topic.informationList ? (
+          <>
+            {topic.information}
+            {topic.informationList && (
+              <List>
+                {topic.informationList.map((listItem) => (
+                  <List.Item key={listItem}>{listItem}</List.Item>
+                ))}
+              </List>
+            )}
+          </>
+        ) : (
+          "No information available"
         )}
       </Accordion.Panel>
     </Accordion.Item>
