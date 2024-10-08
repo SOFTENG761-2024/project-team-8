@@ -18,6 +18,7 @@ export interface Course {
   courseImage: Parse.File;
   materials: string[];
   audience: string[];
+  isCertificateAvailable: boolean;
 }
 
 export interface Module {

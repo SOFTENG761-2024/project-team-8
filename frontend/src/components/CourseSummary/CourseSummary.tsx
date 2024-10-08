@@ -120,10 +120,12 @@ const CourseAttributes = () => {
         <IconStarFilled />
         <Text size="textSm">{currentCourseData?.yearLevel}</Text>
       </div>
-      <div className={classes.item}>
-        <IconAwardFilled />
-        <Text size="textSm">Certificate of Completion</Text>
-      </div>
+      {currentCourseData?.isCertificateAvailable && (
+        <div className={classes.item}>
+          <IconAwardFilled />
+          <Text size="textSm">Certificate of Completion</Text>
+        </div>
+      )}
     </div>
   );
 };
