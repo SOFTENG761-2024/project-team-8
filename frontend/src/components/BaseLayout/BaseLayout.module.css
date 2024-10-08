@@ -14,10 +14,16 @@ body {
   background-color: var(--mantine-color-neutral-0);
 }
 
+.divider {
+  width: 97vw;
+  margin-bottom: 3vh;
+  border-bottom: 0.125rem solid var(--mantine-color-neutral-2);
+}
+
 .mainContentWrapper {
   width: 100%;
   height: 70vh;
-  margin: 0rem 2rem;
+  margin-left: 2rem;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -26,8 +32,8 @@ body {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 12rem;
-  padding: 1rem;
+  height: 17vh;
+  padding: 0 1rem;
 }
 
 .headerContent {
@@ -41,9 +47,10 @@ body {
   display: flex;
   padding-top: 5rem;
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
   height: min-content;
-  padding: 1rem;
+  padding: 0 1.5vw;
 }
 
 .footerWrapper {
@@ -73,6 +80,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
+  margin-right: 8vw;
 }
 
 .alert {
@@ -83,12 +91,4 @@ body {
 .countDown {
   color: light-dark(var(--mantine-color-grey-8), var(--mantine-color-white));
   font-size: 2rem;
-}
-
-.logo {
-  max-width: 100%;
-  height: 100%;
-  top: 1.25rem;
-  left: 1.25rem;
-  object-fit: cover;
 }
