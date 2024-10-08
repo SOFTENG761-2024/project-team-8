@@ -26,11 +26,18 @@ import {
 } from "@mantine/core";
 import { CourseContext } from "../Course/CourseContext.tsx";
 
+/* CourseSummary prop types */
 interface CourseSummaryProps {
   summaryExpanded: boolean;
   setSummaryExpanded: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * This component contains the information components of the course and collapsing functionality of the component
+ *
+ * @param {boolean} summaryExpanded - True if the CourseSummary is in expanded form, false otherwise
+ * @param {function} setSummaryExpanded - Function for setting the CourseSummary's expansion status
+ */
 export const CourseSummary = ({
   summaryExpanded,
   setSummaryExpanded,
@@ -70,10 +77,16 @@ export const CourseSummary = ({
   );
 };
 
+/* CourseSummaryBase prop types */
 interface CourseSummaryBaseProps {
   isExpanded: boolean;
 }
 
+/**
+ * Displays the course image and contains the course's information components
+ *
+ * @param {boolean} isExpanded - True if the CourseSummary is in expanded form, false otherwise
+ */
 const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
   const { currentCourseData } = useContext(CourseContext);
   return (
@@ -93,6 +106,9 @@ const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
   );
 };
 
+/**
+ * Displays the year level of the course and availability of the Certificate of Completion
+ */
 const CourseAttributes = () => {
   const { currentCourseData } = useContext(CourseContext);
   return (
@@ -109,6 +125,9 @@ const CourseAttributes = () => {
   );
 };
 
+/**
+ * Formatting course information into CourseSummaryTopic structure to display in the SummaryAccordion component
+ */
 const SummaryTopics = () => {
   const { currentCourseData } = useContext(CourseContext);
   return [
@@ -135,6 +154,7 @@ const SummaryTopics = () => {
   ];
 };
 
+/* CourseSummaryTopic prop types */
 interface CourseSummaryTopic {
   value: string;
   icon: ReactNode;
@@ -142,11 +162,18 @@ interface CourseSummaryTopic {
   informationList?: string[] | null; //  for bullet points
 }
 
+/* SummaryAccordion prop types */
 interface SummaryAccordionProps {
   topics: CourseSummaryTopic[];
   isExpanded: boolean;
 }
 
+/**
+ * Accordion used to display the course's description, learning outcomes, materials list, and audience
+ *
+ * @param {CourseSummaryTopic[]} topics - List of CourseSummaryTopics to display in each accordion item
+ * @param {boolean} isExpanded - True if the CourseSummary is in expanded form, false otherwise
+ */
 const SummaryAccordion = ({ topics, isExpanded }: SummaryAccordionProps) => {
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
