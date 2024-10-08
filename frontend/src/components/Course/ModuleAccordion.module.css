@@ -29,3 +29,11 @@
 .lessonCard:hover svg {
     color: var(--mantine-color-primary-5) !important;
 }
+
+.addLessonButton {
+    display: flex;
+    justify-content: start;
+    border-radius: 1rem;
+    padding-left: 1rem;
+}
+

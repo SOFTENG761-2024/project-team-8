@@ -6,11 +6,13 @@ import {
   Text,
   useMantineTheme,
   Tooltip,
+  Button,
 } from "@mantine/core";
 import {
   IconBook2,
   IconSquareRoundedChevronDownFilled,
   IconFile,
+  IconFilePlus,
 } from "@tabler/icons-react";
 import styles from "./ModuleAccordion.module.css";
 import { useContext, useState } from "react";
@@ -19,6 +21,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Lesson } from "../../interfaces/kit";
 import { CourseContext } from "./CourseContext";
 import { FullscreenContextProvider } from "../../context/FullscreenContextProvider";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 interface ModuleAccordionProps {
   module: {
@@ -29,6 +32,7 @@ interface ModuleAccordionProps {
 
 const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
   const theme = useMantineTheme();
+  const { currentUserData } = useContext(AuthContext);
   const { currentCourseData } = useContext(CourseContext);
   const [opened, { open, close }] = useDisclosure(false);
   const [initialLessonIndex, setInitialLessonIndex] = useState<number | null>(
@@ -90,7 +94,7 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
             </Group>
           </Accordion.Control>
           <Accordion.Panel>
-            <Stack>
+            <Stack pb="1rem">
               {module.lessons.map((lesson, index) => (
                 <Tooltip
                   key={lesson.id}
@@ -117,6 +121,17 @@ const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
                 </Tooltip>
               ))}
             </Stack>
+            {currentUserData?.get("role") === "admin" && (
+              <Button
+                className={styles.addLessonButton}
+                leftSection={<IconFilePlus />}
+                bg="primary.5"
+                w="100%"
+                size="lg"
+              >
+                <Text fw={600}>Add new lesson</Text>
+              </Button>
+            )}
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
