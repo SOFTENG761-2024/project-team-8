@@ -16,17 +16,16 @@ const Header = () => {
 
   const determinePage = () => {
     const path = location.pathname;
-    if (path.includes("dashboard")) {
+    if (path === "/user/dashboard") {
       setPage("Dashboard");
-    } else if (path.includes("courses")) {
+    } else if (path.startsWith("/user/courses")) {
       setPage("Course Details");
-    } else if (path.includes("bookmarks")) {
+    } else if (path === "/user/bookmarks") {
       setPage("Bookmarked Courses");
-    } else if (path.includes("browse")) {
-      setPage("Browse Courses");
+    } else if (path === "/user/browse") {
+      setPage("Browse Unsubscribed Courses");
     } else {
-      // CAN ADD MORE!
-      setPage("");
+      setPage("Page Not Found");
     }
   };
 

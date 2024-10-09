@@ -24,6 +24,7 @@ import {
 } from "@tabler/icons-react";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
+import NotFoundPage from "./NotFound.page.tsx";
 
 export interface CoursePage extends Course {
   num_lessons: number;
@@ -39,6 +40,7 @@ const CoursePage = () => {
   const [summaryExpanded, setSummaryExpanded] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+  const [isNotFound, setIsNotFound] = useState<boolean>(false);
   useEffect(() => {
     document.title = formattedPageTitle("COURSE");
 
@@ -47,6 +49,14 @@ const CoursePage = () => {
         const courseResult = await Parse.Cloud.run("getCourse", {
           courseId: courseId,
         });
+        console.log(courseResult)
+        // If courseResult is null or undefined, set isNotFound to true
+        if (!courseResult) {
+          setIsNotFound(true);
+          setLoading(false);
+          return;
+        }
+
         const completedResult = await Parse.Cloud.run("isCourseCompleted", {
           courseId: courseId,
           userId: currentUserData?.id,
@@ -65,6 +75,8 @@ const CoursePage = () => {
         setLoading(false);
       } catch (error) {
         console.log(error);
+        setIsNotFound(true);
+        setLoading(false);
       }
     };
     fetchCourseData();
@@ -103,6 +115,8 @@ const CoursePage = () => {
         <Center h="100%" w="100%">
           <Loader size={100} color={theme.colors.primary[4]} />
         </Center>
+      ) : isNotFound ? (
+        <NotFoundPage />
       ) : (
         <>
           <Group align="center" justify="space-between">

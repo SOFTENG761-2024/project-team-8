@@ -2,7 +2,7 @@ import { Center, Paper, Title } from "@mantine/core";
 import { FC, ReactNode } from "react";
 
 interface WelcomeContainerProps {
-  title: string;
+  title?: string;
   children: ReactNode;
 }
 const WelcomeContainer: FC<WelcomeContainerProps> = ({ title, children }) => (
