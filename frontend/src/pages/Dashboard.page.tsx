@@ -2,6 +2,7 @@ import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
 import Parse from "../../parseconfig.ts";
 
 import {
+  Blockquote,
   Box,
   Center,
   Grid,
@@ -12,9 +13,10 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useContext, useEffect, useState } from "react";
-import { IconFilter, IconSearch } from "@tabler/icons-react";
+import { IconFilter, IconInfoCircle, IconSearch } from "@tabler/icons-react";
 import { AuthContext } from "../context/AuthContextProvider.tsx";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
+import { Link } from "react-router-dom";
 
 // defining the Course type and create some dummy data
 export interface Course {
@@ -111,59 +113,69 @@ const DashboardPage = () => {
   }, [courses, searchQuery, filter, completedCourseIds]);
 
   return (
-    <Box w={"100%"} h={"100%"}>
-      <Stack h="auto" align="stretch">
-        <Grid pb={10}>
-          <Grid.Col span={8}>
-            <Input
-              size="md"
-              variant="filled"
-              placeholder="Search for course..."
-              rightSection={<IconSearch />}
-              onChange={(e) => setSearchQuery(e.currentTarget.value)}
-            />
-          </Grid.Col>
-          <Grid.Col span={4}>
-            <Select
-              size="md"
-              variant="filled"
-              value={filter}
-              defaultValue={"recently-viewed"}
-              onChange={(value) => setFilter(value)}
-              data={[
-                { value: "all", label: "All" },
-                { value: "recently-viewed", label: "Recently Viewed" },
-                { value: "complete", label: "Complete" },
-                { value: "incomplete", label: "Incomplete" },
-                { value: "name-asc", label: "Name A-Z" },
-                { value: "name-desc", label: "Name Z-A" },
-              ]}
-              placeholder="Filter & Sort"
-              rightSection={<IconFilter />}
-            />
-          </Grid.Col>
-        </Grid>
-        <Box className="course-card-collection-wrapper">
-          {loading ? (
-            <Center h="100%" w="100%">
-              <Loader
-                pt="1rem"
-                m="0 auto"
-                size={40}
-                color={theme.colors.primary[4]}
-                style={{ margin: "0 auto", display: "block" }} // Optional inline styling for centering
+    <Box w="100%" h="100%">
+      {loading ? (
+        <Center h="100vh">
+          <Loader
+            pt="1rem"
+            size={40}
+            color={theme.colors.primary[4]}
+            style={{ display: "block" }}
+          />
+        </Center>
+      ) : courses.length === 0 ? (
+        <Box p={40}>
+          <Blockquote
+            color="blue"
+            radius="xl"
+            icon={<IconInfoCircle size={60} />}
+            cite="&mdash; ByteEd Support"
+          >
+            You currently don&apos;t have access to any courses. Visit the <Link to={"/user/browse"}>Browse</Link> page to explore available courses and request access! &#128512;
+          </Blockquote>
+        </Box>
+      ) : (
+        <Stack h="auto" align="stretch">
+          <Grid pb={10}>
+            <Grid.Col span={8}>
+              <Input
+                size="md"
+                variant="filled"
+                placeholder="Search for course..."
+                rightSection={<IconSearch />}
+                onChange={(e) => setSearchQuery(e.currentTarget.value)}
               />
-            </Center>
-          ) : (
+            </Grid.Col>
+            <Grid.Col span={4}>
+              <Select
+                size="md"
+                variant="filled"
+                value={filter}
+                defaultValue={"recently-viewed"}
+                onChange={(value) => setFilter(value)}
+                data={[
+                  { value: "all", label: "All" },
+                  { value: "recently-viewed", label: "Recently Viewed" },
+                  { value: "complete", label: "Complete" },
+                  { value: "incomplete", label: "Incomplete" },
+                  { value: "name-asc", label: "Name A-Z" },
+                  { value: "name-desc", label: "Name Z-A" },
+                ]}
+                placeholder="Filter & Sort"
+                rightSection={<IconFilter />}
+              />
+            </Grid.Col>
+          </Grid>
+          <Box className="course-card-collection-wrapper">
             <CourseCardCollection
               courses={filteredCourses}
               unsubscribed={false}
               completedCourseIds={completedCourseIds}
               bookmarkedCourseIds={bookmarkedCourses}
             />
-          )}
-        </Box>
-      </Stack>
+          </Box>
+        </Stack>
+      )}
     </Box>
   );
 };
