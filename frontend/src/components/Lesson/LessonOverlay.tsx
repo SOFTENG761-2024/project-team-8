@@ -7,7 +7,6 @@ import {
   Title,
   Text,
   UnstyledButton,
-  Image,
   Flex,
   useMantineTheme,
   Tooltip,
@@ -191,13 +190,8 @@ const LessonOverlay = ({
             <IconFile size="2rem" />
             {currentLesson.title}
           </Title>
-          <Image
-            radius="md"
-            src={"https://placehold.co/600x400?text=Lesson_Image"}
-            w="auto"
-          />
+
           <Text py="1rem" ta="justify">
-            {" "}
             {currentLesson.overview || "No overview available"}
           </Text>
           {currentLesson.content.map(

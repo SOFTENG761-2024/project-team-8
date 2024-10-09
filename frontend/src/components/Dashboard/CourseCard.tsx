@@ -88,7 +88,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 direction={isSmallScreen ? "column" : "row"}
               >
                 {isComplete && <CourseTag variant="complete" />}
-                {isBookmarked && <CourseTag variant="favorite" />}
+                {isBookmarked && <CourseTag variant="bookmark" />}
               </Flex>
             </Box>
           </Grid.Col>
