@@ -23,7 +23,7 @@ const Header = () => {
     } else if (path.includes("bookmarks")) {
       setPage("Bookmarked Courses");
     } else if (path.includes("browse")) {
-      setPage("Browse Unsubscribed Courses");
+      setPage("Browse Courses");
     } else {
       // CAN ADD MORE!
       setPage("");

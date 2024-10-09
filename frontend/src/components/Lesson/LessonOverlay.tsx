@@ -7,7 +7,6 @@ import {
   Title,
   Text,
   UnstyledButton,
-  Image,
   Flex,
   useMantineTheme,
   Tooltip,

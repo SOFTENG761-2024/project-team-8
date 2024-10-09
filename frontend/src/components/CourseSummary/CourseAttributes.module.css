@@ -1,0 +1,31 @@
+.courseHighlights {
+  background: var(--mantine-color-secondary-2);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.small {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mantine-color-secondary-6);
+  gap: 0.5rem;
+  width: max-content;
+}
+
+.small .item{
+  gap: 0.3rem;
+}
+
+.item p {
+  line-height: 1rem;
+}

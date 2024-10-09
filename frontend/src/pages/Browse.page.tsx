@@ -7,13 +7,16 @@ import {
   Grid,
   Input,
   Loader,
+  Paper,
   Select,
   Stack,
+  Text,
   useMantineTheme,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
 import { Course } from "./Dashboard.page.tsx";
+import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 const BrowsePage = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -23,20 +26,23 @@ const BrowsePage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // fetch data
+  // fetch data and change page title
   useEffect(() => {
+    document.title = formattedPageTitle("BROWSE");
     const fetchUserCourses = async () => {
       try {
         // get course content
         const sub = await Parse.Cloud.run("getUserKitsAndCourses");
         const allCourses = await Parse.Cloud.run("getAllKitCourses");
         // remove duplicates from all available courses
-        const uniqueAllCourses = allCourses.filter((obj: { id: string; }, index: any, self: any[]) =>
-          index === self.findIndex((o: { id: string; }) => o.id === obj.id)
+        const uniqueAllCourses = allCourses.filter(
+          (obj: { id: string }, index: number, self: []) =>
+            index === self.findIndex((o: { id: string }) => o.id === obj.id)
         );
         // filter out subscribed courses to get unsubscribed courses
         const result = uniqueAllCourses.filter(
-          (obj1: {id: string}) => !sub.some((obj2: { id: string}) => obj1.id === obj2.id)
+          (obj1: { id: string }) =>
+            !sub.some((obj2: { id: string }) => obj1.id === obj2.id)
         );
         setCourses(result);
         setLoading(false);
@@ -50,9 +56,10 @@ const BrowsePage = () => {
   // update the courses shown whenever courses, search query, or filter changes
   useEffect(() => {
     const filtered = courses
-      .filter((course) =>
-        course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        course.kitName.toLowerCase().includes(searchQuery.toLowerCase())
+      .filter(
+        (course) =>
+          course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          course.kitName.toLowerCase().includes(searchQuery.toLowerCase())
       )
       .sort((a, b) => {
         switch (filter) {
@@ -70,7 +77,16 @@ const BrowsePage = () => {
 
   return (
     <Box w={"100%"} h={"100%"}>
-      <Stack h="auto" align="stretch">
+      <Stack h="auto" align="stretch" gap={0}>
+        <Paper bg="primary.0" mb="0.5rem" p="0.75rem" radius="0.75rem">
+          <Text c="primary.3" fw="800" size="sm">
+            You do not have access to these courses
+          </Text>
+          <Text c="primary.4" fw="500" mt="0.25rem" size="sm">
+            Please contact ByteEd by email at DEMO@byteed.com with the course
+            name, course kit, and username or email of your ByteEd account.
+          </Text>
+        </Paper>
         <Grid pb={10}>
           <Grid.Col span={8}>
             <Input
@@ -110,7 +126,12 @@ const BrowsePage = () => {
               />
             </Center>
           ) : (
-            <CourseCardCollection courses={filteredCourses} unsubscribed={true} completedCourseIds={[]} bookmarkedCourseIds={[]}/>
+            <CourseCardCollection
+              courses={filteredCourses}
+              unsubscribed
+              completedCourseIds={[]}
+              bookmarkedCourseIds={[]}
+            />
           )}
         </Box>
       </Stack>

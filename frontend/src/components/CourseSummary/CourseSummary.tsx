@@ -7,24 +7,16 @@ import {
 } from "react";
 import classes from "./CourseSummary.module.css";
 import {
-  IconAwardFilled,
   IconBulbFilled,
   IconChevronLeft,
   IconChevronRight,
   IconFileDescription,
   IconInfoSquareFilled,
-  IconStarFilled,
   IconUserFilled,
 } from "@tabler/icons-react";
-import {
-  Accordion,
-  ActionIcon,
-  Image,
-  List,
-  Text,
-  Tooltip,
-} from "@mantine/core";
+import { Accordion, ActionIcon, Image, List, Tooltip } from "@mantine/core";
 import { CourseContext } from "../Course/CourseContext.tsx";
+import CourseAttributes from "./CourseAttributes.tsx";
 
 /* CourseSummary prop types */
 interface CourseSummaryProps {
@@ -99,9 +91,12 @@ const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
           src={currentCourseData?.courseImage?._url}
           radius="10px"
         />
-        <CourseAttributes />
+        <CourseAttributes
+          yearLevel={currentCourseData?.yearLevel}
+          isCertificateAvailable={currentCourseData?.isCertificateAvailable}
+        />
         <SummaryAccordion
-          topics={formatSummaryTopics()}
+          topics={useFormatSummaryTopics()}
           isExpanded={isExpanded}
         />
       </div>
@@ -110,30 +105,9 @@ const CourseSummaryBase = ({ isExpanded }: CourseSummaryBaseProps) => {
 };
 
 /**
- * Displays the year level of the course and availability of the Certificate of Completion
- */
-const CourseAttributes = () => {
-  const { currentCourseData } = useContext(CourseContext);
-  return (
-    <div className={classes.courseHighlights}>
-      <div className={classes.item}>
-        <IconStarFilled />
-        <Text size="textSm">{currentCourseData?.yearLevel}</Text>
-      </div>
-      {currentCourseData?.isCertificateAvailable && (
-        <div className={classes.item}>
-          <IconAwardFilled />
-          <Text size="textSm">Certificate of Completion</Text>
-        </div>
-      )}
-    </div>
-  );
-};
-
-/**
  * Formatting course information into CourseSummaryTopic structure to display in the SummaryAccordion component
  */
-const formatSummaryTopics = () => {
+const useFormatSummaryTopics = () => {
   const { currentCourseData } = useContext(CourseContext);
   return [
     {

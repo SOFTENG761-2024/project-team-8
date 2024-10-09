@@ -1,9 +1,5 @@
 import { Box, Chip, MantineStyleProps, useMantineTheme } from "@mantine/core";
-import {
-  IconAwardFilled,
-  IconBookmarkFilled,
-  IconHeartFilled,
-} from "@tabler/icons-react";
+import { IconAwardFilled, IconBookmarkFilled } from "@tabler/icons-react";
 import { FC } from "react";
 
 export interface CourseTagProps extends MantineStyleProps {
