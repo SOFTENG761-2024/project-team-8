@@ -33,18 +33,27 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [displayAlerts, setDisplayAlerts] = useState<boolean>(false);
-  const { setIsAnyPdfFullscreen } = useContext(FullscreenContext);
+  const { setIsAnyPdfFullscreen, lessonChanged, setLessonChanged } =
+    useContext(FullscreenContext);
   const [pdfSize, setPdfSize] = useState({ width: 0, height: 0 });
   const pdfCanvasRef = useRef(null);
-  const [documentLoaded, setdocumentLoaded] = useState<boolean>(false);
 
   const onDocumentLoadSuccess = ({ numPages }: OnLoadSuccessTypes): void => {
+    if (lessonChanged) {
+      // new lesson resources have now loaded, update context
+      setTimeout(() => {
+        setLessonChanged(false);
+      }, 500);
+    }
+
     setNumPages(numPages);
-    setdocumentLoaded(true);
   };
 
   const onDocumentLoading = () => {
-    setdocumentLoaded(false);
+    if (lessonChanged) {
+      // reset page number when on new lesson overlay screen
+      setPageNumber(1);
+    }
   };
 
   const changePage = useCallback(
@@ -134,12 +143,12 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
         </Stack>
       ) : (
         <>
-          {!documentLoaded && <Loader color="primary.5" />}
+          {lessonChanged && <Loader color="primary.5" />}
           <Flex
             direction="row"
             wrap="nowrap"
             align="center"
-            className={documentLoaded ? styles.viewerBackground : styles.hidden} // only render pdf view once document is fully loaded
+            className={lessonChanged ? styles.hidden : styles.viewerBackground} // only render pdf viewer once document is fully loaded
           >
             <Stack gap="0">
               <Text
