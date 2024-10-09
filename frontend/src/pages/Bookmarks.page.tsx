@@ -1,4 +1,5 @@
 import {
+  Blockquote,
   Box,
   Center,
   Flex,
@@ -12,6 +13,8 @@ import { AuthContext } from "../context/AuthContextProvider";
 import Parse from "../../parseconfig";
 import { Course } from "./Dashboard.page";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
+import { IconInfoCircle } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 const BookmarksPage = () => {
   const [bookmarkedCourses, setBookmarkedCourses] = useState<Course[]>([]);
@@ -89,11 +92,15 @@ const BookmarksPage = () => {
           unsubscribed={false}
         />
       ) : (
-        <Flex justify="center" align="center" h="100px">
-          <Text c={"neutral.5"} size="xl">
-            No bookmarked courses found &#128546;
-          </Text>
-        </Flex>
+        <Box p={40}>
+          <Blockquote
+            color="blue"
+            radius="xl"
+            icon={<IconInfoCircle size={60} />}
+          >
+            You don't have any bookmarked courses.
+          </Blockquote>
+        </Box>
       )}
     </Box>
   );
