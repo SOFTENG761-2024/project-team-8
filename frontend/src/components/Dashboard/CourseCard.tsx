@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Box, Button, Card, Flex, Grid, Image, Modal, Stack, Text } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Card,
+  Flex,
+  Grid,
+  Image,
+  Modal,
+  Stack,
+  Text,
+} from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/Dashboard.page";
 import { IconEye } from "@tabler/icons-react";
@@ -15,7 +25,8 @@ interface CourseCardProps {
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
-  course, unsubscribed,
+  course,
+  unsubscribed,
   isBookmarked = false,
   isComplete = false,
 }) => {
@@ -26,19 +37,16 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   return (
     <Box>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-      >
+      <Modal opened={opened} onClose={() => setOpened(false)}>
         <Stack>
           <Image
-              src={course.image._url}
-              alt="Course Image"
-              height={150}
-              width={150}
-              radius="md"
-              style={{ objectFit: "cover" }}
-            />
+            src={course.image._url}
+            alt="Course Image"
+            height={150}
+            width={150}
+            radius="md"
+            style={{ objectFit: "cover" }}
+          />
           <Text size="xl" fw={700} c="primary.5">
             {course.title}
           </Text>
@@ -96,11 +104,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
               <Text size="sm" c="gray">
                 {course.lessons} Lessons
               </Text>
-              {unsubscribed && 
+              {unsubscribed && (
                 <Text size="sm" c="red">
                   Contact us to subscribe to this content!
                 </Text>
-              }
+              )}
               {/* COURSE TAGS */}
               <Flex
                 gap="0.25rem"
@@ -108,25 +116,29 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 direction={isSmallScreen ? "column" : "row"}
               >
                 {isComplete && <CourseTag variant="complete" />}
-                {isBookmarked && <CourseTag variant="favorite" />}
+                {isBookmarked && <CourseTag variant="bookmark" />}
               </Flex>
             </Box>
           </Grid.Col>
         </Grid>
         {/* View Button positioned at the bottom-right */}
         <Button
-            variant="filled"
-            bg="var(--mantine-color-primary-5)"
-            style={{
-              position: !isSmallScreen ? "absolute" : "static",
-              bottom: '20px',
-              right: '20px',
-            }}
-            onClick={() => unsubscribed ? setOpened(true) : navigate(`/user/courses/${course.id}`)}
-            leftSection={<IconEye/>}
-          >
-            {unsubscribed ? "Preview" : "View"}
-          </Button>
+          variant="filled"
+          bg="var(--mantine-color-primary-5)"
+          style={{
+            position: !isSmallScreen ? "absolute" : "static",
+            bottom: "20px",
+            right: "20px",
+          }}
+          onClick={() =>
+            unsubscribed
+              ? setOpened(true)
+              : navigate(`/user/courses/${course.id}`)
+          }
+          leftSection={<IconEye />}
+        >
+          {unsubscribed ? "Preview" : "View"}
+        </Button>
       </Card>
     </Box>
   );
