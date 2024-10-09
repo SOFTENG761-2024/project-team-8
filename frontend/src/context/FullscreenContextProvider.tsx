@@ -3,6 +3,8 @@ import { createContext, ReactNode, useState } from "react";
 interface FullscreenContextType {
   isAnyPdfFullscreen: boolean;
   setIsAnyPdfFullscreen: (fullscreen: boolean) => void;
+  lessonChanged: boolean;
+  setLessonChanged: (changed: boolean) => void;
 }
 
 interface FullscreenContextProviderProps {
@@ -12,6 +14,8 @@ interface FullscreenContextProviderProps {
 export const FullscreenContext = createContext<FullscreenContextType>({
   isAnyPdfFullscreen: false,
   setIsAnyPdfFullscreen: () => {},
+  lessonChanged: true,
+  setLessonChanged: () => {},
 });
 
 /**
@@ -23,10 +27,13 @@ export const FullscreenContextProvider = ({
   children,
 }: FullscreenContextProviderProps) => {
   const [isAnyPdfFullscreen, setIsAnyPdfFullscreen] = useState<boolean>(false);
+  const [lessonChanged, setLessonChanged] = useState<boolean>(true);
 
   const context = {
     isAnyPdfFullscreen,
     setIsAnyPdfFullscreen,
+    lessonChanged,
+    setLessonChanged,
   };
 
   return (

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Box, Button, Card, Flex, Grid, Image, Modal, Stack, Text } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+import { Box, Button, Card, Flex, Grid, Image, Text } from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { Course } from "../../pages/Dashboard.page";
 import { IconEye } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import styles from "./CourseCard.module.css";
 import CourseTag from "./CourseTag";
+import CoursePreviewModal from "./CoursePreviewModal";
 
 interface CourseCardProps {
   course: Course;
@@ -15,45 +16,19 @@ interface CourseCardProps {
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
-  course, unsubscribed,
+  course,
+  unsubscribed,
   isBookmarked = false,
   isComplete = false,
 }) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
-  const [opened, setOpened] = useState(false);
+  const [opened, { open, close }] = useDisclosure(false); // for summary modal
   const navigate = useNavigate();
 
   return (
-    <Box>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-      >
-        <Stack>
-          <Image
-              src={course.image._url}
-              alt="Course Image"
-              height={150}
-              width={150}
-              radius="md"
-              style={{ objectFit: "cover" }}
-            />
-          <Text size="xl" fw={700} c="primary.5">
-            {course.title}
-          </Text>
-          <Text c="primary.4" fw={500} size="md">
-            {course.kitName}
-          </Text>
-          <Text size="sm" c="gray" style={{ paddingTop: "1.5rem" }}>
-            Description:
-          </Text>
-          <Text size="sm" c="gray">
-            {course?.description || "No description available"}
-          </Text>
-        </Stack>
-      </Modal>
-
+    <>
+      <CoursePreviewModal course={course} opened={opened} onClose={close} />
       <Card
         shadow="sm"
         padding="sm"
@@ -87,20 +62,25 @@ const CourseCard: React.FC<CourseCardProps> = ({
           {/* Course details */}
           <Grid.Col span={isSmallScreen ? 12 : 9}>
             <Box className={styles.courseDetails}>
-              <Text size="xl" fw={700} c="primary.5">
+              <Text
+                size="xl"
+                fw={700}
+                c="primary.5"
+                truncate={isSmallScreen && "end"}
+              >
                 {course.title}
               </Text>
-              <Text c="primary.4" fw={500} size="md">
+              <Text
+                c="primary.4"
+                fw={500}
+                size="md"
+                truncate={isSmallScreen && "end"}
+              >
                 {course.kitName}
               </Text>
               <Text size="sm" c="gray">
                 {course.lessons} Lessons
               </Text>
-              {unsubscribed && 
-                <Text size="sm" c="red">
-                  Contact us to subscribe to this content!
-                </Text>
-              }
               {/* COURSE TAGS */}
               <Flex
                 gap="0.25rem"
@@ -108,27 +88,30 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 direction={isSmallScreen ? "column" : "row"}
               >
                 {isComplete && <CourseTag variant="complete" />}
-                {isBookmarked && <CourseTag variant="favorite" />}
+                {isBookmarked && <CourseTag variant="bookmark" />}
               </Flex>
             </Box>
           </Grid.Col>
         </Grid>
         {/* View Button positioned at the bottom-right */}
         <Button
-            variant="filled"
-            bg="var(--mantine-color-primary-5)"
-            style={{
-              position: !isSmallScreen ? "absolute" : "static",
-              bottom: '20px',
-              right: '20px',
-            }}
-            onClick={() => unsubscribed ? setOpened(true) : navigate(`/user/courses/${course.id}`)}
-            leftSection={<IconEye/>}
-          >
-            {unsubscribed ? "Preview" : "View"}
-          </Button>
+          variant="filled"
+          tt="capitalize"
+          bg="var(--mantine-color-primary-5)"
+          style={{
+            position: !isSmallScreen ? "absolute" : "static",
+            bottom: "1rem",
+            right: "1rem",
+          }}
+          onClick={() =>
+            unsubscribed ? open() : navigate(`/user/courses/${course.id}`)
+          }
+          leftSection={<IconEye />}
+        >
+          {unsubscribed ? "Preview" : "View"}
+        </Button>
       </Card>
-    </Box>
+    </>
   );
 };
 
