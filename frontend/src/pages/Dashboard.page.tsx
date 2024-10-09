@@ -26,6 +26,8 @@ export interface Course {
   kitName: string;
   lessons: number;
   image: Parse.File;
+  yearLevel: string;
+  isCertificateAvailable: boolean;
 }
 
 /**

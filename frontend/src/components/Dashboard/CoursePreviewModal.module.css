@@ -1,0 +1,28 @@
+.styledBody {
+  overflow: hidden;
+  padding: 0 2rem 2rem 2rem;
+}
+
+.modalDescription {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* changing default scrollbar style for the description */
+.styledBody {
+::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+/* scrollbar track style */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* scrollbar handle style */
+::-webkit-scrollbar-thumb {
+  background: var(--mantine-color-neutral-2);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+}
