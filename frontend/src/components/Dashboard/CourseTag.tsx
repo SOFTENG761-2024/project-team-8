@@ -1,9 +1,13 @@
 import { Box, Chip, MantineStyleProps, useMantineTheme } from "@mantine/core";
-import { IconAwardFilled, IconHeartFilled } from "@tabler/icons-react";
+import {
+  IconAwardFilled,
+  IconBookmarkFilled,
+  IconHeartFilled,
+} from "@tabler/icons-react";
 import { FC } from "react";
 
 export interface CourseTagProps extends MantineStyleProps {
-  variant: "favorite" | "complete";
+  variant: "complete" | "bookmark";
 }
 
 const CourseTag: FC<CourseTagProps> = ({ variant, ...mantineStyleProps }) => {
@@ -14,18 +18,18 @@ const CourseTag: FC<CourseTagProps> = ({ variant, ...mantineStyleProps }) => {
   let text;
 
   switch (variant) {
-    case "favorite":
-      tagColor = "accentRed.1";
-      labelColor = theme.colors.accentRed[5];
-      icon = <IconHeartFilled size="1rem" color={labelColor} />;
-      text = "Favorite";
-      break;
-
     case "complete":
       tagColor = "accentGreen.1";
       labelColor = theme.colors.accentGreen[5];
       icon = <IconAwardFilled size="1rem" color={labelColor} />;
       text = "Complete";
+      break;
+
+    case "bookmark":
+      tagColor = "accentRed.1";
+      labelColor = theme.colors.accentRed[5];
+      icon = <IconBookmarkFilled size="1rem" color={labelColor} />;
+      text = "Saved";
       break;
   }
 
