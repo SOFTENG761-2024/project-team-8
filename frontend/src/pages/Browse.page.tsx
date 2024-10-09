@@ -16,6 +16,7 @@ import {
 import { useEffect, useState } from "react";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
 import { Course } from "./Dashboard.page.tsx";
+import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 const BrowsePage = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -25,8 +26,9 @@ const BrowsePage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // fetch data
+  // fetch data and change page title
   useEffect(() => {
+    document.title = formattedPageTitle("BROWSE");
     const fetchUserCourses = async () => {
       try {
         // get course content
