@@ -35,18 +35,13 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
   const [displayAlerts, setDisplayAlerts] = useState<boolean>(false);
   const { setIsAnyPdfFullscreen, lessonChanged, setLessonChanged } =
     useContext(FullscreenContext);
+  const [documentLoading, setDocumentLoading] = useState<boolean>(true);
   const [pdfSize, setPdfSize] = useState({ width: 0, height: 0 });
   const pdfCanvasRef = useRef(null);
 
   const onDocumentLoadSuccess = ({ numPages }: OnLoadSuccessTypes): void => {
-    if (lessonChanged) {
-      // new lesson resources have now loaded, update context
-      setTimeout(() => {
-        setLessonChanged(false);
-      }, 500);
-    }
-
     setNumPages(numPages);
+    setDocumentLoading(false);
   };
 
   const onDocumentLoading = () => {
@@ -81,6 +76,7 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
           case "Escape":
             setFullscreen(false);
             setIsAnyPdfFullscreen(false);
+            setDocumentLoading(true);
             break;
           default:
             break;
@@ -108,6 +104,13 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
       setDisplayAlerts(false);
     }, 3000);
   }, [fullscreen]);
+
+  useEffect(() => {
+    if (lessonChanged) {
+      setLessonChanged(false);
+    }
+    setDocumentLoading(true);
+  }, [lessonChanged]);
 
   return (
     <Box
@@ -143,12 +146,14 @@ const PdfViewer = ({ url, fullscreen, setFullscreen }: PdfViewerProps) => {
         </Stack>
       ) : (
         <>
-          {lessonChanged && <Loader color="primary.5" />}
+          {documentLoading && <Loader color="primary.5" />}
           <Flex
             direction="row"
             wrap="nowrap"
             align="center"
-            className={lessonChanged ? styles.hidden : styles.viewerBackground} // only render pdf viewer once document is fully loaded
+            className={
+              documentLoading ? styles.hidden : styles.viewerBackground
+            } // only render pdf viewer once document is fully loaded
           >
             <Stack gap="0">
               <Text
