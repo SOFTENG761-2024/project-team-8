@@ -20,13 +20,13 @@ const NotFoundContent: React.FC<NotFoundContentProps> = ({ buttonText, buttonLin
                 padding: '5px',
             }}
         />
-        <Text size="xl" fw={700} c="primary.5">
+        <Text size="xl" fw={700} c="primary.5" ta={'center'}>
             Oops!
         </Text>
-        <Text c="primary.4" fw={500} size="md">
+        <Text c="primary.4" fw={500} size="md" ta={'center'}>
             Sorry, the page you are looking for doesn't exist!
         </Text>
-        <Button component={Link} to={buttonLink} size="md" color="primary">
+        <Button component={Link} to={buttonLink} size="md" color="primary" ta={'center'}>
             {buttonText}
         </Button>
     </Stack>
