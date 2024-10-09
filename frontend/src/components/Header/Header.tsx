@@ -1,4 +1,4 @@
-import { Avatar, Container, Text } from "@mantine/core";
+import { Avatar, Container, Text, Image } from "@mantine/core";
 import classes from "./Header.module.css";
 import explorer from "../../assets/explorer.png";
 import { useContext, useEffect, useState } from "react";
@@ -32,7 +32,7 @@ const Header = () => {
   return (
     <Container fluid className={classes.headerWrapper}>
       <div className={classes.detailsWrapper}>
-        <img src={explorer} alt="Centered" style={{ maxWidth: "4rem" }} />
+        <Image src={explorer} alt="Centered" h={90} />
         <Text fw={700} size="2.1rem" c="primary.4">
           {page}
         </Text>
