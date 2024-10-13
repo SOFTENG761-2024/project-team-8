@@ -138,7 +138,7 @@ interface CourseSummaryTopic {
   value: string;
   icon: ReactNode;
   information?: string | null;
-  informationList?: string[] | null; //  for bullet points
+  informationList?: string[] | null; 
 }
 
 /* SummaryAccordion prop types */

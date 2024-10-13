@@ -23,7 +23,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
-  const [opened, { open, close }] = useDisclosure(false); // for summary modal
+  const [opened, { open, close }] = useDisclosure(false); 
   const navigate = useNavigate();
 
   return (
