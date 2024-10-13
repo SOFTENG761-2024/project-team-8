@@ -1,16 +1,16 @@
-import { FC, useState } from "react";
-import Parse from "../../../parseconfig.ts";
-import { useForm } from "@mantine/form";
 import {
   Anchor,
   Button,
   Center,
   Container,
   PasswordInput,
-  TextInput,
   Text,
+  TextInput,
 } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Parse from "../../../parseconfig.ts";
 
 /**
  * User Registration Component

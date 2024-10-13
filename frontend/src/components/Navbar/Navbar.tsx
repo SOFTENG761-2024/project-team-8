@@ -1,15 +1,15 @@
-import { ActionIcon, rem, Stack, Text, Divider, Tooltip } from "@mantine/core";
-import classes from "./NavBar.module.css";
+import { ActionIcon, Divider, rem, Stack, Text, Tooltip } from "@mantine/core";
 import {
+  IconBookFilled,
   IconBookmarkFilled,
   IconChevronRight,
   IconHomeFilled,
   IconLogout,
-  IconBookFilled,
 } from "@tabler/icons-react";
-import { Link, useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContextProvider";
+import classes from "./NavBar.module.css";
 
 interface NavbarLinkProps {
   icon: typeof IconHomeFilled;

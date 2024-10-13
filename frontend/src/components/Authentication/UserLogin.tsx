@@ -1,18 +1,18 @@
-import { FC, useContext, useEffect, useState } from "react";
-import Parse from "../../../parseconfig.ts";
 import {
-  Text,
+  Anchor,
   Button,
   Center,
-  Container,
-  Anchor,
-  TextInput,
-  PasswordInput,
-  Group,
   Checkbox,
+  Container,
+  Group,
+  PasswordInput,
+  Text,
+  TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { FC, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Parse from "../../../parseconfig.ts";
 import { AuthContext } from "../../context/AuthContextProvider.tsx";
 
 const APP_ID = import.meta.env.VITE_BACK4APP_APP_ID;

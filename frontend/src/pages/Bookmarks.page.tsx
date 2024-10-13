@@ -5,13 +5,13 @@ import {
   Loader,
   useMantineTheme,
 } from "@mantine/core";
-import { useContext, useEffect, useState } from "react";
-import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
-import { AuthContext } from "../context/AuthContextProvider";
-import Parse from "../../parseconfig";
-import { Course } from "./Dashboard.page";
-import { formattedPageTitle } from "../constants/pageTitles.ts";
 import { IconInfoCircle } from "@tabler/icons-react";
+import { useContext, useEffect, useState } from "react";
+import Parse from "../../parseconfig";
+import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
+import { formattedPageTitle } from "../constants/pageTitles.ts";
+import { AuthContext } from "../context/AuthContextProvider";
+import { Course } from "./Dashboard.page";
 
 const BookmarksPage = () => {
   const [bookmarkedCourses, setBookmarkedCourses] = useState<Course[]>([]);

@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContextProvider";
-import { Navigate, Outlet } from "react-router-dom";
 import { Loader } from "@mantine/core";
+import { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { AuthContext } from "../context/AuthContextProvider";
 
 /**
  * This component is a wrapper for routes that require the user to be an admin.

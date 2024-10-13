@@ -3,17 +3,17 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import DashboardPage from "../pages/Dashboard.page";
-import CoursePage from "../pages/Course.page";
-import CreateLessonPage from "../pages/admin/CreateLesson.page";
 import BaseLayout from "../components/BaseLayout/BaseLayout";
-import WelcomePage from "../pages/Welcome.page";
-import UserRoute from "./UserRoute";
-import AdminRoute from "./AdminRoute";
 import { CourseContextProvider } from "../components/Course/CourseContext";
 import BookmarksPage from "../pages/Bookmarks.page";
 import BrowsePage from "../pages/Browse.page";
+import CoursePage from "../pages/Course.page";
+import DashboardPage from "../pages/Dashboard.page";
 import NotFoundPage from "../pages/NotFound.page";
+import WelcomePage from "../pages/Welcome.page";
+import CreateLessonPage from "../pages/admin/CreateLesson.page";
+import AdminRoute from "./AdminRoute";
+import UserRoute from "./UserRoute";
 
 const router = createBrowserRouter([
   {

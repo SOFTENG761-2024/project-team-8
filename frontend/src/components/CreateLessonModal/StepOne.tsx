@@ -6,10 +6,10 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import { FormLabel } from "./FormLabel";
 import { UseFormReturnType } from "@mantine/form";
 import { FC } from "react";
 import { Module } from "../../interfaces/kit";
+import { FormLabel } from "./FormLabel";
 
 interface StepOneProps {
   form: UseFormReturnType<{

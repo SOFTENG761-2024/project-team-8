@@ -1,7 +1,7 @@
+import { useEffect } from "react";
 import UserLogin from "../components/Authentication/UserLogin";
 import UserRegister from "../components/Authentication/UserRegister";
 import WelcomeContainer from "../components/WelcomeContainer";
-import { useEffect } from "react";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
 
 interface WelcomePagePropTypes {
