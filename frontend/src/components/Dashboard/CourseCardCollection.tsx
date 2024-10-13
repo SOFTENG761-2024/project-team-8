@@ -10,6 +10,14 @@ interface CourseCardCollectionProps {
   unsubscribed: boolean;
 }
 
+/**
+ * Component displays the course cards containign course information to be displayed in paginated form
+ *
+ * @param {Course[]} courses - list of data Course interface form to be displayed in the course cards
+ * @param {string[]} completedCourseIds - list of course ids of completed courses
+ * @param {string[]} bookmarkedCourseIds - list of course ids of bookmarked/saved courses
+ * @param {boolean} unsubscribed -is True if the collection displays courses the user is not subscribed to, otherwise, false
+ */
 const CourseCardCollection: React.FC<CourseCardCollectionProps> = ({
   courses,
   completedCourseIds,

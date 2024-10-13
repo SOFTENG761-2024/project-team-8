@@ -88,14 +88,15 @@ const BrowsePage = () => {
             style={{ margin: "0 auto", display: "block" }}
           />
         </Center>
-      ) : filteredCourses.length === 0 ? (
+      ) : courses.length === 0 ? (
         <Box p={40}>
           <Blockquote
             color="blue"
             radius="xl"
             icon={<IconInfoCircle size={60} />}
           >
-            You have access to all the courses available. Keep on the lookout for new courses! &#128512;
+            You have access to all the courses available. Keep on the lookout
+            for new courses! &#128512;
           </Blockquote>
         </Box>
       ) : (
@@ -148,5 +149,5 @@ const BrowsePage = () => {
       )}
     </Box>
   );
-}
+};
 export default BrowsePage;

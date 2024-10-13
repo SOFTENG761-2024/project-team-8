@@ -2,9 +2,7 @@ import {
   Blockquote,
   Box,
   Center,
-  Flex,
   Loader,
-  Text,
   useMantineTheme,
 } from "@mantine/core";
 import { useContext, useEffect, useState } from "react";
@@ -14,7 +12,6 @@ import Parse from "../../parseconfig";
 import { Course } from "./Dashboard.page";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
 import { IconInfoCircle } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
 
 const BookmarksPage = () => {
   const [bookmarkedCourses, setBookmarkedCourses] = useState<Course[]>([]);
