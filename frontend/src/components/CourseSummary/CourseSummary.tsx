@@ -1,11 +1,4 @@
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useContext,
-  useState,
-} from "react";
-import classes from "./CourseSummary.module.css";
+import { Accordion, ActionIcon, Image, List, Tooltip } from "@mantine/core";
 import {
   IconBulbFilled,
   IconChevronLeft,
@@ -14,9 +7,16 @@ import {
   IconInfoSquareFilled,
   IconUserFilled,
 } from "@tabler/icons-react";
-import { Accordion, ActionIcon, Image, List, Tooltip } from "@mantine/core";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 import { CourseContext } from "../Course/CourseContext.tsx";
 import CourseAttributes from "./CourseAttributes.tsx";
+import classes from "./CourseSummary.module.css";
 
 /* CourseSummary prop types */
 interface CourseSummaryProps {
@@ -138,7 +138,7 @@ interface CourseSummaryTopic {
   value: string;
   icon: ReactNode;
   information?: string | null;
-  informationList?: string[] | null; //  for bullet points
+  informationList?: string[] | null; 
 }
 
 /* SummaryAccordion prop types */

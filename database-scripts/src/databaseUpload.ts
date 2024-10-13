@@ -22,7 +22,7 @@ interface Course {
     yearLevel: string;
     description: string;
     outcomes: string[];
-    modules: Module[]; // references to those objects
+    modules: Module[]; 
     assessments: Assessment[];
     courseImage?: Parse.File;
 }

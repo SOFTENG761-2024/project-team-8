@@ -1,9 +1,9 @@
+import { Box, Image } from "@mantine/core";
 import { Outlet } from "react-router-dom";
-import classes from "./BaseLayout.module.css";
-import Navbar from "../Navbar/Navbar";
-import Header from "../Header/Header";
-import { Box, Divider, Image } from "@mantine/core";
 import logo from "../../assets/logo.png";
+import Header from "../Header/Header";
+import Navbar from "../Navbar/Navbar";
+import classes from "./BaseLayout.module.css";
 
 const BaseLayout = () => {
   return (

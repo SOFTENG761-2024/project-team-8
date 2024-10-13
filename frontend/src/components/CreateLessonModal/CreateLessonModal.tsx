@@ -1,22 +1,22 @@
 import {
   Button,
   Divider,
+  Flex,
   Group,
   Modal,
+  rem,
   Stack,
   Stepper,
   Title,
-  Flex,
-  rem,
 } from "@mantine/core";
+import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
-import classes from "./CreateLessonModal.module.css";
-import { useForm } from "@mantine/form";
 import { Content } from "../../interfaces/kit";
+import classes from "./CreateLessonModal.module.css";
 import { StepOne } from "./StepOne";
-import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import StepTwo from "./StepTwo";
 
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);

@@ -1,9 +1,9 @@
-import { Avatar, Container, Text, Image } from "@mantine/core";
-import classes from "./Header.module.css";
-import explorer from "../../assets/explorer.png";
+import { Avatar, Container, Image, Text } from "@mantine/core";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import explorer from "../../assets/explorer.png";
 import { AuthContext } from "../../context/AuthContextProvider";
+import classes from "./Header.module.css";
 
 const Header = () => {
   const { currentUserData } = useContext(AuthContext);

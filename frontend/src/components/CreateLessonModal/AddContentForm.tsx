@@ -3,16 +3,16 @@ import {
   FileInput,
   Group,
   Stack,
+  Text,
   Textarea,
   TextInput,
-  Text,
 } from "@mantine/core";
+import { IconUpload } from "@tabler/icons-react";
+import Parse from "parse";
+import { FC, useEffect, useState } from "react";
+import { Content } from "../../interfaces/kit";
 import classes from "./CreateLessonModal.module.css";
 import { FormLabel } from "./FormLabel";
-import { IconUpload } from "@tabler/icons-react";
-import { Content } from "../../interfaces/kit";
-import { FC, useEffect, useState } from "react";
-import Parse from "parse";
 
 interface AddContentFormProps {
   oldContent: Content | null;

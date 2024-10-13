@@ -1,8 +1,8 @@
-import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+import { AuthContextProvider } from "./context/AuthContextProvider";
 import { Router } from "./router/Router";
 import { theme } from "./theme/theme";
-import { AuthContextProvider } from "./context/AuthContextProvider";
 
 function App() {
   return (

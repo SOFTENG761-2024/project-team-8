@@ -1,16 +1,16 @@
 import {
+  Button,
   Divider,
   Group,
-  Stack,
-  Title,
-  Text,
   Select,
-  Button,
+  Stack,
+  Text,
+  Title,
 } from "@mantine/core";
-import classes from "./CreateLessonModal.module.css";
-import { Content } from "../../interfaces/kit";
 import { FC, useState } from "react";
+import { Content } from "../../interfaces/kit";
 import { AddContentForm } from "./AddContentForm";
+import classes from "./CreateLessonModal.module.css";
 
 interface StepTwoProps {
   contents: Content[];

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
 import { Flex, Grid, Pagination, Text } from "@mantine/core";
-import CourseCard from "./CourseCard";
+import React, { useState } from "react";
 import { Course } from "../../pages/Dashboard.page";
+import CourseCard from "./CourseCard";
 
 interface CourseCardCollectionProps {
   courses: Course[];
