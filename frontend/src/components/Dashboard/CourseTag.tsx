@@ -6,6 +6,16 @@ export interface CourseTagProps extends MantineStyleProps {
   variant: "complete" | "bookmark";
 }
 
+/**
+ * @component
+ * CourseTag
+ *
+ * This component is for the course tag section of the course page,
+ * displaying a tag for bookmarked or completed courses
+ * 
+ * @param {string} variant - The variant of the tag (complete or bookmark)
+ * @returns {JSX.Element}
+ */
 const CourseTag: FC<CourseTagProps> = ({ variant, ...mantineStyleProps }) => {
   const theme = useMantineTheme();
   let tagColor;

@@ -17,6 +17,19 @@ interface StepTwoProps {
   setContents: (contents: Content[]) => void;
   error: string;
 }
+
+/**
+ * @component
+ * StepTwo
+ *
+ * This component is for the second step of the create lesson modal,
+ * offering a form to create a new lesson
+ * 
+ * @param {Content[]} contents - Array of content objects
+ * @param {function} setContents - Function to set the contents
+ * @param {string} error - Error message
+ * @returns {JSX.Element}
+ */
 const StepTwo: FC<StepTwoProps> = ({ contents, setContents, error }) => {
   const [editContent, setEditContent] = useState<Content | null>(null);
   const [resetForm, setResetForm] = useState(false);

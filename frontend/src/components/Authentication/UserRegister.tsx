@@ -14,7 +14,8 @@ import { useNavigate } from "react-router-dom";
 
 /**
  * User Registration Component
- *
+ * @component
+ * 
  * This component handles the logic to interact with the backend to create a new user account.
  * It also handles form errors and validation for users when creating an account.
  * It will redirect users to the dashboard upon successful sign up.

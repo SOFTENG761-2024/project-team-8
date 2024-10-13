@@ -10,6 +10,18 @@ interface LessonContentSectionProps {
   fileUrl: string;
 }
 
+/**
+ * @component
+ * LessonContentSection
+ *
+ * This component is for the lesson content section of the course page,
+ * displaying the lesson content
+ * 
+ * @param {string} title - The title of the lesson content
+ * @param {string} description - The description of the lesson content
+ * @param {string} fileUrl - The URL of the lesson content file
+ * @returns {JSX.Element}
+ */
 const LessonContentSection = ({
   title,
   description,

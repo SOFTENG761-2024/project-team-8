@@ -18,6 +18,7 @@ interface PdfViewerNavProps {
 
 /**
  * This component provides navigation controls for the PDF viewer.
+ * @component
  *
  * @param {function} changePage - This function changes the current page of the PDF viewer. It takes an offset as an argument, which determines the direction and number of pages to move.
  * @param {number} pageNumber - The current page number of the PDF viewer.

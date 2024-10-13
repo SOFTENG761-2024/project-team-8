@@ -5,6 +5,15 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContextProvider";
 
+/**
+ * @component
+ * Header
+ *
+ * This component is for the header section of the user dashboard,
+ * displaying the page title and user details
+ * 
+ * @returns {JSX.Element}
+ */
 const Header = () => {
   const { currentUserData } = useContext(AuthContext);
   const name = currentUserData?.attributes.username;
