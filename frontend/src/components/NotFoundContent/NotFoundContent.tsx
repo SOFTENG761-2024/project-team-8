@@ -7,6 +7,17 @@ interface NotFoundContentProps {
     buttonLink: string;
 }
 
+/**
+ * @component
+ * NotFoundContent
+ *
+ * This component is for the 404 page content,
+ * displaying a robot image and a message
+ * 
+ * @param {string} buttonText - The text for the button
+ * @param {string} buttonLink - The link for the button
+ * @returns {JSX.Element}
+ */
 const NotFoundContent: React.FC<NotFoundContentProps> = ({ buttonText, buttonLink }) => (
     <Stack align="center" p="xl" w="30rem">
         <Image

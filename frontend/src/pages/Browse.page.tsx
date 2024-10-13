@@ -19,6 +19,9 @@ import { useEffect, useState } from "react";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
 import { Course } from "./Dashboard.page.tsx";
 
+/**
+ * Page containing the content used to populate the browse page, main functionality to display all available courses to the user
+ */
 const BrowsePage = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const theme = useMantineTheme();

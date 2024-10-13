@@ -27,6 +27,15 @@ interface ModuleAccordionProps {
   };
 }
 
+/**
+ * @component
+ * ModuleAccordion
+ *
+ * This component is for the module accordion section of the course page,
+ * displaying lessons within each module
+ * 
+ * @param {object} module - Module object containing title and lessons array
+ */
 const ModuleAccordion = ({ module }: ModuleAccordionProps) => {
   const theme = useMantineTheme();
   const { currentCourseData } = useContext(CourseContext);

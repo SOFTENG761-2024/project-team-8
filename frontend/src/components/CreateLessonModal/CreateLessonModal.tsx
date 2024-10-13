@@ -18,6 +18,16 @@ import { StepOne } from "./StepOne";
 import StepThree from "./StepThree";
 import StepTwo from "./StepTwo";
 
+
+/**
+ * @component
+ * CreateLessonModal
+ *
+ * This component is for the create lesson modal,
+ * offering a form to create a new lesson
+ * 
+ * @returns {JSX.Element}
+ */
 const CreateLessonModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [active, setActive] = useState(0);

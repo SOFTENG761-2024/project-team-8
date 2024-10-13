@@ -4,6 +4,9 @@ import NotFoundContent from '../components/NotFoundContent/NotFoundContent';
 import WelcomeContainer from '../components/WelcomeContainer';
 import { AuthContext } from '../context/AuthContextProvider';
 
+/**
+ * Page containing the content used to populate the 404 page layout
+ */
 const NotFoundPage = () => {
     const { currentUserData, loadingData } = useContext(AuthContext);
 

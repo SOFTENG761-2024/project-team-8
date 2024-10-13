@@ -5,6 +5,15 @@ import explorer from "../../assets/explorer.png";
 import { AuthContext } from "../../context/AuthContextProvider";
 import classes from "./Header.module.css";
 
+/**
+ * @component
+ * Header
+ *
+ * This component is for the header section of the user dashboard,
+ * displaying the page title and user details
+ * 
+ * @returns {JSX.Element}
+ */
 const Header = () => {
   const { currentUserData } = useContext(AuthContext);
   const name = currentUserData?.attributes.username;

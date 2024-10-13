@@ -35,6 +35,21 @@ interface LessonOverlayProps extends ModalProps {
   onClose: () => void;
 }
 
+/**
+ * @component
+ * LessonOverlay
+ *
+ * This component is for the lesson overlay section of the course page,
+ * displaying the lesson content
+ * 
+ * @param {string} courseTitle - The title of the course
+ * @param {string} moduleTitle - The title of the module
+ * @param {number} currentLessonIndex - The index of the current lesson
+ * @param {Lesson[]} moduleLessons - The full list of lessons in the module
+ * @param {boolean} opened - True if the overlay is open, false otherwise
+ * @param {function} onClose - Function to close the overlay
+ * @returns {JSX.Element}
+ */
 const LessonOverlay = ({
   courseTitle,
   moduleTitle,
@@ -141,9 +156,9 @@ const LessonOverlay = ({
                     finalLessonInModule
                       ? onClose
                       : () => {
-                          setLessonIndex(lessonIndex + 1);
-                          setLessonChanged(true);
-                        }
+                        setLessonIndex(lessonIndex + 1);
+                        setLessonChanged(true);
+                      }
                   }
                 >
                   {finalLessonInModule ? "Finish Module" : "Next lesson"}

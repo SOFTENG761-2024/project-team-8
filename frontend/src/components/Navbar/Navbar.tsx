@@ -18,6 +18,15 @@ interface NavbarLinkProps {
   expanded?: boolean;
 }
 
+/**
+ * @component
+ * NavbarLink
+ *
+ * @param  {Icon} icon - icon of each navbar link
+ * @param  {string} label - label of each navbar link
+ * @param  {boolean?} active - boolean to check if the user is currently on the page which the navbar link is associated with
+ * @param  {boolean?} expanded - boolean to check if the navbar is expanded (with label)
+ */
 function NavbarLink({
   icon: Icon,
   label,
@@ -69,6 +78,13 @@ function NavbarLink({
   );
 }
 
+/**
+ * @component
+ * Navbar
+ *
+ * This component is the navigation bar for user to navigate to different pages of the app
+ *
+ */
 const Navbar = () => {
   const [expanded, setExpanded] = useState<boolean>(true);
   const location = useLocation();
@@ -83,7 +99,6 @@ const Navbar = () => {
     { icon: IconBookFilled, label: "Browse", path: "/user/browse" },
   ];
   const navbarItems = links.map((link) => {
-    // e.g. /user/dashboard
     const pathWithLabel = `${link.path}/${link.label.toLowerCase()}`;
 
     // checks if current path matches the link's path or subpath
@@ -106,6 +121,7 @@ const Navbar = () => {
     clearStoredUserData();
     sessionStorage.removeItem("sessionToken");
   };
+
   return (
     <nav
       className={`${classes.navbar} ${expanded ? classes.navbarExpanded : classes.navbarCollapsed}`}

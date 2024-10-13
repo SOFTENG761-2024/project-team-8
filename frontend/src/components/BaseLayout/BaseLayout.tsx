@@ -5,6 +5,13 @@ import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import classes from "./BaseLayout.module.css";
 
+/**
+ * @component
+ * BaseLayout
+ *
+ * This component is the base layout of the entire app,
+ * setting the header, main content and navbar to desired location on screen
+ */
 const BaseLayout = () => {
   return (
     <Box className={classes.layoutWrapper}>

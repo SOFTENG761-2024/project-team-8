@@ -20,6 +20,18 @@ interface StepOneProps {
   }>;
   modules: Module[];
 }
+
+/**
+ * @component
+ * StepOne
+ *
+ * This component is for the first step of the create lesson modal,
+ * offering a form to create a new lesson
+ * 
+ * @param {object} form - Form object containing lessonName, lessonOverview, module, and content
+ * @param {Module[]} modules - Array of module objects
+ * @returns {JSX.Element}
+ */
 export const StepOne: FC<StepOneProps> = ({ form, modules }) => {
   const moduleOptions: string[] = modules.map(
     (module) => module.title // Unique identifier for the module

@@ -15,6 +15,19 @@ interface CourseCardProps {
   unsubscribed: boolean;
 }
 
+/**
+ * @component
+ * CourseCard
+ *
+ * This component is for the course card section of the dashboard page,
+ * displaying course details and a view button
+ * 
+ * @param {object} course - Course object containing course details
+ * @param {boolean} isBookmarked - True if the course is bookmarked, false otherwise
+ * @param {boolean} isComplete - True if the course is complete, false otherwise
+ * @param {boolean} unsubscribed - True if the user is unsubscribed, false otherwise
+ * @returns {JSX.Element}
+ */
 const CourseCard: React.FC<CourseCardProps> = ({
   course,
   unsubscribed,

@@ -7,6 +7,10 @@ import { formattedPageTitle } from "../constants/pageTitles.ts";
 interface WelcomePagePropTypes {
   state: "login" | "register";
 }
+
+/**
+ * Page containing the content used to populate the welcome page layout for login and register
+ */
 const WelcomePage = ({ state }: WelcomePagePropTypes) => {
   useEffect(() => {
     if (state === "login") {

@@ -23,6 +23,7 @@ interface OnLoadSuccessTypes {
 /**
  * This component handles the logic for displaying a PDF file on the page, using the react-pdf library.
  * It also provides a fullscreen mode to view the PDF file.
+ * @component
  *
  * @param {string} url - The URL of the PDF file to display.
  * @param {boolean} fullscreen - Indicates whether the viewer is in fullscreen mode.

@@ -21,6 +21,19 @@ interface AddContentFormProps {
   resetForm: boolean;
 }
 
+/**
+ * @component
+ * AddContentForm
+ *
+ * This component is for the course content section of the course page,
+ * offering a form to add or edit content for a lesson
+ * 
+ * @param {Content} oldContent - The content object to be edited
+ * @param {function} onSave - Function to save the content
+ * @param {function} onDelete - Function to delete the content
+ * @param {boolean} resetForm - Boolean to reset the form
+ * @returns {JSX.Element}
+ */
 export const AddContentForm: FC<AddContentFormProps> = ({
   oldContent,
   onSave,

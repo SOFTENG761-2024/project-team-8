@@ -13,6 +13,18 @@ interface StepThreeProps {
   }>;
   contentLength: number;
 }
+
+/**
+ * @component
+ * StepThree
+ *
+ * This component is for the third step of the create lesson modal,
+ * offering a form to create a new lesson
+ * 
+ * @param {object} form - Form object containing lessonName, lessonOverview, module, and content
+ * @param {number} contentLength - Number of content sections
+ * @returns {JSX.Element}
+ */
 const StepThree: FC<StepThreeProps> = ({ form, contentLength }) => {
   return (
     <>

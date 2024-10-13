@@ -13,6 +13,9 @@ import { formattedPageTitle } from "../constants/pageTitles.ts";
 import { AuthContext } from "../context/AuthContextProvider";
 import { Course } from "./Dashboard.page";
 
+/**
+ * Page containing the content used to populate the bookmarks page, main functionality to display the user's bookmarked courses
+ */
 const BookmarksPage = () => {
   const [bookmarkedCourses, setBookmarkedCourses] = useState<Course[]>([]);
   const [bookmarkedCoursesId, setBookmarkedCoursesId] = useState<string[]>([]);

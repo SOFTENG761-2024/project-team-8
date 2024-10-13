@@ -23,6 +23,15 @@ interface ModulesData {
   lessons: Lesson[];
 }
 
+/**
+ * @component
+ * CourseContent
+ *
+ * This component is for the course content section of the course page,
+ * displaying modules and lessons within each module
+ * 
+ * @param {boolean} summaryExpanded - True if the CourseSummary is in expanded form, false otherwise
+ */
 const CourseContent = ({ summaryExpanded }: CourseContentProps) => {
   const theme = useMantineTheme();
   const [modulesData, setModulesData] = useState<ModulesData[]>([]);
