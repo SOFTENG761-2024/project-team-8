@@ -5,6 +5,13 @@ import Header from "../Header/Header";
 import { Box, Divider, Image } from "@mantine/core";
 import logo from "../../assets/logo.png";
 
+/**
+ * @component
+ * BaseLayout
+ *
+ * This component is the base layout of the entire app,
+ * setting the header, main content and navbar to desired location on screen
+ */
 const BaseLayout = () => {
   return (
     <Box className={classes.layoutWrapper}>
