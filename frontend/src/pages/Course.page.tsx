@@ -31,6 +31,9 @@ export interface CoursePage extends Course {
   kit: string;
 }
 
+/**
+ * Page containing the content used to populate the course page for a specific course
+ */
 const CoursePage = () => {
   const { courseId } = useParams();
   const { currentUserData } = useContext(AuthContext);
