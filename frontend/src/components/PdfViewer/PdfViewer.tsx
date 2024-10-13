@@ -1,10 +1,9 @@
 import { Box, Flex, Loader, Paper, Stack, Text } from "@mantine/core";
-import styles from "./PdfViewer.module.css";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import { Document, Page } from "react-pdf";
-import { pdfjs } from "react-pdf";
-import PdfViewerNav from "./PdfViewerNav";
+import { Document, Page, pdfjs } from "react-pdf";
 import { FullscreenContext } from "../../context/FullscreenContextProvider";
+import styles from "./PdfViewer.module.css";
+import PdfViewerNav from "./PdfViewerNav";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",

@@ -1,5 +1,5 @@
-import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
 import Parse from "../../parseconfig.ts";
+import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
 
 import {
   Blockquote,
@@ -12,11 +12,11 @@ import {
   Stack,
   useMantineTheme,
 } from "@mantine/core";
-import { useContext, useEffect, useState } from "react";
 import { IconFilter, IconInfoCircle, IconSearch } from "@tabler/icons-react";
-import { AuthContext } from "../context/AuthContextProvider.tsx";
-import { formattedPageTitle } from "../constants/pageTitles.ts";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { formattedPageTitle } from "../constants/pageTitles.ts";
+import { AuthContext } from "../context/AuthContextProvider.tsx";
 
 // defining the Course type and create some dummy data
 export interface Course {

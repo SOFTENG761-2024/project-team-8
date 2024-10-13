@@ -1,8 +1,8 @@
-import { Center, Loader } from '@mantine/core'
-import { useContext, useEffect } from 'react'
-import { AuthContext } from '../context/AuthContextProvider';
-import WelcomeContainer from '../components/WelcomeContainer';
+import { Center, Loader } from '@mantine/core';
+import { useContext, useEffect } from 'react';
 import NotFoundContent from '../components/NotFoundContent/NotFoundContent';
+import WelcomeContainer from '../components/WelcomeContainer';
+import { AuthContext } from '../context/AuthContextProvider';
 
 /**
  * Page containing the content used to populate the 404 page layout

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
 import { Box, Button, Card, Flex, Grid, Image, Text } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import { Course } from "../../pages/Dashboard.page";
 import { IconEye } from "@tabler/icons-react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Course } from "../../pages/Dashboard.page";
 import styles from "./CourseCard.module.css";
-import CourseTag from "./CourseTag";
 import CoursePreviewModal from "./CoursePreviewModal";
+import CourseTag from "./CourseTag";
 
 interface CourseCardProps {
   course: Course;
@@ -36,7 +36,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
-  const [opened, { open, close }] = useDisclosure(false); // for summary modal
+  const [opened, { open, close }] = useDisclosure(false); 
   const navigate = useNavigate();
 
   return (

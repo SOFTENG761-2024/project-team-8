@@ -1,8 +1,8 @@
-import { Group, Button, Stack, Title, Text, Divider, Box } from "@mantine/core";
+import { Box, Button, Divider, Group, Stack, Text, Title } from "@mantine/core";
 import { IconArrowsMaximize, IconDownload } from "@tabler/icons-react";
-import PdfViewer from "../PdfViewer/PdfViewer";
 import { useContext, useState } from "react";
 import { FullscreenContext } from "../../context/FullscreenContextProvider";
+import PdfViewer from "../PdfViewer/PdfViewer";
 
 interface LessonContentSectionProps {
   title: string;

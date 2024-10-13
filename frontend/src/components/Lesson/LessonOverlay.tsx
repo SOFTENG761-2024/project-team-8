@@ -1,30 +1,30 @@
 import {
+  Chip,
+  Flex,
   Modal,
   ModalProps,
-  Chip,
   rem,
   Stack,
-  Title,
   Text,
-  UnstyledButton,
-  Flex,
-  useMantineTheme,
+  Title,
   Tooltip,
+  UnstyledButton,
+  useMantineTheme,
 } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import {
   IconBook2,
   IconCircleArrowLeftFilled,
   IconCircleArrowRightFilled,
+  IconCircleCheckFilled,
   IconFile,
   IconX,
-  IconCircleCheckFilled,
 } from "@tabler/icons-react";
-import styles from "./LessonOverlay.module.css";
-import { useMediaQuery } from "@mantine/hooks";
-import LessonContentSection from "./LessonContentSection";
 import { useContext, useState } from "react";
-import { Lesson } from "../../interfaces/kit";
 import { FullscreenContext } from "../../context/FullscreenContextProvider";
+import { Lesson } from "../../interfaces/kit";
+import LessonContentSection from "./LessonContentSection";
+import styles from "./LessonOverlay.module.css";
 
 interface LessonOverlayProps extends ModalProps {
   courseTitle: string;

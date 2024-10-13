@@ -1,5 +1,5 @@
-import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
 import Parse from "../../parseconfig.ts";
+import CourseCardCollection from "../components/Dashboard/CourseCardCollection";
 
 import {
   Blockquote,
@@ -14,10 +14,10 @@ import {
   Text,
   useMantineTheme,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
 import { IconFilter, IconInfoCircle, IconSearch } from "@tabler/icons-react";
-import { Course } from "./Dashboard.page.tsx";
+import { useEffect, useState } from "react";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
+import { Course } from "./Dashboard.page.tsx";
 
 /**
  * Page containing the content used to populate the browse page, main functionality to display all available courses to the user

@@ -1,5 +1,4 @@
 import { ActionIcon, Group, Stack, Text, Tooltip } from "@mantine/core";
-import styles from "./PdfViewerNav.module.css";
 import {
   IconArrowDown,
   IconArrowLeft,
@@ -7,6 +6,7 @@ import {
   IconArrowUp,
 } from "@tabler/icons-react";
 import { FC } from "react";
+import styles from "./PdfViewerNav.module.css";
 
 interface PdfViewerNavProps {
   changePage: (offset: number) => void;

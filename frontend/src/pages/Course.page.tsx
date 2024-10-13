@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import {
   Box,
   Button,
@@ -10,20 +9,21 @@ import {
   Tooltip,
   useMantineTheme,
 } from "@mantine/core";
-import CourseContent from "../components/Course/CourseContent";
-import { CourseSummary } from "../components/CourseSummary/CourseSummary.tsx";
-import { useContext, useEffect, useState } from "react";
-import Parse from "../../parseconfig.ts";
-import { Course } from "../interfaces/kit.ts";
-import { CourseContext } from "../components/Course/CourseContext.tsx";
 import {
   IconAward,
   IconAwardFilled,
   IconBookmark,
   IconBookmarkFilled,
 } from "@tabler/icons-react";
-import { AuthContext } from "../context/AuthContextProvider.tsx";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Parse from "../../parseconfig.ts";
+import CourseContent from "../components/Course/CourseContent";
+import { CourseContext } from "../components/Course/CourseContext.tsx";
+import { CourseSummary } from "../components/CourseSummary/CourseSummary.tsx";
 import { formattedPageTitle } from "../constants/pageTitles.ts";
+import { AuthContext } from "../context/AuthContextProvider.tsx";
+import { Course } from "../interfaces/kit.ts";
 import NotFoundPage from "./NotFound.page.tsx";
 
 export interface CoursePage extends Course {

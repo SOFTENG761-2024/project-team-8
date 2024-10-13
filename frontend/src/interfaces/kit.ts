@@ -10,7 +10,7 @@ export interface Course {
   id: string;
   title: string;
   kitTitle: string;
-  yearLevel: string; // changed from number to string
+  yearLevel: string;
   description: string;
   outcomes: string[];
   modules: Module[]; // references to those objects

@@ -1,8 +1,8 @@
-import { Divider, Group, Stack, Title, Text, Anchor } from "@mantine/core";
-import { IconCircleCheckFilled } from "@tabler/icons-react";
-import classes from "./CreateLessonModal.module.css";
+import { Anchor, Divider, Group, Stack, Text, Title } from "@mantine/core";
 import { UseFormReturnType } from "@mantine/form";
+import { IconCircleCheckFilled } from "@tabler/icons-react";
 import { FC } from "react";
+import classes from "./CreateLessonModal.module.css";
 
 interface StepThreeProps {
   form: UseFormReturnType<{

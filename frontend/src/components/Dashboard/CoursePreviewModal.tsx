@@ -1,9 +1,9 @@
 import { Flex, Image, Modal, ModalProps, Stack, Text } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { FC } from "react";
 import { Course } from "../../pages/Dashboard.page";
 import CourseAttributes from "../CourseSummary/CourseAttributes";
 import styles from "./CoursePreviewModal.module.css";
-import { useMediaQuery } from "@mantine/hooks";
 
 interface CoursePreviewModalProps extends ModalProps {
   course: Course;

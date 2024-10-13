@@ -1,7 +1,7 @@
-import { IconAwardFilled, IconStarFilled } from "@tabler/icons-react";
-import styles from "./CourseAttributes.module.css";
 import { Box, Text } from "@mantine/core";
+import { IconAwardFilled, IconStarFilled } from "@tabler/icons-react";
 import { FC } from "react";
+import styles from "./CourseAttributes.module.css";
 
 interface CourseAttributesProps {
   yearLevel?: string;

@@ -4,21 +4,21 @@ import {
   Group,
   Stack,
   Text,
-  useMantineTheme,
   Tooltip,
+  useMantineTheme,
 } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import {
   IconBook2,
-  IconSquareRoundedChevronDownFilled,
   IconFile,
+  IconSquareRoundedChevronDownFilled,
 } from "@tabler/icons-react";
-import styles from "./ModuleAccordion.module.css";
 import { useContext, useState } from "react";
-import LessonOverlay from "../Lesson/LessonOverlay";
-import { useDisclosure } from "@mantine/hooks";
-import { Lesson } from "../../interfaces/kit";
-import { CourseContext } from "./CourseContext";
 import { FullscreenContextProvider } from "../../context/FullscreenContextProvider";
+import { Lesson } from "../../interfaces/kit";
+import LessonOverlay from "../Lesson/LessonOverlay";
+import { CourseContext } from "./CourseContext";
+import styles from "./ModuleAccordion.module.css";
 
 interface ModuleAccordionProps {
   module: {
